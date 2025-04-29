@@ -10,8 +10,7 @@ public class SMBIdle : LinkedSMB<MonsterStateMachine>
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
-
+        // 수정해야함 
         if (!monobeHaviour.TransAttack("isAttack", ref monobeHaviour.nomalAttack.attackDelay, monobeHaviour.nomalAttack.baseAttackDelay))
         {
 

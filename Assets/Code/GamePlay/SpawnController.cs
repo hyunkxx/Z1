@@ -4,6 +4,8 @@ using UnityEngine;
 public class SpawnController : MonoBehaviour
 {
     public GameObject PlayerPrefabs;
+    public PoolContainer objectPools;
+    
     void Start()
     {
         StartCoroutine(Spawn("TestMonster", 10));
@@ -21,12 +23,13 @@ public class SpawnController : MonoBehaviour
 
         while(curCount < _count)
         {
-            GameObject obj = ObjectPool.Instance.PullObject(_type);
+            ObjectPool objectPool = objectPools.GetPool(_type);
+            GameObject obj = objectPool.GetObject(Vector3.zero, Quaternion.identity);
             obj.GetComponent<MonsterStateMachine>().target = PlayerPrefabs;
 
             curCount++;
 
-            yield return new WaitForSeconds(1f);              
+            yield return new WaitForSeconds(1f);
         }
     }
 }
