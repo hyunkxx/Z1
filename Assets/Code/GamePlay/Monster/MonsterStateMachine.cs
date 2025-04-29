@@ -3,7 +3,7 @@ using UnityEngine;
 public class MonsterStateMachine : MonoBehaviour
 {
     public IAction ActionType;
-    public AiCharacter monster;
+    public AICharacter monster;
     public Animator animator;
     public GameObject target;
     public NomalAttack nomalAttack;
@@ -12,7 +12,7 @@ public class MonsterStateMachine : MonoBehaviour
     private void Awake()
     {
         LinkedSMB<MonsterStateMachine>.Initialize(animator, this);
-        monster = new AiCharacter();
+        monster = new AICharacter();
     }
 
     public void Initialize()

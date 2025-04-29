@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -55,3 +56,109 @@ public class ObjectPool : Singleton<ObjectPool>
     }
 
 }
+
+
+//using UnityEngine;
+//using System.Collections;
+//using System.Collections.Generic;
+
+//public class ObjectPool : MonoBehaviour
+//{
+//    [Header("ObjectPool Properties")]
+//    [SerializeField] private string poolName;
+//    [SerializeField] private int poolSize;
+//    [SerializeField] private GameObject sourcePrefab;
+
+//    public string PoolName => poolName;
+//    public int PoolSize => poolSize;
+//    public GameObject SourcePrefab => sourcePrefab;
+
+//    public int activateCount
+//    {
+//        get
+//        {
+//            return poolSize - objectPool.Count;
+//        }
+//    }
+
+//    private Queue<GameObject> objectPool;
+
+//    private void Awake()
+//    {
+//        objectPool = new Queue<GameObject>();
+
+//        for (int i = 0; i < poolSize; ++i)
+//        {
+//            GameObject obj = Instantiate(sourcePrefab, transform.position, Quaternion.identity);
+//            ReturnObject(obj);
+//        }
+//    }
+
+//    public GameObject GetObject(Vector3 position, Quaternion rotation)
+//    {
+//        GameObject obj = objectPool.Dequeue();
+
+//        obj.transform.position = position;
+//        obj.transform.rotation = rotation;
+
+//        obj.gameObject.SetActive(true);
+
+//        return obj;
+//    }
+
+//    public void ReturnObject(GameObject obj)
+//    {
+//        obj.gameObject.SetActive(false);
+//        objectPool.Enqueue(obj);
+//    }
+//}
+
+//public class PoolContainer : MonoBehaviour
+//{
+//    Dictionary<string, ObjectPool> poolContainer = new Dictionary<string, ObjectPool>();
+
+//    private void Awake()
+//    {
+//        ObjectPool[] pools = GetComponents<ObjectPool>();
+//        foreach(ObjectPool pool in pools)
+//        {
+//            RegisterPool(pool);
+//        }
+//    }
+
+//    public bool RegisterPool(ObjectPool pool)
+//    {
+//        if (pool == null || string.IsNullOrEmpty(pool.PoolName))
+//        {
+//            Debug.LogError("Pool or PoolName is null/empty");
+//            return false;
+//        }
+
+//        if (poolContainer.ContainsKey(pool.PoolName))
+//        {
+//            Debug.LogWarning($"Pool with name {pool.PoolName} already exists");
+//            return false;
+//        }
+
+//        poolContainer.Add(pool.PoolName, pool);
+//        return true;
+//    }
+//    public bool UnregisterPool(string poolName)
+//    {
+//        if(poolContainer.TryGetValue(poolName, out ObjectPool pool))
+//        {
+//            poolContainer.Remove(poolName);
+//            return true;
+//        }
+
+//        return false;
+//    }
+//    public void ClearContainer()
+//    {
+//        poolContainer.Clear();
+//    }
+//    public ObjectPool GetPool(string poolName)
+//    {
+//        return poolContainer.GetValueOrDefault(poolName);
+//    }
+//}

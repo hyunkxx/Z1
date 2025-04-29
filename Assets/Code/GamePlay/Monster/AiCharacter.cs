@@ -13,7 +13,7 @@ interface IMonster
     public void Death();
 }
 
-public class AiCharacter : IMonster
+public class AICharacter : IMonster
 {
     IAction AttackType;
     public float hp = 100;
