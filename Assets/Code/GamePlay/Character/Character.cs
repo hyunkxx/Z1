@@ -25,41 +25,46 @@ public struct TransformData
 
 public class Character : MonoBehaviour
 {
-    [SerializeField] protected Movement movement;
+    [SerializeField]
+    protected MovementComponent movement;
     
     protected Rigidbody2D rg2d;
     protected SpriteRenderer spriteRenderer;
 
-    bool bFaceRight;
+    protected Animator animator;
+    protected CharacterAnimationController animController;
+    protected WeaponSystem weaponSystem;
+
+    bool bFaceRight = true;
+
+    public MovementComponent Movement => movement;
 
     private void Awake()
     {
-        Debug.Assert(movement != null, "movement is not assigned");
+        Debug.Assert(movement != null, "MovementComponent is not assigned");
 
         rg2d = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        animController = GetComponent<CharacterAnimationController>();
+        weaponSystem = GetComponent<WeaponSystem>();
     }
 
     public bool IsFaceRight()
     {
         return bFaceRight;
     }
-    public void OnInputAxis(Vector2 inputDirection)
-    {
-        FaceDirectionUpdate(inputDirection);
-        movement.MoveToDirection(inputDirection);
-    }
-    private void FaceDirectionUpdate(Vector2 direction)
+
+    public void FaceDirectionUpdate(Vector2 direction)
     {
         if(direction.x > 0f)
         {
             bFaceRight = true;
-            spriteRenderer.flipX = false;
+            transform.localScale = new Vector3(1f, 1f, 1f);
         }
         else if(direction.x < 0f)
         {
             bFaceRight = false;
-            spriteRenderer.flipX = true;
+            transform.localScale = new Vector3(-1f, 1f, 1f);
         }
     }
 }

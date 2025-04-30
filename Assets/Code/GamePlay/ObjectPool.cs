@@ -1,8 +1,3 @@
-//using System;
-//using System.Collections.Generic;
-//using UnityEditor;
-//using UnityEngine;
-
 //public class ObjectPool : Singleton<ObjectPool>
 //{
 //    public Dictionary<string, List<GameObject>> monsterPool = new Dictionary<string, List<GameObject>>();
@@ -44,7 +39,7 @@
 //                }
 //            }
 
-//            // ¸ðµÎ È°¼ºÈ­ÀÏ °æ¿ì
+//            // ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½
 //            int lastCount = objectList.Count;
 //            CreatePool(_type, 10);
 

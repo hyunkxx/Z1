@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 
@@ -21,12 +22,15 @@ public class GameMode
 
     public Transform PlayerStart;
 
+    public EGameState gameState = EGameState.Ready;
+    public Action<EGameState> OnChangeGameState;
+
     protected override void Awake()
     {
         base.Awake();
 
         GameManager.Instance.RegisterGameMode(this);
-        gameRule.gameState = EGameState.Ready;
+        gameState = EGameState.Ready;
     }
 
     protected override void Start()
@@ -37,13 +41,17 @@ public class GameMode
 
     public void ChangeGameState(EGameState state)
     {
-        gameRule.ChangeGameState(state);
+        if (gameState == state)
+            return;
+
+        gameState = state;
+        OnChangeGameState?.Invoke(state);
     }
 
     public void StartGame()
     {
         gameRule.SpawnPlayer(PlayerStart.position);
-        gameRule.ChangeGameState(EGameState.InProgress);
+        ChangeGameState(EGameState.InProgress);
     }
     public void FinishGame()
     {
