@@ -349,7 +349,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1322661214}
-  - component: {fileID: 1322661213}
+  - component: {fileID: 1322661218}
   - component: {fileID: 1322661217}
   - component: {fileID: 1322661216}
   - component: {fileID: 1322661215}
@@ -360,20 +360,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1322661213
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1322661212}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1eae82c1e3178034da05bb50d2a0fe0b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerPrefabs: {fileID: 1897780436}
-  objectPools: {fileID: 1322661215}
 --- !u!4 &1322661214
 Transform:
   m_ObjectHideFlags: 0
@@ -428,9 +414,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58521fdc2ccc04d4d99d2746998be5a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolName: TestMonster
+  poolName: Orc
   poolSize: 10
   sourcePrefab: {fileID: 4817972689310064399, guid: 69acf7b901470664584eb719adde6fc6, type: 3}
+--- !u!114 &1322661218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1322661212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd526af5e60fc174d84c479269d5020b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectPools: {fileID: 1322661215}
+  PlayerPrefabs: {fileID: 1897780436}
 --- !u!1 &1897780436
 GameObject:
   m_ObjectHideFlags: 0
