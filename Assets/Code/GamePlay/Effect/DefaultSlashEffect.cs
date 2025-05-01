@@ -9,11 +9,17 @@ public class DefaultSlashEffect : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    public void ActivateSlash(TransformData transformData, bool bUpper)
+    public void OnAnimationFinished()
+    {
+        DeactivateEffect();
+    }
+
+    public void ActivateEffect(TransformData transformData, bool bUpper)
     {
         gameObject.SetActive(true);
         gameObject.transform.position = transformData.position;
         gameObject.transform.rotation = transformData.rotation;
+
 
         if (bUpper)
         {
@@ -25,9 +31,8 @@ public class DefaultSlashEffect : MonoBehaviour
         }
     }
 
-    public void DeactivateSlash()
+    public void DeactivateEffect()
     {
-        Debug.Log("slashEnd");
         gameObject.SetActive(false);
     }
 }

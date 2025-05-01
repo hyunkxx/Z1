@@ -3,7 +3,7 @@ using UnityEngine;
 
 
 public class PlayerController 
-    : Z1Object
+    : Z1Behaviour
 {
     protected Character character;
     public Action<Character> OnChangedCharacter;

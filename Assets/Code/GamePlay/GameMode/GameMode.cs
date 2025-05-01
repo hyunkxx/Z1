@@ -15,7 +15,7 @@ public enum EGameState
 }
 
 public class GameMode
-    : Z1Object
+    : Z1Behaviour
 {
     public GameRule gameRule;
     public PlayerController playerController;

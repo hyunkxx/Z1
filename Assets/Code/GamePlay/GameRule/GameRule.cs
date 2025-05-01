@@ -3,7 +3,7 @@ using UnityEngine;
 
 
 public abstract class GameRule
-    : Z1Object
+    : Z1Behaviour
 {
     private GameMode gameMode;
 

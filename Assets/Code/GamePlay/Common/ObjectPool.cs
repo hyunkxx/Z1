@@ -13,7 +13,8 @@ public class ObjectPool : MonoBehaviour
     public string PoolName => poolName;
     public int PoolSize => poolSize;
     public GameObject SourcePrefab => sourcePrefab;
-
+    public Queue<GameObject> Pool => objectPool;
+    
     public int activateCount
     {
         get

@@ -102,9 +102,9 @@ public class MovementComponent : MonoBehaviour
     {
         rg2d.AddForce(moveDirection * moveSpeed, ForceMode2D.Force);
 
-        if (rg2d.linearVelocity.magnitude > maxVelocity)
-        {
-            rg2d.linearVelocity = rg2d.linearVelocity.normalized * maxVelocity;
-        }
+        //if (rg2d.linearVelocity.magnitude > maxVelocity)
+        //{
+        //    rg2d.linearVelocity = rg2d.linearVelocity.normalized * maxVelocity;
+        //}
     }
 }

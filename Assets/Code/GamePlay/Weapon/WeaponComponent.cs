@@ -91,7 +91,7 @@ public class WeaponComponent : MonoBehaviour
     public void Swing()
     {
         TransformData trans = new TransformData();
-        trans.position = transform.position + weaponDirection * 0.1f;
+        trans.position = transform.position + weaponDirection * 0.05f;
         trans.localPosition = weaponSocket.localPosition;
 
         float angle = Mathf.Atan2(weaponDirection.y, weaponDirection.x) * Mathf.Rad2Deg;
@@ -99,7 +99,7 @@ public class WeaponComponent : MonoBehaviour
 
         trans.rotation = Quaternion.Euler(0f, 0f, angle);
 
-        slashEffect.ActivateSlash(trans, isWeaponLowered);
+        slashEffect.ActivateEffect(trans, isWeaponLowered);
         weaponRotateCoroutine = StartCoroutine(CoroutineRotateWeapon());
     }
 
