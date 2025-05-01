@@ -23,12 +23,32 @@ public class SurvivalSpawner : SpawnController
 
         while (curCount < _count)
         {
-            GameObject obj = base.Spawn(_type);
+            bool isValidPos = false;
+            float xPos = 0, yPos = 0;
+
+            while (!isValidPos)
+            {
+                xPos = Random.Range(-10, 10);
+                yPos = Random.Range(-6, 6);
+                isValidPos = IsValidSpawnPosition(PlayerPrefabs.transform.position, new Vector3(xPos, yPos, 0));
+            }
+
+            transform.position = PlayerPrefabs.transform.position + new Vector3(xPos, yPos, 0);
+
+            GameObject obj = base.Spawn(_type, new Vector3(xPos, yPos));
             obj.GetComponent<MonsterStateMachine>().target = PlayerPrefabs;
             obj.GetComponent<SurvivalAIController>().target = PlayerPrefabs;
             curCount++;
 
             yield return new WaitForSeconds(1f);
         }
+    }
+
+    bool IsValidSpawnPosition(Vector3 _targetPos, Vector3 _position)
+    {
+        if (Vector3.Distance(_position, _targetPos) > 9)
+            return true;
+
+        return false;
     }
 }

@@ -17,6 +17,7 @@ public class UIBase : MonoBehaviour
         Survival_Ready_Panel,
         CharacterSelect_Panel,
         CharacterSelectContents,
+        CharacterInven_Panel,
     }
 
     protected enum Buttons

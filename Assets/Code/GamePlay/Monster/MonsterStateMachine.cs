@@ -22,17 +22,7 @@ public class MonsterStateMachine : MonoBehaviour
 
     void Start()
     {
-        bool isValidPos = false;
-        float xPos = 0, yPos = 0;
 
-        while (!isValidPos)
-        {
-            xPos = Random.Range(-10, 10);
-            yPos = Random.Range(-6, 6);
-            isValidPos = IsValidSpawnPosition(target.transform.position, new Vector3(xPos, yPos, 0));
-        }
-
-        transform.position = target.transform.position + new Vector3(xPos, yPos, 0);
     }
 
     void Update()
@@ -42,6 +32,7 @@ public class MonsterStateMachine : MonoBehaviour
 
     public bool TransAttack(string _paramName, ref float _delay, float _baseDelay)
     {
+        if (target == null) return false;
         if (_delay > 0f) return false;
 
         if (Vector2.Distance(target.transform.position, transform.position) < 1f)
@@ -65,13 +56,5 @@ public class MonsterStateMachine : MonoBehaviour
         if (ActionType == null) return;
 
         monster.Action(ActionType);
-    }
-
-    bool IsValidSpawnPosition(Vector3 _targetPos, Vector3 _position)
-    {
-        if (Vector3.Distance(_position, _targetPos) > 9)
-            return true;
-
-        return false;
     }
 }

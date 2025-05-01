@@ -14,9 +14,9 @@ public class SpawnController : MonoBehaviour
         
     }
 
-    public GameObject Spawn(string _type)
+    public GameObject Spawn(string _type, Vector3 _spawnPos)
     {
         ObjectPool objectPool = objectPools.GetPool(_type);
-        return objectPool.GetObject(Vector3.zero, Quaternion.identity);
+        return objectPool.GetObject(_spawnPos, Quaternion.identity);
     }
 }

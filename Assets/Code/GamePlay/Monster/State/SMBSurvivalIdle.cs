@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SMBIdle : LinkedSMB<MonsterStateMachine>
+public class SMBSurvivalIdle : LinkedSMB<MonsterStateMachine>
 {
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
