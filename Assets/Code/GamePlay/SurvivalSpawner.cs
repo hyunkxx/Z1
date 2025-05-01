@@ -7,8 +7,8 @@ public class SurvivalSpawner : SpawnController
 
     void Start()
     {
-        StartCoroutine(Spawn("Orc", 10));
-        StartCoroutine(Spawn("TestBossMonster", 10));
+        StartCoroutine(Spawn("Orc", 1));
+        //StartCoroutine(Spawn("TestBossMonster", 10));
     }
 
     // Update is called once per frame

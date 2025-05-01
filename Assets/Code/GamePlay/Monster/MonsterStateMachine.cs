@@ -6,8 +6,8 @@ public class MonsterStateMachine : MonoBehaviour
     public AICharacter monster;
     public Animator animator;
     public GameObject target;
-    public NomalAttack nomalAttack;
-    public SpecialAttack specailAttack;
+    public Skill nomalAttack;
+    public Skill specailAttack;
     
     private void Awake()
     {

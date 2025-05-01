@@ -5,7 +5,6 @@ public class SMBSurvivalIdle : LinkedSMB<MonsterStateMachine>
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         monobeHaviour.ActionType = null;
-        Debug.Log("Idle");
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

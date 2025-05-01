@@ -1,21 +1,24 @@
 using UnityEngine;
 
-public class NomalAttack : MonoBehaviour, IAction
+public class NomalAttack : Skill
 {
-    public float attackDelay = 3f;
-    public float baseAttackDelay = 3f;
+    private void Awake()
+    {
+        attackDelay = 3f;
+        baseAttackDelay = 3f;
+    }
 
     void Start()
     {
         
     }
 
-    void Update()
+    private void Update()
     {
         attackDelay -= Time.deltaTime;
     }
 
-    public void Action()
+    public override void Action()
     {
         Debug.Log("Noral Attack");
     }

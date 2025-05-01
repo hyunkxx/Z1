@@ -421,7 +421,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1322661214
 Transform:
   m_ObjectHideFlags: 0
@@ -477,7 +477,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolName: Orc
-  poolSize: 10
+  poolSize: 1
   sourcePrefab: {fileID: 4817972689310064399, guid: 69acf7b901470664584eb719adde6fc6, type: 3}
 --- !u!114 &1322661218
 MonoBehaviour:
@@ -660,7 +660,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1982508458
 MonoBehaviour:
   m_ObjectHideFlags: 0
