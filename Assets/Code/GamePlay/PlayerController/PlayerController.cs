@@ -8,6 +8,12 @@ public class PlayerController
     protected Character character;
     public Action<Character> OnChangedCharacter;
 
+    protected bool inputLock = false;
+    public void SetInputLock(bool bValue)
+    {
+        inputLock = bValue;
+    }
+
     protected override void Awake()
     {
         base.Awake();

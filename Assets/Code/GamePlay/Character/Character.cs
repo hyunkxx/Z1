@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 
@@ -33,11 +34,11 @@ public class Character : MonoBehaviour
 
     protected Animator animator;
     protected CharacterAnimationController animController;
-    protected WeaponSystem weaponSystem;
+    protected WeaponComponent weaponSystem;
+    public MovementComponent Movement => movement;
 
     bool bFaceRight = true;
-
-    public MovementComponent Movement => movement;
+    public Action<bool> OnChangeFlip;
 
     private void Awake()
     {
@@ -46,10 +47,9 @@ public class Character : MonoBehaviour
         rg2d = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animController = GetComponent<CharacterAnimationController>();
-        weaponSystem = GetComponent<WeaponSystem>();
+        weaponSystem = GetComponent<WeaponComponent>();
     }
-
-    public bool IsFaceRight()
+    public bool IsRight()
     {
         return bFaceRight;
     }

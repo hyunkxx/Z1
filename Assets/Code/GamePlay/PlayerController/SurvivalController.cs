@@ -20,6 +20,12 @@ public class SurvivalController
 
     protected void EvaluateAxisKeyState()
     {
+        if (inputLock)
+        {
+            character.Movement.MoveToDirection(Vector2.zero);
+            return;
+        }
+
         Vector2 inputDirection;
         inputDirection.x = Input.GetAxisRaw("Horizontal");
         inputDirection.y = Input.GetAxisRaw("Vertical");

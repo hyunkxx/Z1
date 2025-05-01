@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4830204434607766788}
   - component: {fileID: 56588940593395949}
+  - component: {fileID: 775182407013112998}
   m_Layer: 0
   m_Name: WeaponSocket
   m_TagString: Untagged
@@ -25,13 +26,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2623416765903343386}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.2164396, w: 0.97629607}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.1, y: -0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8286493116884513989}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 25}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &56588940593395949
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -87,6 +88,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &775182407013112998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2623416765903343386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8f0d97f583356c4db150ff4ad6e7363, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponSocket: {fileID: 4830204434607766788}
+  weaponSprite: {fileID: 56588940593395949}
+  slashEffect: {fileID: 8323170807558458712, guid: f1316b5109a41444a97dc32a6e05b9e0, type: 3}
 --- !u!1 &7834587441641150271
 GameObject:
   m_ObjectHideFlags: 0
@@ -102,7 +118,6 @@ GameObject:
   - component: {fileID: 4578601590110176259}
   - component: {fileID: 7235276069043101290}
   - component: {fileID: 6984386188652096524}
-  - component: {fileID: 275969890600590794}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -256,7 +271,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDamping: 6
-  m_AngularDamping: 0.05
+  m_AngularDamping: 1
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -269,17 +284,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &275969890600590794
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7834587441641150271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8f0d97f583356c4db150ff4ad6e7363, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponSocket: {fileID: 4830204434607766788}
-  weaponSprite: {fileID: 56588940593395949}

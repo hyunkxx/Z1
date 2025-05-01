@@ -14,12 +14,13 @@ public class CameraMovement : MonoBehaviour
     private UnityEngine.Rendering.Universal.PixelPerfectCamera pixelPerfectCamera;
 
     private GameObject viewTarget;
-    public GameObject ViewTarget => viewTarget;
     
     private Rigidbody2D targetRg2d;
     private MovementComponent targetMovement;
 
     public Action<GameObject> OnChangeViewTarget;
+
+    public GameObject ViewTarget => viewTarget;
 
     public void Awake()
     {

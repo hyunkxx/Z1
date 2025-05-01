@@ -15,8 +15,6 @@ public class MovementComponent : MonoBehaviour
     [Header("Movement Properties")]
     [SerializeField] private float moveSpeed = 10.0f;
     [SerializeField] private float maxVelocity = 2.0f;
-    public float MaxVelocity => maxVelocity;
-
     EMovementState movementState = EMovementState.None;
 
     private float ReachedOffset = 0.5f;
@@ -24,6 +22,11 @@ public class MovementComponent : MonoBehaviour
     private Vector2 goalLocation;
 
     private Rigidbody2D rg2d;
+
+    public float MaxVelocity => maxVelocity;
+    public Vector2 MoveDirection => moveDirection;
+    public Vector2 GoalLocation => goalLocation;
+    public Rigidbody2D MovementRigidBody => rg2d;
 
     private void Awake()
     {
@@ -47,7 +50,10 @@ public class MovementComponent : MonoBehaviour
                 break;
         }
     }
-
+    public bool IsMove()
+    {
+        return !HelperLibrary.ApproximateEqual(moveDirection, Vector2.zero);
+    }
     public void ResetMovement()
     {
         movementState = EMovementState.None;
@@ -101,22 +107,4 @@ public class MovementComponent : MonoBehaviour
             rg2d.linearVelocity = rg2d.linearVelocity.normalized * maxVelocity;
         }
     }
-
-    /*
-    private float MoveSpeed = 1.5f;
-
-    void Move()
-    {
-        this.gameObject.transform.position += new Vector3(1, 0, 0) * Time.deltaTime;
-    }
-
-    void MoveDesPos(Vector3 _destination)
-    {
-        if (Vector2.Distance(_destination, transform.position) < 0.5f) return;
-
-        Vector3 direction = _destination - this.transform.position;
-        direction = direction.normalized;
-        this.gameObject.transform.position += direction * MoveSpeed * Time.deltaTime;
-    }
-    */
 }
