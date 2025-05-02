@@ -19,10 +19,28 @@ public class DamageEvent
     }
 }
 
-public class Damageable : MonoBehaviour
+public enum ETeam
 {
+    None,
+    Player,
+    EnemyAI
+}
+
+public sealed class Damageable : MonoBehaviour
+{
+    [SerializeField] private ETeam teamID = ETeam.EnemyAI;
+    public ETeam TeamID => teamID;
+
     public event Action<DamageEvent> OnDamageTaken;
 
+    public bool IsAlly(Damageable other)
+    {
+        return other.TeamID == teamID;
+    }
+    public bool IsEnemy(Damageable other)
+    {
+        return other.TeamID != teamID;
+    }
     public void TakeDamage(DamageEvent customEvent)
     {
         OnDamageTaken?.Invoke(customEvent);

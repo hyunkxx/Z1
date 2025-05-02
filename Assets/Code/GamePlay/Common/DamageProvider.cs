@@ -92,11 +92,16 @@ public class DamageProvider : MonoBehaviour
         if (!enableTrigger)
             return;
 
-        Damageable damageable = collision.gameObject.GetComponent<Damageable>();
-        if(damageable)
+        Damageable owner = providerData.owner.GetComponent<Damageable>();
+        Damageable other = collision.gameObject.GetComponent<Damageable>();
+        if(owner && other)
         {
-            DamageEvent damageEvent = new DamageEvent(providerData.characterStats.Damage, providerData.owner);
-            damageable.TakeDamage(damageEvent);
+            if(owner.IsEnemy(other))
+            {
+                Debug.Log($"take damage {collision.gameObject.name}");
+                DamageEvent damageEvent = new DamageEvent(providerData.characterStats.Damage, providerData.owner);
+                other.TakeDamage(damageEvent);
+            }
         }
     }
 }

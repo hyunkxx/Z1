@@ -2,7 +2,7 @@ using UnityEngine;
 
 public interface IAction
 { 
-    public void Action();
+    public void ExcuteAction();
 }
 
 // ----------------------------------------------------------------
@@ -25,7 +25,7 @@ public class AICharacter : IMonster
 
     public void Action(IAction attackType)
     {
-        attackType.Action();
+        attackType.ExcuteAction();
     }
 
     public void Death()

@@ -39,7 +39,7 @@ public class Character : Z1Behaviour
     protected GhostEffect ghostEffect;
 
     //test
-    public Effect2D testEffect;
+    public AttackAction testEffect;
 
     public MovementComponent Movement => movement;
 
@@ -75,14 +75,12 @@ public class Character : Z1Behaviour
 
         if (Input.GetKeyDown(KeyCode.I))
         {
-            testEffect.ActivateEffect(gameObject);
+            testEffect.ExcuteAction();
         }
-
     }
-
     protected virtual void TakeDamage(DamageEvent info)
     {
-        Debug.Log(info);
+        Debug.Log("Player HIT");
     }
 
     public bool IsRight()
