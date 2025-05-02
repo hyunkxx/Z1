@@ -8,5 +8,6 @@ public class Skill : MonoBehaviour, IAction
     public virtual void Action() 
     {
         Debug.Log("Skill Action");
+        // 데미지 처리
     }
 }

@@ -26,7 +26,7 @@ public class Effect2D : EffectBase
         collider.isTrigger = true;
 
         animator = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
         AddLastKeyframeEvent();
     }
@@ -41,6 +41,7 @@ public class Effect2D : EffectBase
         if (animator.GetCurrentAnimatorStateInfo(0).IsName(_anim) && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
             Destroy(this);
     }
+
     private void AddLastKeyframeEvent()
     {
         RuntimeAnimatorController controller = animator.runtimeAnimatorController;

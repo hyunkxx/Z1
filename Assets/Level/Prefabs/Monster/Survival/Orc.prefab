@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 6123920241179067176}
   - component: {fileID: 6138868582767852989}
   - component: {fileID: 6821499858594191812}
+  - component: {fileID: 4293781717159346933}
   - component: {fileID: -6749091913132686085}
   - component: {fileID: 5032921733773311675}
   - component: {fileID: 828445366256103033}
   - component: {fileID: 3471724657695876419}
   - component: {fileID: 1507022867646640303}
-  - component: {fileID: 4293781717159346933}
   m_Layer: 0
   m_Name: Orc
   m_TagString: Untagged
@@ -70,6 +70,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDelay: 3
   baseAttackDelay: 3
+  damageProvider: {fileID: 0}
+--- !u!114 &4293781717159346933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4817972689310064399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 932a9037eb67e0b4e8757b1817b3914e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDelay: 10
+  baseAttackDelay: 10
+  damageProvider: {fileID: 0}
+  EffectPrefab: {fileID: 3797684433542849519, guid: 168187d4be14fe649b61410e4b9a282d, type: 3}
+  effect2D: {fileID: 0}
 --- !u!114 &-6749091913132686085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,21 +211,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.45117188, y: 0.60253906}
   m_EdgeRadius: 0
---- !u!114 &4293781717159346933
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4817972689310064399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 932a9037eb67e0b4e8757b1817b3914e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackDelay: 10
-  baseAttackDelay: 10
-  EffectPrefab: {fileID: 3797684433542849519, guid: 168187d4be14fe649b61410e4b9a282d, type: 3}
 --- !u!1 &7090187289041907029
 GameObject:
   m_ObjectHideFlags: 0
