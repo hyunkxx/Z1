@@ -29,10 +29,17 @@ public class MovementComponent : MonoBehaviour
     public Vector2 GoalLocation => goalLocation;
     public Rigidbody2D MovementRigidBody => rg2d;
 
+    public event Action<bool> OnSpriteFlipChanged;
     public event Action OnReachedLocation;
+    private SpriteRenderer rootSprite;
 
-    private void Awake()
+    private Character character;
+
+    private void Start()
     {
+        rootSprite = transform.Find("Root").GetComponent<SpriteRenderer>();
+        character = transform.root.GetComponent<Character>();
+
         rg2d = GetComponent<Rigidbody2D>();
     }
     private void FixedUpdate()
@@ -105,10 +112,51 @@ public class MovementComponent : MonoBehaviour
     protected void ApplyMovementForce()
     {
         rg2d.AddForce(moveDirection * moveSpeed, ForceMode2D.Force);
+        if (rootSprite)
+        {
+            UpdateRootSpriteFlip();
+        }
 
         //if (rg2d.linearVelocity.magnitude > maxVelocity)
         //{
         //    rg2d.linearVelocity = rg2d.linearVelocity.normalized * maxVelocity;
         //}
+    }
+    protected void UpdateRootSpriteFlip()
+    {
+        /* aim move case */
+        if (IsMove() && character && character.TargetingComponent.HasNearTarget())
+        {
+            Vector3 targetDir = character.TargetingComponent.GetTargetDirection();
+            if (rootSprite.flipX && targetDir.x > 0f)
+            {
+                rootSprite.flipX = false;
+                OnSpriteFlipChanged?.Invoke(rootSprite.flipX);
+            }
+            else if(!rootSprite.flipX && targetDir.x < 0f)
+            {
+                rootSprite.flipX = true;
+                OnSpriteFlipChanged?.Invoke(rootSprite.flipX);
+            }
+        }
+        else
+        {
+            if (moveDirection.x > 0f)
+            {
+                if (rootSprite.flipX)
+                {
+                    rootSprite.flipX = false;
+                    OnSpriteFlipChanged?.Invoke(rootSprite.flipX);
+                }
+            }
+            else if (moveDirection.x < 0f)
+            {
+                if (!rootSprite.flipX)
+                {
+                    rootSprite.flipX = true;
+                    OnSpriteFlipChanged?.Invoke(rootSprite.flipX);
+                }
+            }
+        }
     }
 }

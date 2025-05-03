@@ -1,4 +1,7 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
+
 using UnityEngine;
 
 
@@ -26,15 +29,14 @@ public struct TransformData
 
 public class Character : Z1Behaviour
 {
-    [SerializeField]
-    protected MovementComponent movementComponent;
+    [SerializeField] protected MovementComponent movementComponent;
+
     protected WeaponComponent weaponComponent;
     protected TargetingComponent targetingComponent;
     protected CharacterAnimationController animController;
 
     protected Rigidbody2D rg2d;
     protected SpriteRenderer spriteRenderer;
-    protected Animator animator;
 
     protected CharacterStats characterStats;
 
@@ -48,27 +50,22 @@ public class Character : Z1Behaviour
     public MovementComponent Movement => movementComponent;
     public CharacterStats Stats => characterStats;
 
-    bool bFaceRight = true;
     public Action<bool> OnChangeFlip;
 
-    protected override void Awake()
+    protected override void Start()
     {
-        Debug.Assert(movementComponent != null, "MovementComponent is not assigned");
-
         rg2d = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = transform.Find("Root").GetComponent<SpriteRenderer>();
         animController = GetComponent<CharacterAnimationController>();
         ghostEffect = GetComponent<GhostEffect>();
         characterStats = GetComponent<CharacterStats>();
 
         weaponComponent = GetComponent<WeaponComponent>();
-        targetingComponent = GetComponent<TargetingComponent>();
+        targetingComponent = GetComponentInChildren<TargetingComponent>();
 
         damageable = GetComponent<Damageable>();
         damageable.OnDamageTaken += TakeDamage;
-    }
-    protected override void Start()
-    {
+
         ghostEffect.Initialize(spriteRenderer);
     }
     protected override void OnDestroy()
@@ -90,23 +87,9 @@ public class Character : Z1Behaviour
     {
         Debug.Log("Player HIT");
     }
-
     public bool IsRight()
     {
-        return bFaceRight;
-    }
-    public void FaceDirectionUpdate(Vector2 direction)
-    {
-        if(direction.x > 0f)
-        {
-            bFaceRight = true;
-            transform.localScale = new Vector3(1f, 1f, 1f);
-        }
-        else if(direction.x < 0f)
-        {
-            bFaceRight = false;
-            transform.localScale = new Vector3(-1f, 1f, 1f);
-        }
+        return !spriteRenderer.flipX;
     }
     public void Dash()
     {

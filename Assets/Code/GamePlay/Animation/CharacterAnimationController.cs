@@ -9,7 +9,7 @@ public class CharacterAnimationController : MonoBehaviour
     public void Awake()
     {
         character = GetComponent<Character>();
-        animator = GetComponent<Animator>();
+        animator = transform.Find("Root").GetComponent<Animator>();
         rg2d = GetComponent<Rigidbody2D>();
     }
     public void LateUpdate()

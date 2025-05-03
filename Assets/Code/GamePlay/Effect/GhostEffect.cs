@@ -32,7 +32,7 @@ public class GhostEffect : MonoBehaviour
         }
 
         sourceSprite = source;
-        character = source.gameObject.GetComponent<Character>();
+        character = source.gameObject.transform.root.GetComponent<Character>();
         foreach (GameObject obj in effectPool.Pool)
         {
             SpriteRenderer renderer = obj.AddComponent<SpriteRenderer>();

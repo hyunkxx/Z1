@@ -58,7 +58,10 @@ public class TargetingComponent : MonoBehaviour
     {
         return HasNearTarget() ? targetList[0].target : null;
     }
-
+    public Vector3 GetTargetDirection()
+    {
+        return (targetList[0].target.transform.position - transform.position).normalized;
+    }
     private IEnumerator UpdatePriorityWeights()
     {
         while(true)
@@ -76,7 +79,7 @@ public class TargetingComponent : MonoBehaviour
                     float directionWeight = Vector2.Dot(characterDir, targetDirection);
                     directionWeight = Mathf.Clamp01((directionWeight + 1f / 2f));
 
-                    targetList[i].weight = (distanceWeight * 0.7f) + (directionWeight * 0.3f);
+                    targetList[i].weight = distanceWeight + directionWeight;
                 }
 
                 SortByPriorityWeights();
@@ -109,7 +112,6 @@ public class TargetingComponent : MonoBehaviour
 
         if(owner.IsEnemy(other))
         {
-            Debug.Log($"add {collision.gameObject.name}");
             TargetElement element = new TargetElement(collision.gameObject);
 
             targetList.Add(element);
@@ -124,7 +126,6 @@ public class TargetingComponent : MonoBehaviour
 
         if (owner.IsEnemy(other))
         {
-            Debug.Log($"remove {collision.gameObject.name}");
             TargetElement find = targetList.Find(e => e.target == collision.gameObject);
             targetList.Remove(find);
 

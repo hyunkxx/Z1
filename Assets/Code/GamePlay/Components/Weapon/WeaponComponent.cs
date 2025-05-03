@@ -18,12 +18,11 @@ public class WeaponComponent : MonoBehaviour
         Swing
     }
 
-    [SerializeField] private Transform weaponSocket;
-    [SerializeField] private SpriteRenderer weaponSprite;
     [SerializeField] private DefaultSlashEffect slashEffect;
 
     private Character character;
     private MovementComponent movement;
+    private SpriteRenderer weaponSprite;
 
     private float pivotAngle;
     private float offsetAngle;
@@ -35,14 +34,30 @@ public class WeaponComponent : MonoBehaviour
     private Coroutine weaponRotateCoroutine;
     private Coroutine weaponResetCoroutine;
 
-    public void Awake()
+    public void Start()
     {
         GameObject holder = new GameObject("EffectHolder");
         holder.transform.SetParent(transform.parent);
         slashEffect = Instantiate(slashEffect, holder.transform);
 
-        movement = GetComponentInParent<MovementComponent>();
+        weaponSprite = GetComponent<SpriteRenderer>();
         character = GetComponentInParent<Character>();
+
+        movement = character.Movement;
+
+        character.Movement.OnSpriteFlipChanged += FlipX;
+    }
+    public void OnDestroy()
+    {
+        character.Movement.OnSpriteFlipChanged -= FlipX;
+    }
+
+    public void FlipX(bool bFlip)
+    {
+        weaponSprite.flipX = bFlip;
+        Vector3 localTransform = transform.localPosition;
+        localTransform.x *= -1f;
+        transform.localPosition = localTransform;
     }
 
     public void ChangeWeaponState(EWeaponComponentState state)
@@ -57,7 +72,7 @@ public class WeaponComponent : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if(weaponRotateCoroutine == null)
+            if (weaponRotateCoroutine == null)
                 Swing();
         }
 
@@ -71,16 +86,23 @@ public class WeaponComponent : MonoBehaviour
 
                 if (movement.IsMove())
                 {
-                    weaponDirection = movement.MoveDirection;
+                    if(character.TargetingComponent.HasNearTarget())
+                    {
+                        weaponDirection = character.TargetingComponent.GetTargetDirection();
+                    }
+                    else
+                    {
+                        weaponDirection = movement.MoveDirection;
+                    }
                 }
                 else
                 {
-                    weaponDirection = character.IsRight() ? Vector2.right : -Vector2.right;
+                    weaponDirection = character.GetCharacterDirection();
                 }
 
-                targetAngle = Mathf.Atan2(weaponDirection.y, weaponDirection.x) * Mathf.Rad2Deg + pivotAngle + offsetAngle;
-                angle = Mathf.LerpAngle(weaponSocket.transform.eulerAngles.z, targetAngle, Time.deltaTime * 15.0f);
-                weaponSocket.transform.rotation = Quaternion.Euler(0, 0, angle);
+                targetAngle = Mathf.Repeat(Mathf.Atan2(weaponDirection.y, weaponDirection.x) * Mathf.Rad2Deg + pivotAngle + offsetAngle, 360f);
+                angle = Mathf.LerpAngle(transform.eulerAngles.z, targetAngle, Time.deltaTime * 15.0f);
+                transform.rotation = Quaternion.Euler(0, 0, angle);
 
                 break;
             case EWeaponComponentState.Swing:
@@ -92,14 +114,10 @@ public class WeaponComponent : MonoBehaviour
     {
         TransformData trans = new TransformData();
         trans.position = transform.position + weaponDirection * 0.05f;
-        trans.localPosition = weaponSocket.localPosition;
+        trans.localPosition = transform.localPosition;
 
         float angle = Mathf.Atan2(weaponDirection.y, weaponDirection.x) * Mathf.Rad2Deg;
-        angle += character.IsRight() ? 0f : 180f;
-
         trans.rotation = Quaternion.Euler(0f, 0f, angle);
-
-        movement.MovementRigidBody.AddForce(character.GetCharacterDirection() * 1f, ForceMode2D.Impulse);
 
         slashEffect.ActivateEffect(character, trans, isWeaponLowered);
         weaponRotateCoroutine = StartCoroutine(CoroutineRotateWeapon());
@@ -124,6 +142,7 @@ public class WeaponComponent : MonoBehaviour
         ResetWeaponState();
         weaponResetCoroutine = null;
     }
+
     IEnumerator CoroutineRotateWeapon()
     {
         weaponState = EWeaponComponentState.Swing;
@@ -135,21 +154,21 @@ public class WeaponComponent : MonoBehaviour
             weaponResetCoroutine = null;
         }
 
-        float swingAngle = 160f;
+        float swingAngle = 175f;
         const float swingSpeed = 35f;
 
-        float currentAngle = weaponSocket.transform.eulerAngles.z * Mathf.Rad2Deg;
+        float currentAngle = transform.eulerAngles.z;
         float targetAngle;
 
         if (character.IsRight())
         {
             swingAngle = isWeaponLowered ? -swingAngle : swingAngle;
-            targetAngle = weaponSocket.transform.eulerAngles.z - swingAngle;
+            targetAngle = transform.eulerAngles.z - swingAngle;
         }
         else
         {
             swingAngle = isWeaponLowered ? -swingAngle : swingAngle;
-            targetAngle = weaponSocket.transform.eulerAngles.z + swingAngle;
+            targetAngle = transform.eulerAngles.z + swingAngle;
         }
 
         offsetAngle += 180f;
@@ -157,13 +176,13 @@ public class WeaponComponent : MonoBehaviour
 
         while (true)
         {
-            float angle = Mathf.LerpAngle(weaponSocket.transform.eulerAngles.z, targetAngle, Time.deltaTime * swingSpeed);
-            weaponSocket.transform.rotation = Quaternion.Euler(0, 0, angle);
+            float angle = Mathf.LerpAngle(transform.eulerAngles.z, targetAngle, Time.deltaTime * swingSpeed);
+            transform.rotation = Quaternion.Euler(0, 0, angle);
 
             float delta = Mathf.DeltaAngle(angle, targetAngle);
             if (Mathf.Abs(delta) < 0.1f)
             {
-                weaponSocket.transform.rotation = Quaternion.Euler(0, 0, targetAngle);
+                transform.rotation = Quaternion.Euler(0, 0, targetAngle);
                 break;
             }
 

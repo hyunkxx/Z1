@@ -4,10 +4,14 @@ public class DefaultSlashEffect : MonoBehaviour
 {
     private Animator animator;
     private DamageProvider damageProvider;
+    private SpriteRenderer sprite;
+
     public DamageProvider DamageProvider => damageProvider;
+    public SpriteRenderer Sprite => sprite;
 
     private void Awake()
     {
+        sprite = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         damageProvider = GetComponent<DamageProvider>();
     }
@@ -24,14 +28,13 @@ public class DefaultSlashEffect : MonoBehaviour
         gameObject.transform.rotation = transformData.rotation;
         damageProvider.ActivateProvider(character.gameObject, character.Stats);
 
-        if (bUpper)
+        sprite.flipY = bUpper ? false : true;
+        if(!character.IsRight())
         {
-            animator.SetTrigger("UpperSlash");
+            sprite.flipY = !sprite.flipY;
         }
-        else
-        {
-            animator.SetTrigger("LowerSlash");
-        }
+
+        animator.SetTrigger("UpperSlash");
     }
 
     public void DeactivateEffect()

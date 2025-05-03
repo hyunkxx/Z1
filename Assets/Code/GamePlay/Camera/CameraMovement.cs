@@ -8,7 +8,7 @@ public class CameraMovement : MonoBehaviour
     //[SerializeField] private float smoothMovementFactor = 0.01f;
 
     [SerializeField]
-    private float zoomFactor = 1f;
+    //private float zoomFactor = 1f;
     private const float cameraDistance = -10;
 
     private UnityEngine.Rendering.Universal.PixelPerfectCamera pixelPerfectCamera;
