@@ -23,7 +23,6 @@ public struct DamageProviderParam
         this.periodicInterval = periodicInterval;
         this.shouldDisableOnTrigger = shouldDisableOnTrigger;
     }
-
     public DamageProviderParam(DamageProviderParam param)
     {
         this.owner = param.owner;
@@ -42,8 +41,11 @@ public class DamageProvider : MonoBehaviour
 
     protected void Activate()
     {
+        var colls = GetComponentsInChildren<Collider2D>();
+        Debug.Assert(colls != null, "Effect2D has no assigned Collider.");
+
         enableTrigger = true;
-        StartCoroutine(CoroutineActivateTimer());
+        StartCoroutine(CoroutineLifeTime());
         if(providerData.periodicInterval > 0f)
         {
             StartCoroutine(CoroutinePerodicActivate());
@@ -57,7 +59,7 @@ public class DamageProvider : MonoBehaviour
         Activate();
     }
 
-    private IEnumerator CoroutineActivateTimer()
+    private IEnumerator CoroutineLifeTime()
     {
         float elapsed = 0f;
         while(elapsed < providerData.duration)
@@ -67,6 +69,7 @@ public class DamageProvider : MonoBehaviour
         }
 
         StopAllCoroutines();
+        enableTrigger = false;
         gameObject.SetActive(false);
     }
     private IEnumerator CoroutinePerodicActivate()
@@ -101,6 +104,10 @@ public class DamageProvider : MonoBehaviour
                 Debug.Log($"take damage {collision.gameObject.name}");
                 DamageEvent damageEvent = new DamageEvent(providerData.characterStats.Damage, providerData.owner);
                 other.TakeDamage(damageEvent);
+
+                Rigidbody2D rg2d = owner.GetComponent<Rigidbody2D>();
+                Vector3 dir = owner.transform.position - other.transform.position;
+                rg2d.AddForce(dir.normalized, ForceMode2D.Impulse);
             }
         }
     }

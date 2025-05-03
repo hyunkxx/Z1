@@ -43,6 +43,11 @@ public sealed class Damageable : MonoBehaviour
     }
     public void TakeDamage(DamageEvent customEvent)
     {
+        ObjectPool pool = PoolManager.Instance.GetPool("DamageFont");
+        GameObject instance = pool.GetObject(transform.position, Quaternion.identity);
+        DamageFont font = instance.GetComponent<DamageFont>();
+        font.Show(customEvent, Color.white);
+
         OnDamageTaken?.Invoke(customEvent);
     }
 }

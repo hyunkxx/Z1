@@ -8,6 +8,8 @@ public class PlayerController
     protected Character character;
     public Action<Character> OnChangedCharacter;
 
+    public Character Character => character;
+
     protected bool inputLock = false;
     public void SetInputLock(bool bValue)
     {

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 
@@ -27,6 +28,8 @@ public class MovementComponent : MonoBehaviour
     public Vector2 MoveDirection => moveDirection;
     public Vector2 GoalLocation => goalLocation;
     public Rigidbody2D MovementRigidBody => rg2d;
+
+    public event Action OnReachedLocation;
 
     private void Awake()
     {
@@ -81,6 +84,7 @@ public class MovementComponent : MonoBehaviour
         if (Reached)
         {
             movementState = EMovementState.Reached;
+            OnReachedLocation?.Invoke();
         }
 
         return Reached;

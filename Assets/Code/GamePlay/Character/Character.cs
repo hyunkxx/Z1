@@ -27,34 +27,42 @@ public struct TransformData
 public class Character : Z1Behaviour
 {
     [SerializeField]
-    protected MovementComponent movement;
-    
+    protected MovementComponent movementComponent;
+    protected WeaponComponent weaponComponent;
+    protected TargetingComponent targetingComponent;
+    protected CharacterAnimationController animController;
+
     protected Rigidbody2D rg2d;
     protected SpriteRenderer spriteRenderer;
+    protected Animator animator;
+
+    protected CharacterStats characterStats;
 
     protected Damageable damageable;
-    protected Animator animator;
-    protected CharacterAnimationController animController;
-    protected WeaponComponent weaponComponent;
     protected GhostEffect ghostEffect;
 
     //test
     public AttackAction testEffect;
 
-    public MovementComponent Movement => movement;
+    public TargetingComponent TargetingComponent => targetingComponent;
+    public MovementComponent Movement => movementComponent;
+    public CharacterStats Stats => characterStats;
 
     bool bFaceRight = true;
     public Action<bool> OnChangeFlip;
 
     protected override void Awake()
     {
-        Debug.Assert(movement != null, "MovementComponent is not assigned");
+        Debug.Assert(movementComponent != null, "MovementComponent is not assigned");
 
         rg2d = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animController = GetComponent<CharacterAnimationController>();
-        weaponComponent = GetComponent<WeaponComponent>();
         ghostEffect = GetComponent<GhostEffect>();
+        characterStats = GetComponent<CharacterStats>();
+
+        weaponComponent = GetComponent<WeaponComponent>();
+        targetingComponent = GetComponent<TargetingComponent>();
 
         damageable = GetComponent<Damageable>();
         damageable.OnDamageTaken += TakeDamage;
@@ -71,7 +79,7 @@ public class Character : Z1Behaviour
     {
         /* temp */
         if (Input.GetKeyDown(KeyCode.LeftShift))
-            Dash(movement.MoveDirection);
+            Dash();
 
         if (Input.GetKeyDown(KeyCode.I))
         {
@@ -100,19 +108,19 @@ public class Character : Z1Behaviour
             transform.localScale = new Vector3(-1f, 1f, 1f);
         }
     }
-    public void Dash(Vector2 direction)
+    public void Dash()
     {
-        const float dash = 10f;
+        const float dashPower = 10f;
 
         ghostEffect.ActivateEffect();
-        if (movement.IsMove())
-        {
-            rg2d.AddForce(direction.normalized * dash, ForceMode2D.Impulse);
-        }
+        Vector2 direction = GetCharacterDirection();
+        rg2d.AddForce(direction * dashPower, ForceMode2D.Impulse);
+    }
+    public Vector2 GetCharacterDirection()
+    {
+        if (movementComponent.IsMove())
+            return movementComponent.MoveDirection.normalized;
         else
-        {
-            Vector2 dir = IsRight() ? Vector2.right : Vector2.left;
-            rg2d.AddForce(dir * dash, ForceMode2D.Impulse);
-        }
+            return IsRight() ? Vector2.right : Vector2.left;
     }
 }

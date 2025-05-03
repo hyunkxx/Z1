@@ -99,7 +99,9 @@ public class WeaponComponent : MonoBehaviour
 
         trans.rotation = Quaternion.Euler(0f, 0f, angle);
 
-        slashEffect.ActivateEffect(trans, isWeaponLowered);
+        movement.MovementRigidBody.AddForce(character.GetCharacterDirection() * 1f, ForceMode2D.Impulse);
+
+        slashEffect.ActivateEffect(character, trans, isWeaponLowered);
         weaponRotateCoroutine = StartCoroutine(CoroutineRotateWeapon());
     }
 

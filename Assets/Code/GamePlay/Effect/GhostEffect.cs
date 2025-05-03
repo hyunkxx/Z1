@@ -53,12 +53,15 @@ public class GhostEffect : MonoBehaviour
         while (spawnCount < ghostParam.count)
         {
             GameObject obj = effectPool.GetObject(transform.position, transform.rotation);
-            SpriteRenderer sprite = obj.GetComponent<SpriteRenderer>();
-            sprite.color = ghostParam.beginColor;
-            sprite.flipX = character.IsRight() ? false : true;
+            if(obj)
+            {
+                SpriteRenderer sprite = obj.GetComponent<SpriteRenderer>();
+                sprite.color = ghostParam.beginColor;
+                sprite.flipX = character.IsRight() ? false : true;
 
-            StartCoroutine(CoroutineChangeColor(obj, sprite));
-            spawnCount++;
+                StartCoroutine(CoroutineChangeColor(obj, sprite));
+                spawnCount++;
+            }
 
             yield return new WaitForSeconds(ghostParam.activeInterval);
         }

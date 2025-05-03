@@ -45,5 +45,8 @@ TagManager:
   - name: Effect
     uniqueID: 847969267
     locked: 0
+  - name: WorldSpaceUI
+    uniqueID: 1965022313
+    locked: 0
   m_RenderingLayers:
   - Default

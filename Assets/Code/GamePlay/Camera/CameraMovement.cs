@@ -49,8 +49,8 @@ public class CameraMovement : MonoBehaviour
         if (!viewTarget)
             return;
 
-        float ratio = targetRg2d.linearVelocity.magnitude / targetMovement.MaxVelocity;
-        Camera.main.orthographicSize = Mathf.Lerp(3, 4, ratio * zoomFactor);
+        //float ratio = targetRg2d.linearVelocity.magnitude / targetMovement.MaxVelocity;
+        //Camera.main.orthographicSize = Mathf.Lerp(3, 4, ratio * zoomFactor);
 
         Vector3 position = viewTarget.transform.position;
         position.z = cameraDistance;
