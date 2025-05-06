@@ -45,11 +45,11 @@ public class WeaponComponent : MonoBehaviour
 
         movement = character.Movement;
 
-        character.Movement.OnSpriteFlipChanged += FlipX;
+        character.OnChangedFlip += FlipX;
     }
     public void OnDestroy()
     {
-        character.Movement.OnSpriteFlipChanged -= FlipX;
+        character.OnChangedFlip -= FlipX;
     }
 
     public void FlipX(bool bFlip)
@@ -85,16 +85,9 @@ public class WeaponComponent : MonoBehaviour
             case EWeaponComponentState.Move:
                 pivotAngle = character.IsRight() ? 0f : 180f;
 
-                if (movement.IsMove())
+                if(character.TargetingComponent.HasNearTarget())
                 {
-                    if(character.TargetingComponent.HasNearTarget())
-                    {
-                        weaponDirection = character.TargetingComponent.GetTargetDirection();
-                    }
-                    else
-                    {
-                        weaponDirection = movement.MoveDirection;
-                    }
+                    weaponDirection = character.TargetingComponent.GetTargetDirection();
                 }
                 else
                 {

@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.TextCore.Text;
 
 
 [System.Serializable]
@@ -50,6 +52,8 @@ public class Character : Z1Behaviour
     public MovementComponent Movement => movementComponent;
     public CharacterStats Stats => characterStats;
 
+    public event Action<bool> OnChangedFlip;
+
     protected override void Start()
     {
         rg2d = GetComponent<Rigidbody2D>();
@@ -80,6 +84,8 @@ public class Character : Z1Behaviour
         {
             testEffect.ExcuteAction();
         }
+
+        UpdateFlip();
     }
     protected virtual void TakeDamage(DamageEvent info)
     {
@@ -99,11 +105,43 @@ public class Character : Z1Behaviour
     }
     public Vector2 GetCharacterDirection()
     {
-        //if (movementComponent.IsMove())
-        //    return movementComponent.MoveDirection.normalized;
-        //else
-        //    return IsRight() ? Vector2.right : Vector2.left;
-
-        return movementComponent.MoveDirection.normalized;
+        if (movementComponent.IsMove())
+            return movementComponent.MoveDirection.normalized;
+        else
+            return IsRight() ? Vector2.right : Vector2.left;
+    }
+    public void UpdateFlip()
+    {
+        if(movementComponent.IsMove())
+        {
+            if(targetingComponent.HasNearTarget())
+            {
+                Vector3 targetDir = targetingComponent.GetTargetDirection();
+                if (spriteRenderer.flipX && targetDir.x > 0f)
+                {
+                    spriteRenderer.flipX = false;
+                    OnChangedFlip?.Invoke(false);
+                }
+                else if (!spriteRenderer.flipX && targetDir.x < 0f)
+                {
+                    spriteRenderer.flipX = true;
+                    OnChangedFlip?.Invoke(true);
+                }
+            }
+            else
+            {
+                Vector3 moveDirection = movementComponent.MoveDirection;
+                if (spriteRenderer.flipX && moveDirection.x > 0f)
+                {
+                    spriteRenderer.flipX = false;
+                    OnChangedFlip?.Invoke(false);
+                }
+                else if (!spriteRenderer.flipX && moveDirection.x < 0f)
+                {
+                    spriteRenderer.flipX = true;
+                    OnChangedFlip?.Invoke(true);
+                }
+            }
+        }
     }
 }

@@ -85,7 +85,7 @@ public class TargetingComponent : MonoBehaviour
                 SortByPriorityWeights();
             }
 
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(1f);
         }
     }
 
@@ -93,13 +93,17 @@ public class TargetingComponent : MonoBehaviour
     {
         targetList.Sort((a, b) =>
         {
-            return a.weight.CompareTo(b.weight);
+            return b.weight.CompareTo(a.weight);
         });
 
         for (int i = 0; i < targetList.Count; ++i)
         {
             SpriteRenderer sprite = targetList[i].target.GetComponent<SpriteRenderer>();
-            sprite.color = new Color(targetList[i].weight, 0f, 0f);
+
+            if (i == 0)
+                sprite.color = new Color(targetList[i].weight, 0f, 0f);
+            else
+                sprite.color = Color.white;
         }
     }
 
@@ -113,7 +117,6 @@ public class TargetingComponent : MonoBehaviour
         if(owner.IsEnemy(other))
         {
             TargetElement element = new TargetElement(collision.gameObject);
-
             targetList.Add(element);
         }
     }
@@ -130,7 +133,6 @@ public class TargetingComponent : MonoBehaviour
             targetList.Remove(find);
 
             SpriteRenderer sprite = collision.gameObject.GetComponent<SpriteRenderer>();
-            sprite.color = Color.white;
         }
     }
 }

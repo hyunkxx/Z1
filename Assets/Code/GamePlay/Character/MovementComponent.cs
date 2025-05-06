@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 
 enum EMovementState
@@ -29,17 +30,10 @@ public class MovementComponent : MonoBehaviour
     public Vector2 GoalLocation => goalLocation;
     public Rigidbody2D MovementRigidBody => rg2d;
 
-    public event Action<bool> OnSpriteFlipChanged;
     public event Action OnReachedLocation;
-    private SpriteRenderer rootSprite;
-
-    private Character character;
 
     private void Start()
     {
-        rootSprite = transform.Find("Root").GetComponent<SpriteRenderer>();
-        character = transform.root.GetComponent<Character>();
-
         rg2d = GetComponent<Rigidbody2D>();
     }
     private void FixedUpdate()
@@ -66,8 +60,9 @@ public class MovementComponent : MonoBehaviour
     }
     public void ResetMovement()
     {
+        Debug.Log("Reset");
         movementState = EMovementState.None;
-        //moveDirection = Vector2.zero;
+        moveDirection = Vector2.zero;
         goalLocation = Vector2.zero;
     }
     public void MoveToDirection(Vector2 direction)
@@ -100,62 +95,22 @@ public class MovementComponent : MonoBehaviour
     protected void PerformMovement(Vector2 direction)
     {
         Vector2 position = gameObject.transform.position;
-        if (HelperLibrary.ApproximateEqual(direction - position, Vector2.zero))
+        if (direction == Vector2.zero)
         {
+            moveDirection = Vector2.zero;
             movementState = EMovementState.Aborted;
-            Debug.Log("ApproximateEqual");
         }
         else
         {
             moveDirection = direction.normalized;
-            Debug.Log("else ApproximateEqual");
         }
     }
     protected void ApplyMovementForce()
     {
         rg2d.AddForce(moveDirection * moveSpeed, ForceMode2D.Force);
-        if (rootSprite)
-        {
-            UpdateRootSpriteFlip();
-        }
-
         //if (rg2d.linearVelocity.magnitude > maxVelocity)
         //{
         //    rg2d.linearVelocity = rg2d.linearVelocity.normalized * maxVelocity;
         //}
-    }
-    protected void UpdateRootSpriteFlip()
-    {
-        /* aim move case */
-        if (character && IsMove())
-        {
-            if(character.TargetingComponent.HasNearTarget())
-            {
-                Vector3 targetDir = character.TargetingComponent.GetTargetDirection();
-                if (rootSprite.flipX && targetDir.x > 0f)
-                {
-                    rootSprite.flipX = false;
-                    OnSpriteFlipChanged?.Invoke(false);
-                }
-                else if (!rootSprite.flipX && targetDir.x < 0f)
-                {
-                    rootSprite.flipX = true;
-                    OnSpriteFlipChanged?.Invoke(true);
-                }
-            }
-            else
-            {
-                if (rootSprite.flipX && moveDirection.x > 0f)
-                {
-                    rootSprite.flipX = false;
-                    OnSpriteFlipChanged?.Invoke(false);
-                }
-                else if (!rootSprite.flipX &&  moveDirection.x < 0f)
-                {
-                    rootSprite.flipX = true;
-                    OnSpriteFlipChanged?.Invoke(true);
-                }
-            }
-        }
     }
 }
