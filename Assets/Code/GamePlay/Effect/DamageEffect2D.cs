@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-public class HitEffect2D : Effect2D
+public class DamageEffect2D : Effect2D
 {
     [Header("HitEffect2D Property")]
     [SerializeField] 

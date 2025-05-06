@@ -67,7 +67,7 @@ public class MovementComponent : MonoBehaviour
     public void ResetMovement()
     {
         movementState = EMovementState.None;
-        moveDirection = Vector2.zero;
+        //moveDirection = Vector2.zero;
         goalLocation = Vector2.zero;
     }
     public void MoveToDirection(Vector2 direction)
@@ -103,10 +103,12 @@ public class MovementComponent : MonoBehaviour
         if (HelperLibrary.ApproximateEqual(direction - position, Vector2.zero))
         {
             movementState = EMovementState.Aborted;
+            Debug.Log("ApproximateEqual");
         }
         else
         {
             moveDirection = direction.normalized;
+            Debug.Log("else ApproximateEqual");
         }
     }
     protected void ApplyMovementForce()
@@ -125,36 +127,33 @@ public class MovementComponent : MonoBehaviour
     protected void UpdateRootSpriteFlip()
     {
         /* aim move case */
-        if (IsMove() && character && character.TargetingComponent.HasNearTarget())
+        if (character && IsMove())
         {
-            Vector3 targetDir = character.TargetingComponent.GetTargetDirection();
-            if (rootSprite.flipX && targetDir.x > 0f)
+            if(character.TargetingComponent.HasNearTarget())
             {
-                rootSprite.flipX = false;
-                OnSpriteFlipChanged?.Invoke(rootSprite.flipX);
-            }
-            else if(!rootSprite.flipX && targetDir.x < 0f)
-            {
-                rootSprite.flipX = true;
-                OnSpriteFlipChanged?.Invoke(rootSprite.flipX);
-            }
-        }
-        else
-        {
-            if (moveDirection.x > 0f)
-            {
-                if (rootSprite.flipX)
+                Vector3 targetDir = character.TargetingComponent.GetTargetDirection();
+                if (rootSprite.flipX && targetDir.x > 0f)
                 {
                     rootSprite.flipX = false;
-                    OnSpriteFlipChanged?.Invoke(rootSprite.flipX);
+                    OnSpriteFlipChanged?.Invoke(false);
                 }
-            }
-            else if (moveDirection.x < 0f)
-            {
-                if (!rootSprite.flipX)
+                else if (!rootSprite.flipX && targetDir.x < 0f)
                 {
                     rootSprite.flipX = true;
-                    OnSpriteFlipChanged?.Invoke(rootSprite.flipX);
+                    OnSpriteFlipChanged?.Invoke(true);
+                }
+            }
+            else
+            {
+                if (rootSprite.flipX && moveDirection.x > 0f)
+                {
+                    rootSprite.flipX = false;
+                    OnSpriteFlipChanged?.Invoke(false);
+                }
+                else if (!rootSprite.flipX &&  moveDirection.x < 0f)
+                {
+                    rootSprite.flipX = true;
+                    OnSpriteFlipChanged?.Invoke(true);
                 }
             }
         }

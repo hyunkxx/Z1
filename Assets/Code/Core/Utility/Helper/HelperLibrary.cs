@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class HelperLibrary
 {
-    private static float epsilon = 0.0001f;
+    private static float epsilon = 0.001f;
 
     public static bool ApproximateEqual(Vector3 a, Vector3 b)
     {

@@ -50,8 +50,6 @@ public class Character : Z1Behaviour
     public MovementComponent Movement => movementComponent;
     public CharacterStats Stats => characterStats;
 
-    public Action<bool> OnChangeFlip;
-
     protected override void Start()
     {
         rg2d = GetComponent<Rigidbody2D>();
@@ -101,9 +99,11 @@ public class Character : Z1Behaviour
     }
     public Vector2 GetCharacterDirection()
     {
-        if (movementComponent.IsMove())
-            return movementComponent.MoveDirection.normalized;
-        else
-            return IsRight() ? Vector2.right : Vector2.left;
+        //if (movementComponent.IsMove())
+        //    return movementComponent.MoveDirection.normalized;
+        //else
+        //    return IsRight() ? Vector2.right : Vector2.left;
+
+        return movementComponent.MoveDirection.normalized;
     }
 }

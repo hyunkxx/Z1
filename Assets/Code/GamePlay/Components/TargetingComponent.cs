@@ -74,12 +74,12 @@ public class TargetingComponent : MonoBehaviour
                     float distance = Vector2.Distance(targetPosition, transform.position);
                     float distanceWeight = 1f - Mathf.Clamp01(distance / targetingCollider.radius);
 
-                    Vector2 characterDir = character.GetCharacterDirection();
-                    Vector2 targetDirection = targetPosition - transform.position.normalized;
+                    Vector2 characterDir = character.Movement.MoveDirection;
+                    Vector2 targetDirection = (targetPosition - transform.position).normalized;
                     float directionWeight = Vector2.Dot(characterDir, targetDirection);
                     directionWeight = Mathf.Clamp01((directionWeight + 1f / 2f));
 
-                    targetList[i].weight = distanceWeight + directionWeight;
+                    targetList[i].weight = (distanceWeight * 0.6f) + (directionWeight * 0.4f);
                 }
 
                 SortByPriorityWeights();
