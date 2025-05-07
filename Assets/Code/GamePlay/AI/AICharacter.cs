@@ -10,13 +10,13 @@ public interface IAction
 interface IMonster
 {
     public void Spawn();
+    public void Move();
     public void Death();
 }
 
-public class AICharacter : IMonster
+public class AICharacter : MonoBehaviour, IMonster
 {
-    IAction AttackType;
-    public float hp = 100;
+    public MovementComponent movement;
 
     public void Spawn()
     {
@@ -26,6 +26,11 @@ public class AICharacter : IMonster
     public void Action(IAction attackType)
     {
         attackType.ExcuteAction();
+    }
+
+    public void Move()
+    {
+
     }
 
     public void Death()

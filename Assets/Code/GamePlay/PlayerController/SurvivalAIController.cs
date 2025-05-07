@@ -7,6 +7,7 @@ public class SurvivalAIController : MonoBehaviour
 
     private void Awake()
     {
+
     }
 
     private void Update()
@@ -16,7 +17,6 @@ public class SurvivalAIController : MonoBehaviour
 
     void MoveToPlayer()
     {
-        if (Vector2.Distance(target.transform.position, transform.position) > 1f)
-            movement.MoveToDirection((target.transform.position - transform.position).normalized);
+         movement.MoveToLocation(target.transform.position);
     }
 }

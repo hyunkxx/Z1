@@ -3,18 +3,27 @@ using UnityEngine;
 
 public class SurvivalSpawner : SpawnController
 {
-    public GameObject PlayerPrefabs;
+    public PlayerController playerController;
+    public GameObject Character;
 
+    private void Awake()
+    {
+    }
     void Start()
     {
-        StartCoroutine(Spawn("Orc", 1));
+        Invoke("Initialize", 0.5f);
         //StartCoroutine(Spawn("TestBossMonster", 10));
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+    }
+
+    void Initialize()
+    {
+        Character = playerController.Character.gameObject;
+        StartCoroutine(Spawn("Orc", 1));
     }
 
     IEnumerator Spawn(string _type, int _count)
@@ -30,14 +39,14 @@ public class SurvivalSpawner : SpawnController
             {
                 xPos = Random.Range(-10, 10);
                 yPos = Random.Range(-6, 6);
-                isValidPos = IsValidSpawnPosition(PlayerPrefabs.transform.position, new Vector3(xPos, yPos, 0));
+                isValidPos = IsValidSpawnPosition(Character.transform.position, new Vector3(xPos, yPos, 0));
             }
 
-            transform.position = PlayerPrefabs.transform.position + new Vector3(xPos, yPos, 0);
+            transform.position = Character.transform.position + new Vector3(xPos, yPos, 0);
 
             GameObject obj = base.Spawn(_type, new Vector3(xPos, yPos));
-            obj.GetComponent<MonsterStateMachine>().target = PlayerPrefabs;
-            obj.GetComponent<SurvivalAIController>().target = PlayerPrefabs;
+            obj.GetComponent<MonsterStateMachine>().target = Character;
+            obj.GetComponent<SurvivalAIController>().target = Character;
             curCount++;
 
             yield return new WaitForSeconds(1f);
