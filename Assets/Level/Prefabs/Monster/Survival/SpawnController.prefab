@@ -48,7 +48,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectPools: {fileID: 5145002880415504483}
-  PlayerPrefabs: {fileID: 0}
+  playerController: {fileID: 0}
+  Character: {fileID: 0}
 --- !u!114 &8779192647644488034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,9 +77,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58521fdc2ccc04d4d99d2746998be5a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolName: TestBossMonster
+  poolName: Necromancer
   poolSize: 10
-  sourcePrefab: {fileID: 4817972689310064399, guid: 6a877db33ad06dd4c9adaecb20cdcaf6, type: 3}
+  sourcePrefab: {fileID: 4817972689310064399, guid: cfa41bbc8dd305846aa7a57af2928ba4, type: 3}
 --- !u!114 &5145002880415504483
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -46,6 +46,12 @@ public class PoolContainer : MonoBehaviour
     {
         poolContainer.Clear();
     }
+
+    public Dictionary<string, ObjectPool> GetContainer()
+    {
+        return poolContainer;
+    }
+    
     public ObjectPool GetPool(string poolName)
     {
         return poolContainer.GetValueOrDefault(poolName);

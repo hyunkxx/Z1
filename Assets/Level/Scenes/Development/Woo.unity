@@ -379,7 +379,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 1.03
+  orthographic size: 1.05
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -676,9 +676,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58521fdc2ccc04d4d99d2746998be5a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolName: TestBossMonster
-  poolSize: 10
-  sourcePrefab: {fileID: 4817972689310064399, guid: 6a877db33ad06dd4c9adaecb20cdcaf6, type: 3}
+  poolName: Necromancer
+  poolSize: 1
+  sourcePrefab: {fileID: 4817972689310064399, guid: cfa41bbc8dd305846aa7a57af2928ba4, type: 3}
 --- !u!114 &1322661217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -708,38 +708,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectPools: {fileID: 1322661215}
   playerController: {fileID: 306485427}
-  Character: {fileID: 1353610233}
---- !u!1 &1353610233
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1353610234}
-  m_Layer: 0
-  m_Name: Player
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1353610234
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1353610233}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.5939393, y: -0.09311373, z: 0.018480193}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  Character: {fileID: 0}
 --- !u!1 &1396715088
 GameObject:
   m_ObjectHideFlags: 0
@@ -1145,4 +1114,3 @@ SceneRoots:
   - {fileID: 1704275352}
   - {fileID: 1396715089}
   - {fileID: 441296033}
-  - {fileID: 1353610234}

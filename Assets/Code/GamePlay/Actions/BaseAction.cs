@@ -9,6 +9,8 @@ public abstract class BaseAction : Z1Behaviour, IAction
 
     public float attackDelay = 10f;
     public float baseAttackDelay = 10f;
+    public float attackRange = 1f;
+    public AnimationClip clip;
 
     public virtual void ExcuteAction() { }
 }

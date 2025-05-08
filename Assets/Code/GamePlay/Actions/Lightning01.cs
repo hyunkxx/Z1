@@ -21,11 +21,9 @@ public class Lightning01 : AttackAction
     public override void ExcuteAction()
     {
         // Instantiate Effect
-        GameObject obj = Instantiate(EffectPrefab);
-        obj.transform.position = Vector3.zero;
+        base.ExcuteAction();
         // 스킬 로직
         
         // 데미지 처리
     }
 }
-    

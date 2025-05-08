@@ -10,7 +10,7 @@ public interface IAction
 interface IMonster
 {
     public void Spawn();
-    public void Move();
+    public void Move(Vector3 _targetPos);
     public void Death();
 }
 
@@ -28,9 +28,9 @@ public class AICharacter : MonoBehaviour, IMonster
         attackType.ExcuteAction();
     }
 
-    public void Move()
+    public void Move(Vector3 _targetPos)
     {
-
+        movement.MoveToLocation(_targetPos);
     }
 
     public void Death()

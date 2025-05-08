@@ -12,7 +12,6 @@ public class SurvivalSpawner : SpawnController
     void Start()
     {
         Invoke("Initialize", 0.5f);
-        //StartCoroutine(Spawn("TestBossMonster", 10));
     }
 
     // Update is called once per frame
@@ -23,7 +22,11 @@ public class SurvivalSpawner : SpawnController
     void Initialize()
     {
         Character = playerController.Character.gameObject;
-        StartCoroutine(Spawn("Orc", 1));
+
+        foreach (var pool in objectPools.GetContainer())
+        {
+            StartCoroutine(Spawn(pool.Key, pool.Value.PoolSize));
+        }
     }
 
     IEnumerator Spawn(string _type, int _count)
@@ -46,7 +49,6 @@ public class SurvivalSpawner : SpawnController
 
             GameObject obj = base.Spawn(_type, new Vector3(xPos, yPos));
             obj.GetComponent<MonsterStateMachine>().target = Character;
-            obj.GetComponent<SurvivalAIController>().target = Character;
             curCount++;
 
             yield return new WaitForSeconds(1f);

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MonsterStateMachine : MonoBehaviour
@@ -8,12 +9,13 @@ public class MonsterStateMachine : MonoBehaviour
     public GameObject target;
 
     public AttackAction nomalAttack;
-    public AttackAction specailAttack;
+    public AttackAction activeSkill;
+    public AttackAction[] skill;
     
     private void Awake()
     {
         LinkedSMB<MonsterStateMachine>.Initialize(animator, this);
-        monster = new AICharacter();
+        //AddLastKeyframeEvent();
     }
 
     public void Initialize()
@@ -31,25 +33,49 @@ public class MonsterStateMachine : MonoBehaviour
 
     }
 
-    public bool TransAttack(string _paramName, ref float _delay, float _baseDelay)
+    public void TransMove()
+    {
+        animator.SetBool("isMove", true);
+    }
+
+    public bool TransAttack(string _paramName, ref float _delay, float _baseDelay, float _range)
     {
         if (target == null) return false;
         if (_delay > 0f) return false;
-
-        if (Vector2.Distance(target.transform.position, transform.position) < 1f)
-        {
-            _delay = _baseDelay;
-            animator.SetBool(_paramName, true);
-            return true;
-        }
-
-        return false;
+        if (Vector2.Distance(target.transform.position, transform.position) > _range) return false;
+      
+        _delay = _baseDelay;
+        animator.SetTrigger(_paramName);
+        animator.SetBool("isMove", false);
+        return true;
     }
 
-    public void CheckAnimationEnd(string _anim, string _bool)
+    // ÆÐÅÏ
+    public void SkillPatern()
     {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName(_anim) && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
-            animator.SetBool(_bool, false);
+
+    }
+
+    public void ChangeStateClip()
+    {
+        AnimatorOverrideController overrideController = new AnimatorOverrideController(animator.runtimeAnimatorController);
+
+        var overrides = new List<KeyValuePair<AnimationClip, AnimationClip>>();
+        overrideController.GetOverrides(overrides);
+
+        string targetClipName = "Skill";
+        
+        for (int i = 0; i < overrides.Count; i++)
+        {
+            if (overrides[i].Key.name == targetClipName)
+            {
+                overrides[i] = new KeyValuePair<AnimationClip, AnimationClip>(overrides[i].Key, activeSkill.clip);
+                break;
+            }
+        }
+
+        overrideController.ApplyOverrides(overrides);
+        animator.runtimeAnimatorController = overrideController;
     }
 
     public void Action()

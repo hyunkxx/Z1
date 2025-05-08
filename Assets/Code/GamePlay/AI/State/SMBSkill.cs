@@ -1,16 +1,18 @@
 using UnityEngine;
 
-public class SMBSpecialAttack : LinkedSMB<MonsterStateMachine>
+public class SMBSkill : LinkedSMB<MonsterStateMachine>
 {
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        monobeHaviour.ActionType = monobeHaviour.specailAttack;
+        monobeHaviour.ChangeStateClip();
+        monobeHaviour.ActionType = monobeHaviour.activeSkill;
+        monobeHaviour.activeSkill.SetEffectTransform(monobeHaviour.target.transform);
         monobeHaviour.Action();
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        monobeHaviour.CheckAnimationEnd("TestSpecialAttack", "isSpecialAttack");
+        //monobeHaviour.CheckAnimationEnd("Skill0", "isSkill0");
     }
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

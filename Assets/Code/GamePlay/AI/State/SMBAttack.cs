@@ -10,7 +10,7 @@ public class SMBAttack : LinkedSMB<MonsterStateMachine>
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        monobeHaviour.CheckAnimationEnd("Attack", "isAttack");
+        //monobeHaviour.CheckAnimationEnd("Attack", "isAttack");
     }
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

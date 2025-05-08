@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6138868582767852989}
   - component: {fileID: 6821499858594191812}
   - component: {fileID: 4293781717159346933}
-  - component: {fileID: -6749091913132686085}
+  - component: {fileID: -2782679265535172728}
   - component: {fileID: 5032921733773311675}
   - component: {fileID: 828445366256103033}
   - component: {fileID: 3471724657695876419}
@@ -52,10 +52,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7345b55aa1b47c4a8bf4c5dc29f92ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monster: {fileID: -2782679265535172728}
   animator: {fileID: 828445366256103033}
   target: {fileID: 0}
   nomalAttack: {fileID: 6821499858594191812}
-  specailAttack: {fileID: 4293781717159346933}
+  activeSkill: {fileID: 0}
+  skill: []
 --- !u!114 &6821499858594191812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,6 +73,8 @@ MonoBehaviour:
   actionName: 
   attackDelay: 3
   baseAttackDelay: 3
+  attackRange: 1
+  clip: {fileID: 0}
   EffectPrefab: {fileID: 0}
 --- !u!114 &4293781717159346933
 MonoBehaviour:
@@ -87,8 +91,10 @@ MonoBehaviour:
   actionName: 
   attackDelay: 10
   baseAttackDelay: 10
+  attackRange: 1
+  clip: {fileID: 7400000, guid: 9683973278f6cdc46a5e66ac8a653ed8, type: 2}
   EffectPrefab: {fileID: 3797684433542849519, guid: 168187d4be14fe649b61410e4b9a282d, type: 3}
---- !u!114 &-6749091913132686085
+--- !u!114 &-2782679265535172728
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,10 +103,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4817972689310064399}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e6687a2f26039b4fb96025919b6bf3f, type: 3}
+  m_Script: {fileID: 11500000, guid: 6249c808bbf923a40a102b0a933ba976, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
   movement: {fileID: 5032921733773311675}
 --- !u!114 &5032921733773311675
 MonoBehaviour:
@@ -151,7 +156,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDamping: 1
+  m_LinearDamping: 6
   m_AngularDamping: 1
   m_GravityScale: 0
   m_Material: {fileID: 0}
