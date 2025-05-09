@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.U2D;
 
 
 public abstract class EffectBase : Z1Behaviour
@@ -14,11 +15,13 @@ public class Effect2D : EffectBase
     [Header("Effect2D Property")]
     protected Animator animator;
     protected GameObject owner;
+    protected SpriteRenderer sprite;
 
     protected override void Awake()
     {
         base.Awake();
 
+        sprite = GetComponentInChildren<SpriteRenderer>();
         animator = GetComponent<Animator>();
         AddLastKeyframeEvent();
     }

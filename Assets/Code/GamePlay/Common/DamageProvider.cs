@@ -1,5 +1,7 @@
+using NUnit.Framework;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -36,12 +38,18 @@ public struct DamageProviderParam
 
 public class DamageProvider : MonoBehaviour
 {
-    [SerializeField] DamageProviderParam providerData;
+    [SerializeField] private int targetCount;
+    [SerializeField] private DamageProviderParam providerData;
+
     private bool enableTrigger = false;
+
+    Collider2D[] colls;
+    List<Damageable> targetList = new List<Damageable>();
 
     protected void Activate()
     {
-        var colls = GetComponentsInChildren<Collider2D>();
+        targetList.Clear();
+        colls = GetComponentsInChildren<Collider2D>();
         Debug.Assert(colls != null, "Effect2D has no assigned Collider.");
 
         enableTrigger = true;
@@ -69,24 +77,27 @@ public class DamageProvider : MonoBehaviour
         }
 
         StopAllCoroutines();
-        enableTrigger = false;
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
     private IEnumerator CoroutinePerodicActivate()
     {
         float elapsed = 0f;
         while(true)
         {
-            enableTrigger = false;
-            elapsed += Time.deltaTime;
+            yield return null;
 
             if (elapsed >= providerData.periodicInterval)
             {
                 elapsed = 0f;
-                enableTrigger = true;
-            }
+                foreach (Collider2D coll in colls)
+                {
+                    coll.enabled = false;
+                    coll.isTrigger = true;
 
-            yield return null;
+                    coll.enabled = true;
+                }
+            }
+            elapsed += Time.deltaTime;
         }
     }
 
@@ -97,17 +108,13 @@ public class DamageProvider : MonoBehaviour
 
         Damageable owner = providerData.owner.GetComponent<Damageable>();
         Damageable other = collision.gameObject.GetComponent<Damageable>();
-        if(owner && other)
+        if (owner && other)
         {
-            if(owner.IsEnemy(other))
+            if (owner.IsEnemy(other))
             {
                 Debug.Log($"take damage {collision.gameObject.name}");
                 DamageEvent damageEvent = new DamageEvent(providerData.characterStats.Damage, providerData.owner);
                 other.TakeDamage(damageEvent);
-
-                Rigidbody2D rg2d = owner.GetComponent<Rigidbody2D>();
-                Vector3 dir = owner.transform.position - other.transform.position;
-                rg2d.AddForce(dir.normalized * 0.25f, ForceMode2D.Impulse);
             }
         }
     }

@@ -38,4 +38,8 @@ public class DamageEffect2D : Effect2D
         CharacterStats stats = owner.GetComponent<CharacterStats>();
         damageProvider.ActivateProvider(owner, stats);
     }
+    protected override void EffectDeactivated()
+    {
+        sprite.color = new Color(1f, 1f, 1f, 0f);
+    }
 }

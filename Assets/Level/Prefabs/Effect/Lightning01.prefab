@@ -218,5 +218,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   providerData:
     shouldDisableOnTrigger: 0
-    duration: 5
-    periodicInterval: 0
+    duration: 3
+    periodicInterval: 1

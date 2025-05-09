@@ -297,7 +297,6 @@ GameObject:
   - component: {fileID: 456257941}
   - component: {fileID: 456257940}
   - component: {fileID: 456257939}
-  - component: {fileID: 456257938}
   m_Layer: 0
   m_Name: PoolManager
   m_TagString: Untagged
@@ -305,21 +304,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &456257938
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 456257937}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58521fdc2ccc04d4d99d2746998be5a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poolName: DamageFont
-  poolSize: 100
-  sourcePrefab: {fileID: 2921562705188856761, guid: fa9c30b76f353754581f11420c76104f, type: 3}
 --- !u!114 &456257939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -467,7 +451,7 @@ Camera:
   far clip plane: 1000
   field of view: 19.4
   orthographic: 1
-  orthographic size: 4.1015625
+  orthographic size: 7.59375
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
