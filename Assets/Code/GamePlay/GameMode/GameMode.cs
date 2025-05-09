@@ -28,13 +28,13 @@ public class GameMode
     protected override void Awake()
     {
         base.Awake();
-
-        GameManager.Instance.RegisterGameMode(this);
-        gameState = EGameState.Ready;
     }
 
     protected override void Start()
     {
+        GameManager.Instance.RegisterGameMode(this);
+        gameState = EGameState.Ready;
+
         base.Start();
         StartGame();
     }
