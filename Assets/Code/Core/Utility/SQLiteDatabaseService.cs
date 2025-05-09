@@ -31,6 +31,11 @@ public sealed class SQLiteDatabaseService : IDisposable
         return InCommand.ExecuteNonQuery();
     }
 
+    public IDataReader ExcuteReader(IDbCommand InCommand)
+    {
+        return InCommand.ExecuteReader();
+    }
+
     public int ExecuteNonQuery(string query, Dictionary<string, object> parameters = null)
     {
         using (IDbCommand command = Connection.CreateCommand())
@@ -50,37 +55,24 @@ public sealed class SQLiteDatabaseService : IDisposable
         }
     }
 
-    public IDataReader ExcuteReader(IDbCommand InCommand)
+    public IDataReader ExcuteReader(string query, Dictionary<string, object> parameters = null)
     {
-        return InCommand.ExecuteReader();
-    }
+        IDbCommand command = Connection.CreateCommand();
+        command.CommandType = CommandType.Text;
+        command.CommandText = query;
 
-    public void ExcuteReader(string query, Dictionary<string, object> parameters = null)
-    {
-        using (IDbCommand command = Connection.CreateCommand())
+        foreach (var param in parameters)
         {
-            command.CommandType = CommandType.Text;
-            command.CommandText = query;
-
-            foreach (var param in parameters)
-            {
-                IDbDataParameter dbParam = command.CreateParameter();
-                dbParam.ParameterName = param.Key;
-                dbParam.Value = param.Value ?? DBNull.Value;
-                command.Parameters.Add(dbParam);
-            }
-
-            using (IDataReader reader = ExcuteReader(command))
-            {
-                while (reader.Read())
-                {
-
-                }
-            }
+            IDbDataParameter dbParam = command.CreateParameter();
+            dbParam.ParameterName = param.Key;
+            dbParam.Value = param.Value ?? DBNull.Value;
+            command.Parameters.Add(dbParam);
         }
+
+        return ExcuteReader(command);
     }
 
-    public T GetDataClass<T>(int id, params object[] args) where T : IModel, new()
+    public T GetDataClass<T>(int id, params object[] args) where T : IDatabaseModel, new()
     {
         T obj = new T();
         string query = $"SELECT * FROM {typeof(T).Name} WHERE ID = @id";
@@ -107,7 +99,7 @@ public sealed class SQLiteDatabaseService : IDisposable
         return obj;
     }
 
-    public List<T> GetDataClassList<T>(params object[] args) where T : IModel, new()
+    public List<T> GetDataClassList<T>(params object[] args) where T : IDatabaseModel, new()
     {
         List<T> objList = new List<T>();
         string query = $"SELECT * FROM {typeof(T).Name}";
