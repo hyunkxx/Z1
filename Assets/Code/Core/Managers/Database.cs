@@ -9,12 +9,12 @@ using UnityEngine;
 using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 
 
-public interface IModel
+public interface IDatabaseModel
 {
     public void Initialize(IDataRecord record, params object[] args);
 }
 
-public class ItemData : IModel
+public class ItemData : IDatabaseModel
 {
     public string name;
     public int id;

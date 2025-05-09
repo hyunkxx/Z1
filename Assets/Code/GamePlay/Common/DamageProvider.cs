@@ -89,15 +89,27 @@ public class DamageProvider : MonoBehaviour
             if (elapsed >= providerData.periodicInterval)
             {
                 elapsed = 0f;
+
                 foreach (Collider2D coll in colls)
                 {
                     coll.enabled = false;
                     coll.isTrigger = true;
-
                     coll.enabled = true;
                 }
             }
             elapsed += Time.deltaTime;
+        }
+    }
+
+    /* temp */
+    private IEnumerator CoroutineResetTrigger(Collider2D[] Incolls)
+    {
+        foreach (Collider2D coll in Incolls)
+        {
+            coll.enabled = false;
+            coll.isTrigger = true;
+            yield return new WaitForFixedUpdate();
+            coll.enabled = true;
         }
     }
 
