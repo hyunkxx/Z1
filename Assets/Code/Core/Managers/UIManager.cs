@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class UIManager : UIBase
 {
     [SerializeField] CharacterSelecter characterSelecter;
+    
 
     private void Awake()
     {
@@ -18,14 +19,19 @@ public class UIManager : UIBase
 
     void Start()
     {
-        GetButton((int)Buttons.Lobby_Play_btn).onClick.AddListener(()=> { PanelAction(GetGameObject((int)GameObjects.PlayPanel));  });
-        GetButton((int)Buttons.DefenseMode).onClick.AddListener(()=> { PanelAction(GetGameObject((int)GameObjects.Survival_Ready_Panel));  });
-        GetButton((int)Buttons.Survival_Ready_CharcterSelect_btn).onClick.AddListener(()=> { PanelAction(GetGameObject((int)GameObjects.CharacterSelect_Panel));  });
-        GetButton((int)Buttons.Survival_Play_btn).onClick.AddListener(()=> { GameManager.Instance.OpenScene("Woo");  });
-    }
+        //Main_Panel
+        PanelOpenAction( GetGameObject((int)GameObjects.Main_Panel));
+        GetButton((int)Buttons.Lobby_Play_btn).onClick.AddListener(()=> { PanelOpenAction(GetGameObject((int)GameObjects.PlayPanel));  });
+        GetButton((int)Buttons.Lobby_Character_btn).onClick.AddListener(() => { PanelOpenAction(GetGameObject((int)GameObjects.CharacterInven_Panel)); });
 
-    void Update()
-    {
-        
+        //Play_Panel
+        GetButton((int)Buttons.DefenseMode).onClick.AddListener(()=> { PanelOpenAction(GetGameObject((int)GameObjects.Survival_Ready_Panel));  });
+        GetButton((int)Buttons.Play_Back_btn).onClick.AddListener(PanelBackAction);
+
+        //Survival_Ready_Panel
+        GetButton((int)Buttons.Survival_Ready_CharcterSelect_btn).onClick.AddListener(()=> { PanelOpenAction(GetGameObject((int)GameObjects.CharacterSelect_Panel));  });        
+        GetButton((int)Buttons.Survival_Ready_Back_btn).onClick.AddListener(PanelBackAction);
+        GetButton((int)Buttons.Survival_Ready_Play_btn).onClick.AddListener(()=> { GameManager.Instance.OpenScene("Woo");  });
+
     }
 }

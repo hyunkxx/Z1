@@ -8,11 +8,25 @@ using UnityEngine.UI;
 
 public class UIBase : MonoBehaviour
 {
+
+    protected enum OrderType
+    {
+        Default,
+        Single,
+        Multiple,
+    }
+
+
+    
     static public Dictionary<Type, UnityEngine.Object[]> _objects = new Dictionary<Type, UnityEngine.Object[]>();
     static Dictionary<Type, UnityEngine.Object[]> _PlayObjects = new Dictionary<Type, UnityEngine.Object[]>();
+    static Stack<GameObject> Panel_Order = new Stack<GameObject>();
+    //Dictionary<GameObject, OrderType> UI_Order = new Dictionary<GameObject, OrderType>();
+
 
     protected enum GameObjects
     {
+        Main_Panel,
         PlayPanel,
         Survival_Ready_Panel,
         CharacterSelect_Panel,
@@ -22,11 +36,24 @@ public class UIBase : MonoBehaviour
 
     protected enum Buttons
     {
+        //Main_Panel
         Lobby_Play_btn,
+        Lobby_Character_btn,
+
+        //Play_Panel
         DefenseMode,
+        Play_Back_btn,
+
+        //Survival_Ready_Panel
         Survival_Ready_CharcterSelect_btn,
+        Survival_Ready_Play_btn,
+        Survival_Ready_Back_btn,
+
+        //CharacterSelect_Panel
         CharacterSelect_btn,
-        Survival_Play_btn,
+        CharacterSelect_Back_btn,
+        
+
     }
 
     protected enum Texts
@@ -121,7 +148,8 @@ public class UIBase : MonoBehaviour
         return objects[_index] as T;
     }
 
-    protected void ClearLobbyDic() { _objects.Clear(); }
+    protected void ClearLobbyDic() { _objects.Clear();
+                                      Panel_Order.Clear(); }
     protected Button GetButton(int _index) { return Get<Button>(_index); }
     protected Text GetText(int _index) { return Get<Text>(_index); }
     protected TextMeshProUGUI GetTextMeshPro(int _index) { return Get<TextMeshProUGUI>(_index); }
@@ -130,15 +158,57 @@ public class UIBase : MonoBehaviour
 
     #endregion
 
-    public void PanelAction(GameObject _panel)
+    protected void PanelAction(GameObject _panel,OrderType orderType = OrderType.Default)
     {
         if (_panel.activeSelf)
         {
-            _panel.SetActive(false);
+            PanelQuitAction(_panel, orderType);
         }
         else
         {
-            _panel.SetActive(true);
+            PanelOpenAction(_panel, orderType);
         }
     }
+
+
+    protected void PanelOpenAction(GameObject _panel, OrderType orderType = OrderType.Default)
+    {
+        if (orderType == OrderType.Single)
+        {
+            CloseAll();
+        }
+
+        if(Panel_Order.Count > 0)
+            Panel_Order.Peek().SetActive(false);
+
+        _panel.SetActive(true);
+        Panel_Order.Push(_panel);
+
+     
+
+    }
+
+    protected void PanelQuitAction(GameObject _panel, OrderType orderType = OrderType.Default)
+    {
+        _panel.SetActive(false);
+        Panel_Order.Pop();
+    }
+
+    public void PanelBackAction()
+    {
+        if (Panel_Order.Count == 0)
+            return;
+
+        Panel_Order.Pop().SetActive(false);
+
+        if(Panel_Order.Count > 0)
+            Panel_Order.Peek().SetActive(true);
+    }
+
+    private void CloseAll()
+    {
+
+    }
+
+    
 }

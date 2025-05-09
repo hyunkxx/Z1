@@ -6,9 +6,11 @@ public class CharacterSelecter : UIBase
     GameObject CurSlot; 
     private void Awake()
     {
-        GetButton((int)Buttons.CharacterSelect_btn).onClick.AddListener(() => { PanelAction(GetGameObject((int)GameObjects.CharacterSelect_Panel)); });
+        GetButton((int)Buttons.CharacterSelect_Back_btn).onClick.AddListener(PanelBackAction);
+        GetButton((int)Buttons.CharacterSelect_btn).onClick.AddListener(PanelBackAction);
+        //GetButton((int)Buttons.CharacterSelect_btn).onClick.AddListener(() => { PanelAction(GetGameObject((int)GameObjects.CharacterSelect_Panel)); });
 
-        for(int i = 0; i < GetGameObject((int)GameObjects.CharacterSelectContents).transform.childCount; ++i)
+        for (int i = 0; i < GetGameObject((int)GameObjects.CharacterSelectContents).transform.childCount; ++i)
         {
             GetGameObject((int)GameObjects.CharacterSelectContents).transform.GetChild(i).GetComponent<Button>().onClick.AddListener(OnClickCharacterSlot);
         }
@@ -19,7 +21,7 @@ public class CharacterSelecter : UIBase
 
     void Start()
     {
-        
+       
     }
 
     // Update is called once per frame
