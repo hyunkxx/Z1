@@ -60,7 +60,6 @@ public class MovementComponent : MonoBehaviour
     }
     public void ResetMovement()
     {
-        Debug.Log("Reset");
         movementState = EMovementState.None;
         moveDirection = Vector2.zero;
         goalLocation = Vector2.zero;

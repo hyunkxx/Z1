@@ -8,15 +8,17 @@ public class SurvivalSpawner : SpawnController
 
     private void Awake()
     {
-    }
-    void Start()
-    {
-        Initialize();
+
     }
 
-    // Update is called once per frame
+    void Start()
+    {
+        Invoke("Initialize", 0.5f);
+    }
+
     void Update()
     {
+
     }
 
     void Initialize()

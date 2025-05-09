@@ -16,6 +16,6 @@ public class NomalAttack : AttackAction
 
     public override void ExcuteAction()
     {
-        Debug.Log("Normal Attack");
+
     }
 }

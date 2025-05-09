@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class LineController : MonoBehaviour
@@ -5,12 +7,12 @@ public class LineController : MonoBehaviour
     private LineRenderer lineRenderer;
 
     [SerializeField] private Texture2D[] textures;
+    private int MaxTargetCount = 10;
     private int FrameIndex = 0;
     private float fps = 30f;
     private float fpsCounter = 0;
 
-    Vector2 startPos = Vector2.zero;
-    [SerializeField] Transform[] targetPosArray;
+    public List<GameObject> targetArray = new List<GameObject>();
 
     private void Awake()
     {
@@ -22,6 +24,22 @@ public class LineController : MonoBehaviour
     }
 
     // Update is called once per frame
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.GetComponent<Damageable>() == null) return;
+
+        if (targetArray.Count < MaxTargetCount)
+        {
+            if (collision.GetComponent<Damageable>().TeamID == ETeam.EnemyAI)
+                targetArray.Add(collision.gameObject);
+        }
+        else
+        {
+            // 공격 호출
+        }
+    }
+
     void Update()
     {
         AssignTarget();
@@ -41,15 +59,13 @@ public class LineController : MonoBehaviour
         }
     }
 
-    void AssignTarget()
+    public void AssignTarget()
     {
-        startPos = transform.position;
-        lineRenderer.positionCount = targetPosArray.Length + 1;
-        lineRenderer.SetPosition(0, startPos);
+        lineRenderer.positionCount = targetArray.Count;
 
-        for(int i = 0; i < targetPosArray.Length; ++i)
+        for(int i = 0; i < targetArray.Count; ++i)
         {
-            lineRenderer.SetPosition(i + 1, targetPosArray[i].position);
+            lineRenderer.SetPosition(i, targetArray[i].transform.position);
         }
     }
 }

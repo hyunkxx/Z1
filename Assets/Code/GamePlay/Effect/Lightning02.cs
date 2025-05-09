@@ -1,14 +1,19 @@
+using System.Collections;
 using UnityEngine;
 
 public class Lightning02 : AttackAction
 {
+    LineController lineController;
+
     protected override void Awake()
     {
         attackDelay = 10f;
         baseAttackDelay = 10f;
-        //effect2D = EffectPrefab.GetComponentInChildren<Effect2D>();
+    }
 
-        Debug.Log(effect2D);
+    protected override void Start()
+    {
+        effect2D.ActivateEffect(gameObject);
     }
 
     protected override void Update()
@@ -20,13 +25,37 @@ public class Lightning02 : AttackAction
     {
         // Instantiate Effect
         base.ExcuteAction();
-        // 胶懦 肺流
-        FindTargets();
-        // 单固瘤 贸府
+        Debug.Log("Lightning02 Action");
+        // 鞀ろ偓 搿滌
+        StartCoroutine(OnHit());
     }
 
-    void FindTargets()
+    private IEnumerator OnHit()
     {
+        int attackCount = 10;
+        CharacterStats stats = gameObject.GetComponent<CharacterStats>();
 
+        while (attackCount > 0)
+        {
+            for (int i = 0; i < lineController.targetArray.Count; ++i)
+            {
+                Damageable owner = gameObject.GetComponent<Damageable>();
+                Damageable other = lineController.targetArray[i].gameObject.GetComponent<Damageable>();
+                if (owner && other)
+                {
+                    if (owner.IsEnemy(other))
+                    {
+                        DamageEvent damageEvent = new DamageEvent(stats.Damage, gameObject);
+                        other.TakeDamage(damageEvent);
+
+                        Rigidbody2D rg2d = owner.GetComponent<Rigidbody2D>();
+                        Vector3 dir = owner.transform.position - other.transform.position;
+                        rg2d.AddForce(dir.normalized * 0.25f, ForceMode2D.Impulse);
+                    }
+                }
+            }
+            attackCount--;
+            yield return new WaitForSeconds(1f);
+        }
     }
 }

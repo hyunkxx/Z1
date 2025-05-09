@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2404697065978103630}
   - component: {fileID: 7779437938331540732}
   - component: {fileID: 7279969416524898591}
+  - component: {fileID: 3601422122402033719}
   m_Layer: 0
   m_Name: Root
   m_TagString: Untagged
@@ -134,9 +135,7 @@ LineRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Positions:
-  - {x: 0, y: 0, z: 0}
-  - {x: 1, y: 1, z: 0}
+  m_Positions: []
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -213,7 +212,53 @@ MonoBehaviour:
   - {fileID: 2800000, guid: d4ebcdab13e31ba42bf6cdc242aea9ee, type: 3}
   - {fileID: 2800000, guid: 9d4e0b7f847f60949b308a7cb04190a7, type: 3}
   - {fileID: 2800000, guid: edfd9d5c262554d48a1406c3f8b81c37, type: 3}
-  targetPosArray: []
+  targetArray: []
+--- !u!61 &3601422122402033719
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1946652232520427568}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 3, y: 3}
+  m_EdgeRadius: 0
 --- !u!1 &3797684433542849519
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,9 +269,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7624007919248151335}
   - component: {fileID: 8961564749864106436}
-  - component: {fileID: 8290326324412833518}
   - component: {fileID: 7731013299200658941}
-  - component: {fileID: 8783115098648516985}
+  - component: {fileID: -1028013577327493980}
   m_Layer: 0
   m_Name: Lightning02
   m_TagString: Untagged
@@ -272,52 +316,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!61 &8290326324412833518
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3797684433542849519}
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!114 &7731013299200658941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,8 +328,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0450f78b2b7080147ac07b6b9580e214, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageProvider: {fileID: 8783115098648516985}
---- !u!114 &8783115098648516985
+  damageProvider: {fileID: -1028013577327493980}
+--- !u!114 &-1028013577327493980
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -343,6 +341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56ab27d8b576930409b984a2ab7d367b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetCount: 10
   providerData:
     shouldDisableOnTrigger: 0
     duration: 5

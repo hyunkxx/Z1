@@ -545,7 +545,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da5b5184270dca34895759172ca7ff77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actionName: Lightning01
+  actionName: Lightning02
+  EffectPrefab: {fileID: 3797684433542849519, guid: 61d81880b8a83f94486b205275f0b907, type: 3}
   attackDelay: 10
   baseAttackDelay: 10
-  EffectPrefab: {fileID: 3797684433542849519, guid: 168187d4be14fe649b61410e4b9a282d, type: 3}
+  attackRange: 1
+  clip: {fileID: 0}
