@@ -10,8 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4973071157628513526}
   - component: {fileID: 2137552103653165469}
-  - component: {fileID: 8779192647644488034}
-  - component: {fileID: 2600803066832528290}
   - component: {fileID: 5145002880415504483}
   m_Layer: 0
   m_Name: SpawnController
@@ -50,36 +48,6 @@ MonoBehaviour:
   objectPools: {fileID: 5145002880415504483}
   playerController: {fileID: 0}
   Character: {fileID: 0}
---- !u!114 &8779192647644488034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3762498227995324552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58521fdc2ccc04d4d99d2746998be5a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poolName: Orc
-  poolSize: 10
-  sourcePrefab: {fileID: 4817972689310064399, guid: 69acf7b901470664584eb719adde6fc6, type: 3}
---- !u!114 &2600803066832528290
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3762498227995324552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58521fdc2ccc04d4d99d2746998be5a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poolName: Necromancer
-  poolSize: 10
-  sourcePrefab: {fileID: 4817972689310064399, guid: cfa41bbc8dd305846aa7a57af2928ba4, type: 3}
 --- !u!114 &5145002880415504483
 MonoBehaviour:
   m_ObjectHideFlags: 0

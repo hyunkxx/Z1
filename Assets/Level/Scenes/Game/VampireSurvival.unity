@@ -308,8 +308,6 @@ GameObject:
   m_Component:
   - component: {fileID: 623131622}
   - component: {fileID: 623131621}
-  - component: {fileID: 623131620}
-  - component: {fileID: 623131619}
   - component: {fileID: 623131618}
   m_Layer: 0
   m_Name: SpawnController
@@ -330,36 +328,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a367764dae25bd4196253d48886a0b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &623131619
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 623131617}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58521fdc2ccc04d4d99d2746998be5a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poolName: Necromancer
-  poolSize: 1
-  sourcePrefab: {fileID: 4817972689310064399, guid: cfa41bbc8dd305846aa7a57af2928ba4, type: 3}
---- !u!114 &623131620
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 623131617}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58521fdc2ccc04d4d99d2746998be5a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poolName: Orc
-  poolSize: 1
-  sourcePrefab: {fileID: 4817972689310064399, guid: 69acf7b901470664584eb719adde6fc6, type: 3}
 --- !u!114 &623131621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -904,7 +872,6 @@ GameObject:
   - component: {fileID: 1956107136}
   - component: {fileID: 1956107135}
   - component: {fileID: 1956107134}
-  - component: {fileID: 1956107133}
   m_Layer: 0
   m_Name: PoolManager
   m_TagString: Untagged
@@ -912,21 +879,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1956107133
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1956107132}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58521fdc2ccc04d4d99d2746998be5a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poolName: DamageFont
-  poolSize: 100
-  sourcePrefab: {fileID: 2921562705188856761, guid: fa9c30b76f353754581f11420c76104f, type: 3}
 --- !u!114 &1956107134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -971,11 +923,11 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1388977593}
+  - {fileID: 1096703460}
   - {fileID: 571732915}
   - {fileID: 294718766}
   - {fileID: 1068811110}
-  - {fileID: 1956107136}
-  - {fileID: 1096703460}
   - {fileID: 623131622}
+  - {fileID: 1956107136}
   - {fileID: 1939671852}
   - {fileID: 1306443873}

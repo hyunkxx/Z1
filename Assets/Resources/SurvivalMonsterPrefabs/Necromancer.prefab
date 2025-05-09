@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 828445366256103033}
   - component: {fileID: 3471724657695876419}
   - component: {fileID: 1507022867646640303}
+  - component: {fileID: -8504464274580213397}
   m_Layer: 0
   m_Name: Necromancer
   m_TagString: Untagged
@@ -72,11 +73,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actionName: 
+  EffectPrefab: {fileID: 0}
   attackDelay: 3
   baseAttackDelay: 3
   attackRange: 1
   clip: {fileID: 0}
-  EffectPrefab: {fileID: 0}
 --- !u!114 &4293781717159346933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,11 +91,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actionName: 
+  EffectPrefab: {fileID: 3797684433542849519, guid: 168187d4be14fe649b61410e4b9a282d, type: 3}
   attackDelay: 10
   baseAttackDelay: 10
   attackRange: 1
   clip: {fileID: 7400000, guid: 9683973278f6cdc46a5e66ac8a653ed8, type: 2}
-  EffectPrefab: {fileID: 3797684433542849519, guid: 168187d4be14fe649b61410e4b9a282d, type: 3}
 --- !u!114 &377585905382159770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,6 +218,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.45117188, y: 0.60253906}
   m_EdgeRadius: 0
+--- !u!114 &-8504464274580213397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4817972689310064399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3a442b5ffe38b54daf6906c202f337f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teamID: 2
 --- !u!1 &7090187289041907029
 GameObject:
   m_ObjectHideFlags: 0

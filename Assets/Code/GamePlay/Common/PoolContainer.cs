@@ -8,6 +8,16 @@ public class PoolContainer : MonoBehaviour
 
     private void Awake()
     {
+        //ObjectPool[] pools = GetComponents<ObjectPool>();
+        //foreach (ObjectPool pool in pools)
+        //{
+        //    RegisterPool(pool);
+        //}
+    }
+
+    // Change 
+    public void FindPools()
+    {
         ObjectPool[] pools = GetComponents<ObjectPool>();
         foreach (ObjectPool pool in pools)
         {

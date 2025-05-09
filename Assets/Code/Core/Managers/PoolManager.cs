@@ -14,5 +14,10 @@ public class PoolManager : Singleton<PoolManager>
     public void Start()
     {
         container = GetComponent<PoolContainer>();
+
+        ObjectPool pool = gameObject.AddComponent<ObjectPool>();
+        pool.InitializePool(Resources.Load<GameObject>("Common/UI/DamageFont"), 100);
+
+        container.FindPools();
     }
 }

@@ -29,8 +29,22 @@ public class ObjectPool : MonoBehaviour
 
     private void Awake()
     {
+
+    }
+
+    public void InitializePool(GameObject _obj, int _count)
+    {
+        sourcePrefab = _obj;
+        poolSize = _count;
+        poolName = sourcePrefab.name;
+
+        CreatePool();
+    }
+
+    void CreatePool()
+    {
         objectPool = new Queue<GameObject>();
-        poolHolder = new GameObject($"{poolName}_Pool");
+        poolHolder = new GameObject($"{sourcePrefab.name}_Pool");
 
         for (int i = 0; i < poolSize; ++i)
         {
@@ -39,6 +53,7 @@ public class ObjectPool : MonoBehaviour
             ReturnObject(obj);
         }
     }
+
     public GameObject GetObject(Vector3 position, Quaternion rotation)
     {
         if (activateCount >= poolSize)

@@ -11,7 +11,7 @@ public class SurvivalSpawner : SpawnController
     }
     void Start()
     {
-        Invoke("Initialize", 0.5f);
+        Initialize();
     }
 
     // Update is called once per frame
@@ -22,11 +22,21 @@ public class SurvivalSpawner : SpawnController
     void Initialize()
     {
         Character = playerController.Character.gameObject;
+        // Input Data
+        AddPool("SurvivalMonsterPrefabs/Orc", 10); // DataPath, Size
+
+        objectPools.FindPools();
 
         foreach (var pool in objectPools.GetContainer())
         {
             StartCoroutine(Spawn(pool.Key, pool.Value.PoolSize));
         }
+    }
+
+    void AddPool(string _monsterPath, int _size)
+    {
+        ObjectPool pool = gameObject.AddComponent<ObjectPool>();
+        pool.InitializePool(Resources.Load<GameObject>(_monsterPath), _size);
     }
 
     IEnumerator Spawn(string _type, int _count)

@@ -27,7 +27,6 @@ public class UIBase : MonoBehaviour
         Survival_Ready_CharcterSelect_btn,
         CharacterSelect_btn,
         Survival_Play_btn,
-
     }
 
     protected enum Texts
