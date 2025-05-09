@@ -3,21 +3,19 @@ using UnityEngine;
 
 public class Lightning02 : AttackAction
 {
+    Collider2D collider2D;
     LineController lineController;
 
     protected override void Awake()
     {
+        base.Awake();
         attackDelay = 10f;
         baseAttackDelay = 10f;
     }
 
-    protected override void Start()
-    {
-        effect2D.ActivateEffect(gameObject);
-    }
-
     protected override void Update()
     {
+        base.Update();
         attackDelay -= Time.deltaTime;
     }
 
@@ -25,7 +23,8 @@ public class Lightning02 : AttackAction
     {
         // Instantiate Effect
         base.ExcuteAction();
-        Debug.Log("Lightning02 Action");
+        lineController = effect2D.gameObject.GetComponentInChildren<LineController>();
+        collider2D = effect2D.gameObject.GetComponentInChildren<BoxCollider2D>();
         // 스킬 로직
         StartCoroutine(OnHit());
     }
@@ -34,6 +33,7 @@ public class Lightning02 : AttackAction
     {
         int attackCount = 10;
         CharacterStats stats = gameObject.GetComponent<CharacterStats>();
+        collider2D.enabled = true;
 
         while (attackCount > 0)
         {
@@ -57,5 +57,7 @@ public class Lightning02 : AttackAction
             attackCount--;
             yield return new WaitForSeconds(1f);
         }
+
+        Destroy(effect2D.gameObject);
     }
 }

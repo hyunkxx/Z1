@@ -344,5 +344,5 @@ MonoBehaviour:
   targetCount: 10
   providerData:
     shouldDisableOnTrigger: 0
-    duration: 5
+    duration: 10
     periodicInterval: 0

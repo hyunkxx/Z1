@@ -20,6 +20,7 @@ public class Lightning01 : AttackAction
     {
         // Instantiate Effect
         base.ExcuteAction();
+
         // 스킬 로직
         
         // 데미지 처리
