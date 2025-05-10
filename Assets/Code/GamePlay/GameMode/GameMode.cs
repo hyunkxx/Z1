@@ -1,4 +1,7 @@
 using System;
+
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine;
 
 
@@ -25,6 +28,12 @@ public sealed class GameMode
     private EGameState gameState;
     public event Action<EGameState> OnChangeGameState;
 
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        Addressables.ReleaseInstance(playerController.Character.gameObject);
+    }
+
     protected override void Awake()
     {
         base.Awake();
@@ -37,6 +46,8 @@ public sealed class GameMode
     {
         base.Start();
         StartGame();
+
+        Debug.Log("GameStart");
     }
 
     public void ChangeGameState(EGameState state)
@@ -50,13 +61,18 @@ public sealed class GameMode
 
     public void SpawnPlayer(Vector3 location)
     {
-        GameObject spawned = Instantiate(GameManager.Instance.tempPlayerPrefab, location, Quaternion.identity);
-        Character character = spawned.GetComponent<Character>();
+        Addressables.InstantiateAsync("Assets/Level/Prefabs/Character/Char_BaekSu.prefab").Completed += (handle) =>
+        {
+            if(handle.Status == AsyncOperationStatus.Succeeded)
+            {
+                //GameObject spawned = Instantiate(handle.Result, location, Quaternion.identity);
+                Character character = handle.Result.GetComponent<Character>();
 
-        CameraMovement cameraMovement = Camera.main.GetComponent<CameraMovement>();
-        cameraMovement.SetViewTarget(character.gameObject);
-
-        playerController.BindCharacter(character);
+                CameraMovement cameraMovement = Camera.main.GetComponent<CameraMovement>();
+                cameraMovement.SetViewTarget(character.gameObject);
+                playerController.BindCharacter(character);
+            }
+        };
     }
 
     public void TeleportPlayer(Vector3 location)

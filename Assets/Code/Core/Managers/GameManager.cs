@@ -41,13 +41,13 @@ public class GameManager : Singleton<GameManager>
             }
         }
     }
-
     private IEnumerator LoadSceneAsync(string sceneName)
     {
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneName);
 
         while (!asyncOperation.isDone)
         {
+            Debug.Log("LoadScene");
             yield return null;
         }
     }
