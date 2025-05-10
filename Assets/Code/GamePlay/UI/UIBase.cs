@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIBase : MonoBehaviour
@@ -25,7 +26,7 @@ public class UIBase : MonoBehaviour
 
     protected enum GameObjects
     {
-        Main_Panel,
+        //Main_Panel,
         PlayPanel,
         Survival_Ready_Panel,
         CharacterSelect_Panel,
@@ -41,19 +42,19 @@ public class UIBase : MonoBehaviour
 
         //Play_Panel
         DefenseMode,
-        Play_Back_btn,
+        //Play_Back_btn,
 
         //Survival_Ready_Panel
         Survival_Ready_CharcterSelect_btn,
         Survival_Ready_Play_btn,
-        Survival_Ready_Back_btn,
+        //Survival_Ready_Back_btn,
 
         //CharacterSelect_Panel
         CharacterSelect_btn,
-        CharacterSelect_Back_btn,
+        //CharacterSelect_Back_btn,
 
         //CharacterInven_Panel
-        CharacterInven_Back_btn
+        //CharacterInven_Back_btn
 
 
     }
@@ -197,9 +198,6 @@ public class UIBase : MonoBehaviour
         }
 
             _panel.SetActive(true);
-
-
-
     }
 
     protected void PanelQuitAction(GameObject _panel, OrderType orderType = OrderType.Default)
@@ -237,6 +235,12 @@ public class UIBase : MonoBehaviour
         UI_Order.Clear();
 
     }
+
+    public void MoveScene(string _sceneName)
+    {
+        SceneManager.LoadScene(_sceneName);
+    }
+
     private void CloseAll()
     {
 

@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 3471724657695876419}
   - component: {fileID: 1507022867646640303}
   - component: {fileID: 1437535598788499756}
-  - component: {fileID: -7469166469162138618}
+  - component: {fileID: 4992113286630369142}
   m_Layer: 0
   m_Name: Orc
   m_TagString: Untagged
@@ -231,7 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teamID: 2
---- !u!212 &-7469166469162138618
+--- !u!212 &4992113286630369142
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

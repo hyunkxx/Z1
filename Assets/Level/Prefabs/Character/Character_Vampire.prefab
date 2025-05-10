@@ -179,7 +179,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 8769933567029890119, guid: febb501f9ce63e5448c333eabb8965cc, type: 3}
+  m_Sprite: {fileID: -2070896522, guid: 41c0aa1c835478443ba6edc1e425b1cf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -200,7 +200,7 @@ Animator:
   m_GameObject: {fileID: 4249194490359796861}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: edfef664c2824754b9f69e1213276c82, type: 2}
+  m_Controller: {fileID: 9100000, guid: 36c02149b327f2a48bd61952dd456614, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -309,13 +309,12 @@ GameObject:
   - component: {fileID: 4578601590110176259}
   - component: {fileID: 7235276069043101290}
   - component: {fileID: 7172233613179981037}
-  - component: {fileID: 3524021180409938420}
   - component: {fileID: 9098919813877421223}
   - component: {fileID: 5756834599355081601}
   - component: {fileID: 2047761708928815268}
   - component: {fileID: 6042269923291634350}
   m_Layer: 0
-  m_Name: Character
+  m_Name: Character_Vampire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -489,22 +488,7 @@ MonoBehaviour:
     duration: 1
     beginColor: {r: 0.21226418, g: 0.7476019, b: 1, a: 1}
     endColor: {r: 1, g: 0.23113209, b: 0.23113209, a: 0}
-  effectPool: {fileID: 3524021180409938420}
---- !u!114 &3524021180409938420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7834587441641150271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58521fdc2ccc04d4d99d2746998be5a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poolName: GhostEffectPool
-  poolSize: 20
-  sourcePrefab: {fileID: 7275869127781755479, guid: 63200722313076e48a399b056708827b, type: 3}
+  effectPool: {fileID: 0}
 --- !u!114 &9098919813877421223
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -20,7 +20,7 @@ public class CharacterInven : UIBase
             CloseButtons[i].onClick.AddListener(Link_Off);
         }
 
-        GetButton((int)Buttons.CharacterInven_Back_btn).onClick.AddListener(PanelBackAction);
+        //GetButton((int)Buttons.CharacterInven_Back_btn).onClick.AddListener(PanelBackAction);
     }
     void Start()
     {

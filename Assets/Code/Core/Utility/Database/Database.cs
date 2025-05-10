@@ -32,6 +32,14 @@ public class Database : Singleton<Database>
     [SerializeField]
     private string DatabasePath = "Database/GameDatabase.db";
 
+
+    #region TestCode
+
+    /* Test Data */
+    public List<TestCharacterData> CharcterList = new List<TestCharacterData>();
+
+    #endregion
+
     /* TABLE SAMPLE */
     private Dictionary<int, ItemData> itemTable = new Dictionary<int, ItemData>();
     public IReadOnlyDictionary<int, ItemData> ItemTable => itemTable;
@@ -43,6 +51,10 @@ public class Database : Singleton<Database>
         Debug.Log(persistentDBPath);
 
         AssetDuplicator.CopyFile(streamingDBPath, persistentDBPath, OnCopyComplete);
+
+        /* Test Data */
+        CharcterList.Add(new TestCharacterData(1000, "Backsu", (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Character/1000/character_1000.png", typeof(Sprite))));
+        CharcterList.Add(new TestCharacterData(1001, "Vampire", (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Character/1001/character_1001.png", typeof(Sprite))));
     }
     public void OnCopyComplete(bool bSuccessful)
     {
@@ -63,5 +75,21 @@ public class Database : Singleton<Database>
     public void OnDestroy()
     {
         databaseService.Dispose();
+    }
+}
+
+/*Test Class*/
+[System.Serializable]
+public struct TestCharacterData
+{
+    public int ID;
+    public string Name;
+    public Sprite sprite;
+
+    public TestCharacterData(int _id, string _name, Sprite _sprite)
+    {
+        ID = _id;
+        Name = _name;
+        sprite = _sprite;
     }
 }

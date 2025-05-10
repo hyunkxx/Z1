@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,16 +12,16 @@ public class CharacterSelecter : UIBase
 
     public void ActiveButton(bool value)
     {
-        GetButton((int)Buttons.CharacterSelect_Back_btn).gameObject.SetActive(value);
+        //GetButton((int)Buttons.CharacterSelect_Back_btn).gameObject.SetActive(value);
         GridUpdate();
     }
 
     
     private void Awake()
     {
-        GetButton((int)Buttons.CharacterSelect_Back_btn).onClick.AddListener(PanelBackAction);
+        //GetButton((int)Buttons.CharacterSelect_Back_btn).onClick.AddListener(PanelBackAction);
         // GetButton((int)Buttons.CharacterSelect_btn).onClick.AddListener(PanelBackAction);
-        //GetButton((int)Buttons.CharacterSelect_btn).onClick.AddListener(() => { PanelAction(GetGameObject((int)GameObjects.CharacterSelect_Panel)); });
+        GetButton((int)Buttons.CharacterSelect_btn).onClick.AddListener(OnClickSelectButton);
 
         int ContentsSize = GetGameObject((int)GameObjects.CharacterSelectContents).transform.childCount;
         Slots = new GameObject[ContentsSize];
@@ -36,13 +37,30 @@ public class CharacterSelecter : UIBase
 
     void Start()
     {
-        GridUpdate();
+        //GridUpdate();
+        ActiveSlot();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    void ActiveSlot()
+    {
+        for(int i = 0; i < Database.Instance.CharcterList.Count; ++i)
+        {
+            Slots[i].SetActive(true);
+            SetSlotInfo(i);
+        }
+    }
+
+    void SetSlotInfo(int _index)
+    {
+        Slots[_index].GetComponent<CharacterSlot>().CharacterID = Database.Instance.CharcterList[_index].ID;
+        Slots[_index].GetComponent<CharacterSlot>().CharacterName = Database.Instance.CharcterList[_index].Name;
+        Slots[_index].GetComponent<CharacterSlot>().CharacterImage.sprite = Database.Instance.CharcterList[_index].sprite;
     }
 
     void OnClickCharacterSlot()
@@ -103,4 +121,10 @@ public class CharacterSelecter : UIBase
 
     }
 
+
+    void OnClickSelectButton()
+    {
+        GameManager.Instance.tempPlayerPrefab = (GameObject)AssetDatabase.LoadAssetAtPath($"Assets/Level/Prefabs/Character/Character_{CurSlot.GetComponent<CharacterSlot>().CharacterName}.prefab", typeof(GameObject));
+        PanelBackAction();
+    }
 }

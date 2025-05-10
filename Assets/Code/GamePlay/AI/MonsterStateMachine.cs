@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -83,5 +84,36 @@ public class MonsterStateMachine : MonoBehaviour
         if (ActionType == null) return;
 
         monster.Action(ActionType);
+    }
+
+    Coroutine YSortingCoroutine;
+    bool isYSorting = false;
+
+    private void OnBecameVisible()
+    {
+        if (isYSorting) return;
+
+        YSortingCoroutine = StartCoroutine(YSorting());
+    }
+    private void OnBecameInvisible()
+    {
+        StopCoroutine(YSortingCoroutine);
+    }
+
+    private IEnumerator YSorting()
+    {
+        while(gameObject.activeSelf)
+        {
+            if (transform.position.y < target.transform.position.y - 0.1f)
+            {
+                gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 2;
+            }
+            else
+            {
+                gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = 0;
+            }
+
+            yield return new WaitForSeconds(0.25f);
+        }
     }
 }
