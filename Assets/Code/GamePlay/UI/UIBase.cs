@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -17,11 +16,11 @@ public class UIBase : MonoBehaviour
     }
 
 
-    
+
     static public Dictionary<Type, UnityEngine.Object[]> _objects = new Dictionary<Type, UnityEngine.Object[]>();
     static Dictionary<Type, UnityEngine.Object[]> _PlayObjects = new Dictionary<Type, UnityEngine.Object[]>();
     static Stack<GameObject> Panel_Order = new Stack<GameObject>();
-    //Dictionary<GameObject, OrderType> UI_Order = new Dictionary<GameObject, OrderType>();
+    Dictionary<GameObject, OrderType> UI_Order = new Dictionary<GameObject, OrderType>();
 
 
     protected enum GameObjects
@@ -52,7 +51,10 @@ public class UIBase : MonoBehaviour
         //CharacterSelect_Panel
         CharacterSelect_btn,
         CharacterSelect_Back_btn,
-        
+
+        //CharacterInven_Panel
+        CharacterInven_Back_btn
+
 
     }
 
@@ -65,6 +67,7 @@ public class UIBase : MonoBehaviour
     {
 
     }
+
 
     protected enum Images
     {
@@ -148,8 +151,11 @@ public class UIBase : MonoBehaviour
         return objects[_index] as T;
     }
 
-    protected void ClearLobbyDic() { _objects.Clear();
-                                      Panel_Order.Clear(); }
+    protected void ClearLobbyDic()
+    {
+        _objects.Clear();
+        Panel_Order.Clear();
+    }
     protected Button GetButton(int _index) { return Get<Button>(_index); }
     protected Text GetText(int _index) { return Get<Text>(_index); }
     protected TextMeshProUGUI GetTextMeshPro(int _index) { return Get<TextMeshProUGUI>(_index); }
@@ -158,7 +164,7 @@ public class UIBase : MonoBehaviour
 
     #endregion
 
-    protected void PanelAction(GameObject _panel,OrderType orderType = OrderType.Default)
+    protected void PanelAction(GameObject _panel, OrderType orderType = OrderType.Default)
     {
         if (_panel.activeSelf)
         {
@@ -178,20 +184,36 @@ public class UIBase : MonoBehaviour
             CloseAll();
         }
 
-        if(Panel_Order.Count > 0)
-            Panel_Order.Peek().SetActive(false);
+        if (orderType != OrderType.Multiple)
+        {
 
-        _panel.SetActive(true);
-        Panel_Order.Push(_panel);
+            if (Panel_Order.Count > 0)
+                Panel_Order.Peek().SetActive(false);
+            Panel_Order.Push(_panel);
+        }
+        else
+        {
+            UI_Order.Add(_panel, orderType);
+        }
 
-     
+            _panel.SetActive(true);
+
+
 
     }
 
     protected void PanelQuitAction(GameObject _panel, OrderType orderType = OrderType.Default)
     {
         _panel.SetActive(false);
-        Panel_Order.Pop();
+
+        if (orderType != OrderType.Multiple)
+        {
+            Panel_Order.Pop();
+        }
+        else
+        {
+            UI_Order.Remove(_panel);
+        }
     }
 
     public void PanelBackAction()
@@ -199,16 +221,26 @@ public class UIBase : MonoBehaviour
         if (Panel_Order.Count == 0)
             return;
 
+
         Panel_Order.Pop().SetActive(false);
 
-        if(Panel_Order.Count > 0)
+        if (Panel_Order.Count > 0)
             Panel_Order.Peek().SetActive(true);
-    }
 
+
+        
+        foreach(KeyValuePair<GameObject,OrderType> pair in UI_Order)
+        {
+            pair.Key.SetActive(false);
+         
+        }
+        UI_Order.Clear();
+
+    }
     private void CloseAll()
     {
 
     }
 
-    
+
 }
