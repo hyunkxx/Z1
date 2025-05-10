@@ -22,6 +22,12 @@ public class Singleton<T> : MonoBehaviour where T : Component
         }
     }
 
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    static private void InternalInitailize()
+    {
+        _ = Singleton<T>.Instance;
+    }
+
     private void Awake()
     {
         if (instance == null)
@@ -29,7 +35,7 @@ public class Singleton<T> : MonoBehaviour where T : Component
             instance = this as T;
             DontDestroyOnLoad(gameObject);
         }
-        else
+        else if(instance != this)
         {
             Destroy(gameObject);
         }

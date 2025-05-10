@@ -2,26 +2,21 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.IO;
 using System.Windows.Input;
 using Mono.Data.Sqlite;
+
+
 using UnityEngine;
 
 
-public sealed class SQLiteDatabaseService : IDisposable
+public sealed class DatabaseService : IDisposable
 {
     public IDbConnection Connection => connection;
     private IDbConnection connection;
 
-    private string DatabaseName = "GameDatabase";
-
-    public SQLiteDatabaseService()
+    public DatabaseService(string path)
     {
-        /* temp code
-         * Application.persistentDataPath
-        */
-        string path = $"URI=file:{Application.streamingAssetsPath}/Database/GameDatabase.db";
-        Debug.Log(path);
-
         connection = new SqliteConnection(path);
         connection.Open();
     }
@@ -77,7 +72,7 @@ public sealed class SQLiteDatabaseService : IDisposable
         T obj = new T();
         string query = $"SELECT * FROM {typeof(T).Name} WHERE ID = @id";
 
-        using(IDbCommand command = connection.CreateCommand())
+        using (IDbCommand command = connection.CreateCommand())
         {
             command.CommandType = CommandType.Text;
             command.CommandText = query;

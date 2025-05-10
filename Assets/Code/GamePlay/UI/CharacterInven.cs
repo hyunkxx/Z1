@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CharacterInven : MonoBehaviour
 {
-    int CurSelectIndex = 0;
+    //int CurSelectIndex = 0;
 
     void Start()
     {

@@ -451,7 +451,7 @@ Camera:
   far clip plane: 1000
   field of view: 19.4
   orthographic: 1
-  orthographic size: 7.59375
+  orthographic size: 4.140625
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -1065,7 +1065,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!95 &1714574314
 Animator:
   serializedVersion: 7
@@ -1468,7 +1468,6 @@ MonoBehaviour:
   gameRule: {fileID: 2123508013}
   playerController: {fileID: 769491151}
   PlayerStart: {fileID: 1348542723}
-  gameState: 1
 --- !u!4 &2123508012
 Transform:
   m_ObjectHideFlags: 0

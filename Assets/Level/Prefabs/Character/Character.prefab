@@ -487,8 +487,8 @@ MonoBehaviour:
     count: 8
     activeInterval: 0.07
     duration: 1
-    beginColor: {r: 1, g: 1, b: 1, a: 1}
-    endColor: {r: 0, g: 0, b: 0, a: 0}
+    beginColor: {r: 0.21226418, g: 0.7476019, b: 1, a: 1}
+    endColor: {r: 1, g: 0.23113209, b: 0.23113209, a: 0}
   effectPool: {fileID: 3524021180409938420}
 --- !u!114 &3524021180409938420
 MonoBehaviour:

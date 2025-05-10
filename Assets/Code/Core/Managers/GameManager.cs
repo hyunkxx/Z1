@@ -18,8 +18,13 @@ public class GameManager : Singleton<GameManager>
         if(Input.GetKeyDown(KeyCode.X))
         {
             Character character = GameMode.playerController.Character;
-            tempEnemy.GetComponent<MovementComponent>().MoveToLocation(character.transform.position);
+            tempEnemy.GetComponent<MovementComponent>().MoveToLocation(character.transform.position, OnReched);
         }
+    }
+
+    public void OnReched()
+    {
+        Debug.Log("REA");
     }
 
     public void OpenScene(string sceneName)

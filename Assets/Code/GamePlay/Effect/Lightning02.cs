@@ -13,6 +13,10 @@ public class Lightning02 : AttackAction
         baseAttackDelay = 10f;
     }
 
+    protected override void Start()
+    {
+        base.Start();
+    }
     protected override void Update()
     {
         base.Update();

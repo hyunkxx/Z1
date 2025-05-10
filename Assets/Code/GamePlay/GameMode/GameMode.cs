@@ -5,16 +5,16 @@ using UnityEngine;
 public enum EGameState
 {
     None,
-    Ready,
-    InProgress,
+    Initialize,
+    EnterGame,
+    ExitGame,
     Paused,
     Success,
     Failure,
-    GameOver,
     Restarting
 }
 
-public class GameMode
+public sealed class GameMode
     : Z1Behaviour
 {
     public GameRule gameRule;
@@ -22,19 +22,19 @@ public class GameMode
 
     public Transform PlayerStart;
 
-    public EGameState gameState = EGameState.Ready;
-    public Action<EGameState> OnChangeGameState;
+    private EGameState gameState;
+    public event Action<EGameState> OnChangeGameState;
 
     protected override void Awake()
     {
         base.Awake();
+
+        GameManager.Instance.RegisterGameMode(this);
+        ChangeGameState(EGameState.Initialize);
     }
 
     protected override void Start()
     {
-        GameManager.Instance.RegisterGameMode(this);
-        gameState = EGameState.Ready;
-
         base.Start();
         StartGame();
     }
@@ -48,10 +48,29 @@ public class GameMode
         OnChangeGameState?.Invoke(state);
     }
 
+    public void SpawnPlayer(Vector3 location)
+    {
+        GameObject spawned = Instantiate(GameManager.Instance.tempPlayerPrefab, location, Quaternion.identity);
+        Character character = spawned.GetComponent<Character>();
+
+        CameraMovement cameraMovement = Camera.main.GetComponent<CameraMovement>();
+        cameraMovement.SetViewTarget(character.gameObject);
+
+        playerController.BindCharacter(character);
+    }
+
+    public void TeleportPlayer(Vector3 location)
+    {
+        if (!playerController.Character)
+            return;
+
+        playerController.Character.transform.position = location;
+    }
+
     public void StartGame()
     {
-        gameRule.SpawnPlayer(PlayerStart.position);
-        ChangeGameState(EGameState.InProgress);
+        SpawnPlayer(PlayerStart.position);
+        ChangeGameState(EGameState.EnterGame);
     }
     public void FinishGame()
     {

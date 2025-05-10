@@ -30,7 +30,7 @@ public class MovementComponent : MonoBehaviour
     public Vector2 GoalLocation => goalLocation;
     public Rigidbody2D MovementRigidBody => rg2d;
 
-    public event Action OnReachedLocation;
+    private Action OnReachedCallback;
 
     private void Start()
     {
@@ -69,12 +69,15 @@ public class MovementComponent : MonoBehaviour
         PerformMovement(direction);
         movementState = EMovementState.DirectionalMovement;
     }
-    public void MoveToLocation(Vector2 location)
+    public void MoveToLocation(Vector2 location, Action onReachedCallback = null)
     {
         Vector2 position = transform.position;
         Vector2 direction = (location - position).normalized;
         goalLocation = location;
         movementState = EMovementState.PositionalMovement;
+
+        OnReachedCallback = onReachedCallback;
+
         PerformMovement(direction);
     }
     public bool HasReachedLocation()
@@ -85,7 +88,7 @@ public class MovementComponent : MonoBehaviour
         if (Reached)
         {
             movementState = EMovementState.Reached;
-            OnReachedLocation?.Invoke();
+            OnReachedCallback?.Invoke();
         }
 
         return Reached;

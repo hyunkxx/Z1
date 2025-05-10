@@ -44,15 +44,15 @@ public class DamageProvider : MonoBehaviour
     private bool enableTrigger = false;
 
     Collider2D[] colls;
-    List<Damageable> targetList = new List<Damageable>();
 
     protected void Activate()
     {
-        targetList.Clear();
         colls = GetComponentsInChildren<Collider2D>();
         Debug.Assert(colls != null, "Effect2D has no assigned Collider.");
 
         enableTrigger = true;
+        ResetTrigger();
+
         StartCoroutine(CoroutineLifeTime());
         if(providerData.periodicInterval > 0f)
         {
@@ -89,13 +89,7 @@ public class DamageProvider : MonoBehaviour
             if (elapsed >= providerData.periodicInterval)
             {
                 elapsed = 0f;
-
-                foreach (Collider2D coll in colls)
-                {
-                    coll.enabled = false;
-                    coll.isTrigger = true;
-                    coll.enabled = true;
-                }
+                ResetTrigger();
             }
             elapsed += Time.deltaTime;
         }
@@ -109,6 +103,16 @@ public class DamageProvider : MonoBehaviour
             coll.enabled = false;
             coll.isTrigger = true;
             yield return new WaitForFixedUpdate();
+            coll.enabled = true;
+        }
+    }
+
+    public void ResetTrigger()
+    {
+        foreach (Collider2D coll in colls)
+        {
+            coll.enabled = false;
+            coll.isTrigger = true;
             coll.enabled = true;
         }
     }
