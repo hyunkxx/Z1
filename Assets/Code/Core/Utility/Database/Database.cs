@@ -10,11 +10,6 @@ using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 using System.IO;
 
 
-public interface IDatabaseModel
-{
-    public void Initialize(IDataRecord record, params object[] args);
-}
-
 /* temp struct */
 public class ItemData : IDatabaseModel
 {
@@ -29,7 +24,6 @@ public class ItemData : IDatabaseModel
         data = record.GetInt32(2);
     }
 }
-
 
 public class Database : Singleton<Database>
 {

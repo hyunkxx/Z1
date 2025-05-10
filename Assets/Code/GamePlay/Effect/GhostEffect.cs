@@ -37,7 +37,7 @@ public class GhostEffect : MonoBehaviour
 
         effectPool = gameObject.AddComponent<ObjectPool>();
         effectPool.InitializePool((GameObject)AssetDatabase.LoadAssetAtPath("Assets/Level/Prefabs/Effect/EmptyGameObject.prefab", typeof(GameObject)), 20);
-
+        
         foreach (GameObject obj in effectPool.Pool)
         {
             SpriteRenderer renderer = obj.AddComponent<SpriteRenderer>();
@@ -46,7 +46,6 @@ public class GhostEffect : MonoBehaviour
             renderer.color = ghostParam.beginColor;
         }
     }
-
     public void ActivateEffect()
     {
         StartCoroutine(CoroutineActivateGhost());
