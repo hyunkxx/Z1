@@ -7,6 +7,5 @@ public class SurvivalGameRule
     protected override void Start()
     {
         base.Start();
-        /* Create Select Character UI */
     }
 }

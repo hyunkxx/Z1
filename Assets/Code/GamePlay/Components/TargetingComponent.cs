@@ -50,6 +50,7 @@ public class TargetingComponent : MonoBehaviour
     {
         StartCoroutine(UpdatePriorityWeights());
     }
+
     public bool HasNearTarget()
     {
         return targetList.Count > 0;

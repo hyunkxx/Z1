@@ -14,8 +14,8 @@ public class DamageEffect2D : Effect2D
 
         colls = GetComponentsInChildren<Collider2D>();
         Debug.Assert(colls != null, "Effect2D has no assigned Collider.");
-
-        foreach(Collider2D coll in colls)
+        
+        foreach (Collider2D coll in colls)
         {
             coll.enabled = false;
             coll.isTrigger = true;

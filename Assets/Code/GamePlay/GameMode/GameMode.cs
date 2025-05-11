@@ -8,7 +8,7 @@ using UnityEngine;
 public enum EGameState
 {
     None,
-    Initialize,
+    ReadyGame,
     EnterGame,
     ExitGame,
     Paused,
@@ -28,10 +28,16 @@ public sealed class GameMode
     private EGameState gameState;
     public event Action<EGameState> OnChangeGameState;
 
+    private AsyncOperationHandle<GameObject> characterHandle;
+
     protected override void OnDestroy()
     {
         base.OnDestroy();
-        Addressables.ReleaseInstance(playerController.Character.gameObject);
+
+        if(characterHandle.IsValid())
+        {
+            Addressables.ReleaseInstance(characterHandle);
+        }
     }
 
     protected override void Awake()
@@ -39,15 +45,23 @@ public sealed class GameMode
         base.Awake();
 
         GameManager.Instance.RegisterGameMode(this);
-        ChangeGameState(EGameState.Initialize);
+        InitializeGame();
+
+        ChangeGameState(EGameState.ReadyGame);
     }
 
     protected override void Start()
     {
         base.Start();
-        StartGame();
+
 
         Debug.Log("GameStart");
+    }
+
+    public void InitializeGame()
+    {
+        SpawnPlayer(PlayerStart.position);
+        ChangeGameState(EGameState.EnterGame);
     }
 
     public void ChangeGameState(EGameState state)
@@ -61,10 +75,12 @@ public sealed class GameMode
 
     public void SpawnPlayer(Vector3 location)
     {
-        Addressables.InstantiateAsync("Assets/Level/Prefabs/Character/Char_BaekSu.prefab").Completed += (handle) =>
+        Addressables.InstantiateAsync("Assets/Level/Prefabs/Character/Character_BackSu.prefab", location, Quaternion.identity).Completed += (handle) =>
         {
-            if(handle.Status == AsyncOperationStatus.Succeeded)
+            if (handle.Status == AsyncOperationStatus.Succeeded)
             {
+                characterHandle = handle;
+
                 //GameObject spawned = Instantiate(handle.Result, location, Quaternion.identity);
                 Character character = handle.Result.GetComponent<Character>();
 
@@ -81,19 +97,5 @@ public sealed class GameMode
             return;
 
         playerController.Character.transform.position = location;
-    }
-
-    public void StartGame()
-    {
-        SpawnPlayer(PlayerStart.position);
-        ChangeGameState(EGameState.EnterGame);
-    }
-    public void FinishGame()
-    {
-
-    }
-    public void RestartGame()
-    {
-
     }
 }

@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Level/Scenes/Game/Lobby.unity
     guid: f9c3dd2c62e853940946e6df29713975
   - enabled: 1
+    path: Assets/Level/Scenes/Game/VampireSurvival.unity
+    guid: 780d1d09b8ef2694c934c1261831e4ca
+  - enabled: 1
     path: Assets/Level/Scenes/Development/Hyun.unity
     guid: fc9c1c505581f334aad91cda07be22e9
   - enabled: 1

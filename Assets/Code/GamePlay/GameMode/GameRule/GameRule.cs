@@ -10,6 +10,5 @@ public abstract class GameRule
     protected override void Awake()
     {
         base.Start();
-        gameMode = gameObject.GetComponent<GameMode>();
     }
 }
