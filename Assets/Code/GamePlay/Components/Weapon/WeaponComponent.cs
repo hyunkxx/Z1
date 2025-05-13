@@ -140,7 +140,7 @@ public class WeaponComponent : MonoBehaviour
     IEnumerator CoroutineRotateWeapon()
     {
         weaponState = EWeaponComponentState.Swing;
-        GameManager.Instance.GameMode.playerController.SetInputLock(true);
+        GameManager.Instance.GameMode.PlayerController.SetInputLock(true);
 
         if(weaponResetCoroutine != null)
         {
@@ -199,7 +199,7 @@ public class WeaponComponent : MonoBehaviour
         }
 
         weaponState = EWeaponComponentState.Idle;
-        GameManager.Instance.GameMode.playerController.SetInputLock(false);
+        GameManager.Instance.GameMode.PlayerController.SetInputLock(false);
 
         weaponRotateCoroutine = null;
     }

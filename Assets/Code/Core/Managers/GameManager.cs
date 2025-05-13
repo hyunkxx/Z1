@@ -17,7 +17,7 @@ public class GameManager : Singleton<GameManager>
     {
         if(Input.GetKeyDown(KeyCode.X))
         {
-            Character character = GameMode.playerController.Character;
+            Character character = GameMode.PlayerController.Character;
             tempEnemy.GetComponent<MovementComponent>().MoveToLocation(character.transform.position, OnReched);
         }
     }

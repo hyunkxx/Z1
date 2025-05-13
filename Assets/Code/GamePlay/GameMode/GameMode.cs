@@ -20,23 +20,35 @@ public enum EGameState
 public sealed class GameMode
     : Z1Behaviour
 {
-    public GameRule gameRule;
-    public PlayerController playerController;
+    public PlayerController PlayerController { get; private set; }
+    public GameRule Rule { get; private set; }
 
-    public Transform PlayerStart;
+    [SerializeField]
+    private Transform playerStart;
+
+    [SerializeField]
+    private GameObject _playerControllerPrefab;
+
+    [SerializeField]
+    private GameObject _gameRulePrefab;
 
     private EGameState gameState;
     public event Action<EGameState> OnChangeGameState;
 
-    private AsyncOperationHandle<GameObject> characterHandle;
+    //[SerializeField]
+    //GameModeConfig _config;
+
+    //private AsyncOperationHandle<GameObject> _gameRlueHandle;
+    //private AsyncOperationHandle<GameObject> _playerControllerHandle;
+    private AsyncOperationHandle<GameObject> _characterHandle;
 
     protected override void OnDestroy()
     {
         base.OnDestroy();
 
-        if(characterHandle.IsValid())
+        if(_characterHandle.IsValid())
         {
-            Addressables.ReleaseInstance(characterHandle);
+            Addressables.ReleaseInstance(_characterHandle);
         }
     }
 
@@ -46,7 +58,7 @@ public sealed class GameMode
 
         GameManager.Instance.RegisterGameMode(this);
         InitializeGame();
-
+        
         ChangeGameState(EGameState.ReadyGame);
     }
 
@@ -54,14 +66,19 @@ public sealed class GameMode
     {
         base.Start();
 
-
-        Debug.Log("GameStart");
+        ChangeGameState(EGameState.EnterGame);
     }
 
-    public void InitializeGame()
+    public bool InitializeGame()
     {
-        SpawnPlayer(PlayerStart.position);
-        ChangeGameState(EGameState.EnterGame);
+        if (!_gameRulePrefab || !_playerControllerPrefab)
+            return false;
+
+        Rule = Instantiate(_gameRulePrefab).GetComponent<GameRule>();
+        PlayerController = Instantiate(_playerControllerPrefab).GetComponent<PlayerController>();
+
+        SpawnPlayer(playerStart.position);
+        return true;
     }
 
     public void ChangeGameState(EGameState state)
@@ -79,23 +96,22 @@ public sealed class GameMode
         {
             if (handle.Status == AsyncOperationStatus.Succeeded)
             {
-                characterHandle = handle;
+                _characterHandle = handle;
 
-                //GameObject spawned = Instantiate(handle.Result, location, Quaternion.identity);
                 Character character = handle.Result.GetComponent<Character>();
-
                 CameraMovement cameraMovement = Camera.main.GetComponent<CameraMovement>();
                 cameraMovement.SetViewTarget(character.gameObject);
-                playerController.BindCharacter(character);
+
+                PlayerController.ConnectCharacter(character);
             }
         };
     }
 
     public void TeleportPlayer(Vector3 location)
     {
-        if (!playerController.Character)
+        if (!PlayerController.Character)
             return;
 
-        playerController.Character.transform.position = location;
+        PlayerController.Character.transform.position = location;
     }
 }

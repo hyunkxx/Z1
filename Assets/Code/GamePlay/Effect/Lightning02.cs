@@ -51,10 +51,6 @@ public class Lightning02 : AttackAction
                     {
                         DamageEvent damageEvent = new DamageEvent(stats.Damage, gameObject);
                         other.TakeDamage(damageEvent);
-
-                        Rigidbody2D rg2d = owner.GetComponent<Rigidbody2D>();
-                        Vector3 dir = owner.transform.position - other.transform.position;
-                        rg2d.AddForce(dir.normalized * 0.25f, ForceMode2D.Impulse);
                     }
                 }
             }

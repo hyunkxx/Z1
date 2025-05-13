@@ -13,17 +13,11 @@ public sealed class AppManager : Singleton<AppManager>
 {
     private void Awake()
     {
-        AssetLoader.Initialize();
-    }
-
-    public void Update()
-    {
-        if (Input.GetMouseButton(0))
-            AssetLoader.UnInitialize();
+        //AssetLoader.Initialize();
     }
 
     void OnDisable()
     {
-        AssetLoader.UnInitialize();
+        //AssetLoader.UnInitialize();
     }
 }

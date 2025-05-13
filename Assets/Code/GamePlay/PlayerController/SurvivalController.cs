@@ -13,8 +13,10 @@ public class SurvivalController
     }
     protected override void Update()
     {
-        base.Update();
+        if (!character)
+            return;
 
+        base.Update();
         EvaluateAxisKeyState();
     }
 

@@ -25,7 +25,7 @@ public class PlayerController
         base.Update();
     }
 
-    public void BindCharacter(Character target)
+    public void ConnectCharacter(Character target)
     {
         if (character == target)
             return;
@@ -33,7 +33,7 @@ public class PlayerController
         character = target;
         OnChangedCharacter?.Invoke(character);
     }
-    public void UnBindCharacter()
+    public void DisconnectCharacter()
     {
         if (!character)
             return;

@@ -1,8 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 
 [System.Serializable]
@@ -36,8 +39,8 @@ public class GhostEffect : MonoBehaviour
         character = source.gameObject.transform.root.GetComponent<Character>();
 
         effectPool = gameObject.AddComponent<ObjectPool>();
-        effectPool.InitializePool((GameObject)AssetDatabase.LoadAssetAtPath("Assets/Level/Prefabs/Effect/EmptyGameObject.prefab", typeof(GameObject)), 20);
-        
+        effectPool.InitializePool(new GameObject("EmptyGameObject"), 20);
+
         foreach (GameObject obj in effectPool.Pool)
         {
             SpriteRenderer renderer = obj.AddComponent<SpriteRenderer>();

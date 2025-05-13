@@ -42,15 +42,22 @@ public class DamageProvider : MonoBehaviour
     [SerializeField] private DamageProviderParam providerData;
 
     private bool enableTrigger = false;
-
     Collider2D[] colls;
 
-    protected void Activate()
+    private void Awake()
     {
         colls = GetComponentsInChildren<Collider2D>();
         Debug.Assert(colls != null, "Effect2D has no assigned Collider.");
 
-        enableTrigger = true;
+        foreach (Collider2D coll in colls)
+        {
+            coll.enabled = false;
+            coll.isTrigger = true;
+        }
+    }
+
+    protected void Activate()
+    {
         ResetTrigger();
 
         StartCoroutine(CoroutineLifeTime());
@@ -115,6 +122,8 @@ public class DamageProvider : MonoBehaviour
             coll.isTrigger = true;
             coll.enabled = true;
         }
+
+        enableTrigger = true;
     }
 
     public void OnTriggerEnter2D(Collider2D collision)

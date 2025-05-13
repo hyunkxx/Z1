@@ -14,13 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_GroupName: Materials
   m_GUID: 7faeffa7b5c9e3f448590aad28ffc597
-  m_SerializeEntries:
-  - m_GUID: a97c105638bdf8b4a8650670310a4cd3
-    m_Address: URP_SpriteDefaultLit
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Material
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d696c73dc2a11ad42a29971d096876ce, type: 2}
   m_SchemaSet:

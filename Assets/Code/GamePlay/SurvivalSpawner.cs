@@ -3,17 +3,35 @@ using UnityEngine;
 
 public class SurvivalSpawner : SpawnController
 {
+    [HideInInspector] 
     public PlayerController playerController;
+
+    [HideInInspector] 
     public GameObject Character;
 
-    private void Awake()
+    private void Start()
     {
-
+        GameMode mode = GameManager.Instance.GameMode;
+        mode.OnChangeGameState += OnChangeGameState;
     }
 
-    void Start()
+    private void OnDestroy()
     {
-        Invoke("Initialize", 0.5f);
+        GameMode mode = GameManager.Instance.GameMode;
+        if(mode)
+        {
+            mode.OnChangeGameState -= OnChangeGameState;
+        }
+    }
+
+    private void OnChangeGameState(EGameState state)
+    {
+        switch(state)
+        {
+            case EGameState.EnterGame:
+                Initialize();
+                break;
+        }
     }
 
     void Update()
@@ -23,7 +41,10 @@ public class SurvivalSpawner : SpawnController
 
     void Initialize()
     {
-        Character = playerController.Character.gameObject;
+        GameMode mode = GameManager.Instance.GameMode;
+        Character = mode.PlayerController.Character.gameObject;
+        playerController = mode.PlayerController;
+
         // Input Data
         AddPool("SurvivalMonsterPrefabs/Orc", 10); // DataPath, Size
 
