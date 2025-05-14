@@ -28,10 +28,13 @@ public class UIBase : MonoBehaviour
     {
         //Main_Panel,
         PlayPanel,
+        Defence_Ready_Panel,
         Survival_Ready_Panel,
         CharacterSelect_Panel,
         CharacterSelectContents,
         CharacterInven_Panel,
+        ItemInven_Panel,
+        SelectItem_Panel,
     }
 
     protected enum Buttons
@@ -41,20 +44,26 @@ public class UIBase : MonoBehaviour
         Lobby_Character_btn,
 
         //Play_Panel
-        DefenseMode,
-        //Play_Back_btn,
+        Play_DefenseMode_btn,
+        Play_SurvivalMode_btn,
+        Play_Back_btn,
 
         //Survival_Ready_Panel
         Survival_Ready_CharcterSelect_btn,
         Survival_Ready_Play_btn,
-        //Survival_Ready_Back_btn,
+        Survival_Ready_Back_btn,
+
+        //Defence_Ready_Panel
+        Defence_Ready_Play_btn,
+        Defence_Ready_Back_btn,
 
         //CharacterSelect_Panel
         CharacterSelect_btn,
         //CharacterSelect_Back_btn,
 
-        //CharacterInven_Panel
-        //CharacterInven_Back_btn
+        CharacterInven_Close_btn,
+        ItemInven_Close_btn,
+        ItemInven_Sort_btn,
 
 
     }
@@ -73,6 +82,7 @@ public class UIBase : MonoBehaviour
     protected enum Images
     {
         Survival_Ready_CharcterSlot_Img,
+        CharacterEquip_Character_Img,
     }
 
     #region UI 맵핑

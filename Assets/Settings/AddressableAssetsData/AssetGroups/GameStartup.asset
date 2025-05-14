@@ -18,8 +18,12 @@ MonoBehaviour:
   - m_GUID: 9b414eae461647c46858c7aed068e659
     m_Address: Assets/Level/Prefabs/Character/Character_BackSu.prefab
     m_ReadOnly: 0
-    m_SerializedLabels:
-    - Character
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f07912dc484ffcb458b49811d6161f4e
+    m_Address: Assets/Level/Prefabs/Character/Character_Vampire.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a97c105638bdf8b4a8650670310a4cd3
     m_Address: Packages/com.unity.render-pipelines.universal/Runtime/Materials/Sprite-Lit-Default.mat

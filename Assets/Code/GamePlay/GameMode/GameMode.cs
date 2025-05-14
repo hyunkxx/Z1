@@ -80,6 +80,7 @@ public sealed class GameMode
 
     public void ChangeGameState(EGameState state)
     {
+        Debug.Log("ChangeGameState");
         if (gameState == state)
             return;
 

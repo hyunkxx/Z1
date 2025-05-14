@@ -9,9 +9,13 @@ public class SurvivalSpawner : SpawnController
     [HideInInspector] 
     public GameObject Character;
 
-    private void Awake()
+    private int minXPos = -10, maxXPos = 10;
+    private int minYPos = -6, maxYPos = 6;
+
+    private void Start()
     {
         GameMode mode = GameManager.Instance.GameMode;
+        Debug.Log("mode" + mode);
         mode.OnChangeGameState += OnChangeGameState;
     }
 
@@ -26,6 +30,7 @@ public class SurvivalSpawner : SpawnController
 
     private void OnChangeGameState(EGameState state)
     {
+        Debug.Log("!@#!#");
         switch(state)
         {
             case EGameState.ReadyGame:
@@ -73,8 +78,8 @@ public class SurvivalSpawner : SpawnController
 
             while (!isValidPos)
             {
-                xPos = Random.Range(-10, 10);
-                yPos = Random.Range(-6, 6);
+                xPos = Random.Range(minXPos, maxXPos);
+                yPos = Random.Range(minYPos, maxYPos);
                 isValidPos = IsValidSpawnPosition(Character.transform.position, new Vector3(xPos, yPos, 0));
             }
 

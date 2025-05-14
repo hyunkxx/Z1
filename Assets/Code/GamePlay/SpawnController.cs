@@ -10,3 +10,5 @@ public class SpawnController : MonoBehaviour
         return objectPool.GetObject(_spawnPos, Quaternion.identity);
     }
 }
+
+

@@ -25,13 +25,21 @@ public class LobbyUI : UIBase
         GetButton((int)Buttons.Lobby_Character_btn).onClick.AddListener(() => { PanelOpenAction(GetGameObject((int)GameObjects.CharacterInven_Panel)); });
 
         //Play_Panel
-        GetButton((int)Buttons.DefenseMode).onClick.AddListener(()=> { PanelOpenAction(GetGameObject((int)GameObjects.Survival_Ready_Panel));  });
-        //GetButton((int)Buttons.Play_Back_btn).onClick.AddListener(PanelBackAction);
+        GetButton((int)Buttons.Play_DefenseMode_btn).onClick.AddListener(()=> { PanelOpenAction(GetGameObject((int)GameObjects.Defence_Ready_Panel));  });
+        GetButton((int)Buttons.Play_SurvivalMode_btn).onClick.AddListener(()=> { PanelOpenAction(GetGameObject((int)GameObjects.Survival_Ready_Panel));  });
+        GetButton((int)Buttons.Play_Back_btn).onClick.AddListener(PanelBackAction);
 
+        //Defence_Ready_Panel
+        GetButton((int)Buttons.Defence_Ready_Play_btn).onClick.AddListener(() => { GameManager.Instance.OpenScene("Defence"); });
+        GetButton((int)Buttons.Defence_Ready_Back_btn).onClick.AddListener(PanelBackAction);
+        
         //Survival_Ready_Panel
         GetButton((int)Buttons.Survival_Ready_CharcterSelect_btn).onClick.AddListener(()=> { PanelOpenAction(GetGameObject((int)GameObjects.CharacterSelect_Panel));  });
-        //GetButton((int)Buttons.Survival_Ready_Back_btn).onClick.AddListener(PanelBackAction);
+        GetButton((int)Buttons.Survival_Ready_Back_btn).onClick.AddListener(PanelBackAction);
         GetButton((int)Buttons.Survival_Ready_Play_btn).onClick.AddListener(() => { GameManager.Instance.OpenScene("VampireSurvival"); });
+
+        //CharacterInven_Panel
+
 
     }
 }

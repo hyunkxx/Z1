@@ -33,7 +33,5 @@ public class AttackAction : BaseAction
         {
             effect2D.ActivateEffect(gameObject, effectTransform);
         }
-
-        Debug.Log($"Skill Action {gameObject.name}");
     }
 }

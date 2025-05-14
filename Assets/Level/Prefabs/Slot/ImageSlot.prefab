@@ -96,6 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6d8edff498283c49ab9063c6bf86e00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CharacterID: 0
+  CharacterName: 
   CharacterImage: {fileID: 9218235271339107404}
   Focus: {fileID: 6849681379193636548}
 --- !u!1 &3733162753069855389
@@ -283,7 +285,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3861986605225178759
 CanvasRenderer:

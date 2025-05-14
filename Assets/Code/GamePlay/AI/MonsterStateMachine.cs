@@ -87,16 +87,17 @@ public class MonsterStateMachine : MonoBehaviour
     }
 
     Coroutine YSortingCoroutine;
-    bool isYSorting = false;
-
+    
     private void OnBecameVisible()
     {
-        if (isYSorting) return;
+        if (YSortingCoroutine != null) return;
 
         YSortingCoroutine = StartCoroutine(YSorting());
     }
     private void OnBecameInvisible()
     {
+        if (YSortingCoroutine == null) return;
+
         StopCoroutine(YSortingCoroutine);
     }
 

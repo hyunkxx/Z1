@@ -1,5 +1,9 @@
 using UnityEngine;
 
+public interface IAction
+{
+    public void ExcuteAction();
+}
 
 public abstract class BaseAction : Z1Behaviour, IAction
 {

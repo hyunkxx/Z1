@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Lightning02 : AttackAction
 {
-    Collider2D collider2D;
+    Collider2D col;
     LineController lineController;
 
     protected override void Awake()
@@ -28,7 +28,7 @@ public class Lightning02 : AttackAction
         // Instantiate Effect
         base.ExcuteAction();
         lineController = effect2D.gameObject.GetComponentInChildren<LineController>();
-        collider2D = effect2D.gameObject.GetComponentInChildren<BoxCollider2D>();
+        col = effect2D.gameObject.GetComponentInChildren<BoxCollider2D>();
         // 스킬 로직
         StartCoroutine(OnHit());
     }
@@ -37,7 +37,7 @@ public class Lightning02 : AttackAction
     {
         int attackCount = 10;
         CharacterStats stats = gameObject.GetComponent<CharacterStats>();
-        collider2D.enabled = true;
+        col.enabled = true;
 
         while (attackCount > 0)
         {

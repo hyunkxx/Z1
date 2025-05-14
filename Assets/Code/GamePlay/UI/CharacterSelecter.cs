@@ -52,15 +52,8 @@ public class CharacterSelecter : UIBase
         for(int i = 0; i < Database.Instance.CharcterList.Count; ++i)
         {
             Slots[i].SetActive(true);
-            SetSlotInfo(i);
+            Slots[i].GetComponent<CharacterSlot>().SetSlotInfo(i);
         }
-    }
-
-    void SetSlotInfo(int _index)
-    {
-        Slots[_index].GetComponent<CharacterSlot>().CharacterID = Database.Instance.CharcterList[_index].ID;
-        Slots[_index].GetComponent<CharacterSlot>().CharacterName = Database.Instance.CharcterList[_index].Name;
-        Slots[_index].GetComponent<CharacterSlot>().CharacterImage.sprite = Database.Instance.CharcterList[_index].sprite;
     }
 
     void OnClickCharacterSlot()
@@ -118,13 +111,13 @@ public class CharacterSelecter : UIBase
         
         Vector2 vec2 = new Vector2(0, -position.y + slotHeight);
         GetGameObject((int)GameObjects.CharacterSelectContents).GetComponent<RectTransform>().sizeDelta = vec2;
-
     }
 
 
     void OnClickSelectButton()
     {
-        GameManager.Instance.tempPlayerPrefab = (GameObject)AssetDatabase.LoadAssetAtPath($"Assets/Level/Prefabs/Character/Character_{CurSlot.GetComponent<CharacterSlot>().CharacterName}.prefab", typeof(GameObject));
+        // 선택된 ID GameManager에 전달
+        //GameManager.Instance.tempPlayerPrefab = (GameObject)AssetDatabase.LoadAssetAtPath($"Assets/Level/Prefabs/Character/Character_{CurSlot.GetComponent<CharacterSlot>().CharacterName}.prefab", typeof(GameObject));
         PanelBackAction();
     }
 }

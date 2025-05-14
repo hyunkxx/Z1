@@ -13,6 +13,14 @@ public class CharacterSlot : MonoBehaviour
         return CharacterImage.sprite;
     }
 
+
+    public void SetSlotInfo(int _index)
+    {
+       CharacterID = Database.Instance.CharcterList[_index].ID;
+       CharacterName = Database.Instance.CharcterList[_index].Name;
+       CharacterImage.sprite = Database.Instance.CharcterList[_index].sprite;
+    }
+
     public void ActiveFocus()
     {
         if (Focus.activeSelf)

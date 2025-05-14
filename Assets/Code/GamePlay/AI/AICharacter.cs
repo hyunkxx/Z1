@@ -1,12 +1,5 @@
 using UnityEngine;
 
-public interface IAction
-{ 
-    public void ExcuteAction();
-}
-
-// ----------------------------------------------------------------
-
 interface IMonster
 {
     public void Spawn();
