@@ -36,7 +36,9 @@ public class Database : Singleton<Database>
     #region TestCode
 
     /* Test Data */
-    public List<TestCharacterData> CharcterList = new List<TestCharacterData>();
+    public List<TestCharacterData> TestCharcterList = new List<TestCharacterData>();
+    public Dictionary<int, TestItemData> TestItemTable = new Dictionary<int, TestItemData>();
+    public List<TestItemData> TestInvenList = new List<TestItemData>();
 
     #endregion
 
@@ -53,8 +55,14 @@ public class Database : Singleton<Database>
         AssetDuplicator.CopyFile(streamingDBPath, persistentDBPath, OnCopyComplete);
 
         /* Test Data */
-        CharcterList.Add(new TestCharacterData(1000, "Backsu", (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Character/1000/character_1000.png", typeof(Sprite))));
-        CharcterList.Add(new TestCharacterData(1001, "Vampire", (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Character/1001/character_1001.png", typeof(Sprite))));
+        TestCharcterList.Add(new TestCharacterData(1000, "Backsu", (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Character/1000/character_1000.png", typeof(Sprite))));
+        TestCharcterList.Add(new TestCharacterData(1001, "Vampire", (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Character/1001/character_1001.png", typeof(Sprite))));
+        TestItemTable.Add(100001, new TestItemData(100001, "TestWeapon01", TestItemType.None, (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Character/1001/character_1001.png", typeof(Sprite))));
+        TestItemTable.Add(100001, new TestItemData(100001, "TestWeapon02", TestItemType.None, (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Character/1001/character_1001.png", typeof(Sprite))));
+        TestItemTable.Add(100001, new TestItemData(100001, "TestArmor01", TestItemType.None, (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Character/1001/character_1001.png", typeof(Sprite))));
+        TestItemTable.Add(100001, new TestItemData(100001, "TestArmor02", TestItemType.None, (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Character/1001/character_1001.png", typeof(Sprite))));
+        TestItemTable.Add(100001, new TestItemData(100001, "TestHelmet01", TestItemType.None, (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Character/1001/character_1001.png", typeof(Sprite))));
+        TestItemTable.Add(100001, new TestItemData(100001, "TestHelmet02", TestItemType.None, (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Character/1001/character_1001.png", typeof(Sprite))));
     }
     public void OnCopyComplete(bool bSuccessful)
     {
@@ -80,10 +88,11 @@ public class Database : Singleton<Database>
 
 /*Test Class*/
 [System.Serializable]
-public struct TestCharacterData
+public class TestCharacterData
 {
     public int ID;
     public string Name;
+    public List<TestItemData> EquipList = new List<TestItemData>();
     public Sprite sprite;
 
     public TestCharacterData(int _id, string _name, Sprite _sprite)
@@ -92,4 +101,28 @@ public struct TestCharacterData
         Name = _name;
         sprite = _sprite;
     }
+}
+
+public class TestItemData
+{
+    public int ID;
+    public string Name;
+    public TestItemType ItemType = TestItemType.None;
+    public Sprite sprite;
+
+    public TestItemData(int _id, string _name, TestItemType _itemType, Sprite _sprite)
+    {
+        ID = _id;
+        Name = _name;
+        ItemType = _itemType;
+        sprite = _sprite;
+    }
+}
+
+public enum TestItemType
+{
+    None,
+    Equip,
+    Use,
+    Other,
 }

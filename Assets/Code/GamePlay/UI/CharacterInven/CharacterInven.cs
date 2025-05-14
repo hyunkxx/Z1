@@ -40,7 +40,7 @@ public class CharacterInven : UIBase
 
     void ActiveSlot()
     {
-        for (int i = 0; i < Database.Instance.CharcterList.Count; ++i)
+        for (int i = 0; i < Database.Instance.TestCharcterList.Count; ++i)
         {
             Slots[i].SetActive(true);
             Slots[i].GetComponent<CharacterSlot>().SetSlotInfo(i);

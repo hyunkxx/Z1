@@ -16,9 +16,9 @@ public class CharacterSlot : MonoBehaviour
 
     public void SetSlotInfo(int _index)
     {
-       CharacterID = Database.Instance.CharcterList[_index].ID;
-       CharacterName = Database.Instance.CharcterList[_index].Name;
-       CharacterImage.sprite = Database.Instance.CharcterList[_index].sprite;
+       CharacterID = Database.Instance.TestCharcterList[_index].ID;
+       CharacterName = Database.Instance.TestCharcterList[_index].Name;
+       CharacterImage.sprite = Database.Instance.TestCharcterList[_index].sprite;
     }
 
     public void ActiveFocus()
