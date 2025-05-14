@@ -46,7 +46,7 @@ public class DamageProvider : MonoBehaviour
 
     private void Awake()
     {
-        colls = GetComponentsInChildren<Collider2D>();
+        colls = GetComponents<Collider2D>();
         Debug.Assert(colls != null, "Effect2D has no assigned Collider.");
 
         foreach (Collider2D coll in colls)

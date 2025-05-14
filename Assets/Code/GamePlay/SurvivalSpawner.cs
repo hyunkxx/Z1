@@ -9,7 +9,7 @@ public class SurvivalSpawner : SpawnController
     [HideInInspector] 
     public GameObject Character;
 
-    private void Start()
+    private void Awake()
     {
         GameMode mode = GameManager.Instance.GameMode;
         mode.OnChangeGameState += OnChangeGameState;
@@ -28,7 +28,7 @@ public class SurvivalSpawner : SpawnController
     {
         switch(state)
         {
-            case EGameState.EnterGame:
+            case EGameState.ReadyGame:
                 Initialize();
                 break;
         }

@@ -58,15 +58,12 @@ public sealed class GameMode
 
         GameManager.Instance.RegisterGameMode(this);
         InitializeGame();
-        
-        ChangeGameState(EGameState.ReadyGame);
     }
 
     protected override void Start()
     {
         base.Start();
 
-        ChangeGameState(EGameState.EnterGame);
     }
 
     public bool InitializeGame()
@@ -104,6 +101,8 @@ public sealed class GameMode
 
                 PlayerController.ConnectCharacter(character);
             }
+
+            ChangeGameState(EGameState.ReadyGame);
         };
     }
 
