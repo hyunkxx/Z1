@@ -1,13 +1,16 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CharacterEquipUI : UIBase
 {
-    public int CurCharacterID = 0;
+    private int CurCharacterID = 1000;
+    [SerializeField] private ItemInventoryUI ItemIvenUI;
 
     [SerializeField] private GameObject Contents;
-    private int PrevInvenIndex = 0;
+    private TestItemData PrevInvenItem = null;
     private GameObject CurSlot;
+    private TestItemType CurSlotItemType = TestItemType.None;
     private GameObject[] Slots;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -25,6 +28,15 @@ public class CharacterEquipUI : UIBase
     public void UpdateSlotUI(int _ID)
     {
         CurCharacterID = _ID;
+        Dictionary<TestItemType, TestItemData> characterEquipData = Database.Instance.TestCharcterList[_ID].CharacterEquipData;
+        for (int i = 0; i < characterEquipData.Count; ++i)
+        {
+            if (characterEquipData[(TestItemType)i] == null)
+                Slots[i].transform.GetChild(0).GetComponent<Image>().sprite = null;
+            else
+                Slots[i].transform.GetChild(0).GetComponent<Image>().sprite = characterEquipData[(TestItemType)i].sprite;
+        }
+
     }
 
     // Update is called once per frame
@@ -39,32 +51,34 @@ public class CharacterEquipUI : UIBase
         {
             if (GetButtonName() == Slots[i].name)
             {
-                GetGameObject((int)GameObjects.ItemInven_Panel).SetActive(true);
                 CurSlot = Slots[i];
+                CurSlotItemType = (TestItemType)i;
+
+                GetGameObject((int)GameObjects.ItemInven_Panel).SetActive(true);
+                ItemIvenUI.SetSlotInfo(CurSlotItemType);
             }
         }
     }
 
     void UnEquip()
     {
-        // 이전 아이템 장착 해제
-        Database.Instance.TestInvenList[PrevInvenIndex].isEquip = false;
+        PrevInvenItem.isEquip = false;
+        Database.Instance.TestCharcterList[CurCharacterID].CharacterEquipData[CurSlotItemType] = null;
     }
 
-    public void Equip(int _itemID, int _invenIdex)
+    public void Equip(TestItemData _item)
     {
-        // Check Other Character 
-        if (PrevInvenIndex == 0)
-            PrevInvenIndex = _invenIdex;
+        // 다른 캐릭이 장착중인지 현재 장착중인지 체크해야함.
+        if (PrevInvenItem == null)
+            PrevInvenItem = _item;
         else
             UnEquip();
 
-        // inventory Item = Equip True
-        Database.Instance.TestInvenList[_invenIdex].isEquip = true;
-        // SlotImage.sprite = inventory Item Sprite
-        CurSlot.transform.GetChild(0).GetComponent<Image>().sprite = Database.Instance.TestInvenList[_invenIdex].sprite;
+        Database.Instance.TestCharcterList[CurCharacterID].CharacterEquipData[CurSlotItemType] = _item;
+       _item.isEquip = true;
+        CurSlot.transform.GetChild(0).GetComponent<Image>().sprite = _item.sprite;
 
-        PrevInvenIndex = _invenIdex;
+        PrevInvenItem = _item;
     }
 
 }

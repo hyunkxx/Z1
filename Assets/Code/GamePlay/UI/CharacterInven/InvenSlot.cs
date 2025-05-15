@@ -12,12 +12,9 @@ public class InvenSlot : MonoBehaviour
     }
 
 
-    public void SetSlotInfo(int _index)
+    public void SetSlotInfo(TestItemData _itemData)
     {
-        itemData.ID = Database.Instance.TestInvenList[_index].ID;
-        itemData.Name = Database.Instance.TestInvenList[_index].Name;
-        itemData.sprite = Database.Instance.TestInvenList[_index].sprite;
-
-        ItemImage.sprite = itemData.sprite;
+        itemData = _itemData;
+        ItemImage.sprite = (itemData == null) ? null : itemData.sprite;
     }
 }

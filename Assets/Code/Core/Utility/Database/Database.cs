@@ -46,7 +46,7 @@ public class Database : Singleton<Database>
 
     #region TestCode
     /* Test Data */
-    public List<TestCharacterData> TestCharcterList = new List<TestCharacterData>();
+    public Dictionary<int, TestCharacterData> TestCharcterList = new Dictionary<int, TestCharacterData>();
     public Dictionary<int, TestItemData> TestItemTable = new Dictionary<int, TestItemData>();
     public List<TestItemData> TestInvenList = new List<TestItemData>();
 
@@ -71,14 +71,14 @@ public class Database : Singleton<Database>
         AssetDuplicator.CopyFile(streamingDBPath, persistentDBPath, OnCopyComplete);
 
         /* Test Data */
-        TestCharcterList.Add(new TestCharacterData(1000, "Backsu", (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Character/1000/character_1000.png", typeof(Sprite))));
-        TestCharcterList.Add(new TestCharacterData(1001, "Vampire", (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Character/1001/character_1001.png", typeof(Sprite))));
-        TestItemTable.Add(100001, new TestItemData(100001, "TestWeapon01", TestItemType.None, (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Weapon/AxeLong1.png", typeof(Sprite))));
-        TestItemTable.Add(100002, new TestItemData(100002, "TestWeapon02", TestItemType.None, (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Weapon/AxeNormal1.png", typeof(Sprite))));
+        TestCharcterList.Add(1000, new TestCharacterData(1000, "Backsu", (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Character/1000/character_1000.png", typeof(Sprite))));
+        TestCharcterList.Add(1001, new TestCharacterData(1001, "Vampire", (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Character/1001/character_1001.png", typeof(Sprite))));
+        TestItemTable.Add(100001, new TestItemData(100001, "TestWeapon01", TestItemType.Weapon, (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Weapon/AxeLong1.png", typeof(Sprite))));
+        TestItemTable.Add(100002, new TestItemData(100002, "TestWeapon02", TestItemType.Weapon, (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Weapon/AxeNormal1.png", typeof(Sprite))));
         TestItemTable.Add(100003, new TestItemData(100003, "TestArmor01", TestItemType.None, (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Weapon/Normal_Armor1.png", typeof(Sprite))));
         TestItemTable.Add(100004, new TestItemData(100004, "TestArmor02", TestItemType.None, (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Weapon/Normal_Cloth1.png", typeof(Sprite))));
-        TestItemTable.Add(100005, new TestItemData(100005, "TestHelmet01", TestItemType.None, (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Weapon/Normal_Helmet1.png", typeof(Sprite))));
-        TestItemTable.Add(100006, new TestItemData(100006, "TestHelmet02", TestItemType.None, (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Weapon/Normal_Helmet2.png", typeof(Sprite))));
+        TestItemTable.Add(100005, new TestItemData(100005, "TestHelmet01", TestItemType.Helmet, (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Weapon/Normal_Helmet1.png", typeof(Sprite))));
+        TestItemTable.Add(100006, new TestItemData(100006, "TestHelmet02", TestItemType.Helmet, (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Weapon/Normal_Helmet2.png", typeof(Sprite))));
         TestInvenList.Add(TestItemTable[100001]);
         TestInvenList.Add(TestItemTable[100001]);
         TestInvenList.Add(TestItemTable[100002]);
@@ -112,7 +112,7 @@ public class TestCharacterData
 {
     public int ID;
     public string Name;
-    public List<TestItemData> EquipList = new List<TestItemData>();
+    public Dictionary<TestItemType, TestItemData> CharacterEquipData = new Dictionary<TestItemType, TestItemData>() { { TestItemType.Helmet, null}, { TestItemType.Weapon, null} };
     public Sprite sprite;
 
     public TestCharacterData(int _id, string _name, Sprite _sprite)
@@ -143,8 +143,9 @@ public class TestItemData
 
 public enum TestItemType
 {
-    None,
-    Equip,
+    Helmet = 0,
+    Weapon = 1,
     Use,
     Other,
+    None,
 }
