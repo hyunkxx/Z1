@@ -5,10 +5,11 @@ using UnityEngine;
 public abstract class GameRule
     : Z1Behaviour
 {
-    private GameMode gameMode;
+    protected GameMode _gameMode;
 
     protected override void Awake()
     {
-        base.Start();
+        base.Awake();
+        _gameMode = GameManager.Instance.GameMode;
     }
 }

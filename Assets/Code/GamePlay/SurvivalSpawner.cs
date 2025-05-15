@@ -22,7 +22,11 @@ public class SurvivalSpawner : SpawnController
     {
         if (GameManager.IsValid())
         {
-            GameManager.Instance.GameMode.OnChangeGameState -= OnChangeGameState;
+            GameMode mode = GameManager.Instance.GameMode;
+            if (mode)
+            {
+                mode.OnChangeGameState -= OnChangeGameState;
+            }
         }
     }
 

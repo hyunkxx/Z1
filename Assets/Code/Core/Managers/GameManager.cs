@@ -5,29 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
-    //public ulong SelectMainCharacterID = 1001;
-    public GameObject tempPlayerPrefab;
+    public string Payload { get; private set; }
+    public GameMode GameMode { get; private set; }
 
-    public GameMode GameMode => gameMode;
-    private GameMode gameMode;
-
-    public GameObject tempEnemy;
-
-    protected override void Update()
+    public bool HasPayload()
     {
-        if(Input.GetKeyDown(KeyCode.X))
-        {
-            Character character = GameMode.PlayerController.Character;
-            tempEnemy.GetComponent<MovementComponent>().MoveToLocation(character.transform.position, OnReched);
-        }
+        return !string.IsNullOrEmpty(Payload);
     }
 
-    public void OnReched()
-    {
-        Debug.Log("REA");
-    }
-
-    public void OpenScene(string sceneName)
+    public void OpenScene(string sceneName, string payload = "")
     {
         int sceneCount = SceneManager.sceneCountInBuildSettings;
         for (int i = 0; i < sceneCount; i++)
@@ -37,6 +23,7 @@ public class GameManager : Singleton<GameManager>
 
             if (name == sceneName)
             {
+                this.Payload = payload;
                 StartCoroutine(LoadSceneAsync(sceneName));
             }
         }
@@ -44,16 +31,18 @@ public class GameManager : Singleton<GameManager>
     private IEnumerator LoadSceneAsync(string sceneName)
     {
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(sceneName);
+        Debug.Log("LoadScene");
 
         while (!asyncOperation.isDone)
         {
-            Debug.Log("LoadScene");
             yield return null;
         }
+
+        Debug.Log("Scene Load Complete");
     }
 
     public void RegisterGameMode(GameMode mode)
     {
-        this.gameMode = mode;
+        this.GameMode = mode;
     }
 }

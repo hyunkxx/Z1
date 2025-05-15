@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a9617472397cc6846a49f27f17a5a1ef, type: 3}
-  m_Name: CAD_TEMP2
+  m_Name: CAD_Vampire
   m_EditorClassIdentifier: 
   _characterID: 1001
-  _name: TEMP2
-  _prefabKey: Character_TEMP2
+  _name: Vampire
+  _prefabKey: Character_Vampire
   _sprite: {fileID: 866145876, guid: 41c0aa1c835478443ba6edc1e425b1cf, type: 3}

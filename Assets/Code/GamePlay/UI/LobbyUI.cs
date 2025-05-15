@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class LobbyUI : UIBase
 {
     [SerializeField] CharacterSelecter characterSelecter;
-    
 
     private void Awake()
     {
@@ -36,7 +35,6 @@ public class LobbyUI : UIBase
         //Survival_Ready_Panel
         GetButton((int)Buttons.Survival_Ready_CharcterSelect_btn).onClick.AddListener(()=> { PanelOpenAction(GetGameObject((int)GameObjects.CharacterSelect_Panel));  });
         GetButton((int)Buttons.Survival_Ready_Back_btn).onClick.AddListener(PanelBackAction);
-        GetButton((int)Buttons.Survival_Ready_Play_btn).onClick.AddListener(() => { GameManager.Instance.OpenScene("VampireSurvival"); });
 
         //CharacterInven_Panel
 

@@ -4,11 +4,13 @@ using UnityEngine.UI;
 
 public class CharacterSelecter : UIBase
 {
-    GameObject CurSlot;
-    [SerializeField] private GameObject ScrollView;
-    
+    [SerializeField]
+    private GameObject ScrollView;
 
+    private GameObject CurSlot;
     private GameObject[] Slots;
+
+    public int SelectCharacterID { get; private set; }
 
     public void ActiveButton(bool value)
     {
@@ -33,6 +35,8 @@ public class CharacterSelecter : UIBase
 
         CurSlot = GetGameObject((int)GameObjects.CharacterSelectContents).transform.GetChild(0).gameObject;
         CurSlot.GetComponent<CharacterSlot>().ActiveFocus();
+
+        GetButton((int)Buttons.Survival_Ready_Play_btn).onClick.AddListener(() => { GameManager.Instance.OpenScene("VampireSurvival", SelectCharacterID.ToString()); });
     }
 
     void Start()
@@ -116,8 +120,9 @@ public class CharacterSelecter : UIBase
 
     void OnClickSelectButton()
     {
-        // 선택된 ID GameManager에 전달
-        //GameManager.Instance.tempPlayerPrefab = (GameObject)AssetDatabase.LoadAssetAtPath($"Assets/Level/Prefabs/Character/Character_{CurSlot.GetComponent<CharacterSlot>().CharacterName}.prefab", typeof(GameObject));
+        CharacterSlot slot = CurSlot.GetComponent<CharacterSlot>();
+        SelectCharacterID = slot.CharacterID;
+
         PanelBackAction();
     }
 }

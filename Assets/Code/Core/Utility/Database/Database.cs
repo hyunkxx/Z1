@@ -54,7 +54,7 @@ public class Database : Singleton<Database>
 
     /* TEMP */
     [SerializedDictionary("Key", "Character Asset Data")]
-    public SerializedDictionary<int, CharacterAssetData> CharacterAssetData;// = new SerializedDictionary<int, CharacterAssetData>();
+    public SerializedDictionary<int, CharacterAssetData> CharacterAssetData;
 
     /* TABLE SAMPLE */
     private Dictionary<int, ItemData> itemTable = new Dictionary<int, ItemData>();
@@ -63,10 +63,7 @@ public class Database : Singleton<Database>
     protected override void Awake()
     {
         base.Awake();
-    }
 
-    public void Initialize()
-    {
         string streamingDBPath = Path.Combine(Application.streamingAssetsPath, DatabasePath);
         string persistentDBPath = Path.Combine(Application.persistentDataPath, DatabasePath);
         Debug.Log(persistentDBPath);

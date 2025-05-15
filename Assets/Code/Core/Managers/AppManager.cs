@@ -15,7 +15,7 @@ public sealed class AppManager : Singleton<AppManager>
     {
         base.Awake();
 
-        Database.Instance.Initialize();
+        //Database.Instance.Initialize();
         //AssetLoader.Initialize();
     }
 
