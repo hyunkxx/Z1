@@ -44,12 +44,12 @@ public sealed class GameMode
 
     protected override void OnDestroy()
     {
-        base.OnDestroy();
-
         if(_characterHandle.IsValid())
         {
             Addressables.ReleaseInstance(_characterHandle);
         }
+
+        base.OnDestroy();
     }
 
     protected override void Awake()
@@ -63,7 +63,6 @@ public sealed class GameMode
     protected override void Start()
     {
         base.Start();
-
     }
 
     public bool InitializeGame()
@@ -90,7 +89,7 @@ public sealed class GameMode
 
     public void SpawnPlayer(Vector3 location)
     {
-        Addressables.InstantiateAsync("Assets/Level/Prefabs/Character/Character_BackSu.prefab", location, Quaternion.identity).Completed += (handle) =>
+        Addressables.InstantiateAsync("Character_BaekSu", location, Quaternion.identity).Completed += (handle) =>
         {
             if (handle.Status == AsyncOperationStatus.Succeeded)
             {

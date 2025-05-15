@@ -67,7 +67,7 @@ public sealed class DatabaseService : IDisposable
         return ExcuteReader(command);
     }
 
-    public T GetDataClass<T>(int id, params object[] args) where T : IDatabaseModel, new()
+    public T GetDataClass<T>(int id, params object[] args) where T : IDatabaseModel<T>, new()
     {
         T obj = new T();
         string query = $"SELECT * FROM {typeof(T).Name} WHERE ID = @id";
@@ -94,7 +94,7 @@ public sealed class DatabaseService : IDisposable
         return obj;
     }
 
-    public List<T> GetDataClassList<T>(params object[] args) where T : IDatabaseModel, new()
+    public List<T> GetDataClassList<T>(params object[] args) where T : IDatabaseModel<T>, new()
     {
         List<T> objList = new List<T>();
         string query = $"SELECT * FROM {typeof(T).Name}";

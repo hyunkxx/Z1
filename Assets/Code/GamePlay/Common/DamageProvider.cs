@@ -137,7 +137,6 @@ public class DamageProvider : MonoBehaviour
         {
             if (owner.IsEnemy(other))
             {
-                Debug.Log($"take damage {collision.gameObject.name}");
                 DamageEvent damageEvent = new DamageEvent(providerData.characterStats.Damage, providerData.owner);
                 other.TakeDamage(damageEvent);
             }

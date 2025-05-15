@@ -14,7 +14,10 @@ public class DummyObject : MonoBehaviour
     }
     private void OnDestroy()
     {
-        damageable.OnDamageTaken -= TakeDamage;
+        if (damageable)
+        {
+            damageable.OnDamageTaken -= TakeDamage;
+        }
     }
 
     private void TakeDamage(DamageEvent info)

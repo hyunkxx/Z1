@@ -13,7 +13,7 @@ public class GameManager : Singleton<GameManager>
 
     public GameObject tempEnemy;
 
-    public void Update()
+    protected override void Update()
     {
         if(Input.GetKeyDown(KeyCode.X))
         {

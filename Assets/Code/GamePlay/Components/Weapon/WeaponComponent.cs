@@ -49,7 +49,10 @@ public class WeaponComponent : MonoBehaviour
     }
     public void OnDestroy()
     {
-        character.OnChangedFlip -= FlipX;
+        if(character)
+        {
+            character.OnChangedFlip -= FlipX;
+        }
     }
 
     public void FlipX(bool bFlip)

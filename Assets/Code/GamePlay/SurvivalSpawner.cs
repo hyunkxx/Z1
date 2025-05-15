@@ -15,22 +15,19 @@ public class SurvivalSpawner : SpawnController
     private void Start()
     {
         GameMode mode = GameManager.Instance.GameMode;
-        Debug.Log("mode" + mode);
         mode.OnChangeGameState += OnChangeGameState;
     }
 
     private void OnDestroy()
     {
-        GameMode mode = GameManager.Instance.GameMode;
-        if(mode)
+        if (GameManager.IsValid())
         {
-            mode.OnChangeGameState -= OnChangeGameState;
+            GameManager.Instance.GameMode.OnChangeGameState -= OnChangeGameState;
         }
     }
 
     private void OnChangeGameState(EGameState state)
     {
-        Debug.Log("!@#!#");
         switch(state)
         {
             case EGameState.ReadyGame:

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: PreLoad
+  m_EditorClassIdentifier: 
+  m_GroupName: PreLoad
+  m_GUID: 27d940c126288bc418a010a4e7df7746
+  m_SerializeEntries:
+  - m_GUID: febb501f9ce63e5448c333eabb8965cc
+    m_Address: Sprite_BaekSu
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: d696c73dc2a11ad42a29971d096876ce, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: dc6c61e683fe8a948ac91a22947d978d, type: 2}
+    - {fileID: 11400000, guid: 87472409fc7881c4c9dcd3215c9df76e, type: 2}

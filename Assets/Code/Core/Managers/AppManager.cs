@@ -11,13 +11,18 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 public sealed class AppManager : Singleton<AppManager>
 {
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
+        Database.Instance.Initialize();
         //AssetLoader.Initialize();
     }
 
-    void OnDisable()
+    protected override void OnDisable()
     {
+        base.OnDisable();
+
         //AssetLoader.UnInitialize();
     }
 }

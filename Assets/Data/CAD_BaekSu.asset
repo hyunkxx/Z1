@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9617472397cc6846a49f27f17a5a1ef, type: 3}
+  m_Name: CAD_BaekSu
+  m_EditorClassIdentifier: 
+  _characterID: 1000
+  _name: BaekSu
+  _prefabKey: Character_BaekSu
+  _sprite: {fileID: 8769933567029890119, guid: febb501f9ce63e5448c333eabb8965cc, type: 3}

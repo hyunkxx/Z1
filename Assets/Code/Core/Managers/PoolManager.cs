@@ -11,8 +11,10 @@ public class PoolManager : Singleton<PoolManager>
         return container.GetPool(poolName);
     }
 
-    public void Start()
+    protected override void Start()
     {
+        base.Start();
+
         container = GetComponent<PoolContainer>();
 
         ObjectPool pool = gameObject.AddComponent<ObjectPool>();

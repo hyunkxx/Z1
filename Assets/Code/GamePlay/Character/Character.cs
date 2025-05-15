@@ -72,7 +72,10 @@ public class Character : Z1Behaviour
     }
     protected override void OnDestroy()
     {
-        damageable.OnDamageTaken -= TakeDamage;
+        if (damageable)
+        {
+            damageable.OnDamageTaken -= TakeDamage;
+        }
     }
     protected override void Update()
     {

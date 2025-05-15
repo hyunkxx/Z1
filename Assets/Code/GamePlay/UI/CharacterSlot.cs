@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,9 +17,11 @@ public class CharacterSlot : MonoBehaviour
 
     public void SetSlotInfo(int _index)
     {
-       CharacterID = Database.Instance.TestCharcterList[_index].ID;
-       CharacterName = Database.Instance.TestCharcterList[_index].Name;
-       CharacterImage.sprite = Database.Instance.TestCharcterList[_index].sprite;
+        CharacterAssetData assetData = Database.Instance.CharacterAssetData.GetValueOrDefault(1000 + _index);
+
+        CharacterID = assetData.CharacterID;
+        CharacterName = assetData.Name;
+        CharacterImage.sprite = assetData.Sprite;
     }
 
     public void ActiveFocus()

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Singleton<T> : MonoBehaviour where T : Component
+public class Singleton<T> : Z1Behaviour where T : Component
 {
     private static T instance;
     public static T Instance
@@ -22,13 +22,19 @@ public class Singleton<T> : MonoBehaviour where T : Component
         }
     }
 
+    public static bool IsValid()
+    {
+        return instance != null;
+    }
+
+    /* TEST */
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-    static private void InternalInitailize()
+    static public void InternalInitailize()
     {
         _ = Singleton<T>.Instance;
     }
 
-    private void Awake()
+    protected override void Awake()
     {
         if (instance == null)
         {

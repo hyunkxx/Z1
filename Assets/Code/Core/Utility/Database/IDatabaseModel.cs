@@ -9,7 +9,8 @@ using Mono.Data.Sqlite;
 using UnityEngine;
 
 
-public interface IDatabaseModel
+public interface IDatabaseModel<T>
 {
     public void Initialize(IDataRecord record, params object[] args);
+    public T Clone();
 }

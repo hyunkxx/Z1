@@ -50,10 +50,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7345b55aa1b47c4a8bf4c5dc29f92ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monster: {fileID: 0}
   animator: {fileID: 828445366256103033}
   target: {fileID: 0}
   nomalAttack: {fileID: 0}
-  specailAttack: {fileID: 0}
+  activeSkill: {fileID: 0}
+  skill: []
 --- !u!114 &5032921733773311675
 MonoBehaviour:
   m_ObjectHideFlags: 0

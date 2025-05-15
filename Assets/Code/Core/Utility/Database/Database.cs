@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Data;
 using System.Data.Common;
 using System.Collections;
@@ -7,21 +8,32 @@ using Mono.Data.Sqlite;
 
 using UnityEngine;
 using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
-using System.IO;
+using AYellowpaper.SerializedCollections;
+using Unity.VisualScripting;
 
 
 /* temp struct */
-public class ItemData : IDatabaseModel
+public class ItemData : IDatabaseModel<ItemData>
 {
-    public string name;
-    public int id;
-    public int data;
+    public string name { get; private set; }
+    public int id { get; private set; }
+    public int data { get; private set; }
 
     public virtual void Initialize(IDataRecord record, params object[] args)
     {
         name = record.GetString(0);
         id = record.GetInt32(1);
         data = record.GetInt32(2);
+    }
+
+    public ItemData Clone()
+    {
+        ItemData clone = new ItemData();
+        clone.name = name;
+        clone.id = id;
+        clone.data = data;
+
+        return clone;
     }
 }
 
@@ -32,9 +44,7 @@ public class Database : Singleton<Database>
     [SerializeField]
     private string DatabasePath = "Database/GameDatabase.db";
 
-
     #region TestCode
-
     /* Test Data */
     public List<TestCharacterData> TestCharcterList = new List<TestCharacterData>();
     public Dictionary<int, TestItemData> TestItemTable = new Dictionary<int, TestItemData>();
@@ -42,11 +52,20 @@ public class Database : Singleton<Database>
 
     #endregion
 
+    /* TEMP */
+    [SerializedDictionary("Key", "CharacterAssetData")]
+    public SerializedDictionary<int, CharacterAssetData> CharacterAssetData = new SerializedDictionary<int, CharacterAssetData>();
+
     /* TABLE SAMPLE */
     private Dictionary<int, ItemData> itemTable = new Dictionary<int, ItemData>();
     public IReadOnlyDictionary<int, ItemData> ItemTable => itemTable;
 
-    public void Awake()
+    protected override void Awake()
+    {
+        base.Awake();
+    }
+
+    public void Initialize()
     {
         string streamingDBPath = Path.Combine(Application.streamingAssetsPath, DatabasePath);
         string persistentDBPath = Path.Combine(Application.persistentDataPath, DatabasePath);
@@ -72,8 +91,6 @@ public class Database : Singleton<Database>
 
     public void OnCopyComplete(bool bSuccessful)
     {
-        Debug.Log(bSuccessful);
-
         string persistentPath = Path.Combine(Application.persistentDataPath, DatabasePath);
         string connectionPath = $"URI=file:{persistentPath}";
         databaseService = new DatabaseService(connectionPath);
@@ -86,7 +103,7 @@ public class Database : Singleton<Database>
         }
     }
 
-    public void OnDestroy()
+    protected override void OnDestroy()
     {
         databaseService.Dispose();
     }
