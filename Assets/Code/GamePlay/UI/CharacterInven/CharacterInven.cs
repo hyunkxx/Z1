@@ -26,6 +26,7 @@ public class CharacterInven : UIBase
         {
             Slots[i] = CharacterInvenContents.transform.GetChild(i).gameObject;
             CharacterInvenContents.transform.GetChild(i).GetComponent<Button>().onClick.AddListener(OnClickCharacterSlot);
+            GetButton((int)Buttons.CharacterInven_Close_btn).onClick.AddListener(()=> { GetGameObject((int)GameObjects.CharacterInven_Panel).SetActive(false); });
         }
 
         CurSlot = Slots[0];
@@ -64,18 +65,15 @@ public class CharacterInven : UIBase
         }
     }
 
-    public float targetVisualSize = 64f; // 모든 캐릭터가 이 크기로 보이게
+    public float targetVisualSize = 64f;
 
     public void SetSprite(Sprite newSprite)
     {
-        // 스프라이트의 실제 크기 (픽셀 단위)
         Vector2 spriteSize = newSprite.rect.size;
 
-        // 비율 계산 (가장 긴 쪽 기준)
         float maxAxis = Mathf.Max(spriteSize.x, spriteSize.y);
         float scale = targetVisualSize / maxAxis;
 
-        // UI 이미지 사이즈 조정 
         Vector2 newSize = (spriteSize * scale) * 5.5f;
         GetImage((int)Images.CharacterEquip_Character_Img).rectTransform.sizeDelta = new Vector2(newSize.x, newSize.x);
     }

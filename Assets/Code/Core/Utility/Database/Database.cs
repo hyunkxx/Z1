@@ -57,13 +57,19 @@ public class Database : Singleton<Database>
         /* Test Data */
         TestCharcterList.Add(new TestCharacterData(1000, "Backsu", (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Character/1000/character_1000.png", typeof(Sprite))));
         TestCharcterList.Add(new TestCharacterData(1001, "Vampire", (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Character/1001/character_1001.png", typeof(Sprite))));
-        TestItemTable.Add(100001, new TestItemData(100001, "TestWeapon01", TestItemType.None, (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Character/1001/character_1001.png", typeof(Sprite))));
-        TestItemTable.Add(100001, new TestItemData(100001, "TestWeapon02", TestItemType.None, (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Character/1001/character_1001.png", typeof(Sprite))));
-        TestItemTable.Add(100001, new TestItemData(100001, "TestArmor01", TestItemType.None, (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Character/1001/character_1001.png", typeof(Sprite))));
-        TestItemTable.Add(100001, new TestItemData(100001, "TestArmor02", TestItemType.None, (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Character/1001/character_1001.png", typeof(Sprite))));
-        TestItemTable.Add(100001, new TestItemData(100001, "TestHelmet01", TestItemType.None, (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Character/1001/character_1001.png", typeof(Sprite))));
-        TestItemTable.Add(100001, new TestItemData(100001, "TestHelmet02", TestItemType.None, (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Character/1001/character_1001.png", typeof(Sprite))));
+        TestItemTable.Add(100001, new TestItemData(100001, "TestWeapon01", TestItemType.None, (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Weapon/AxeLong1.png", typeof(Sprite))));
+        TestItemTable.Add(100002, new TestItemData(100002, "TestWeapon02", TestItemType.None, (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Weapon/AxeNormal1.png", typeof(Sprite))));
+        TestItemTable.Add(100003, new TestItemData(100003, "TestArmor01", TestItemType.None, (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Weapon/Normal_Armor1.png", typeof(Sprite))));
+        TestItemTable.Add(100004, new TestItemData(100004, "TestArmor02", TestItemType.None, (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Weapon/Normal_Cloth1.png", typeof(Sprite))));
+        TestItemTable.Add(100005, new TestItemData(100005, "TestHelmet01", TestItemType.None, (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Weapon/Normal_Helmet1.png", typeof(Sprite))));
+        TestItemTable.Add(100006, new TestItemData(100006, "TestHelmet02", TestItemType.None, (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Weapon/Normal_Helmet2.png", typeof(Sprite))));
+        TestInvenList.Add(TestItemTable[100001]);
+        TestInvenList.Add(TestItemTable[100001]);
+        TestInvenList.Add(TestItemTable[100002]);
+        TestInvenList.Add(TestItemTable[100005]);
+        TestInvenList.Add(TestItemTable[100006]);
     }
+
     public void OnCopyComplete(bool bSuccessful)
     {
         Debug.Log(bSuccessful);
@@ -103,10 +109,12 @@ public class TestCharacterData
     }
 }
 
+[System.Serializable]
 public class TestItemData
 {
     public int ID;
     public string Name;
+    public bool isEquip = false;
     public TestItemType ItemType = TestItemType.None;
     public Sprite sprite;
 

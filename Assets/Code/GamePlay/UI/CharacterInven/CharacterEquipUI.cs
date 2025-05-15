@@ -4,8 +4,10 @@ using UnityEngine.UI;
 public class CharacterEquipUI : UIBase
 {
     public int CurCharacterID = 0;
-    
+
     [SerializeField] private GameObject Contents;
+    private int PrevInvenIndex = 0;
+    private GameObject CurSlot;
     private GameObject[] Slots;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -38,22 +40,31 @@ public class CharacterEquipUI : UIBase
             if (GetButtonName() == Slots[i].name)
             {
                 GetGameObject((int)GameObjects.ItemInven_Panel).SetActive(true);
+                CurSlot = Slots[i];
             }
         }
     }
 
     void UnEquip()
     {
-        // Cur Equip Item = Equip False;
-        // SlotImage.sprite = null
+        // 이전 아이템 장착 해제
+        Database.Instance.TestInvenList[PrevInvenIndex].isEquip = false;
     }
 
-    void Equip(int _itemID)
+    public void Equip(int _itemID, int _invenIdex)
     {
-        UnEquip();
-        // Change Character Equip ItemID = _itemID
+        // Check Other Character 
+        if (PrevInvenIndex == 0)
+            PrevInvenIndex = _invenIdex;
+        else
+            UnEquip();
+
         // inventory Item = Equip True
+        Database.Instance.TestInvenList[_invenIdex].isEquip = true;
         // SlotImage.sprite = inventory Item Sprite
+        CurSlot.transform.GetChild(0).GetComponent<Image>().sprite = Database.Instance.TestInvenList[_invenIdex].sprite;
+
+        PrevInvenIndex = _invenIdex;
     }
 
 }
