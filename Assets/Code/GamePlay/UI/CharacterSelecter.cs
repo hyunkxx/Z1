@@ -49,7 +49,7 @@ public class CharacterSelecter : UIBase
 
     void ActiveSlot()
     {
-        for(int i = 0; i < Database.Instance.TestCharcterList.Count; ++i)
+        for(int i = 0; i < Database.Instance.CharacterAssetData.Count; ++i)
         {
             Slots[i].SetActive(true);
             Slots[i].GetComponent<CharacterSlot>().SetSlotInfo(i);

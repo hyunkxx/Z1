@@ -53,8 +53,8 @@ public class Database : Singleton<Database>
     #endregion
 
     /* TEMP */
-    [SerializedDictionary("Key", "CharacterAssetData")]
-    public SerializedDictionary<int, CharacterAssetData> CharacterAssetData = new SerializedDictionary<int, CharacterAssetData>();
+    [SerializedDictionary("Key", "Character Asset Data")]
+    public SerializedDictionary<int, CharacterAssetData> CharacterAssetData;// = new SerializedDictionary<int, CharacterAssetData>();
 
     /* TABLE SAMPLE */
     private Dictionary<int, ItemData> itemTable = new Dictionary<int, ItemData>();
