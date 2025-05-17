@@ -9,6 +9,8 @@ public class DefenceAIController : MonoBehaviour
     Vector2 curDestination = Vector2.zero;
     int DestinationIndex = 0;
 
+    
+
     private void Start()
     {
         curDestination = DestinationList[DestinationIndex].position;
@@ -22,13 +24,14 @@ public class DefenceAIController : MonoBehaviour
 
     void ChangeDestination()
     {
-        if (Vector2.Distance(transform.position, curDestination) < 0.3f)
+        if (Vector2.Distance(transform.position, curDestination) < 0.5f)
         {
             DestinationIndex++;
 
             if (DestinationIndex == DestinationList.Count)
                 DestinationIndex = 0;
 
+            if(DestinationList.Count > 0)
             curDestination = DestinationList[DestinationIndex].position;
         }
     }

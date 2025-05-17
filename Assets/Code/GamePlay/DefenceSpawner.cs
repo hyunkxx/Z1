@@ -9,7 +9,52 @@ public class DefenceSpawner : SpawnController
 
     void Start()
     {
-        StartCoroutine(Spawn("Defence_Orc", 10));
+        //StartCoroutine(Spawn("Defence_Orc", 10));
+        GameMode mode = GameManager.Instance.GameMode;
+        mode.OnChangeGameState += OnChangeGameState;
+        Initialize();
+
+    }
+
+    private void OnDestroy()
+    {
+        if (GameManager.IsValid())
+        {
+            GameMode mode = GameManager.Instance.GameMode;
+            if (mode)
+            {
+                mode.OnChangeGameState -= OnChangeGameState;
+            }
+        }
+    }
+    private void OnChangeGameState(EGameState state)
+    {
+        switch (state)
+        {
+            case EGameState.ReadyGame:
+                Initialize();
+                break;
+        }
+    }
+
+    void Initialize()
+    {
+        // Input Data
+        AddPool("DefenceMonsterPrefabs/Defence_Orc", 10); // DataPath, Size
+
+        objectPools.FindPools();
+
+        foreach (var pool in objectPools.GetContainer())
+        {
+            StartCoroutine(Spawn(pool.Key, pool.Value.PoolSize));
+        }
+
+    }
+
+    void AddPool(string _monsterPath, int _size)
+    {
+        ObjectPool pool = gameObject.AddComponent<ObjectPool>();
+        pool.InitializePool(Resources.Load<GameObject>(_monsterPath), _size);
     }
 
     void Update()
@@ -30,4 +75,6 @@ public class DefenceSpawner : SpawnController
             yield return new WaitForSeconds(1f);
         }
     }
+
+
 }
