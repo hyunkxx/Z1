@@ -1,5 +1,6 @@
 using UnityEngine;
 
+
 public class Rotator2D : MonoBehaviour
 {
     //[Header("Rotator Property")]
@@ -7,7 +8,6 @@ public class Rotator2D : MonoBehaviour
 
     void Start()
     {
-        
     }
 
     // Update is called once per frame

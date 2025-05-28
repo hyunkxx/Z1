@@ -19,7 +19,7 @@ public class MovementComponent : MonoBehaviour
     [SerializeField] private float maxVelocity = 2.0f;
     EMovementState movementState = EMovementState.None;
 
-    private float ReachedOffset = 0.5f;
+    private float ReachedOffset = 0.01f;
     private Vector2 moveDirection;
     private Vector2 goalLocation;
 
@@ -44,9 +44,7 @@ public class MovementComponent : MonoBehaviour
                 ApplyMovementForce();
                 break;
             case EMovementState.PositionalMovement:
-                if (HasReachedLocation())
-                    ResetMovement();
-                else
+                if (!HasReachedLocation())
                     ApplyMovementForce();
                 break;
             default:
@@ -60,6 +58,7 @@ public class MovementComponent : MonoBehaviour
     }
     public void ResetMovement()
     {
+        rg2d.linearVelocity = Vector2.zero;
         movementState = EMovementState.None;
         moveDirection = Vector2.zero;
         goalLocation = Vector2.zero;
@@ -87,6 +86,7 @@ public class MovementComponent : MonoBehaviour
 
         if (Reached)
         {
+            ResetMovement();
             movementState = EMovementState.Reached;
             OnReachedCallback?.Invoke();
         }

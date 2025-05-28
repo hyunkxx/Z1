@@ -35,6 +35,7 @@ public class DamageFont : MonoBehaviour
         Vector3 origin = transform.position;
         Color color = text.color;
 
+        /* @hyun:todo 애니메이션으로 바꿔라 */
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;

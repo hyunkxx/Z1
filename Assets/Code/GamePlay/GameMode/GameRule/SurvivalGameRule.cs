@@ -52,7 +52,7 @@ public class SurvivalGameRule
 
     private bool SpawnCharacter(Vector3 location)
     {
-        var AssetData = Database.Instance.CharacterAssetData.GetValueOrDefault(CharacterID);
+        var AssetData = Database.Instance.FindCharacterAsset(CharacterID);
         if (!AssetData)
             return false;
 

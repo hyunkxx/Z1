@@ -48,17 +48,23 @@ public class Database : Singleton<Database>
     public Dictionary<int, TestCharacterData> TestCharcterList = new Dictionary<int, TestCharacterData>();
     public Dictionary<int, TestItemData> TestItemTable = new Dictionary<int, TestItemData>();
     public List<TestItemData> TestInvenList = new List<TestItemData>();
-
     #endregion
 
     /* TEMP */
-    [SerializedDictionary("Key", "Character Asset Data")]
-    public SerializedDictionary<int, CharacterAssetData> CharacterAssetData;
-    public SerializedDictionary<string, RoundAssetData> DefenseRoundAssetData;
+    [SerializeField, SerializedDictionary("Key", "Character Data Asset")]
+    private SerializedDictionary<int, CharacterDataAsset> _characterDataAssets;
+    public int CharacterAssetCount => _characterDataAssets.Count;
+
+    [SerializeField, SerializedDictionary("Key", "Item Data Asset")]
+    private SerializedDictionary<int, ItemDataAsset> _itemDataAssets;
+    public int ItemAssetCount => _itemDataAssets.Count;
 
     /* TABLE SAMPLE */
     private Dictionary<int, ItemData> itemTable = new Dictionary<int, ItemData>();
     public IReadOnlyDictionary<int, ItemData> ItemTable => itemTable;
+
+    public CharacterDataAsset FindCharacterAsset(int ID) { return _characterDataAssets.GetValueOrDefault(ID); }
+    public ItemDataAsset FindItemAsset(int ID) { return _itemDataAssets.GetValueOrDefault(ID); }
 
     protected override void Awake()
     {

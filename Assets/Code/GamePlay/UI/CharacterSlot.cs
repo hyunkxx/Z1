@@ -17,11 +17,11 @@ public class CharacterSlot : MonoBehaviour
 
     public void SetSlotInfo(int _index)
     {
-        CharacterAssetData assetData = Database.Instance.CharacterAssetData.GetValueOrDefault(1000 + _index);
+        CharacterDataAsset data = Database.Instance.FindCharacterAsset(1000 + _index);
 
-        CharacterID = assetData.CharacterID;
-        CharacterName = assetData.Name;
-        CharacterImage.sprite = assetData.Sprite;
+        CharacterID = data.CharacterID;
+        CharacterName = data.Name;
+        CharacterImage.sprite = data.Sprite;
     }
 
     public void ActiveFocus()

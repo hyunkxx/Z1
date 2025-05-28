@@ -16,8 +16,8 @@ public class CharacterStats : MonoBehaviour
     [SerializeField] protected float curExp;
     [SerializeField] protected float maxExp;
 
-    private event Action<int> OnLevelupEvent;
-    private event Action<GameObject> OnDieEvent;
+    public event Action<int> OnLevelupEvent;
+    public event Action<GameObject> OnDieEvent;
 
     public int CurLevel => curLevel;
     public int MaxLevel => maxLevel;

@@ -700,7 +700,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DatabasePath: Database/GameDatabase.db
   TestInvenList: []
-  CharacterAssetData:
+  _characterDataAssets:
     _serializedList:
     - Key: 1000
       Value: {fileID: 11400000, guid: 9a3888be8f58885438dfd1529677b30e, type: 2}
@@ -710,6 +710,10 @@ MonoBehaviour:
     _serializedList:
     - Key: Easy
       Value: {fileID: 11400000, guid: ab2071f91d7cec647975e8868580eb28, type: 2}
+  _itemDataAssets:
+    _serializedList:
+    - Key: 0
+      Value: {fileID: 11400000, guid: 2c05242662bd3f64b820b178b5c32384, type: 2}
 --- !u!1 &1049300532
 GameObject:
   m_ObjectHideFlags: 0
@@ -935,6 +939,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28ef09e0260ebd045a65cf053bf05f03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2056151099
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2056151100}
+  - component: {fileID: 2056151101}
+  m_Layer: 0
+  m_Name: TEST_DATA_LOG
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2056151100
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2056151099}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2056151101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2056151099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 380d6b5dc62145e449fc98f152064724, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -945,3 +993,4 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 619394802}
   - {fileID: 342392156}
+  - {fileID: 2056151100}

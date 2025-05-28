@@ -1,8 +1,12 @@
+using NUnit.Framework;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "CharacterAssetData", menuName = "Scriptable Objects/Data/CharacterAssetData")]
-public class CharacterAssetData : ScriptableObject
+[CreateAssetMenu(fileName = "CharacterDataAsset", menuName = "Scriptable Objects/DataAsset/CharacterDataAsset")]
+public class CharacterDataAsset : ScriptableObject
 {
     [SerializeField] private int _characterID;
     [SerializeField] private string _name;
@@ -13,4 +17,4 @@ public class CharacterAssetData : ScriptableObject
     public string Name => _name;
     public string PrefabKey => _prefabKey;
     public Sprite Sprite => _sprite;
-}   
+}
