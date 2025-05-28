@@ -51,13 +51,16 @@ public class Database : Singleton<Database>
     #endregion
 
     /* TEMP */
-    [SerializeField, SerializedDictionary("Key", "Character Data Asset")]
+    [SerializeField, SerializedDictionary("Key", "Character DataAsset")]
     private SerializedDictionary<int, CharacterDataAsset> _characterDataAssets;
     public int CharacterAssetCount => _characterDataAssets.Count;
 
-    [SerializeField, SerializedDictionary("Key", "Item Data Asset")]
+    [SerializeField, SerializedDictionary("Key", "Item DataAsset")]
     private SerializedDictionary<int, ItemDataAsset> _itemDataAssets;
     public int ItemAssetCount => _itemDataAssets.Count;
+
+    [SerializeField, SerializedDictionary("Key", "Defense Round DataAsset")]
+    public SerializedDictionary<string, RoundAssetData> DefenseRoundAssetData;
 
     /* TABLE SAMPLE */
     private Dictionary<int, ItemData> itemTable = new Dictionary<int, ItemData>();
