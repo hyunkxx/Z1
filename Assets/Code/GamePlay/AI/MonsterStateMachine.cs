@@ -16,7 +16,6 @@ public class MonsterStateMachine : MonoBehaviour
     private void Awake()
     {
         LinkedSMB<MonsterStateMachine>.Initialize(animator, this);
-        //AddLastKeyframeEvent();
     }
 
     public void Initialize()

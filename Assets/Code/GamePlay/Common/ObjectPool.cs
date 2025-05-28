@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class ObjectPool : MonoBehaviour
 {
@@ -32,6 +34,18 @@ public class ObjectPool : MonoBehaviour
 
     }
 
+    public void LoadPoolData(string _prefabKey, int _size, Action _loadedComplete)
+    {
+        Addressables.InstantiateAsync(_prefabKey, Vector3.zero, Quaternion.identity).Completed += (handle) =>
+        {
+            if (handle.Status == AsyncOperationStatus.Succeeded)
+            {
+                InitializePool(handle.Result.gameObject, _size);
+                _loadedComplete?.Invoke();
+            }
+        };
+    }
+
     public void InitializePool(GameObject _obj, int _count)
     {
         sourcePrefab = _obj;
@@ -41,7 +55,7 @@ public class ObjectPool : MonoBehaviour
         CreatePool();
     }
 
-    void CreatePool()
+    public void CreatePool()
     {
         objectPool = new Queue<GameObject>();
         poolHolder = new GameObject($"{sourcePrefab.name}_Pool");

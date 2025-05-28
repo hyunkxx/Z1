@@ -11,7 +11,6 @@ using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 using AYellowpaper.SerializedCollections;
 using Unity.VisualScripting;
 
-
 /* temp struct */
 public class ItemData : IDatabaseModel<ItemData>
 {
@@ -55,6 +54,7 @@ public class Database : Singleton<Database>
     /* TEMP */
     [SerializedDictionary("Key", "Character Asset Data")]
     public SerializedDictionary<int, CharacterAssetData> CharacterAssetData;
+    public SerializedDictionary<string, RoundAssetData> DefenseRoundAssetData;
 
     /* TABLE SAMPLE */
     private Dictionary<int, ItemData> itemTable = new Dictionary<int, ItemData>();

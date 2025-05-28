@@ -15,6 +15,16 @@ MonoBehaviour:
   m_GroupName: PreLoad
   m_GUID: 27d940c126288bc418a010a4e7df7746
   m_SerializeEntries:
+  - m_GUID: ab16cf3d12cde4f40ae12ef67211fdc5
+    m_Address: Assets/Level/Prefabs/Monster/Defence/Defence_Orc.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ee2c87aac17c0544c958012d82035a05
+    m_Address: DefenceMonsterPrefabs/Defence_Orc
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: febb501f9ce63e5448c333eabb8965cc
     m_Address: Sprite_BaekSu
     m_ReadOnly: 0

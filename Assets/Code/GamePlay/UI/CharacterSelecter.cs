@@ -12,17 +12,8 @@ public class CharacterSelecter : UIBase
 
     public int SelectCharacterID { get; private set; }
 
-    public void ActiveButton(bool value)
-    {
-        //GetButton((int)Buttons.CharacterSelect_Back_btn).gameObject.SetActive(value);
-        GridUpdate();
-    }
-
-    
     private void Awake()
     {
-        //GetButton((int)Buttons.CharacterSelect_Back_btn).onClick.AddListener(PanelBackAction);
-        // GetButton((int)Buttons.CharacterSelect_btn).onClick.AddListener(PanelBackAction);
         GetButton((int)Buttons.CharacterSelect_btn).onClick.AddListener(OnClickSelectButton);
 
         int ContentsSize = GetGameObject((int)GameObjects.CharacterSelectContents).transform.childCount;
@@ -41,11 +32,9 @@ public class CharacterSelecter : UIBase
 
     void Start()
     {
-        //GridUpdate();
         ActiveSlot();
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -74,49 +63,6 @@ public class CharacterSelecter : UIBase
             }
         }
     }
-
-    private void GridUpdate()
-    {
-        float scrollWidth = ScrollView.GetComponent<RectTransform>().rect.width;
-        float scrollHeight = ScrollView.GetComponent<RectTransform>().rect.height;
-
-        float slotWidth = CurSlot.GetComponent<RectTransform>().rect.width;
-        float slotHeight = CurSlot.GetComponent<RectTransform>().rect.height;
-
-
-        int ContentsSize = GetGameObject((int)GameObjects.CharacterSelectContents).transform.childCount;
-        int RowSize = (int)((scrollWidth * 0.8f) / slotWidth)+1;
-        int Rowcnt = 1;
-
-        float positionX = scrollWidth * 0.05f + slotWidth * 0.5f;
-        float positionY = -slotHeight * 0.7f;
-
-
-        Vector3 position = new Vector3(positionX,positionY,0);
-
-        CurSlot.GetComponent<RectTransform>().localPosition = position;
-        for (int i = 0; i < ContentsSize; ++i)
-        {
-            if (Slots[i] == CurSlot)
-                continue;
-
-            if(Rowcnt == RowSize)
-            {
-                Rowcnt = 0;
-                positionY -= (slotHeight * 1.2f);
-                position.y = positionY;
-            }
-            position.x = positionX + ((slotWidth + (scrollWidth *0.1f)/(RowSize))* Rowcnt);
-            ++Rowcnt;
-            Slots[i].GetComponent<RectTransform>().localPosition = position;
-             
-        }
-
-        
-        Vector2 vec2 = new Vector2(0, -position.y + slotHeight);
-        GetGameObject((int)GameObjects.CharacterSelectContents).GetComponent<RectTransform>().sizeDelta = vec2;
-    }
-
 
     void OnClickSelectButton()
     {

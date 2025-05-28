@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 932a9037eb67e0b4e8757b1817b3914e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actionName: 
+  actionName: Lightning01
   EffectPrefab: {fileID: 3797684433542849519, guid: 168187d4be14fe649b61410e4b9a282d, type: 3}
   attackDelay: 10
   baseAttackDelay: 10

@@ -1,32 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class DefenceSpawner : SpawnController
 {
     public Transform SpawnPos;
     public List<Transform> DestinationList = new List<Transform>();
+    private RoundAssetData roundData;
+
+    private GameMode gameMode;
 
     void Start()
     {
-        //StartCoroutine(Spawn("Defence_Orc", 10));
-        GameMode mode = GameManager.Instance.GameMode;
-        mode.OnChangeGameState += OnChangeGameState;
-        Initialize();
-
+        gameMode = GameManager.Instance.GameMode;
+        gameMode.OnChangeGameState += OnChangeGameState;
     }
 
     private void OnDestroy()
     {
         if (GameManager.IsValid())
         {
-            GameMode mode = GameManager.Instance.GameMode;
-            if (mode)
+            if (gameMode)
             {
-                mode.OnChangeGameState -= OnChangeGameState;
+                gameMode.OnChangeGameState -= OnChangeGameState;
             }
         }
     }
+
     private void OnChangeGameState(EGameState state)
     {
         switch (state)
@@ -34,27 +36,24 @@ public class DefenceSpawner : SpawnController
             case EGameState.ReadyGame:
                 Initialize();
                 break;
+            case EGameState.EnterGame:
+                StartGame();
+                break;
         }
     }
 
     void Initialize()
     {
-        // Input Data
-        AddPool("DefenceMonsterPrefabs/Defence_Orc", 10); // DataPath, Size
+        objectPools.FindPools();  
+    }
 
-        objectPools.FindPools();
-
+    void StartGame()
+    {
         foreach (var pool in objectPools.GetContainer())
         {
             StartCoroutine(Spawn(pool.Key, pool.Value.PoolSize));
         }
 
-    }
-
-    void AddPool(string _monsterPath, int _size)
-    {
-        ObjectPool pool = gameObject.AddComponent<ObjectPool>();
-        pool.InitializePool(Resources.Load<GameObject>(_monsterPath), _size);
     }
 
     void Update()

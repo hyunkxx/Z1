@@ -1,0 +1,139 @@
+using UnityEngine;
+using System.Collections;
+using Unity.VisualScripting;
+using System.Collections.Generic;
+using System;
+
+public class DefenceGameRule
+    : GameRule
+{
+    [SerializeField]
+    GameObject Spawner;
+
+    public string CurMode = "Easy";
+    private float WaitTime = 10f;
+    private float RoundTime = 30f;
+    private int FullLife = 20;
+    private int CurLife = 0;
+    private int Round = 0;
+    private int EndRound = 5;
+
+    Action OnLoadedComplete;
+    private int MaxLoadingCount = 0;
+    private int CurLoadingCount = 0;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        CurMode = GameManager.Instance.Payload;
+
+        _gameMode.OnChangeGameState += OnChangeGameState;
+        _gameMode.ChangeGameState(EGameState.LoadGame);
+    }
+
+
+    protected override void Start()
+    {
+        base.Start();
+
+
+        CurLife = FullLife;
+        StartCoroutine(RoundCheck());
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+        SetLife();
+    }
+
+    private void WinGame()
+    {
+        Debug.Log("Win");
+    }
+
+    private void LoseGame()
+    {
+        Debug.Log("Lose");
+    }
+
+    private IEnumerator RoundCheck()
+    {
+        yield return new WaitForSeconds(WaitTime);          //라운드대기시간
+
+        if(CurLife <= 0)
+        {
+            LoseGame();
+            yield break;
+        }
+
+        ++Round;
+        //Spawner.Spawn(Round) // 이부분에 라운드 받아서 몬스터 스폰
+
+        yield return new WaitForSeconds(RoundTime);     //디펜스시간
+
+        if(Round > EndRound)
+        {
+            WinGame();
+            yield break;
+        }
+    }
+
+    private void SetLife()
+    {
+        //CurLife = FullLife - Spawner.GetMonsterSize(); //스포너에서 몬스터사이즈받아와서 빼기
+    }
+
+    private void OnChangeGameState(EGameState state)
+    {
+        switch (state)
+        {
+            case EGameState.LoadGame:
+                LoadSceneData();
+                break;
+            case EGameState.ReadyGame:
+                Initialize();
+                StartCoroutine(Timer(5f, () => _gameMode.ChangeGameState(EGameState.EnterGame)));
+                break;
+            case EGameState.EnterGame:
+                break;
+        }
+    }
+
+    void LoadSceneData()
+    {
+        // Input Data
+        RoundAssetData roundData = Database.Instance.DefenseRoundAssetData.GetValueOrDefault(CurMode);
+        
+        for (int i = 1; i <= roundData.Round.Count; ++i)
+        {
+            foreach (var data in roundData.Round[i - 1]._monsterSpawnData)
+            {
+                MaxLoadingCount++;
+                ObjectPool pool = Spawner.AddComponent<ObjectPool>();
+                pool.LoadPoolData(data.Key, data.Value, ()=> 
+                { 
+                    CurLoadingCount++; if(MaxLoadingCount == CurLoadingCount) _gameMode.ChangeGameState(EGameState.ReadyGame); 
+                });
+            }
+        }
+    }
+
+    void Initialize()
+    {
+
+    }
+
+    IEnumerator Timer(float _time, Action _action)
+    {
+        while (_time >= 0f)
+        {
+            _time -= 0.1f;
+
+            if (_time < 0)
+                _action?.Invoke();
+
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+}

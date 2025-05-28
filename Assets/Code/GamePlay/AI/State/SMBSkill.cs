@@ -12,7 +12,7 @@ public class SMBSkill : LinkedSMB<MonsterStateMachine>
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //monobeHaviour.CheckAnimationEnd("Skill0", "isSkill0");
+
     }
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

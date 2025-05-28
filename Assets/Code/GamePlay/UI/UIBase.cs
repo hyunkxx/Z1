@@ -28,6 +28,7 @@ public class UIBase : MonoBehaviour
     {
         //Main_Panel,
         PlayPanel,
+        Defence_ModeSelect_Panel,
         Defence_Ready_Panel,
         Survival_Ready_Panel,
         CharacterSelect_Panel,
@@ -35,6 +36,7 @@ public class UIBase : MonoBehaviour
         CharacterInven_Panel,
         ItemInven_Panel,
         SelectItem_Panel,
+        //Popup_Panel,
     }
 
     protected enum Buttons
@@ -56,6 +58,7 @@ public class UIBase : MonoBehaviour
         //Defence_Ready_Panel
         Defence_Ready_Play_btn,
         Defence_Ready_Back_btn,
+        Defence_ModeSelect_Back_btn,
 
         //CharacterSelect_Panel
         CharacterSelect_btn,
@@ -65,6 +68,9 @@ public class UIBase : MonoBehaviour
         ItemInven_Close_btn,
         ItemInven_Sort_btn,
 
+        //Popup_Panel
+        //Popup_Func_btn,
+        //Popup_Close_btn,
 
     }
 
@@ -75,6 +81,9 @@ public class UIBase : MonoBehaviour
 
     protected enum TextMeshPros
     {
+        //Popup_Panel
+        //Popup_Title_txt,
+        //Popup_Des,txt,
 
     }
 
@@ -256,5 +265,39 @@ public class UIBase : MonoBehaviour
 
     }
 
+    //public void ShowPopUp(Action _action, string _setTitleText, string _setDesText)
+    //{
+    //    GetButton((int)Buttons.Popup_Func_btn).onClick.RemoveAllListeners();
+    //    GetButton((int)Buttons.Popup_Close_btn).onClick.RemoveAllListeners();
 
+    //    GetGameObject((int)GameObjects.Popup_Panel).SetActive(true); GetButton((int)Buttons.Popup_Close_btn).gameObject.SetActive(true); GetButton((int)Buttons.Popup_Func_btn).gameObject.SetActive(true);
+
+    //    GetButton((int)Buttons.Popup_Close_btn).onClick.AddListener(() =>
+    //    {
+    //        GetGameObject((int)GameObjects.Popup_Panel).SetActive(false); GetButton((int)Buttons.Popup_Close_btn).gameObject.SetActive(false); GetButton((int)Buttons.Popup_Func_btn).gameObject.SetActive(false);
+    //        //SoundManager.instance.PlayBGM(SoundManager.instance.BGMAudio_0, SoundManager.instance.BackButtonClip);
+    //    });
+    //    GetTextMeshPro((int)TextMeshPros.Popup_Title_txt).text = _setTitleText;
+    //    GetTextMeshPro((int)TextMeshPros.Popup_Des).text = _setDesText;
+    //    GetButton((int)Buttons.Popup_Func_btn).onClick.AddListener(() => { GetGameObject((int)GameObjects.Popup_Panel).SetActive(false); GetButton((int)Buttons.Popup_Close_btn).gameObject.SetActive(false); GetButton((int)Buttons.Popup_Func_btn).gameObject.SetActive(false); _action(); });
+    //}
+
+    //public void ShowPopUp(Action _action, Action _Adsaction, Button _AdsFuncButton, string _setTitleText, string _setDesText)
+    //{
+    //    GetButton((int)Buttons.Popup_Func_btn).onClick.RemoveAllListeners();
+    //    _AdsFuncButton.onClick.RemoveAllListeners();
+    //    GetButton((int)Buttons.Popup_Close_btn).onClick.RemoveAllListeners();
+
+    //    GetGameObject((int)GameObjects.Popup_Panel).SetActive(true); GetButton((int)Buttons.Popup_Close_btn).gameObject.SetActive(true); GetButton((int)Buttons.Popup_Func_btn).gameObject.SetActive(true); _AdsFuncButton.gameObject.SetActive(true);
+
+    //    GetButton((int)Buttons.Popup_Close_btn).onClick.AddListener(() =>
+    //    {
+    //        GetGameObject((int)GameObjects.Popup_Panel).SetActive(false); GetButton((int)Buttons.Popup_Close_btn).gameObject.SetActive(false); GetButton((int)Buttons.Popup_Func_btn).gameObject.SetActive(false);
+    //        //SoundManager.instance.PlayBGM(SoundManager.instance.BGMAudio_0, SoundManager.instance.BackButtonClip);
+    //    });
+    //    GetTextMeshPro((int)TextMeshPros.Popup_Title_txt).text = _setTitleText;
+    //    GetTextMeshPro((int)TextMeshPros.Popup_Des).text = _setDesText;
+    //    GetButton((int)Buttons.Popup_Func_btn).onClick.AddListener(() => { GetGameObject((int)GameObjects.Popup_Panel).SetActive(false); GetButton((int)Buttons.Popup_Close_btn).gameObject.SetActive(false); GetButton((int)Buttons.Popup_Func_btn).gameObject.SetActive(false); _AdsFuncButton.gameObject.SetActive(false); _action(); });
+    //    _AdsFuncButton.onClick.AddListener(() => { GetGameObject((int)GameObjects.Popup_Panel).SetActive(false); GetButton((int)Buttons.Popup_Close_btn).gameObject.SetActive(false); GetButton((int)Buttons.Popup_Func_btn).gameObject.SetActive(false); _AdsFuncButton.gameObject.SetActive(false); _Adsaction(); });
+    //}
 }

@@ -9,6 +9,7 @@ using Unity.VisualScripting;
 public enum EGameState
 {
     None,
+    LoadGame,
     ReadyGame,
     EnterGame,
     ExitGame,
