@@ -38,8 +38,6 @@ public sealed class ItemEquipmentData : ItemDataAsset
 
     public void OnEnable()
     {
-        StackLimit = 1;
-        IsAllowStack = false;
         Category = EItemCategory.Equipment;
     }
 

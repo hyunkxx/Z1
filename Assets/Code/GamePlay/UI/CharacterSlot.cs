@@ -14,7 +14,6 @@ public class CharacterSlot : MonoBehaviour
         return CharacterImage.sprite;
     }
 
-
     public void SetSlotInfo(int _index)
     {
         CharacterDataAsset data = Database.Instance.FindCharacterAsset(1000 + _index);

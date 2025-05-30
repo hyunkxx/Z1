@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Color_ICON_Crystal-Blue-001_0: 2396570783044379588
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -6,7 +6,6 @@ using System.IO;
 using System.Windows.Input;
 using Mono.Data.Sqlite;
 
-
 using UnityEngine;
 
 
@@ -37,7 +36,7 @@ public sealed class DatabaseService : IDisposable
         {
             command.CommandType = CommandType.Text;
             command.CommandText = query;
-
+            
             foreach (var param in parameters)
             {
                 IDbDataParameter dbParam = command.CreateParameter();
@@ -67,6 +66,21 @@ public sealed class DatabaseService : IDisposable
         return ExcuteReader(command);
     }
 
+    public bool TableExists(string tableName)
+    {
+        using (var cmd = connection.CreateCommand())
+        {
+            cmd.CommandText = "SELECT name FROM sqlite_master WHERE type='table' AND name=@tableName;";
+            var param = cmd.CreateParameter();
+            param.ParameterName = "@tableName";
+            param.Value = tableName;
+            cmd.Parameters.Add(param);
+
+            var result = cmd.ExecuteScalar();
+            return result != null && result != DBNull.Value;
+        }
+    }
+
     public T GetDataClass<T>(int id, params object[] args) where T : IDatabaseModel<T>, new()
     {
         T obj = new T();
@@ -86,7 +100,7 @@ public sealed class DatabaseService : IDisposable
             {
                 if (reader.Read())
                 {
-                    obj.Initialize(reader, args);
+                    obj.Deserialize(reader, args);
                 }
             }
         }
@@ -108,7 +122,7 @@ public sealed class DatabaseService : IDisposable
                 while (reader.Read())
                 {
                     T obj = new T();
-                    obj.Initialize(reader, args);
+                    obj.Deserialize(reader, args);
                     objList.Add(obj);
                 }
             }

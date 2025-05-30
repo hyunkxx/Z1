@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      ItemFrame_02_Focus_Yellow_0: -2004272485169586324
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

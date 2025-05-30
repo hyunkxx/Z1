@@ -18,27 +18,21 @@ public class ItemData : IDatabaseModel<ItemData>
     public int id { get; private set; }
     public int data { get; private set; }
 
-    public virtual void Initialize(IDataRecord record, params object[] args)
+    public void Deserialize(IDataRecord record, params object[] args)
     {
         name = record.GetString(0);
         id = record.GetInt32(1);
         data = record.GetInt32(2);
     }
 
-    public ItemData Clone()
+    public void Serialize(IDbCommand command)
     {
-        ItemData clone = new ItemData();
-        clone.name = name;
-        clone.id = id;
-        clone.data = data;
-
-        return clone;
     }
 }
 
 public class Database : Singleton<Database>
 {
-    private DatabaseService databaseService;
+    public DatabaseService databaseService;
 
     [SerializeField]
     private string DatabasePath = "Database/GameDatabase.db";
@@ -66,8 +60,16 @@ public class Database : Singleton<Database>
     private Dictionary<int, ItemData> itemTable = new Dictionary<int, ItemData>();
     public IReadOnlyDictionary<int, ItemData> ItemTable => itemTable;
 
+    /* INVENTORY */
+    public Inventory Inventory { get; private set; }
+
     public CharacterDataAsset FindCharacterAsset(int ID) { return _characterDataAssets.GetValueOrDefault(ID); }
     public ItemDataAsset FindItemAsset(int ID) { return _itemDataAssets.GetValueOrDefault(ID); }
+
+    public bool TableExists(string TableName)
+    {
+        return databaseService.TableExists(TableName);
+    }
 
     protected override void Awake()
     {
@@ -77,7 +79,24 @@ public class Database : Singleton<Database>
         string persistentDBPath = Path.Combine(Application.persistentDataPath, DatabasePath);
         Debug.Log(persistentDBPath);
 
-        AssetDuplicator.CopyFile(streamingDBPath, persistentDBPath, OnCopyComplete);
+        if (File.Exists(persistentDBPath))
+        {
+            BuildVersion streamingVersion = ReadBuildVersion(streamingDBPath);
+            BuildVersion persistentVersion = ReadBuildVersion(persistentDBPath);
+
+            if(streamingVersion < persistentVersion)
+            {
+                PostInitialize($"URI=file:{persistentDBPath}");
+            }
+            else
+            {
+                AssetDuplicator.CopyFile(streamingDBPath, persistentDBPath, OnCopyComplete);
+            }
+        }
+        else
+        {
+            AssetDuplicator.CopyFile(streamingDBPath, persistentDBPath, OnCopyComplete);
+        }
 
         /* Test Data */
         TestCharcterList.Add(1000, new TestCharacterData(1000, "Backsu", (Sprite)UnityEditor.AssetDatabase.LoadAssetAtPath($"Assets/Art/Character/1000/character_1000.png", typeof(Sprite))));
@@ -99,13 +118,96 @@ public class Database : Singleton<Database>
     {
         string persistentPath = Path.Combine(Application.persistentDataPath, DatabasePath);
         string connectionPath = $"URI=file:{persistentPath}";
+        PostInitialize(connectionPath);
+
+        using (IDbCommand command = databaseService.Connection.CreateCommand())
+        {
+            BuildVersion version = new BuildVersion(1);
+
+            string query = "INSERT OR REPLACE INTO BuildVersion (ID, Dirty, AppVersion) VALUES (@ID, @Dirty, @AppVersion);";
+            command.CommandType = CommandType.Text;
+            command.CommandText = query;
+
+            version.Serialize(command);
+            command.ExecuteNonQuery();
+        }
+    }
+
+    private void PostInitialize(string connectionPath)
+    {
         databaseService = new DatabaseService(connectionPath);
+        Inventory = new Inventory(new Vector2Int(5, 5));
 
         /* generate cache */
         List<ItemData> itemList = databaseService.GetDataClassList<ItemData>();
         foreach (ItemData item in itemList)
         {
             itemTable.Add(item.id, item);
+        }
+
+    }
+
+    public BuildVersion ReadBuildVersion(string dbPath)
+    {
+        using (var service = new DatabaseService($"URI=file:{dbPath}"))
+        {
+            using (IDbConnection connection = service.Connection)
+            {
+                if (!service.TableExists("BuildVersion"))
+                {
+                    string CreateQuery = $@"
+                    CREATE TABLE IF NOT EXISTS BuildVersion (
+                        ID INTEGER PRIMARY KEY,
+                        Dirty INTEGER DEFAULT 0,
+                        AppVersion TEXT DEFAULT '{Application.version}'
+                    );";
+
+                    using (IDbCommand command = service.Connection.CreateCommand())
+                    {
+                        command.CommandType = CommandType.Text;
+                        command.CommandText = CreateQuery;
+                        command.ExecuteNonQuery();
+                    }
+
+                    string query = "INSERT OR REPLACE INTO BuildVersion (ID, Dirty, AppVersion) VALUES (@ID, @Dirty, @AppVersion);";
+                    using (var command = connection.CreateCommand())
+                    {
+                        BuildVersion version = new BuildVersion(0);
+
+                        command.CommandType = CommandType.Text;
+                        command.CommandText = query;
+
+                        version.Serialize(command);
+                        command.ExecuteNonQuery();
+                    }
+                }
+
+                return service.GetDataClass<BuildVersion>(0);
+            }
+        }
+    }
+
+    protected override void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Inventory.TryAddItem(0, 3);
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            Inventory.SaveInventory();
+        }
+
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            Inventory.LoadInventory();
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Inventory.TEMP();
         }
     }
 

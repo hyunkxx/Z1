@@ -15,16 +15,15 @@ public class DefenceGameRule
     RoundAssetData roundData;
 
     public string CurMode = "Easy";
-    private float WaitTime = 10f;
     private float RoundTime = 10f;
     private int FullLife = 20;
     private int CurLife = 0;
     private int Round = 0;
     private int EndRound = 5;
 
-    private int HaveGreenStoneCount = 0;
-    private int HaveBlueStoneCount = 0;
-    private int HaveRedStoneCount = 0;
+    //private int HaveGreenStoneCount = 0;
+    //private int HaveBlueStoneCount = 0;
+    //private int HaveRedStoneCount = 0;
 
     private int MaxLoadingCount = 0;
     private int CurLoadingCount = 0;

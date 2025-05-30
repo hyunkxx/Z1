@@ -11,6 +11,6 @@ using UnityEngine;
 
 public interface IDatabaseModel<T>
 {
-    public void Initialize(IDataRecord record, params object[] args);
-    public T Clone();
+    public void Serialize(IDbCommand command);
+    public void Deserialize(IDataRecord record, params object[] args);
 }
