@@ -8,19 +8,31 @@ public class DefenceGameRule
     : GameRule
 {
     [SerializeField]
-    GameObject Spawner;
+    public DefenceSpawner Spawner;
+
+    public Action NextRoundAction;
+
+    RoundAssetData roundData;
 
     public string CurMode = "Easy";
     private float WaitTime = 10f;
-    private float RoundTime = 30f;
+    private float RoundTime = 10f;
     private int FullLife = 20;
     private int CurLife = 0;
     private int Round = 0;
     private int EndRound = 5;
 
-    Action OnLoadedComplete;
+    private int HaveGreenStoneCount = 0;
+    private int HaveBlueStoneCount = 0;
+    private int HaveRedStoneCount = 0;
+
     private int MaxLoadingCount = 0;
     private int CurLoadingCount = 0;
+
+    public float round => Round;
+    public float roundTime => RoundTime;
+    public float fullLife => FullLife;
+    public float curLife => CurLife;
 
     protected override void Awake()
     {
@@ -38,7 +50,6 @@ public class DefenceGameRule
 
 
         CurLife = FullLife;
-        StartCoroutine(RoundCheck());
     }
 
     protected override void Update()
@@ -59,23 +70,29 @@ public class DefenceGameRule
 
     private IEnumerator RoundCheck()
     {
-        yield return new WaitForSeconds(WaitTime);          //라운드대기시간
-
-        if(CurLife <= 0)
+        //yield return new WaitForSeconds(WaitTime);          //라운드대기시간
+        while (true)
         {
-            LoseGame();
-            yield break;
-        }
+            if (CurLife <= 0)
+            {
+                LoseGame();
+                yield break;
+            }
 
-        ++Round;
-        //Spawner.Spawn(Round) // 이부분에 라운드 받아서 몬스터 스폰
+            if (roundData.Round.Count > round)
+            {
+                NextRoundAction.Invoke();
+                Spawner.NextRoundSpawn(Round); // 이부분에 라운드 받아서 몬스터 스폰
+                ++Round;
+            }
 
-        yield return new WaitForSeconds(RoundTime);     //디펜스시간
+            yield return new WaitForSeconds(RoundTime);     //디펜스시간
 
-        if(Round > EndRound)
-        {
-            WinGame();
-            yield break;
+            if (Round > EndRound)
+            {
+                WinGame();
+                yield break;
+            }
         }
     }
 
@@ -96,24 +113,37 @@ public class DefenceGameRule
                 StartCoroutine(Timer(5f, () => _gameMode.ChangeGameState(EGameState.EnterGame)));
                 break;
             case EGameState.EnterGame:
+                StartCoroutine(RoundCheck());
                 break;
         }
     }
 
     void LoadSceneData()
     {
-        // Input Data
-        RoundAssetData roundData = Database.Instance.DefenseRoundAssetData.GetValueOrDefault(CurMode);
-        
+        roundData = Database.Instance.DefenseRoundAssetData.GetValueOrDefault(CurMode);
+        Spawner.SetRoundData(roundData);
+
+        for (int i = 0; i < Database.Instance.CharacterAssetCount; ++i)
+        {
+            MaxLoadingCount++;
+            AssetLoader.LoadAssetAsync<GameObject>(Database.Instance.FindCharacterAsset(i + 1000).PrefabKey, () =>
+            {
+                CurLoadingCount++;
+                if (MaxLoadingCount == CurLoadingCount)
+                    _gameMode.ChangeGameState(EGameState.ReadyGame);
+            });
+        }
+
         for (int i = 1; i <= roundData.Round.Count; ++i)
         {
             foreach (var data in roundData.Round[i - 1]._monsterSpawnData)
             {
                 MaxLoadingCount++;
-                ObjectPool pool = Spawner.AddComponent<ObjectPool>();
-                pool.LoadPoolData(data.Key, data.Value, ()=> 
+                AssetLoader.LoadAssetAsync<GameObject>(data.Key, () => 
                 { 
-                    CurLoadingCount++; if(MaxLoadingCount == CurLoadingCount) _gameMode.ChangeGameState(EGameState.ReadyGame); 
+                    CurLoadingCount++; 
+                    if (MaxLoadingCount == CurLoadingCount)
+                        _gameMode.ChangeGameState(EGameState.ReadyGame); 
                 });
             }
         }
@@ -121,7 +151,41 @@ public class DefenceGameRule
 
     void Initialize()
     {
+        for (int i = 0; i < Database.Instance.CharacterAssetCount; ++i)
+        {
+            ObjectPool characterPool = Spawner.objectPools.GetPool(Database.Instance.FindCharacterAsset(i + 1000).PrefabKey);
 
+            if (characterPool)
+            {
+                characterPool.ExpandPool(10);
+            }
+            else
+            {
+                characterPool = Spawner.gameObject.AddComponent<ObjectPool>();
+                characterPool.InitializePool(AssetLoader.GetHandleInstance<GameObject>(Database.Instance.FindCharacterAsset(i + 1000).PrefabKey), 10);
+            }
+
+            Spawner.objectPools.RegisterPool(characterPool);
+        }
+
+        for (int i = 1; i <= roundData.Round.Count; ++i)
+        {
+            foreach (var data in roundData.Round[i - 1]._monsterSpawnData)
+            {
+                ObjectPool pool = Spawner.objectPools.GetPool(data.Key);
+                if (pool)
+                {
+                    pool.ExpandPool(data.Value);
+                }
+                else
+                {
+                    pool = Spawner.gameObject.AddComponent<ObjectPool>();
+                    pool.InitializePool(AssetLoader.GetHandleInstance<GameObject>(data.Key), data.Value);
+                }
+
+                Spawner.objectPools.RegisterPool(pool);
+            }
+        }
     }
 
     IEnumerator Timer(float _time, Action _action)

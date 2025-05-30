@@ -15,5 +15,21 @@ MonoBehaviour:
   _round:
   - _monsterSpawnData:
       _serializedList:
-      - Key: Assets/Level/Prefabs/Monster/Defence/Defence_Orc.prefab
+      - Key: Defence_Orc
+        Value: 10
+  - _monsterSpawnData:
+      _serializedList:
+      - Key: Defence_Orc
+        Value: 10
+  - _monsterSpawnData:
+      _serializedList:
+      - Key: Defence_Orc
+        Value: 10
+  - _monsterSpawnData:
+      _serializedList:
+      - Key: Defence_Orc
+        Value: 10
+  - _monsterSpawnData:
+      _serializedList:
+      - Key: Defence_Orc
         Value: 10

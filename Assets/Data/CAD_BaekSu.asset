@@ -15,4 +15,7 @@ MonoBehaviour:
   _characterID: 1000
   _name: BaekSu
   _prefabKey: Character_BaekSu
+  _greenStone: 2
+  _blueStone: 1
+  _redStone: 3
   _sprite: {fileID: 8769933567029890119, guid: febb501f9ce63e5448c333eabb8965cc, type: 3}

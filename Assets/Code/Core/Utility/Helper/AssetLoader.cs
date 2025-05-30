@@ -53,8 +53,28 @@ public static class AssetLoader
         {
             if (handle.Status == AsyncOperationStatus.Succeeded)
             {
-                resourceHandles.Add(addressablesPath, handle);
+                AddHandle(addressablesPath, handle);
             }
         };
+    }
+
+    public static void LoadAssetAsync<T>(string addressablesPath, Action _loadedComplete)
+    {
+        if (resourceHandles.ContainsKey(addressablesPath)) { _loadedComplete?.Invoke(); return; }
+
+        Addressables.LoadAssetAsync<T>(addressablesPath).Completed += (handle) =>
+        {
+            if (handle.Status == AsyncOperationStatus.Succeeded)
+            {
+                AddHandle(addressablesPath, handle);
+                _loadedComplete?.Invoke();
+            }
+        };
+    }
+
+    public static void AddHandle(string addressablesPath, AsyncOperationHandle handle)
+    {
+        if (!resourceHandles.ContainsKey(addressablesPath))
+            resourceHandles.Add(addressablesPath, handle);
     }
 }

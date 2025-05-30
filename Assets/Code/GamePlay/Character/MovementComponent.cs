@@ -15,7 +15,7 @@ enum EMovementState
 public class MovementComponent : MonoBehaviour
 {
     [Header("Movement Properties")]
-    [SerializeField] private float moveSpeed = 10.0f;
+    [SerializeField] private float moveSpeed = 1.0f;
     [SerializeField] private float maxVelocity = 2.0f;
     EMovementState movementState = EMovementState.None;
 

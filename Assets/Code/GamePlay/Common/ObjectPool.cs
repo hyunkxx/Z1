@@ -34,18 +34,6 @@ public class ObjectPool : MonoBehaviour
 
     }
 
-    public void LoadPoolData(string _prefabKey, int _size, Action _loadedComplete)
-    {
-        Addressables.InstantiateAsync(_prefabKey, Vector3.zero, Quaternion.identity).Completed += (handle) =>
-        {
-            if (handle.Status == AsyncOperationStatus.Succeeded)
-            {
-                InitializePool(handle.Result.gameObject, _size);
-                _loadedComplete?.Invoke();
-            }
-        };
-    }
-
     public void InitializePool(GameObject _obj, int _count)
     {
         sourcePrefab = _obj;
@@ -68,12 +56,21 @@ public class ObjectPool : MonoBehaviour
         }
     }
 
+    public void ExpandPool(int _size)
+    {
+        for (int i = 0; i < _size; ++i)
+        {
+            GameObject obj = Instantiate(sourcePrefab, transform.position, Quaternion.identity);
+            obj.transform.SetParent(poolHolder.transform);
+            ReturnObject(obj);
+        }
+    }
+
     public GameObject GetObject(Vector3 position, Quaternion rotation)
     {
         if (activateCount >= poolSize)
         {
-            //StartCoroutine(SpawnObjectsPerFrame());
-            return null;
+            ExpandPool(poolSize);
         }
 
         GameObject obj = objectPool.Dequeue();

@@ -6,12 +6,14 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class DefenceSpawner : SpawnController
 {
-    public Transform SpawnPos;
-    public List<Transform> DestinationList = new List<Transform>();
+    public Transform[] MonsterSpawnPos;
+    public Transform[] CharacterSpawnPos;
+
     private RoundAssetData roundData;
 
     private GameMode gameMode;
 
+    public void SetRoundData(RoundAssetData roundAssetData) { roundData = roundAssetData; }
     void Start()
     {
         gameMode = GameManager.Instance.GameMode;
@@ -37,23 +39,23 @@ public class DefenceSpawner : SpawnController
                 Initialize();
                 break;
             case EGameState.EnterGame:
-                StartGame();
                 break;
         }
     }
 
     void Initialize()
     {
-        objectPools.FindPools();  
     }
 
-    void StartGame()
+    public void NextRoundSpawn(int _round)
     {
-        foreach (var pool in objectPools.GetContainer())
+        foreach(var spawnData in roundData.Round[_round]._monsterSpawnData)
         {
-            StartCoroutine(Spawn(pool.Key, pool.Value.PoolSize));
-        }
+            string prefabsKey = spawnData.Key;
+            int size = spawnData.Value;
 
+            StartCoroutine(Spawn(AssetLoader.GetHandleInstance<GameObject>(prefabsKey).name, size, MonsterSpawnPos));
+        }
     }
 
     void Update()
@@ -61,19 +63,30 @@ public class DefenceSpawner : SpawnController
         
     }
      
-    IEnumerator Spawn(string _type, int _count)
+    public IEnumerator Spawn(string _type, int _count, Transform[] _spanwRange)
     {
         int curCount = 0;
 
         while (curCount < _count)
         {
-            GameObject obj = base.Spawn(_type, SpawnPos.position);
-            obj.GetComponent<DefenceAIController>().DestinationList = DestinationList;
+            GameObject obj = base.Spawn(_type, RandSpawnPos(_spanwRange));
             curCount++;
 
             yield return new WaitForSeconds(1f);
         }
     }
 
+
+    Vector3 RandSpawnPos(Transform[] _spanwRange)
+    {
+        float randYPos = Random.Range(_spanwRange[0].transform.position.y, _spanwRange[1].transform.position.y);
+        Vector3 SpawnPos = Vector3.zero;
+
+        SpawnPos.x = _spanwRange[0].transform.position.x;
+        SpawnPos.y = randYPos;
+
+        return SpawnPos;
+
+    }
 
 }

@@ -15,4 +15,7 @@ MonoBehaviour:
   _characterID: 1001
   _name: Vampire
   _prefabKey: Character_Vampire
+  _greenStone: 4
+  _blueStone: 1
+  _redStone: 2
   _sprite: {fileID: 866145876, guid: 41c0aa1c835478443ba6edc1e425b1cf, type: 3}

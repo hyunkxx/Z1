@@ -83,7 +83,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: {fileID: 5032921733773311675}
-  DestinationList: []
 --- !u!95 &828445366256103033
 Animator:
   serializedVersion: 7
@@ -252,9 +251,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1412787937
+  m_SortingLayer: 1
+  m_SortingOrder: 1
   m_Sprite: {fileID: 3799508404887519019, guid: 7142d66507024ff488d593df644c4797, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

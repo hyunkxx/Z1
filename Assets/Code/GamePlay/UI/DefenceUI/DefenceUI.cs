@@ -1,0 +1,36 @@
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class DefenceUI : MonoBehaviour
+{
+    [SerializeField] private DefenceGameRule GameRule;
+    [SerializeField] private Button CraftPanelActiveButton;
+    [SerializeField] private GameObject CraftPanel;
+    [SerializeField] private TextMeshProUGUI Rount_txt;
+    [SerializeField] private TextMeshProUGUI Life_txt;
+    [SerializeField] private TextMeshProUGUI RoundTime_txt;
+
+    private float RoundTime = 0f;
+
+    private void Start()
+    {
+        CraftPanelActiveButton.onClick.AddListener(() => { CraftPanel.SetActive(true); });
+        GameRule.NextRoundAction += OnChangedRoundUI;
+    }
+
+    void Update()
+    {
+        Life_txt.text = $"Round {GameRule.curLife} / {GameRule.fullLife}";
+        RoundTime_txt.text = $"{(int)RoundTime}";
+        RoundTime -= Time.deltaTime;
+    }
+
+    void OnChangedRoundUI()
+    {
+        Rount_txt.text = $"Round {GameRule.round}";
+        RoundTime = GameRule.roundTime;
+    }
+
+
+}
