@@ -1,5 +1,6 @@
 using UnityEngine;
 
+
 public class DummyObject : MonoBehaviour
 {
     private Animator animator;

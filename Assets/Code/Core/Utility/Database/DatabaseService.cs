@@ -30,6 +30,14 @@ public sealed class DatabaseService : IDisposable
         return InCommand.ExecuteReader();
     }
 
+    public void AddParameter(IDbCommand command, string name, object value)
+    {
+        var param = command.CreateParameter();
+        param.ParameterName = name;
+        param.Value = value;
+        command.Parameters.Add(param);
+    }
+
     public int ExecuteNonQuery(string query, Dictionary<string, object> parameters = null)
     {
         using (IDbCommand command = Connection.CreateCommand())
@@ -81,7 +89,7 @@ public sealed class DatabaseService : IDisposable
         }
     }
 
-    public T GetDataClass<T>(int id, params object[] args) where T : IDatabaseModel<T>, new()
+    public T MakeClassByID<T>(int id, params object[] args) where T : IDatabaseModel<T>, new()
     {
         T obj = new T();
         string query = $"SELECT * FROM {typeof(T).Name} WHERE ID = @id";
@@ -108,7 +116,7 @@ public sealed class DatabaseService : IDisposable
         return obj;
     }
 
-    public List<T> GetDataClassList<T>(params object[] args) where T : IDatabaseModel<T>, new()
+    public List<T> MakeListFromTable<T>(params object[] args) where T : IDatabaseModel<T>, new()
     {
         List<T> objList = new List<T>();
         string query = $"SELECT * FROM {typeof(T).Name}";
@@ -129,6 +137,37 @@ public sealed class DatabaseService : IDisposable
         }
 
         return objList;
+    }
+
+    public Dictionary<int, T> MakeDictionaryFromTable<T>(params object[] args) where T : IDatabaseModel<T>, new()
+    {
+        Dictionary<int, T> table = new Dictionary<int, T>();
+        string query = $"SELECT * FROM {typeof(T).Name}";
+        using (IDbCommand command = connection.CreateCommand())
+        {
+            command.CommandType = CommandType.Text;
+            command.CommandText = query;
+
+            using (IDataReader reader = ExcuteReader(command))
+            {
+                while (reader.Read())
+                {
+                    T obj = new T();
+                    int ID = obj.Deserialize(reader, args);
+
+                    if(!table.ContainsKey(ID))
+                    {
+                        table.Add(ID, obj);
+                    }
+                    else
+                    {
+                        Debug.LogError($"Duplicate key detected: {typeof(T).Name} {ID}");
+                    }
+                }
+            }
+        }
+
+        return table;
     }
 
     public void Dispose()

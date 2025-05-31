@@ -93,7 +93,7 @@ public sealed class BuildVersion : IDatabaseModel<BuildVersion>
         }
     }
 
-    public void Deserialize(IDataRecord record, params object[] args)
+    public int Deserialize(IDataRecord record, params object[] args)
     {
         ID = record.GetInt32(0);
         Dirty = record.GetInt32(1);
@@ -102,6 +102,8 @@ public sealed class BuildVersion : IDatabaseModel<BuildVersion>
         string[] parts = AppVersion.Split('.');
         Major = int.Parse(parts[0]);
         Minor = int.Parse(parts[1]);
+
+        return ID;
     }
 
     public void Serialize(IDbCommand command)

@@ -3,16 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum EStatType
-{
-    Damage,
-    Defense,
-    CriticalDamage,
-    CriticalRate,
-    MaxHealth,
-    MoveSpeed,
-}
-
 [System.Serializable]
 public struct StatModifier
 {
@@ -30,7 +20,7 @@ public sealed class ItemEquipmentData : ItemDataAsset
     private List<StatModifier> Stats;
     public int StatModifierCount => Stats.Count;
 
-    /* @hyun:todo */
+    // @hyun:todo
     public void Apply(CharacterStats stat)
     {
         //Stats Apply

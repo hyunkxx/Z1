@@ -11,6 +11,14 @@ using UnityEngine;
 
 public interface IDatabaseModel<T>
 {
+    /*
+     * Map object data to SQLite command parameters
+     */
     public void Serialize(IDbCommand command);
-    public void Deserialize(IDataRecord record, params object[] args);
+
+    /* 
+     * Reads values from the database record and maps them to the object's fields.
+     * Returns the ID, which serves as the dictionary key for this object.
+     */
+    public int Deserialize(IDataRecord record, params object[] args);
 }

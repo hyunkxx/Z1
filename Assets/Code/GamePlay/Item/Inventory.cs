@@ -17,7 +17,7 @@ public sealed class Inventory
     {
         _volume = volume;
 
-        var DatabaseService = Database.Instance.databaseService;
+        var DatabaseService = Database.Instance.Service;
         if (DatabaseService.TableExists(typeof(ItemSlot).Name))
         {
             LoadInventory();
@@ -61,7 +61,7 @@ public sealed class Inventory
 
     public void SaveInventory()
     {
-        IDbConnection DBConnection = Database.Instance.databaseService.Connection;
+        IDbConnection DBConnection = Database.Instance.Service.Connection;
         using(IDbTransaction transaction = DBConnection.BeginTransaction())
         {
             const string query = "INSERT OR REPLACE INTO ItemSlot (ID, Category, ItemID, Quantity) VALUES (@ID, @Category, @ItemID, @Quantity);";
@@ -71,7 +71,6 @@ public sealed class Inventory
                 command.CommandText = query;
                 command.Transaction = transaction;
 
-                int index = 0;
                 for (int category = 0; category < (int)EItemCategory.Max; ++category)
                 {
                     for (int y = 0; y < _volume.y; y++)
@@ -82,7 +81,6 @@ public sealed class Inventory
 
                             currentSlot.Serialize(command);
                             command.ExecuteNonQuery();
-                            ++index;
                         }
                     }
                 }
@@ -93,7 +91,7 @@ public sealed class Inventory
     }
     public void LoadInventory()
     {
-        List<ItemSlot> SlotDataRecords = Database.Instance.databaseService.GetDataClassList<ItemSlot>();
+        List<ItemSlot> SlotDataRecords = Database.Instance.Service.MakeListFromTable<ItemSlot>();
 
         int index = 0;
         for (int category = 0; category < (int)EItemCategory.Max; ++category)

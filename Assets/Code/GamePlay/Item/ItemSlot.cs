@@ -105,15 +105,14 @@ public sealed class ItemSlot : IDatabaseModel<ItemSlot>
         if (IsFull)
             return amount;
 
-        int value = StackCount + amount;
-        if (value > Item.DataAsset.StackLimit)
+        StackCount += amount;
+        if (StackCount > Item.DataAsset.StackLimit)
         {
-            amount = value - Item.DataAsset.StackLimit;
+            amount = StackCount - Item.DataAsset.StackLimit;
             StackCount = Item.DataAsset.StackLimit;
         }
         else
         {
-            StackCount += amount;
             amount = 0;
         }
 
@@ -123,25 +122,22 @@ public sealed class ItemSlot : IDatabaseModel<ItemSlot>
     }
     public int DecrementStack(int amount)
     {
-        int result = StackCount - amount;
-        if (result < 0)
+        int reduce;
+        if (StackCount < amount)
         {
-            int reduce = StackCount;
+            reduce = StackCount;
             StackCount = 0;
             Item = null;
-
-            Identity.Inventory.AddUpdatedSlot(this);
-            OnChangedStackCount?.Invoke(StackCount);
-            return reduce;
         }
         else
         {
             StackCount -= amount;
-
-            Identity.Inventory.AddUpdatedSlot(this);
-            OnChangedStackCount?.Invoke(StackCount);
-            return amount;
+            reduce = amount;
         }
+
+        Identity.Inventory.AddUpdatedSlot(this);
+        OnChangedStackCount?.Invoke(StackCount);
+        return reduce;
     }
 
     public void Serialize(IDbCommand command)
@@ -155,7 +151,7 @@ public sealed class ItemSlot : IDatabaseModel<ItemSlot>
 
         var paramCategory = command.CreateParameter();
         paramCategory.ParameterName = "@Category";
-        paramCategory.Value = IsValid ? (int)Item.DataAsset.Category : -1;
+        paramCategory.Value = (int)Identity.Category;
         command.Parameters.Add(paramCategory);
 
         var paramID = command.CreateParameter();
@@ -168,8 +164,9 @@ public sealed class ItemSlot : IDatabaseModel<ItemSlot>
         paramQuantity.Value = IsValid ? StackCount : 0;
         command.Parameters.Add(paramQuantity);
     }
-    public void Deserialize(IDataRecord record, params object[] args)
+    public int Deserialize(IDataRecord record, params object[] args)
     {
+        int tableID = record.GetInt32(0);
         int ItemID = record.GetInt32(2);
         int Quantity = record.GetInt32(3);
 
@@ -183,5 +180,7 @@ public sealed class ItemSlot : IDatabaseModel<ItemSlot>
             Item = ItemFactory.CreateInstance(Database.Instance.FindItemAsset(ItemID));
             StackCount = Quantity;
         }
+
+        return tableID;
     }
 }

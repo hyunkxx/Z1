@@ -163,8 +163,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d58045645de37d14f83d0605bae6a3a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tempPlayerPrefab: {fileID: 7834587441641150271, guid: 9b414eae461647c46858c7aed068e659, type: 3}
-  tempEnemy: {fileID: 1714574313}
 --- !u!1 &241775270
 GameObject:
   m_ObjectHideFlags: 0
@@ -1179,6 +1177,10 @@ PrefabInstance:
     - target: {fileID: 5224973432465825833, guid: d0d7c201b5d66f748a8104d717801801, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5708635169067706366, guid: d0d7c201b5d66f748a8104d717801801, type: 3}
+      propertyPath: orthographic size
+      value: 4.8046875
       objectReference: {fileID: 0}
     - target: {fileID: 6642420206358302170, guid: d0d7c201b5d66f748a8104d717801801, type: 3}
       propertyPath: m_Name

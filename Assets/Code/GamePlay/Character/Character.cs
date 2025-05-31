@@ -54,14 +54,8 @@ public class Character : Z1Behaviour
 
     public event Action<bool> OnChangedFlip;
 
-    protected override void Awake()
-    {
-        Debug.Log("Character Awake");
-    }
     protected override void Start()
     {
-        Debug.Log("Character Start");
-
         rg2d = GetComponent<Rigidbody2D>();
         spriteRenderer = transform.Find("Root").GetComponent<SpriteRenderer>();
         animController = GetComponent<CharacterAnimationController>();

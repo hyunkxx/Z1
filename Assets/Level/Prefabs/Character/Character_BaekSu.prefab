@@ -305,7 +305,6 @@ GameObject:
   - component: {fileID: 6984386188652096524}
   - component: {fileID: 4299492805316279674}
   - component: {fileID: 2858142384857847269}
-  - component: {fileID: -8197320788744086464}
   - component: {fileID: 4578601590110176259}
   - component: {fileID: 7235276069043101290}
   - component: {fileID: 7172233613179981037}
@@ -425,26 +424,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementComponent: {fileID: 7235276069043101290}
   testEffect: {fileID: 6042269923291634350}
---- !u!114 &-8197320788744086464
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7834587441641150271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 135832de96f4be747aea46f0213d2e03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  curLevel: 1
-  maxLevel: 255
-  damage: 50
-  damageModify: 0
-  curHealth: 0
-  maxHealth: 0
-  curExp: 0
-  maxExp: 0
 --- !u!114 &4578601590110176259
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -11,28 +11,10 @@ using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 using AYellowpaper.SerializedCollections;
 using Unity.VisualScripting;
 
-/* temp struct */
-public class ItemData : IDatabaseModel<ItemData>
-{
-    public string name { get; private set; }
-    public int id { get; private set; }
-    public int data { get; private set; }
-
-    public void Deserialize(IDataRecord record, params object[] args)
-    {
-        name = record.GetString(0);
-        id = record.GetInt32(1);
-        data = record.GetInt32(2);
-    }
-
-    public void Serialize(IDbCommand command)
-    {
-    }
-}
 
 public class Database : Singleton<Database>
 {
-    public DatabaseService databaseService;
+    public DatabaseService Service { get; private set; }
 
     [SerializeField]
     private string DatabasePath = "Database/GameDatabase.db";
@@ -56,19 +38,18 @@ public class Database : Singleton<Database>
     [SerializeField, SerializedDictionary("Key", "Defense Round DataAsset")]
     public SerializedDictionary<string, RoundAssetData> DefenseRoundAssetData;
 
-    /* TABLE SAMPLE */
-    private Dictionary<int, ItemData> itemTable = new Dictionary<int, ItemData>();
-    public IReadOnlyDictionary<int, ItemData> ItemTable => itemTable;
-
     /* INVENTORY */
     public Inventory Inventory { get; private set; }
 
     public CharacterDataAsset FindCharacterAsset(int ID) { return _characterDataAssets.GetValueOrDefault(ID); }
     public ItemDataAsset FindItemAsset(int ID) { return _itemDataAssets.GetValueOrDefault(ID); }
 
-    public bool TableExists(string TableName)
+    private void PostInitialize(string connectionPath)
     {
-        return databaseService.TableExists(TableName);
+        Service = new DatabaseService(connectionPath);
+        Inventory = new Inventory(new Vector2Int(5, 5));
+
+        //_characterStatsTable = Service.MakeDictionaryFromTable<CharacterStatsRecord>();
     }
 
     protected override void Awake()
@@ -120,7 +101,7 @@ public class Database : Singleton<Database>
         string connectionPath = $"URI=file:{persistentPath}";
         PostInitialize(connectionPath);
 
-        using (IDbCommand command = databaseService.Connection.CreateCommand())
+        using (IDbCommand command = Service.Connection.CreateCommand())
         {
             BuildVersion version = new BuildVersion(1);
 
@@ -133,18 +114,9 @@ public class Database : Singleton<Database>
         }
     }
 
-    private void PostInitialize(string connectionPath)
+    public bool TableExists(string TableName)
     {
-        databaseService = new DatabaseService(connectionPath);
-        Inventory = new Inventory(new Vector2Int(5, 5));
-
-        /* generate cache */
-        List<ItemData> itemList = databaseService.GetDataClassList<ItemData>();
-        foreach (ItemData item in itemList)
-        {
-            itemTable.Add(item.id, item);
-        }
-
+        return Service.TableExists(TableName);
     }
 
     public BuildVersion ReadBuildVersion(string dbPath)
@@ -182,7 +154,7 @@ public class Database : Singleton<Database>
                     }
                 }
 
-                return service.GetDataClass<BuildVersion>(0);
+                return service.MakeClassByID<BuildVersion>(0);
             }
         }
     }
@@ -213,7 +185,7 @@ public class Database : Singleton<Database>
 
     protected override void OnDestroy()
     {
-        databaseService.Dispose();
+        Service.Dispose();
     }
 }
 

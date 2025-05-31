@@ -39,15 +39,14 @@ public class GhostEffect : MonoBehaviour
         character = source.gameObject.transform.root.GetComponent<Character>();
 
         effectPool = gameObject.AddComponent<ObjectPool>();
-        effectPool.InitializePool(new GameObject("EmptyGameObject"), 20);
+        GameObject Ghost = new GameObject("Ghost");
+        SpriteRenderer renderer = Ghost.AddComponent<SpriteRenderer>();
+        renderer.sprite = source.sprite;
+        renderer.material = tintMaterial;
+        renderer.color = ghostParam.beginColor;
 
-        foreach (GameObject obj in effectPool.Pool)
-        {
-            SpriteRenderer renderer = obj.AddComponent<SpriteRenderer>();
-            renderer.sprite = source.sprite;
-            renderer.material = tintMaterial;
-            renderer.color = ghostParam.beginColor;
-        }
+        effectPool.InitializePool(Ghost, 20);
+        Destroy(Ghost);
     }
     public void ActivateEffect()
     {

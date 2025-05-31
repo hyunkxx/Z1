@@ -1,73 +1,45 @@
 using System;
 using UnityEngine;
 
-[System.Serializable]
-public class CharacterStats : MonoBehaviour
+
+public enum EStatType
 {
-    [SerializeField] protected int curLevel = 1;
-    [SerializeField] protected int maxLevel = 255;
+    BLA1,
+    BLA2,
+    Max
+}
 
-    [SerializeField] protected float damage;
-    [SerializeField] protected float damageModify;
+//public enum ESubStatType
+//{
+//    AttackDamage,
+//    AttackSpeed,
+//    Armor,
+//    ArmorPenetration,
+//    CriticalDamage,
+//    CriticalRate,
+//    MaxHealth,
+//    Max
+//}
 
-    [SerializeField] protected float curHealth;
-    [SerializeField] protected float maxHealth;
+// @hyun:todo
+public class CharacterStats
+{
+    //temp
+    public float Damage = 50.0f;
 
-    [SerializeField] protected float curExp;
-    [SerializeField] protected float maxExp;
+    float[] _BaseStat = new float[(int)EStatType.Max];
+    float[] _BonusStat = new float[(int)EStatType.Max];
+    float[] _EquipStat = new float[(int)EStatType.Max];
 
-    public event Action<int> OnLevelupEvent;
-    public event Action<GameObject> OnDieEvent;
-
-    public int CurLevel => curLevel;
-    public int MaxLevel => maxLevel;
-    public float CurHealth => curHealth;
-    public float MaxHealth => maxHealth;
-    public float CurExp => curExp;
-    public float MaxExp => maxExp;
-
-    public float Damage => damage;
-    public float DamageModify => damageModify;
-
-    public void Die()
+    public float GetStat(EStatType type)
     {
-        curHealth = 0f;
-        OnDieEvent?.Invoke(gameObject);
+        //return final stat
+        float final = 0.0f;
+        return final;
     }
 
-    public void ReduceHealth(float value)
+    public void ApplyStats(CharacterStatsRecord record)
     {
-        curHealth -= value;
-        if (curHealth <= 0f)
-        {
-            curHealth = 0f;
-            Die();
-        }
-    }
-    public void AddHealth(float value)
-    {
-        curHealth += value;
-        if (curHealth >= maxHealth)
-        {
-            curHealth = maxHealth;
-        }
-    }
-    public void AddExp(float amount)
-    {
-        curExp += amount;
-        while (curExp >= maxExp)
-        {
-            curExp -= maxExp;
-            LevelUp();
-
-            maxExp *= 1.25f;
-        }
-
-        curExp %= maxExp;
-    }
-    private void LevelUp()
-    {
-        curLevel++;
-        OnLevelupEvent?.Invoke(curLevel);
+        // initialize stats
     }
 }

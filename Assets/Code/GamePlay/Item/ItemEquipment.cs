@@ -9,12 +9,12 @@ public class ItemEquipmentParam : ItemParam
 
 public class ItemEquipment : ItemBase
 {
-    private int bEquippedCharacterID;
+    private int EquippedCharacterID;
     public bool IsEquipped
     {
         get
         {
-            return bEquippedCharacterID != -1 ? true : false;
+            return EquippedCharacterID != -1 ? true : false;
         }
     }
 
@@ -22,7 +22,7 @@ public class ItemEquipment : ItemBase
     {
         base.Initialize(data);
 
-        bEquippedCharacterID = -1;
+        EquippedCharacterID = -1;
     }
 
     public override void Use(ItemParam InParam = null)
@@ -34,7 +34,7 @@ public class ItemEquipment : ItemBase
             ItemEquipmentParam param = InParam as ItemEquipmentParam;
             if (param != null)
             {
-                bEquippedCharacterID = param.CharacterID;
+                EquippedCharacterID = param.CharacterID;
             }
         }
     }
