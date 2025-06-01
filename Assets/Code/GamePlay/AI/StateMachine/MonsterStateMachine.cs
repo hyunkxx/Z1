@@ -13,7 +13,7 @@ public class MonsterStateMachine : StateMachine
     {
         base.Initialize();
 
-        LinkedSMB<StateMachine>.Initialize(animator, this);
+        LinkedSMB<MonsterStateMachine>.Initialize(animator, this);
     }
 
     void Start()

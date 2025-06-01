@@ -11,7 +11,7 @@ public class CharacterStateMachine : StateMachine
     {
         base.Initialize();
 
-        LinkedSMB<StateMachine>.Initialize(animator, this);
+        LinkedSMB<CharacterStateMachine>.Initialize(animator, this);
     }
 
     void Start()
