@@ -54,13 +54,13 @@ public class Character : Z1Behaviour
 
     public event Action<bool> OnChangedFlip;
 
+    public void Initialize(CharacterStats stats) { characterStats = stats; }
     protected override void Start()
     {
         rg2d = GetComponent<Rigidbody2D>();
         spriteRenderer = transform.Find("Root").GetComponent<SpriteRenderer>();
         animController = GetComponent<CharacterAnimationController>();
         ghostEffect = GetComponent<GhostEffect>();
-        characterStats = GetComponent<CharacterStats>();
 
         weaponComponent = GetComponent<WeaponComponent>();
         targetingComponent = GetComponentInChildren<TargetingComponent>();
