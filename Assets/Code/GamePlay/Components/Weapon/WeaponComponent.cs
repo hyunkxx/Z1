@@ -74,11 +74,11 @@ public class WeaponComponent : MonoBehaviour
     public void LateUpdate()
     {
         /* temp */
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (weaponRotateCoroutine == null)
-                Swing();
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    if (weaponRotateCoroutine == null)
+        //        Swing();
+        //}
 
         float angle;
         float targetAngle;

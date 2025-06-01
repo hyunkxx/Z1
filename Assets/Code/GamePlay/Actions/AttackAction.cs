@@ -11,6 +11,12 @@ public class AttackAction : BaseAction
     public float attackRange = 1f;
     public AnimationClip clip;
 
+    protected override void Update()
+    {
+        attackDelay -= Time.deltaTime;
+    }
+
+
     public void SetEffectTransform(Transform target)
     {
         effectTransform = target;

@@ -34,8 +34,7 @@ public class SurvivalSpawner : SpawnController
     {
         switch(state)
         {
-            case EGameState.ReadyGame:
-                Initialize();
+            case EGameState.EnterGame:
                 break;
         }
     }
@@ -45,22 +44,6 @@ public class SurvivalSpawner : SpawnController
 
     }
 
-    void Initialize()
-    {
-        GameMode mode = GameManager.Instance.GameMode;
-        Character = mode.PlayerController.Character.gameObject;
-        playerController = mode.PlayerController;
-
-        // Input Data
-        AddPool("SurvivalMonsterPrefabs/Orc", 10); // DataPath, Size
-
-        objectPools.FindPools();
-
-        foreach (var pool in objectPools.GetContainer())
-        {
-            StartCoroutine(Spawn(pool.Key, pool.Value.PoolSize));
-        }
-    }
 
     void AddPool(string _monsterPath, int _size)
     {

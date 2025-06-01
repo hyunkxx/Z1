@@ -164,12 +164,6 @@ public class DefenceGameRule
                 characterPool.InitializePool(AssetLoader.GetHandleInstance<GameObject>(Database.Instance.FindCharacterAsset(i + 1000).PrefabKey), 10);
             }
 
-            foreach (var obj in characterPool.GetQueue())
-            {
-                CharacterStateMachine stateMachine = obj.AddComponent<CharacterStateMachine>();
-                stateMachine.Initialize();
-            }
-
             Spawner.objectPools.RegisterPool(characterPool);
         }
 

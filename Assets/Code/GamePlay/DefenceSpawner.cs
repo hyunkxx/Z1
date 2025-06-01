@@ -45,6 +45,7 @@ public class DefenceSpawner : SpawnController
 
     void Initialize()
     {
+
     }
 
     public void NextRoundSpawn(int _round)
@@ -70,6 +71,14 @@ public class DefenceSpawner : SpawnController
         while (curCount < _count)
         {
             GameObject obj = base.Spawn(_type, RandSpawnPos(_spanwRange));
+
+            if(_type.Contains("Character"))
+            {
+                obj.GetComponent<BoxCollider2D>().enabled = true;
+                CharacterStateMachine stateMachine = obj.AddComponent<CharacterStateMachine>();
+                stateMachine.Initialize();
+            }
+
             curCount++;
 
             yield return new WaitForSeconds(1f);

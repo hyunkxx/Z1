@@ -9,16 +9,18 @@ public class SMBCharacterMove : LinkedSMB<CharacterStateMachine>
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        monobeHaviour.FindTarget();
+
         if (monobeHaviour.target)
             monobeHaviour.movement.MoveToLocation(monobeHaviour.target.transform.position);
         else
-            monobeHaviour.movement.MoveToDirection(Vector2.left);
+            monobeHaviour.movement.MoveToDirection(Vector2.right);
 
-        if (!monobeHaviour.TransAttack(monobeHaviour.nomalAttack, "isAttack", ref monobeHaviour.nomalAttack.attackDelay, monobeHaviour.nomalAttack.baseAttackDelay, monobeHaviour.nomalAttack.attackRange))
+        if (!monobeHaviour.TransAttack(monobeHaviour.nomalAttack, "isAttack"))
         {
             if (monobeHaviour.AttackType != null)
             {
-                monobeHaviour.TransAttack(monobeHaviour.skill[0], "isSkill", ref monobeHaviour.AttackType.attackDelay, monobeHaviour.AttackType.baseAttackDelay, monobeHaviour.AttackType.attackRange);
+                monobeHaviour.TransAttack(monobeHaviour.skill[0], "isSkill");
             }
         }
     }

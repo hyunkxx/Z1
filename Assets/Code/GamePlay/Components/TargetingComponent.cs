@@ -39,11 +39,11 @@ public class TargetingComponent : MonoBehaviour
     //[SerializeField] private int maxTargetCount;
     private List<TargetElement> targetList = new List<TargetElement>();
     private CircleCollider2D targetingCollider;
-    private Character character;
+    private MovementComponent Movement;
 
     public void Awake()
     {
-        character = transform.root.GetComponent<Character>();
+        Movement = transform.parent.GetComponent<MovementComponent>();
         targetingCollider = GetComponent<CircleCollider2D>();
     }
     public void Start()
@@ -75,7 +75,7 @@ public class TargetingComponent : MonoBehaviour
                     float distance = Vector2.Distance(targetPosition, transform.position);
                     float distanceWeight = 1f - Mathf.Clamp01(distance / targetingCollider.radius);
 
-                    Vector2 characterDir = character.Movement.MoveDirection;
+                    Vector2 characterDir = Movement.MoveDirection;
                     Vector2 targetDirection = (targetPosition - transform.position).normalized;
                     float directionWeight = Vector2.Dot(characterDir, targetDirection);
                     directionWeight = Mathf.Clamp01((directionWeight + 1f / 2f));
@@ -97,33 +97,35 @@ public class TargetingComponent : MonoBehaviour
             return b.weight.CompareTo(a.weight);
         });
 
-        for (int i = 0; i < targetList.Count; ++i)
-        {
-            SpriteRenderer sprite = targetList[i].target.GetComponent<SpriteRenderer>();
+        //for (int i = 0; i < targetList.Count; ++i)
+        //{
+        //    SpriteRenderer sprite = targetList[i].target.GetComponent<SpriteRenderer>();
 
-            if (i == 0)
-                sprite.color = new Color(targetList[i].weight, 0f, 0f);
-            else
-                sprite.color = Color.white;
-        }
+        //    if (i == 0)
+        //        sprite.color = new Color(targetList[i].weight, 0f, 0f);
+        //    else
+        //        sprite.color = Color.white;
+        //}
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Damageable owner = transform.root.GetComponent<Damageable>();
+        Damageable owner = transform.parent.GetComponent<Damageable>();
         Damageable other = collision.GetComponent<Damageable>();
+
         if (!owner || !other)
             return;
 
         if(owner.IsEnemy(other))
         {
+            Debug.Log($"Add Element, Owner : {this.gameObject.transform.parent.name}, collision : {collision.name}");
             TargetElement element = new TargetElement(collision.gameObject);
             targetList.Add(element);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Damageable owner = transform.root.GetComponent<Damageable>();
+        Damageable owner = transform.parent.GetComponent<Damageable>();
         Damageable other = collision.GetComponent<Damageable>();
         if (!owner || !other)
             return;

@@ -8,7 +8,7 @@ public class DefenceCraftingSlot : MonoBehaviour
 
     [SerializeField] private Button CraftingButton;
     [SerializeField] private Image CharacterImage;
-    [SerializeField] private int CraftCount = 10;
+    [SerializeField] private int CraftCount = 1;
 
     void Start()
     {

@@ -7,9 +7,10 @@ public class StateMachine : MonoBehaviour
     public IAction ActionType;
     public Animator animator;
     public MovementComponent movement;
+    public TargetingComponent targetingComponent;
 
     [HideInInspector] public GameObject target;
-    [HideInInspector] public AttackAction AttackType;
+     public AttackAction AttackType;
     public AttackAction nomalAttack;
     public AttackAction[] skill;
 
@@ -24,6 +25,7 @@ public class StateMachine : MonoBehaviour
         animator = transform.GetComponentInChildren<Animator>();
         nomalAttack = GetComponent<AttackAction>();
         skill = GetComponents<AttackAction>();
+        targetingComponent = transform.GetComponentInChildren<TargetingComponent>();
     }
 
     public void TransMove()
@@ -31,14 +33,14 @@ public class StateMachine : MonoBehaviour
         animator.SetBool("isMove", true);
     }
 
-    public bool TransAttack(AttackAction _ationType, string _paramName, ref float _delay, float _baseDelay, float _range)
+    public bool TransAttack(AttackAction _ationType, string _paramName)
     {
         if (target == null) return false;
-        if (_delay > 0f) return false;
-        if (Vector2.Distance(target.transform.position, transform.position) > _range) return false;
+        if (_ationType.attackDelay > 0f) return false;
+        if (Vector2.Distance(target.transform.position, transform.position) > _ationType.attackRange) return false;
     
         AttackType = _ationType;
-        _delay = _baseDelay;
+        _ationType.attackDelay = _ationType.baseAttackDelay;
         animator.SetTrigger(_paramName);
         animator.SetBool("isMove", false);
         return true;
@@ -73,40 +75,13 @@ public class StateMachine : MonoBehaviour
         ActionType.ExcuteAction();
     }
 
-    Coroutine YSortingCoroutine;
-
-    private void OnBecameVisible()
+    public void FindTarget()
     {
-        if (YSortingCoroutine != null) return;
-    
-        YSortingCoroutine = StartCoroutine(YSorting());
-    }
+        if (targetingComponent == null) return;
 
-    private void OnBecameInvisible()
-    {
-        if (YSortingCoroutine == null) return;
-    
-        StopCoroutine(YSortingCoroutine);
-    }
+        GameObject nearestTarget = targetingComponent.GetNearestTarget();
 
-    private float minY = -5f;
-    private float maxY = 6f;
-    private float minScale = 1.0f;
-    private float maxScale = 0.5f;
-
-    private IEnumerator YSorting()
-    {
-        while (gameObject.activeSelf)
-        {
-            gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sortingOrder = (int)(transform.position.y * 100);
-
-            float t = Mathf.InverseLerp(maxY, minY, transform.position.y); // Y가 클수록 t는 0
-            float scale = Mathf.Lerp(maxScale, minScale, t);
-
-            transform.localScale = new Vector3(scale, scale, 1f);
-            Debug.Log(scale);
-
-            yield return new WaitForSeconds(0.25f);
-        }
+        if (nearestTarget != null)
+            target = nearestTarget;
     }
 }

@@ -22,7 +22,8 @@ public class DamageEffect2D : Effect2D
             return;
 
         damageProvider.ResetTrigger();
-        CharacterStats stats = owner.GetComponent<CharacterStats>();
+        Character character = owner.GetComponent<Character>();
+        CharacterStats stats = character.Stats;
         damageProvider.ActivateProvider(owner, stats);
     }
     protected override void EffectDeactivated()

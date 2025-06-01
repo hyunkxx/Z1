@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MonsterStateMachine : StateMachine
 {
+
     private void Awake()
     {
         Initialize();
