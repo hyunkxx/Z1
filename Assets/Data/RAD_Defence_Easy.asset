@@ -15,21 +15,21 @@ MonoBehaviour:
   _round:
   - _monsterSpawnData:
       _serializedList:
-      - Key: Defence_Orc
+      - Key: Orc
         Value: 10
   - _monsterSpawnData:
       _serializedList:
-      - Key: Defence_Orc
+      - Key: Orc
         Value: 10
   - _monsterSpawnData:
       _serializedList:
-      - Key: Defence_Orc
+      - Key: Orc
         Value: 10
   - _monsterSpawnData:
       _serializedList:
-      - Key: Defence_Orc
+      - Key: Orc
         Value: 10
   - _monsterSpawnData:
       _serializedList:
-      - Key: Defence_Orc
+      - Key: Orc
         Value: 10

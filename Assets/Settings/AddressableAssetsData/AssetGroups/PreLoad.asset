@@ -20,6 +20,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 69acf7b901470664584eb719adde6fc6
+    m_Address: Orc
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ab16cf3d12cde4f40ae12ef67211fdc5
     m_Address: Defence_Orc
     m_ReadOnly: 0

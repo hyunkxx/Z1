@@ -706,14 +706,14 @@ MonoBehaviour:
       Value: {fileID: 11400000, guid: 9a3888be8f58885438dfd1529677b30e, type: 2}
     - Key: 1001
       Value: {fileID: 11400000, guid: e354c49ef41241949b129e0f30b85d56, type: 2}
-  DefenseRoundAssetData:
-    _serializedList:
-    - Key: Easy
-      Value: {fileID: 11400000, guid: ab2071f91d7cec647975e8868580eb28, type: 2}
   _itemDataAssets:
     _serializedList:
     - Key: 0
       Value: {fileID: 11400000, guid: 2c05242662bd3f64b820b178b5c32384, type: 2}
+  DefenseRoundAssetData:
+    _serializedList:
+    - Key: Easy
+      Value: {fileID: 11400000, guid: ab2071f91d7cec647975e8868580eb28, type: 2}
 --- !u!1 &1049300532
 GameObject:
   m_ObjectHideFlags: 0

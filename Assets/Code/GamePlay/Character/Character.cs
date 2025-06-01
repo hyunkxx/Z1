@@ -79,14 +79,14 @@ public class Character : Z1Behaviour
     }
     protected override void Update()
     {
-        /* temp */
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-            Dash();
+        ///* temp */
+        //if (Input.GetKeyDown(KeyCode.LeftShift))
+        //    Dash();
 
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            testEffect.ExcuteAction();
-        }
+        //if (Input.GetKeyDown(KeyCode.I))
+        //{
+        //    testEffect.ExcuteAction();
+        //}
 
         UpdateFlip();
     }
@@ -98,6 +98,12 @@ public class Character : Z1Behaviour
     {
         return !spriteRenderer.flipX;
     }
+
+    public void Swing()
+    {
+        weaponComponent.Swing();
+    }
+
     public void Dash()
     {
         const float dashPower = 10f;

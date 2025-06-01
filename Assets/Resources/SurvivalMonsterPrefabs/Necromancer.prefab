@@ -10,10 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6123920241179067176}
   - component: {fileID: 6138868582767852989}
+  - component: {fileID: 5032921733773311675}
   - component: {fileID: 6821499858594191812}
   - component: {fileID: 4293781717159346933}
-  - component: {fileID: 377585905382159770}
-  - component: {fileID: 5032921733773311675}
   - component: {fileID: 828445366256103033}
   - component: {fileID: 3471724657695876419}
   - component: {fileID: 1507022867646640303}
@@ -53,13 +52,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7345b55aa1b47c4a8bf4c5dc29f92ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 377585905382159770}
   animator: {fileID: 828445366256103033}
+  movement: {fileID: 5032921733773311675}
   target: {fileID: 0}
+  AttackType: {fileID: 0}
   nomalAttack: {fileID: 6821499858594191812}
-  activeSkill: {fileID: 4293781717159346933}
   skill:
   - {fileID: 4293781717159346933}
+--- !u!114 &5032921733773311675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4817972689310064399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8a767faa2fd3154a8e1cfc9d4e10a88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 10
+  maxVelocity: 2
 --- !u!114 &6821499858594191812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,33 +109,6 @@ MonoBehaviour:
   baseAttackDelay: 10
   attackRange: 1
   clip: {fileID: 7400000, guid: 9683973278f6cdc46a5e66ac8a653ed8, type: 2}
---- !u!114 &377585905382159770
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4817972689310064399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6249c808bbf923a40a102b0a933ba976, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movement: {fileID: 5032921733773311675}
---- !u!114 &5032921733773311675
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4817972689310064399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8a767faa2fd3154a8e1cfc9d4e10a88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 10
-  maxVelocity: 2
 --- !u!95 &828445366256103033
 Animator:
   serializedVersion: 7

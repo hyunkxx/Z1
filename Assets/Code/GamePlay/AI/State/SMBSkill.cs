@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class SMBSkill : LinkedSMB<MonsterStateMachine>
+public class SMBSkill : LinkedSMB<StateMachine>
 {
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         monobeHaviour.ChangeStateClip();
-        monobeHaviour.ActionType = monobeHaviour.activeSkill;
-        monobeHaviour.activeSkill.SetEffectTransform(monobeHaviour.target.transform);
+        monobeHaviour.ActionType = monobeHaviour.AttackType;
+        monobeHaviour.AttackType.SetEffectTransform(monobeHaviour.target.transform);
         monobeHaviour.Action();
     }
 

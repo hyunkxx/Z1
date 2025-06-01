@@ -1,8 +1,7 @@
 using UnityEngine;
 
-public class SMBMove : LinkedSMB<MonsterStateMachine>
+public class SMBMove : LinkedSMB<StateMachine>
 {
-
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 
@@ -10,13 +9,16 @@ public class SMBMove : LinkedSMB<MonsterStateMachine>
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        monobeHaviour.monster.Move(monobeHaviour.target.transform.position);
+        if (monobeHaviour.target)
+            monobeHaviour.movement.MoveToLocation(monobeHaviour.target.transform.position);
+        else
+            monobeHaviour.movement.MoveToDirection(Vector2.left);
 
-        if (!monobeHaviour.TransAttack("isAttack", ref monobeHaviour.nomalAttack.attackDelay, monobeHaviour.nomalAttack.baseAttackDelay, monobeHaviour.nomalAttack.attackRange))
+        if (!monobeHaviour.TransAttack(monobeHaviour.nomalAttack, "isAttack", ref monobeHaviour.nomalAttack.attackDelay, monobeHaviour.nomalAttack.baseAttackDelay, monobeHaviour.nomalAttack.attackRange))
         {
-            if (monobeHaviour.activeSkill != null)
+            if (monobeHaviour.AttackType != null)
             {
-                monobeHaviour.TransAttack("isSkill", ref monobeHaviour.activeSkill.attackDelay, monobeHaviour.activeSkill.baseAttackDelay, monobeHaviour.activeSkill.attackRange);
+                monobeHaviour.TransAttack(monobeHaviour.skill[0], "isSkill", ref monobeHaviour.AttackType.attackDelay, monobeHaviour.AttackType.baseAttackDelay, monobeHaviour.AttackType.attackRange);
             }
         }
     }
@@ -25,5 +27,4 @@ public class SMBMove : LinkedSMB<MonsterStateMachine>
     {
         base.OnStateExit(animator, stateInfo, layerIndex);
     }
-
 }

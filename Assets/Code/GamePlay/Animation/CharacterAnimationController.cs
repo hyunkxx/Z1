@@ -16,11 +16,11 @@ public class CharacterAnimationController : MonoBehaviour
     {
         if(rg2d.linearVelocity.magnitude >= 0.1f)
         {
-            animator.SetBool("Run", true);
+            animator.SetBool("isMove", true);
         }
         else
         {
-            animator.SetBool("Run", false);
+            animator.SetBool("isMove", false);
         }
     }
 }

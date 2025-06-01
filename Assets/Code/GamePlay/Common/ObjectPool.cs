@@ -18,6 +18,7 @@ public class ObjectPool : MonoBehaviour
     public GameObject SourcePrefab => sourcePrefab;
     public Queue<GameObject> Pool => objectPool;
     private GameObject poolHolder;
+    private Queue<GameObject> objectPool;
 
     public int activateCount
     {
@@ -27,7 +28,6 @@ public class ObjectPool : MonoBehaviour
         }
     }
 
-    private Queue<GameObject> objectPool;
 
     private void Awake()
     {
@@ -101,4 +101,6 @@ public class ObjectPool : MonoBehaviour
             yield return null;
         }
     }
+
+    public Queue<GameObject> GetQueue() { return objectPool; }
 }
