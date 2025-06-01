@@ -2,44 +2,59 @@ using System.Data;
 using UnityEngine;
 
 
-/* ummmmmmmmmmmmmmmmmmmmm */
+/**
+ * ID
+ * Unlocked
+ * CurrentLevel
+ * CurrentExp
+ * JobType
+ **/
+public enum EJobType
+{
+    None,
+    HandGun,
+    SMG,
+    AR,
+    Max
+}
+
 public class CharacterStatsRecord : IDatabaseModel<CharacterStatsRecord>
 {
-    public int CharacterID { get; private set; }
+    public int ID { get; private set; }
     public int Unlocked { get; private set; }
-    public int Level { get; private set; }
-    public int STR { get; private set; }
-    public int DEX { get; private set; }
-    public int VIT { get; private set; }
-    public int INT { get; private set; }
-    public int LUK { get; private set; }
+    public int CurrentLevel { get; private set; }
+    public int CurrentExp { get; private set; }
+    public int BaseDamage { get; private set; }
+    public int BaseArmor { get; private set; }
+    public int BaseMaxHealth { get; private set; }
+    public EJobType JobType { get; private set; }
 
     public void Serialize(IDbCommand command)
     {
         command.Parameters.Clear();
 
         DatabaseService Service = Database.Instance.Service;
-        Service.AddParameter(command, "@CharacterID", CharacterID);
+        Service.AddParameter(command, "@CharacterID", ID);
         Service.AddParameter(command, "@Unlocked", Unlocked);
-        Service.AddParameter(command, "@Level", Level);
-        Service.AddParameter(command, "@STR", STR);
-        Service.AddParameter(command, "@DEX", DEX);
-        Service.AddParameter(command, "@VIT", VIT);
-        Service.AddParameter(command, "@INT", INT);
-        Service.AddParameter(command, "@LUK", LUK);
+        Service.AddParameter(command, "@CurrentLevel", CurrentLevel);
+        Service.AddParameter(command, "@CurrentExp", CurrentExp);
+        Service.AddParameter(command, "@BaseDamage", BaseDamage);
+        Service.AddParameter(command, "@BaseArmor", BaseArmor);
+        Service.AddParameter(command, "@BaseMaxHealth", BaseMaxHealth);
+        Service.AddParameter(command, "@JobType", (int)JobType);
     }
 
     public int Deserialize(IDataRecord record, params object[] args)
     {
-        CharacterID = record.GetInt32(0);
+        ID = record.GetInt32(0);
         Unlocked = record.GetInt32(1);
-        Level = record.GetInt32(2);
-        STR = record.GetInt32(3);
-        DEX = record.GetInt32(4);
-        VIT = record.GetInt32(5);
-        INT = record.GetInt32(6);
-        LUK = record.GetInt32(7);
+        CurrentLevel = record.GetInt32(2);
+        CurrentExp = record.GetInt32(3);
+        BaseDamage = record.GetInt32(4);
+        BaseArmor = record.GetInt32(5);
+        BaseMaxHealth = record.GetInt32(6);
+        JobType = (EJobType)record.GetInt32(7);
 
-        return CharacterID;
+        return ID;
     }
 }

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: CAD_BaekSu
   m_EditorClassIdentifier: 
   _characterID: 1000
-  _name: BaekSu
-  _prefabKey: Character_BaekSu
+  _name: Default
+  _prefabKey: Character_Default
   _greenStone: 2
   _blueStone: 1
   _redStone: 3
-  _sprite: {fileID: 8769933567029890119, guid: febb501f9ce63e5448c333eabb8965cc, type: 3}
+  _sprite: {fileID: 7714719776830919727, guid: 8227ec1ecc7b62947aac7fcecbf6074c, type: 3}

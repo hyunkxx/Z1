@@ -27,7 +27,8 @@ public class CharacterSelecter : UIBase
         CurSlot = GetGameObject((int)GameObjects.CharacterSelectContents).transform.GetChild(0).gameObject;
         CurSlot.GetComponent<CharacterSlot>().ActiveFocus();
 
-        GetButton((int)Buttons.Survival_Ready_Play_btn).onClick.AddListener(() => { GameManager.Instance.OpenScene("VampireSurvival", SelectCharacterID.ToString()); });
+        //VampireSurvival
+        GetButton((int)Buttons.Survival_Ready_Play_btn).onClick.AddListener(() => { GameManager.Instance.OpenScene("Hyun", SelectCharacterID.ToString()); });
     }
 
     void Start()

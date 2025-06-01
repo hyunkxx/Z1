@@ -1,6 +1,7 @@
 using UnityEngine;
 
-
+// Action_Lightning01
+// ActionBoom ActionLightning SkillLightning Action_Boom, Action_Attack
 public class NomalAttack : AttackAction
 {
     protected override void Awake()

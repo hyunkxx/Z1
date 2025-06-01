@@ -43,10 +43,6 @@ public class Character : Z1Behaviour
     protected CharacterStats characterStats;
 
     protected Damageable damageable;
-    protected GhostEffect ghostEffect;
-
-    //test
-    public AttackAction testEffect;
 
     public TargetingComponent TargetingComponent => targetingComponent;
     public MovementComponent Movement => movementComponent;
@@ -54,21 +50,22 @@ public class Character : Z1Behaviour
 
     public event Action<bool> OnChangedFlip;
 
-    public void Initialize(CharacterStats stats) { characterStats = stats; }
+    public void Initialize(int characterID)
+    {
+        characterStats = new CharacterStats(characterID);
+    }
+
     protected override void Start()
     {
         rg2d = GetComponent<Rigidbody2D>();
         spriteRenderer = transform.Find("Root").GetComponent<SpriteRenderer>();
         animController = GetComponent<CharacterAnimationController>();
-        ghostEffect = GetComponent<GhostEffect>();
 
         weaponComponent = GetComponent<WeaponComponent>();
         targetingComponent = GetComponentInChildren<TargetingComponent>();
 
         damageable = GetComponent<Damageable>();
         damageable.OnDamageTaken += TakeDamage;
-
-        ghostEffect.Initialize(spriteRenderer);
     }
     protected override void OnDestroy()
     {
@@ -79,15 +76,6 @@ public class Character : Z1Behaviour
     }
     protected override void Update()
     {
-        ///* temp */
-        //if (Input.GetKeyDown(KeyCode.LeftShift))
-        //    Dash();
-
-        //if (Input.GetKeyDown(KeyCode.I))
-        //{
-        //    testEffect.ExcuteAction();
-        //}
-
         UpdateFlip();
     }
     protected virtual void TakeDamage(DamageEvent info)
@@ -99,19 +87,6 @@ public class Character : Z1Behaviour
         return !spriteRenderer.flipX;
     }
 
-    public void Swing()
-    {
-        weaponComponent.Swing();
-    }
-
-    public void Dash()
-    {
-        const float dashPower = 10f;
-
-        ghostEffect.ActivateEffect();
-        Vector2 direction = GetCharacterDirection();
-        rg2d.AddForce(direction * dashPower, ForceMode2D.Impulse);
-    }
     public Vector2 GetCharacterDirection()
     {
         if (movementComponent.IsMove())

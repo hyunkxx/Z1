@@ -78,6 +78,9 @@ public class SurvivalGameRule
                 _characterHandle = handle;
 
                 Character character = handle.Result.GetComponent<Character>();
+                character.Initialize(CharacterID);
+                character.gameObject.AddComponent<CharacterAnimationController>();
+
                 CameraMovement cameraMovement = Camera.main.GetComponent<CameraMovement>();
                 cameraMovement.SetViewTarget(character.gameObject);
 

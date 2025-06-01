@@ -20,6 +20,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aceb1144a0a0c1b469baf633655d0f47
+    m_Address: Character_Default
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f07912dc484ffcb458b49811d6161f4e
     m_Address: Character_Vampire
     m_ReadOnly: 0

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 82d29df9b5559f045993d7b2a22f46a4
+guid: caa726e5c6e4d924b90edb9408274103
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4477480900883755150
-    second: weapon_2000_0
+      213: -6814519180866482288
+    second: simple_weapon_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 512
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -126,23 +126,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: weapon_2000_0
+      name: simple_weapon_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 64
-        height: 64
-      alignment: 9
-      pivot: {x: 0.5, y: 0.3}
+        x: 35
+        y: 144
+        width: 476
+        height: 175
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e80b5c91825332e30800000000000000
-      internalID: 4477480900883755150
+      spriteID: 09f0e5de8e6fd61a0800000000000000
+      internalID: -6814519180866482288
       vertices: []
       indices: 
       edges: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: eccfe66c4471bca4bbb5de7f152db577
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      weapon_2000_0: 4477480900883755150
+      simple_weapon_0: -6814519180866482288
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
