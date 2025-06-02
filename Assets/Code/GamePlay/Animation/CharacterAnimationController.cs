@@ -14,7 +14,7 @@ public class CharacterAnimationController : MonoBehaviour
     }
     public void LateUpdate()
     {
-        if(rg2d.linearVelocity.magnitude >= 0.1f)
+        if(rg2d.linearVelocity.magnitude >= 0.2f)
         {
             animator.SetBool("isMove", true);
         }

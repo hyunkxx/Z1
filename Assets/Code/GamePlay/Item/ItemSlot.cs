@@ -59,6 +59,12 @@ public sealed class ItemSlot : IDatabaseModel<ItemSlot>
         Identity = identity;
     }
 
+    //public void MarkDirty()
+    //{
+    //    Identity.Inventory.AddUpdatedSlot(this);
+    //    OnChangedStackCount(StackCount);
+    //}
+
     public void Swap(ItemSlot rhs)
     {
         ItemBase tempItem = rhs.Item;
@@ -70,6 +76,7 @@ public sealed class ItemSlot : IDatabaseModel<ItemSlot>
         StackCount = stackCount;
 
         Identity.Inventory.AddUpdatedSlot(this);
+
         OnChangedStackCount(StackCount);
         rhs?.OnChangedStackCount(rhs.StackCount);
     }

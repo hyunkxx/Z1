@@ -33,6 +33,9 @@ public class Effect2D : EffectBase
     private void AddLastKeyframeEvent()
     {
         RuntimeAnimatorController controller = animator.runtimeAnimatorController;
+        if (controller == null)
+            return;
+
         foreach (AnimationClip clip in controller.animationClips)
         {
             bool hasEndEvent = false;
@@ -82,7 +85,6 @@ public class Effect2D : EffectBase
 
         transform.position = trans.position;
         transform.rotation = trans.rotation;
-        transform.localPosition = trans.localPosition;
 
         EffectActivated();
     }
@@ -92,7 +94,6 @@ public class Effect2D : EffectBase
 
         transform.position = trans.position;
         transform.rotation = trans.rotation;
-        transform.localPosition = trans.localPosition;
 
         EffectActivated();
     }
@@ -102,7 +103,6 @@ public class Effect2D : EffectBase
 
         transform.position = position;
         transform.rotation = rotation;
-        transform.localPosition = Vector3.zero;
 
         EffectActivated();
     }

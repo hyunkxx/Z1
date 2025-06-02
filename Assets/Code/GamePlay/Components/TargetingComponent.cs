@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-class TargetElement
+public class TargetElement
 {
     public float weight;
     public GameObject target;
@@ -49,6 +49,11 @@ public class TargetingComponent : MonoBehaviour
     public void Start()
     {
         StartCoroutine(UpdatePriorityWeights());
+    }
+
+    public IReadOnlyList<TargetElement> GetTargetList()
+    {
+        return targetList;
     }
 
     public bool HasNearTarget()
@@ -134,8 +139,6 @@ public class TargetingComponent : MonoBehaviour
         {
             TargetElement find = targetList.Find(e => e.target == collision.gameObject);
             targetList.Remove(find);
-
-            SpriteRenderer sprite = collision.gameObject.GetComponent<SpriteRenderer>();
         }
     }
 }

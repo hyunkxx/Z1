@@ -5,7 +5,7 @@ public class SMBMonsterIdle : LinkedSMB<MonsterStateMachine>
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (monobeHaviour == null) return;
-
+        
         monobeHaviour.ActionType = null;
     }
 

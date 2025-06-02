@@ -7,6 +7,18 @@ using UnityEngine.EventSystems;
 using UnityEngine.TextCore.Text;
 
 
+public interface ICharacterQueryable
+{
+    public Character GetCharacter();
+}
+
+[System.Serializable]
+public struct CharacterView
+{
+    public Transform _weaponSocket;
+    public Transform _weaponEndSocket;
+}
+
 [System.Serializable]
 public struct TransformData
 {
@@ -31,6 +43,7 @@ public struct TransformData
 
 public class Character : Z1Behaviour
 {
+    [SerializeField] protected CharacterView characterView;
     [SerializeField] protected MovementComponent movementComponent;
 
     protected WeaponComponent weaponComponent;
@@ -41,9 +54,9 @@ public class Character : Z1Behaviour
     protected SpriteRenderer spriteRenderer;
 
     protected CharacterStats characterStats;
-
     protected Damageable damageable;
 
+    public CharacterView CharacterView => characterView;
     public TargetingComponent TargetingComponent => targetingComponent;
     public MovementComponent Movement => movementComponent;
     public CharacterStats Stats => characterStats;
@@ -53,10 +66,13 @@ public class Character : Z1Behaviour
     public void Initialize(int characterID)
     {
         characterStats = new CharacterStats(characterID);
+        //characterStats.JobType;
     }
 
-    protected override void Start()
+    protected override void Awake()
     {
+        base.Awake();
+
         rg2d = GetComponent<Rigidbody2D>();
         spriteRenderer = transform.Find("Root").GetComponent<SpriteRenderer>();
         animController = GetComponent<CharacterAnimationController>();
@@ -96,35 +112,32 @@ public class Character : Z1Behaviour
     }
     public void UpdateFlip()
     {
-        if(movementComponent.IsMove())
+        if(targetingComponent.HasNearTarget())
         {
-            if(targetingComponent.HasNearTarget())
+            Vector3 targetDir = targetingComponent.GetTargetDirection();
+            if (spriteRenderer.flipX && targetDir.x > 0f)
             {
-                Vector3 targetDir = targetingComponent.GetTargetDirection();
-                if (spriteRenderer.flipX && targetDir.x > 0f)
-                {
-                    spriteRenderer.flipX = false;
-                    OnChangedFlip?.Invoke(false);
-                }
-                else if (!spriteRenderer.flipX && targetDir.x < 0f)
-                {
-                    spriteRenderer.flipX = true;
-                    OnChangedFlip?.Invoke(true);
-                }
+                spriteRenderer.flipX = false;
+                OnChangedFlip?.Invoke(false);
             }
-            else
+            else if (!spriteRenderer.flipX && targetDir.x < 0f)
             {
-                Vector3 moveDirection = movementComponent.MoveDirection;
-                if (spriteRenderer.flipX && moveDirection.x > 0f)
-                {
-                    spriteRenderer.flipX = false;
-                    OnChangedFlip?.Invoke(false);
-                }
-                else if (!spriteRenderer.flipX && moveDirection.x < 0f)
-                {
-                    spriteRenderer.flipX = true;
-                    OnChangedFlip?.Invoke(true);
-                }
+                spriteRenderer.flipX = true;
+                OnChangedFlip?.Invoke(true);
+            }
+        }
+        else
+        {
+            Vector3 moveDirection = movementComponent.MoveDirection;
+            if (spriteRenderer.flipX && moveDirection.x > 0f)
+            {
+                spriteRenderer.flipX = false;
+                OnChangedFlip?.Invoke(false);
+            }
+            else if (!spriteRenderer.flipX && moveDirection.x < 0f)
+            {
+                spriteRenderer.flipX = true;
+                OnChangedFlip?.Invoke(true);
             }
         }
     }

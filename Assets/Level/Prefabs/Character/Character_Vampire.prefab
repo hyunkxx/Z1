@@ -100,7 +100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8f0d97f583356c4db150ff4ad6e7363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slashEffect: {fileID: 8323170807558458712, guid: f1316b5109a41444a97dc32a6e05b9e0, type: 3}
 --- !u!1 &4249194490359796861
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,7 +310,6 @@ GameObject:
   - component: {fileID: 9098919813877421223}
   - component: {fileID: 5756834599355081601}
   - component: {fileID: 2047761708928815268}
-  - component: {fileID: 6042269923291634350}
   m_Layer: 0
   m_Name: Character_Vampire
   m_TagString: Untagged
@@ -421,8 +419,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cb2143c2410b0843af7a67b52461819, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterView:
+    _weaponSocket: {fileID: 0}
+    _weaponEndSocket: {fileID: 0}
   movementComponent: {fileID: 7235276069043101290}
-  testEffect: {fileID: 6042269923291634350}
 --- !u!114 &4578601590110176259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -510,27 +510,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da5b5184270dca34895759172ca7ff77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actionName: Lightning02
+  SkillTarget: 0
+  targetCount: 1
   EffectPrefab: {fileID: 3797684433542849519, guid: 168187d4be14fe649b61410e4b9a282d, type: 3}
   attackDelay: 10
-  baseAttackDelay: 10
-  attackRange: 1
-  clip: {fileID: 0}
---- !u!114 &6042269923291634350
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7834587441641150271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5bf4f4efd6034f4c8fc44b8754fbf29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actionName: Lightning02
-  EffectPrefab: {fileID: 3797684433542849519, guid: 61d81880b8a83f94486b205275f0b907, type: 3}
-  attackDelay: 10
-  baseAttackDelay: 10
   attackRange: 1
   clip: {fileID: 0}

@@ -6,7 +6,6 @@ public class SMBCharacterSkill : LinkedSMB<CharacterStateMachine>
     {
         monobeHaviour.ChangeStateClip();
         monobeHaviour.ActionType = monobeHaviour.AttackType;
-        monobeHaviour.AttackType.SetEffectTransform(monobeHaviour.target.transform);
         monobeHaviour.Action();
     }
 

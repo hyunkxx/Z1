@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+//@hyun_todo : damage type {region/tick/single/multi/}
+
 [System.Serializable]
 public struct DamageProviderParam
 {
@@ -137,7 +139,10 @@ public class DamageProvider : MonoBehaviour
         {
             if (owner.IsEnemy(other))
             {
-                DamageEvent damageEvent = new DamageEvent(providerData.characterStats.Damage, providerData.owner);
+                //@hyun_temp
+                DamageEvent damageEvent = new DamageEvent(50f, providerData.owner);
+
+                //DamageEvent damageEvent = new DamageEvent(providerData.characterStats.Damage, providerData.owner);
                 other.TakeDamage(damageEvent);
             }
         }

@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class StateMachine : MonoBehaviour
 {
-    public IAction ActionType;
+    public BaseAction ActionType;
     public Animator animator;
     public MovementComponent movement;
     public TargetingComponent targetingComponent;
 
     [HideInInspector] public GameObject target;
-     public AttackAction AttackType;
-    public AttackAction nomalAttack;
-    public AttackAction[] skill;
+    public Action_Skill AttackType;
+    public Action_Skill nomalAttack;
+    public Action_Skill[] skill;
 
     private void Awake()
     {
@@ -23,8 +23,8 @@ public class StateMachine : MonoBehaviour
     {
         movement = GetComponent<MovementComponent>();
         animator = transform.GetComponentInChildren<Animator>();
-        nomalAttack = GetComponent<AttackAction>();
-        skill = GetComponents<AttackAction>();
+        nomalAttack = GetComponent<Action_Skill>();
+        skill = GetComponents<Action_Skill>();
         targetingComponent = transform.GetComponentInChildren<TargetingComponent>();
     }
 
@@ -33,14 +33,14 @@ public class StateMachine : MonoBehaviour
         animator.SetBool("isMove", true);
     }
 
-    public bool TransAttack(AttackAction _ationType, string _paramName)
+    public bool TransAttack(Action_Skill _ationType, string _paramName)
     {
         if (target == null) return false;
-        if (_ationType.attackDelay > 0f) return false;
-        if (Vector2.Distance(target.transform.position, transform.position) > _ationType.attackRange) return false;
+        if (_ationType.TransitionDelay > 0f) return false;
+        if (Vector2.Distance(target.transform.position, transform.position) > _ationType.AttackRange) return false;
     
         AttackType = _ationType;
-        _ationType.attackDelay = _ationType.baseAttackDelay;
+        //_ationType.AttackDelay = _ationType.BaseAttackDelay;
         animator.SetTrigger(_paramName);
         animator.SetBool("isMove", false);
         return true;

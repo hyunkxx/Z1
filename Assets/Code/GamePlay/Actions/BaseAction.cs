@@ -1,15 +1,22 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public interface IAction
-{
-    public void ExcuteAction();
-}
 
-public abstract class BaseAction : Z1Behaviour, IAction
+public abstract class BaseAction : Z1Behaviour
 {
-    [SerializeField]
-    protected string actionName;
-    public string ActionName => actionName;
+    public bool TryExecute()
+    {
+        if (CanExcute())
+        {
+            ExcuteAction();
+            return true;
+        }
 
-    public virtual void ExcuteAction() { }
+        return false;
+    }
+
+    public abstract void ExcuteAction();
+    public abstract bool CanExcute();
 }

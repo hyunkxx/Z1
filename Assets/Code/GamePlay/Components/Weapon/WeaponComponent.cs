@@ -3,14 +3,14 @@ using System.Collections;
 using UnityEngine;
 
 
-public class WeaponComponent : MonoBehaviour
+public sealed class WeaponComponent : MonoBehaviour
 {
     private Character character;
     private SpriteRenderer weaponSprite;
 
-    private Vector3 weaponDirection;
+    public Vector3 WeaponDirection { get; private set; }
 
-    public void Start()
+    public void Awake()
     {
         weaponSprite = GetComponent<SpriteRenderer>();
         character = GetComponentInParent<Character>();
@@ -45,14 +45,14 @@ public class WeaponComponent : MonoBehaviour
 
         if (character.TargetingComponent.HasNearTarget())
         {
-            weaponDirection = character.TargetingComponent.GetTargetDirection();
+            WeaponDirection = character.TargetingComponent.GetTargetDirection();
         }
         else
         {
-            weaponDirection = character.GetCharacterDirection();
+            WeaponDirection = character.GetCharacterDirection();
         }
 
-        targetAngle = Mathf.Repeat(Mathf.Atan2(weaponDirection.y, weaponDirection.x) * Mathf.Rad2Deg, 360f);
+        targetAngle = Mathf.Repeat(Mathf.Atan2(WeaponDirection.y, WeaponDirection.x) * Mathf.Rad2Deg, 360f);
         angle = Mathf.LerpAngle(transform.eulerAngles.z, targetAngle, Time.deltaTime * 15.0f);
         transform.rotation = Quaternion.Euler(0, 0, angle);
     }
