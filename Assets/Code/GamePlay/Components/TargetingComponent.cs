@@ -123,7 +123,6 @@ public class TargetingComponent : MonoBehaviour
 
         if(owner.IsEnemy(other))
         {
-            Debug.Log($"Add Element, Owner : {this.gameObject.transform.parent.name}, collision : {collision.name}");
             TargetElement element = new TargetElement(collision.gameObject);
             targetList.Add(element);
         }

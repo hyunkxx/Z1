@@ -339,6 +339,8 @@ GameObject:
   - component: {fileID: 7235276069043101290}
   - component: {fileID: 9098919813877421223}
   - component: {fileID: 5756834599355081601}
+  - component: {fileID: 5511666353575863066}
+  - component: {fileID: 7690316522601446988}
   - component: {fileID: 2047761708928815268}
   m_Layer: 0
   m_Name: Character_Default
@@ -497,6 +499,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teamID: 1
+--- !u!114 &5511666353575863066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7834587441641150271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75f35aae3ecd87b4eb15a8a89d6be57f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SkillTarget: 0
+  targetCount: 1
+  EffectPrefab: {fileID: 4692837568177271607, guid: f199a3da145f9a2418e1b5c1b4c954c8, type: 3}
+  transitionDelay: 1
+  attackRange: 3
+  clip: {fileID: 0}
+--- !u!114 &7690316522601446988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7834587441641150271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb064e34812b77498e61074fe0c98bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Attack: {fileID: 5511666353575863066}
+  SkillSet: []
 --- !u!114 &2047761708928815268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -512,6 +546,6 @@ MonoBehaviour:
   SkillTarget: 0
   targetCount: 1
   EffectPrefab: {fileID: 3797684433542849519, guid: 168187d4be14fe649b61410e4b9a282d, type: 3}
-  attackDelay: 10
+  transitionDelay: 5
   attackRange: 1
   clip: {fileID: 0}

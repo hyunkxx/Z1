@@ -21,7 +21,10 @@ public class SMBMonsterIdle : LinkedSMB<MonsterStateMachine>
             }
         }
 
-        monobeHaviour.TransMove();
+        if (monobeHaviour.target)
+            monobeHaviour.TransMoveToLocation();
+        else
+            monobeHaviour.TransMoveToDirection(Vector2.left);
     }
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

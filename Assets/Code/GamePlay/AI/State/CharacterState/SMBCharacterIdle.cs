@@ -13,15 +13,18 @@ public class SMBCharacterIdle : LinkedSMB<CharacterStateMachine>
     {
         if (monobeHaviour == null) return;
 
-        if (!monobeHaviour.TransAttack(monobeHaviour.nomalAttack,"isAttack"))
-        {
-            if (monobeHaviour.TransAttack(monobeHaviour.skill[1], "isSkill"))
-            {
+        //if (!monobeHaviour.TransAttack(monobeHaviour.nomalAttack, "isAttack"))
+        //{
+        //    if (monobeHaviour.TransAttack(monobeHaviour.skill[0], "isSkill"))
+        //    {
 
-            }
-        }
+        //    }
+        //}
 
-        monobeHaviour.TransMove();
+        if (monobeHaviour.target)
+            monobeHaviour.TransMoveToLocation();
+        else
+            monobeHaviour.TransMoveToDirection(Vector2.right);
     }
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

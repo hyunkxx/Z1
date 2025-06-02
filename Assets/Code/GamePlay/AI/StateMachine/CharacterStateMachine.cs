@@ -16,7 +16,7 @@ public class CharacterStateMachine : StateMachine
 
     void Start()
     {
-
+        StartCoroutine(FindTarget());
     }
 
     void Update()

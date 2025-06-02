@@ -19,7 +19,7 @@ public class MonsterStateMachine : StateMachine
 
     void Start()
     {
-
+        StartCoroutine(FindTarget());
     }
 
     void Update()

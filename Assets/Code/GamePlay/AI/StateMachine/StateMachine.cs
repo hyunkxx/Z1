@@ -10,14 +10,10 @@ public class StateMachine : MonoBehaviour
     public TargetingComponent targetingComponent;
 
     [HideInInspector] public GameObject target;
+    [HideInInspector] public float targetDistance;
     public Action_Skill AttackType;
     public Action_Skill nomalAttack;
     public Action_Skill[] skill;
-
-    private void Awake()
-    {
-
-    }
 
     public virtual void Initialize()
     {
@@ -26,11 +22,40 @@ public class StateMachine : MonoBehaviour
         nomalAttack = GetComponent<Action_Skill>();
         skill = GetComponents<Action_Skill>();
         targetingComponent = transform.GetComponentInChildren<TargetingComponent>();
+        targetDistance = 9999;
     }
 
-    public void TransMove()
+    public void TransMoveToLocation()
     {
+        if (nomalAttack.AttackRange > targetDistance) return;
+
+        movement.MoveToLocation(target.transform.position);
         animator.SetBool("isMove", true);
+    }
+
+    public void TransMoveToDirection(Vector2 direction)
+    {
+        if (nomalAttack.AttackRange > targetDistance)
+        {
+            return;
+        }
+
+        movement.MoveToDirection(direction);
+        animator.SetBool("isMove", true);
+    }
+
+    public void TransIdle()
+    {
+        foreach (var param in animator.parameters)
+        {
+            if (param.type == AnimatorControllerParameterType.Bool)
+            {
+                animator.ResetTrigger(param.name);
+            }
+        }
+
+        movement.ResetMovement();
+        animator.Play("Idle");
     }
 
     public bool TransAttack(Action_Skill _ationType, string _paramName)
@@ -40,7 +65,6 @@ public class StateMachine : MonoBehaviour
         if (Vector2.Distance(target.transform.position, transform.position) > _ationType.AttackRange) return false;
     
         AttackType = _ationType;
-        //_ationType.AttackDelay = _ationType.BaseAttackDelay;
         animator.SetTrigger(_paramName);
         animator.SetBool("isMove", false);
         return true;
@@ -75,13 +99,21 @@ public class StateMachine : MonoBehaviour
         ActionType.ExcuteAction();
     }
 
-    public void FindTarget()
+    protected IEnumerator FindTarget()
     {
-        if (targetingComponent == null) return;
+        while (gameObject.activeSelf)
+        {
+            if (targetingComponent == null) break;
 
-        GameObject nearestTarget = targetingComponent.GetNearestTarget();
+            GameObject nearestTarget = targetingComponent.GetNearestTarget();
 
-        if (nearestTarget != null)
-            target = nearestTarget;
+            if (nearestTarget != null)
+            {
+                target = nearestTarget;
+                targetDistance = Vector2.Distance(transform.position, target.transform.position);
+            }
+
+            yield return new WaitForSeconds(0.5f);
+        }
     }
 }

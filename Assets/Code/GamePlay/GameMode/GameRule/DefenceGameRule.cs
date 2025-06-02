@@ -33,6 +33,15 @@ public class DefenceGameRule
     public float fullLife => FullLife;
     public float curLife => CurLife;
 
+    /*
+     * 추가 할 기능 
+        내 진영 HP -= 
+        적 진영 HP -=
+
+        플레이어 OR Orc 정해진 위치? 범위까지만 접근하고 이동 멈추도록
+        
+     */
+
     protected override void Awake()
     {
         base.Awake();
@@ -69,7 +78,6 @@ public class DefenceGameRule
 
     private IEnumerator RoundCheck()
     {
-        //yield return new WaitForSeconds(WaitTime);          //라운드대기시간
         while (true)
         {
             if (CurLife <= 0)
@@ -81,11 +89,11 @@ public class DefenceGameRule
             if (roundData.Round.Count > round)
             {
                 NextRoundAction.Invoke();
-                Spawner.NextRoundSpawn(Round); // 이부분에 라운드 받아서 몬스터 스폰
+                Spawner.NextRoundSpawn(Round);
                 ++Round;
             }
 
-            yield return new WaitForSeconds(RoundTime);     //디펜스시간
+            yield return new WaitForSeconds(RoundTime);
 
             if (Round > EndRound)
             {

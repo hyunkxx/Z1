@@ -79,6 +79,7 @@ public class MovementComponent : MonoBehaviour
 
         PerformMovement(direction);
     }
+
     public bool HasReachedLocation()
     {
         Vector2 position = transform.position;
@@ -96,7 +97,6 @@ public class MovementComponent : MonoBehaviour
 
     protected void PerformMovement(Vector2 direction)
     {
-        Vector2 position = gameObject.transform.position;
         if (direction == Vector2.zero)
         {
             moveDirection = Vector2.zero;
@@ -104,7 +104,7 @@ public class MovementComponent : MonoBehaviour
         }
         else
         {
-            moveDirection = direction.normalized;
+            moveDirection = direction.normalized; // 
         }
     }
     protected void ApplyMovementForce()

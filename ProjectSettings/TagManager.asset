@@ -42,7 +42,7 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Monster
+  - name: Character
     uniqueID: 1412787937
     locked: 0
   - name: Effect
