@@ -75,8 +75,6 @@ public class DefenceSpawner : SpawnController
             if(_type.Contains("Character"))
             {
                 obj.GetComponent<BoxCollider2D>().enabled = true;
-                CharacterStateMachine stateMachine = obj.AddComponent<CharacterStateMachine>();
-                stateMachine.Initialize();
             }
 
             curCount++;

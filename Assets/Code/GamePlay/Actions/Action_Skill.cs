@@ -75,8 +75,6 @@ public class Action_Skill : BaseAction
     {
         enabled = true;
 
-        stateMachine.TransAttack(this, "isAttack");
-
         if (EffectPrefab == null)
             return;
 

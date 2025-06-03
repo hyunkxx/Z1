@@ -16,10 +16,11 @@ public sealed class ActionComponent : MonoBehaviour
     private Queue<Action_Skill> ActionSequence = new ();
     private Action_Skill RunningSkill;
 
-    /**
+    /*
      * 기본 공격 항시 발동
      * 스킬은 일정 딜레이 이후 공격 범위내 사용 가능한 스킬을 순차적으로 실행함
      */
+
     public void Update()
     {
         if (Attack != null)

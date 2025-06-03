@@ -70,7 +70,6 @@ public class SurvivalSpawner : SpawnController
             transform.position = Character.transform.position + new Vector3(xPos, yPos, 0);
 
             GameObject obj = base.Spawn(_type, new Vector3(xPos, yPos));
-            obj.GetComponent<MonsterStateMachine>().target = Character;
             curCount++;
 
             yield return new WaitForSeconds(1f);

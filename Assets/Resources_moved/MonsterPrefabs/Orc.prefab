@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6123920241179067176}
-  - component: {fileID: 6138868582767852989}
+  - component: {fileID: 3888352031298902229}
+  - component: {fileID: 3590823760687246128}
   - component: {fileID: 5032921733773311675}
   - component: {fileID: 1437535598788499756}
   - component: {fileID: 5743725137997800422}
@@ -40,7 +41,7 @@ Transform:
   - {fileID: 6915638333809491812}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6138868582767852989
+--- !u!114 &3888352031298902229
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -49,15 +50,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 4817972689310064399}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7345b55aa1b47c4a8bf4c5dc29f92ae, type: 3}
+  m_Script: {fileID: 11500000, guid: 1f07c8a4643d5284499d8bef6c65f3d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aIType: 1
+  targetDistanceSqr: 9999
+--- !u!114 &3590823760687246128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4817972689310064399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d14af7aabdd54844d9405b29fe326429, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1961569616728861630}
-  movement: {fileID: 5032921733773311675}
-  targetingComponent: {fileID: 1423535429578495533}
-  target: {fileID: 0}
-  targetDistance: 0
-  AttackType: {fileID: 6821499858594191812}
 --- !u!114 &5032921733773311675
 MonoBehaviour:
   m_ObjectHideFlags: 0
