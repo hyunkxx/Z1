@@ -21,9 +21,12 @@ public class DefenceGameRule
     private int Round = 0;
     private int EndRound = 5;
 
-    //private int HaveGreenStoneCount = 0;
-    //private int HaveBlueStoneCount = 0;
-    //private int HaveRedStoneCount = 0;
+    private DefenceCastle PlayerTeamHP;
+    private DefenceCastle EnemyTeamHP;
+
+    private int HaveGreenStoneCount = 0;
+    private int HaveBlueStoneCount = 0;
+    private int HaveRedStoneCount = 0;
 
     private int MaxLoadingCount = 0;
     private int CurLoadingCount = 0;
@@ -32,15 +35,6 @@ public class DefenceGameRule
     public float roundTime => RoundTime;
     public float fullLife => FullLife;
     public float curLife => CurLife;
-
-    /*
-     * 추가 할 기능 
-        내 진영 HP -= 
-        적 진영 HP -=
-
-        플레이어 OR Orc 정해진 위치? 범위까지만 접근하고 이동 멈추도록
-        
-     */
 
     protected override void Awake()
     {
@@ -63,7 +57,6 @@ public class DefenceGameRule
     protected override void Update()
     {
         base.Update();
-        SetLife();
     }
 
     private void WinGame()
@@ -101,11 +94,6 @@ public class DefenceGameRule
                 yield break;
             }
         }
-    }
-
-    private void SetLife()
-    {
-        //CurLife = FullLife - Spawner.GetMonsterSize(); //스포너에서 몬스터사이즈받아와서 빼기
     }
 
     private void OnChangeGameState(EGameState state)

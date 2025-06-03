@@ -6,20 +6,12 @@ public class SMBCharacterIdle : LinkedSMB<CharacterStateMachine>
     {
         if (monobeHaviour == null) return;
 
-        monobeHaviour.ActionType = null;
+        monobeHaviour.AttackType = null;
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (monobeHaviour == null) return;
-
-        //if (!monobeHaviour.TransAttack(monobeHaviour.nomalAttack, "isAttack"))
-        //{
-        //    if (monobeHaviour.TransAttack(monobeHaviour.skill[0], "isSkill"))
-        //    {
-
-        //    }
-        //}
 
         if (monobeHaviour.target)
             monobeHaviour.TransMoveToLocation();

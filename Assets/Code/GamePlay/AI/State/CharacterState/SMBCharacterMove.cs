@@ -9,9 +9,9 @@ public class SMBCharacterMove : LinkedSMB<CharacterStateMachine>
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(monobeHaviour.target && monobeHaviour.nomalAttack)
+        if(monobeHaviour.target && monobeHaviour.AttackType)
         {
-            if (monobeHaviour.nomalAttack.AttackRange > monobeHaviour.targetDistance)
+            if (monobeHaviour.AttackType.AttackRange > monobeHaviour.targetDistance)
                 monobeHaviour.TransIdle();
         }
         //if (!monobeHaviour.TransAttack(monobeHaviour.nomalAttack, "isAttack"))

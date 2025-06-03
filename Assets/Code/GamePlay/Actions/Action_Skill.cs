@@ -30,6 +30,7 @@ public class Action_Skill : BaseAction
     protected float attackRange = 1f;
     public AnimationClip clip;
 
+    private StateMachine stateMachine;
     protected TargetingComponent targetingComponent;
 
     public int TargetCount => targetCount;
@@ -42,6 +43,7 @@ public class Action_Skill : BaseAction
     {
         base.Awake();
         targetingComponent = GetComponentInChildren<TargetingComponent>();
+        stateMachine = GetComponent<StateMachine>();
 
         BaseDelay = transitionDelay;
         enabled = false;
@@ -72,6 +74,8 @@ public class Action_Skill : BaseAction
     public override void ExcuteAction() 
     {
         enabled = true;
+
+        stateMachine.TransAttack(this, "isAttack");
 
         if (EffectPrefab == null)
             return;

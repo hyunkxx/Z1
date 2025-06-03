@@ -4,8 +4,7 @@ public class SMBMonsterAttack : LinkedSMB<MonsterStateMachine>
 {
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        monobeHaviour.ActionType = monobeHaviour.nomalAttack;
-        monobeHaviour.Action();
+        monobeHaviour.ChangeStateClip();
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

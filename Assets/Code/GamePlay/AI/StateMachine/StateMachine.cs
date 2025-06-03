@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class StateMachine : MonoBehaviour
 {
-    public BaseAction ActionType;
     public Animator animator;
     public MovementComponent movement;
     public TargetingComponent targetingComponent;
@@ -12,22 +11,18 @@ public class StateMachine : MonoBehaviour
     [HideInInspector] public GameObject target;
     [HideInInspector] public float targetDistance;
     public Action_Skill AttackType;
-    public Action_Skill nomalAttack;
-    public Action_Skill[] skill;
 
     public virtual void Initialize()
     {
         movement = GetComponent<MovementComponent>();
         animator = transform.GetComponentInChildren<Animator>();
-        nomalAttack = GetComponent<Action_Skill>();
-        skill = GetComponents<Action_Skill>();
         targetingComponent = transform.GetComponentInChildren<TargetingComponent>();
         targetDistance = 9999;
     }
 
     public void TransMoveToLocation()
     {
-        if (nomalAttack.AttackRange > targetDistance) return;
+        if (AttackType && AttackType.AttackRange > targetDistance) return;
 
         movement.MoveToLocation(target.transform.position);
         animator.SetBool("isMove", true);
@@ -35,7 +30,7 @@ public class StateMachine : MonoBehaviour
 
     public void TransMoveToDirection(Vector2 direction)
     {
-        if (nomalAttack.AttackRange > targetDistance)
+        if (AttackType && AttackType.AttackRange > targetDistance)
         {
             return;
         }
@@ -61,12 +56,13 @@ public class StateMachine : MonoBehaviour
     public bool TransAttack(Action_Skill _ationType, string _paramName)
     {
         if (target == null) return false;
+        if (_ationType == null) return false;
         if (_ationType.TransitionDelay > 0f) return false;
         if (Vector2.Distance(target.transform.position, transform.position) > _ationType.AttackRange) return false;
     
         AttackType = _ationType;
-        animator.SetTrigger(_paramName);
         animator.SetBool("isMove", false);
+        animator.SetTrigger(_paramName);
         return true;
     }
 
@@ -77,7 +73,7 @@ public class StateMachine : MonoBehaviour
         var overrides = new List<KeyValuePair<AnimationClip, AnimationClip>>();
         overrideController.GetOverrides(overrides);
     
-        string targetClipName = "Skill";
+        string targetClipName = "Attack";
 
         for (int i = 0; i < overrides.Count; i++)
         {
@@ -90,13 +86,6 @@ public class StateMachine : MonoBehaviour
 
         overrideController.ApplyOverrides(overrides);
         animator.runtimeAnimatorController = overrideController;
-    }
-
-    public void Action()
-    {
-        if (AttackType == null) return;
-    
-        ActionType.ExcuteAction();
     }
 
     protected IEnumerator FindTarget()

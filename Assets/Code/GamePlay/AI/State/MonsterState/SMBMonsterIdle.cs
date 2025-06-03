@@ -6,20 +6,14 @@ public class SMBMonsterIdle : LinkedSMB<MonsterStateMachine>
     {
         if (monobeHaviour == null) return;
         
-        monobeHaviour.ActionType = null;
+        monobeHaviour.AttackType = null;
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (monobeHaviour == null) return;
 
-        if (!monobeHaviour.TransAttack(monobeHaviour.nomalAttack,"isAttack"))
-        {
-            if (monobeHaviour.AttackType != null)
-            {
-                monobeHaviour.TransAttack(monobeHaviour.skill[0], "isSkill");
-            }
-        }
+        monobeHaviour.TransAttack(monobeHaviour.AttackType, "isAttack");
 
         if (monobeHaviour.target)
             monobeHaviour.TransMoveToLocation();

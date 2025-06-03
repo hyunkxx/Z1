@@ -9,20 +9,12 @@ public class SMBMonsterMove : LinkedSMB<MonsterStateMachine>
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (monobeHaviour.target && monobeHaviour.nomalAttack)
+        if (monobeHaviour.target && monobeHaviour.AttackType)
         {
-            if (monobeHaviour.nomalAttack.AttackRange > monobeHaviour.targetDistance)
+            if (monobeHaviour.AttackType.AttackRange > monobeHaviour.targetDistance)
                 monobeHaviour.TransIdle();
             else
                 monobeHaviour.TransMoveToLocation();
-        }
-
-        if (!monobeHaviour.TransAttack(monobeHaviour.nomalAttack, "isAttack"))
-        {
-            if (monobeHaviour.AttackType != null)
-            {
-                monobeHaviour.TransAttack(monobeHaviour.skill[0], "isSkill");
-            }
         }
     }
 
