@@ -32,6 +32,6 @@ public class SurvivalController
         inputDirection.x = Input.GetAxisRaw("Horizontal");
         inputDirection.y = Input.GetAxisRaw("Vertical");
 
-        character.Movement.MoveToDirection(inputDirection);
+        character.OnInputAxis(inputDirection);
     }
 }

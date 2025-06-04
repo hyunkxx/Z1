@@ -19,5 +19,5 @@ MonoBehaviour:
   m_abilityPrefab: {fileID: 712103377867727384, guid: 086da0c1ffc58664190641df819212fb, type: 3}
   m_abilityTarget: 1
   m_targetCount: 3
-  m_triggerDistance: 10
+  m_triggerDistance: 3
   m_animationTrigger: Attack

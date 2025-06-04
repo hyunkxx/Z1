@@ -35,7 +35,7 @@ public class PoolContainer : MonoBehaviour
 
         if (poolContainer.ContainsKey(pool.PoolName))
         {
-            Debug.LogWarning($"Pool with name {pool.PoolName} already exists");
+            //Debug.LogWarning($"Pool with name {pool.PoolName} already exists");
             return false;
         }
 

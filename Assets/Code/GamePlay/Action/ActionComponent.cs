@@ -10,10 +10,15 @@ public sealed class ActionComponent : MonoBehaviour
     [SerializeField]
     private ActionSet m_actionSet;
 
-    [NonSerialized]
-    private Character m_character;
+    public Character Character { get; private set; }
+    public BaseAction CurrentAction { get; private set; }
 
     Dictionary<EActionType, float> remainingTimes = new();
+
+    public bool IsCurrent(EActionType type)
+    {
+        return CurrentAction == GetAction(type);
+    }
 
     public bool IsCooldownRunning(EActionType actionType)
     {
@@ -22,7 +27,7 @@ public sealed class ActionComponent : MonoBehaviour
 
     public void Awake()
     {
-        m_character = GetComponent<Character>();
+        Character = GetComponent<Character>();
     }
 
     public void Update()
@@ -41,9 +46,13 @@ public sealed class ActionComponent : MonoBehaviour
             return false;
 
         BaseAction action = m_actionSet.GetAction(actionType);
-        if (action.TryExecute(m_character))
+        if (action.TryExecute(Character))
         {
             remainingTimes.Add(actionType, action.CoolDown);
+            CurrentAction = GetAction(actionType);
+            
+
+
             return true;
         }
         else
@@ -64,7 +73,6 @@ public sealed class ActionComponent : MonoBehaviour
         {
             remainingTimes[key] -= Time.deltaTime;
 
-            Debug.Log($"{key} : {remainingTimes[key]}");
             if (remainingTimes[key] <= 0f)
                 remainingTimes.Remove(key);
         }

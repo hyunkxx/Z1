@@ -107,6 +107,7 @@ public class Character
             brain.Initialize(this, AI);
         }
     }
+
     protected override void OnDestroy()
     {
         if (damageable)
@@ -125,6 +126,22 @@ public class Character
     public bool IsRight()
     {
         return !spriteRenderer.flipX;
+    }
+
+    public void OnInputAxis(Vector2 InputDirection)
+    {
+        if(InputDirection != Vector2.zero)
+        {
+            if(!ActionComponent.IsCurrent(EActionType.MOVE))
+                ActionComponent.TryExecute(EActionType.MOVE);
+        }
+        else
+        {
+            if (!ActionComponent.IsCurrent(EActionType.IDLE))
+                ActionComponent.TryExecute(EActionType.IDLE);
+        }
+
+        Movement.MoveToDirection(InputDirection);
     }
 
     public Vector2 GetCharacterDirection()
