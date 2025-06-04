@@ -15,19 +15,24 @@ public enum EAbilityTarget
 public class ActionAbility : BaseAction
 {
     [SerializeField]
-    private GameObject m_abilityPrefab;
+    protected GameObject m_abilityPrefab;
 
     [SerializeField]
-    EAbilityTarget m_abilityTarget;
+    protected EAbilityTarget m_abilityTarget;
 
     [SerializeField, ShowIf("m_abilityTarget", EAbilityTarget.Multi)]
-    private int m_targetCount = 1;
+    protected int m_targetCount = 1;
 
     [SerializeField, ShowIf("m_abilityTarget", EAbilityTarget.Self, true), Range(0.0f, 20.0f)]
-    private float m_triggerDistance = 5f;
+    protected float m_triggerDistance = 5f;
 
     [SerializeField]
     protected string m_animationTrigger;
+
+    public EAbilityTarget AbilityTarget => m_abilityTarget;
+    public int TargetMaxCount { get { return AbilityTarget == EAbilityTarget.Multi ? m_targetCount : 1; } }
+    public float TriggerDistance => m_triggerDistance;
+    public string AnimationTrigger => m_animationTrigger;
 
     protected override bool InternalExecuteAction(ICharacterQueryable InQueryable)
     {
@@ -94,6 +99,7 @@ public class ActionAbility : BaseAction
             if (!string.IsNullOrEmpty(m_animationTrigger))
             {
                 character.Animator.SetTrigger(m_animationTrigger);
+                Debug.Log($"{character.name}   {m_animationTrigger}");
             }
             
             return true;

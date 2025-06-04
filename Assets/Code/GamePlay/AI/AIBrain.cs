@@ -34,11 +34,15 @@ public class AIBrain : MonoBehaviour
 
     public AIType AIType => aIType;
 
-    public void Initialize(Character character, AIType type, float detectRange)
+    public void Initialize(Character character, AIType type)
     {
         possessed = character;
         aIType = type;
-        DetectRange = detectRange;
+
+        ActionComponent component = possessed.ActionComponent;
+        ActionAbility ability = component.GetAction(EActionType.ATTACK) as ActionAbility;
+        DetectRange = ability ? ability.TriggerDistance : 1f;
+
         stateMachine = character.GetComponent<StateMachine>();
     }
 

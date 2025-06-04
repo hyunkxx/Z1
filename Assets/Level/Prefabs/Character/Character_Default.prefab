@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 4830204434607766788}
   - component: {fileID: 56588940593395949}
   - component: {fileID: 775182407013112998}
+  - component: {fileID: 5025526650189984295}
   m_Layer: 0
   m_Name: WeaponSocket
   m_TagString: Untagged
@@ -132,6 +133,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8f0d97f583356c4db150ff4ad6e7363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &5025526650189984295
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2623416765903343386}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cbf02e7bc6464f14699500fe0176e66a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4249194490359796861
 GameObject:
   m_ObjectHideFlags: 0

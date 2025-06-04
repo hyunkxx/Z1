@@ -10,7 +10,5 @@ public class INSTANCE : MonoBehaviour
         GameObject obj = Instantiate<GameObject>(PC);
         PlayerController pc = obj.GetComponent<SurvivalController>();
         pc.ConnectCharacter(C);
-
-        C.gameObject.AddComponent<CharacterAnimationController>();
     }
 }

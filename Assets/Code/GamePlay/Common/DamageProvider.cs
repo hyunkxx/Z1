@@ -84,7 +84,9 @@ public sealed class DamageProvider : MonoBehaviour
         }
 
         StopAllCoroutines();
-        Destroy(gameObject);
+
+        if (shouldDestroyOnTrigger)
+            Destroy(transform.root.gameObject);
     }
 
     private IEnumerator CoroutinePerodicActivate()
