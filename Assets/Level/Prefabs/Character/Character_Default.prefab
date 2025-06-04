@@ -453,6 +453,7 @@ MonoBehaviour:
     m_weaponEndSocket: {fileID: 5900743110533060484}
   movementComponent: {fileID: 7235276069043101290}
   m_isNPC: 0
+  TestDetectRange: 3
 --- !u!114 &7235276069043101290
 MonoBehaviour:
   m_ObjectHideFlags: 0

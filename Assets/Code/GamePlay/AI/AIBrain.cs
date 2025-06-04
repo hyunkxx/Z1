@@ -29,16 +29,16 @@ public class AIBrain : MonoBehaviour
     TargetingComponent targetingComponent;
     StateMachine stateMachine;
 
-    public float DetectRange = 0;
+    public float DetectRange;
     public float targetDistanceSqr = 9999;
 
     public AIType AIType => aIType;
 
-    public void Initialize(Character character, AIType type)
+    public void Initialize(Character character, AIType type, float detectRange)
     {
         possessed = character;
         aIType = type;
-
+        DetectRange = detectRange;
         stateMachine = character.GetComponent<StateMachine>();
     }
 
@@ -47,14 +47,12 @@ public class AIBrain : MonoBehaviour
         Logics = new Dictionary<AIStateType, AIState>()
                 {
                     [AIStateType.Idle] = new IdleAIState(this),
-                    [AIStateType.Move] = new MoveAIState(this),
                     [AIStateType.Attack] = new AttackAIState(this),
+                    [AIStateType.Move] = new MoveAIState(this),
                 };
 
         targetingComponent = transform.GetComponentInChildren<TargetingComponent>();
         movementComponent = transform.GetComponent<MovementComponent>();
-
-        DetectRange = 5;
     }
 
     private void Update()
@@ -83,7 +81,7 @@ public class AIBrain : MonoBehaviour
         return AIStateType.Idle;
     }
 
-    public float GetTargetDistance() { FindTarget(); return targetDistanceSqr; }
+    public float GetTargetDistance() { return Target? (transform.position - Target.transform.position).sqrMagnitude : 9999f; }
 
     public GameObject FindTarget()
     {

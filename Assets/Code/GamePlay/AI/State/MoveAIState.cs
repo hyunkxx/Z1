@@ -27,12 +27,14 @@ public class MoveAIState : AIState
         if (CurMoveState != newMoveState)
         {
             CurMoveState = newMoveState;
-            Move();
         }
+
+        Move();
     }
 
     public override void ExitState()
     {
+        brain.movementComponent.ResetMovement();
     }
 
     MoveState ChooseMoveState()
@@ -53,17 +55,15 @@ public class MoveAIState : AIState
                 brain.movementComponent.MoveToLocation(brain.Target.transform.position);
                 break;
         }
-
-        /**/
-        ActionComponent actionComponent = brain.possessed.ActionComponent;
-        actionComponent.TryExecute(EActionType.ATTACK);
     }
 
     public override bool IsEligible() 
     {
-        // 플레이어에게 일정 거리만큼 다가갔을때 Move False
-        if (brain.FindTarget() && brain.targetDistanceSqr > brain.DetectRange * brain.DetectRange)
+        GameObject target = brain.Target ?? brain.FindTarget();
+        if (target && brain.GetTargetDistance() < brain.DetectRange * brain.DetectRange)
+        {
             return false;
+        }
 
         return true;
     }

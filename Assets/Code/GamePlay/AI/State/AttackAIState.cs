@@ -20,10 +20,12 @@ public class AttackAIState : AIState
 
     public override bool IsEligible()
     {
-        //if(TryExcute())
-        // 어떤 조건에서 Attack State 를 들어오게 할지
+        ActionComponent actionComponent = brain.possessed.ActionComponent;
 
-        return true;
+        if (actionComponent.TryExecute(EActionType.ATTACK))
+            return true;
+
+        return false;
     }
 
     public override void UpdateState()

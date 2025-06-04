@@ -11,7 +11,7 @@ public class IdleAIState : AIState
     public override void EnterState()
     {
         ActionComponent actionComponent = brain.possessed.ActionComponent;
-        actionComponent.TryExecute(EActionType.MOVE);
+        actionComponent.TryExecute(EActionType.IDLE);
     }
 
     public override void ExitState()
@@ -25,6 +25,5 @@ public class IdleAIState : AIState
 
     public override void UpdateState()
     {
-        throw new System.NotImplementedException();
     }
 }

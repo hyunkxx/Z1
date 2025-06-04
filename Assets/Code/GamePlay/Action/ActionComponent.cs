@@ -50,9 +50,6 @@ public sealed class ActionComponent : MonoBehaviour
         {
             remainingTimes.Add(actionType, action.CoolDown);
             CurrentAction = GetAction(actionType);
-            
-
-
             return true;
         }
         else

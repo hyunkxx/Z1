@@ -74,6 +74,8 @@ public class Character
 
     public event Action<bool> OnChangedFlip;
 
+    public float TestDetectRange = 0f;
+
     public void Initialize(int characterID)
     {
         characterStats = new CharacterStats(characterID);
@@ -104,7 +106,7 @@ public class Character
 
             AIBrain brain = gameObject.AddComponent<AIBrain>();
             gameObject.AddComponent<StateMachine>();
-            brain.Initialize(this, AI);
+            brain.Initialize(this, AI, TestDetectRange);
         }
     }
 
