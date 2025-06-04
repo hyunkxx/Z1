@@ -5,8 +5,8 @@ using UnityEngine;
 enum AIStateType
 {
     Idle,
-    Move,
     Attack,
+    Move,
 }
 
 public enum AIType
@@ -47,8 +47,8 @@ public class AIBrain : MonoBehaviour
         Logics = new Dictionary<AIStateType, AIState>()
                 {
                     [AIStateType.Idle] = new IdleAIState(this),
-                    [AIStateType.Attack] = new AttackAIState(this),
                     [AIStateType.Move] = new MoveAIState(this),
+                    [AIStateType.Attack] = new AttackAIState(this),
                 };
 
         targetingComponent = transform.GetComponentInChildren<TargetingComponent>();
