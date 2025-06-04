@@ -75,6 +75,8 @@ public class DefenceSpawner : SpawnController
             if(_type.Contains("Character"))
             {
                 obj.GetComponent<BoxCollider2D>().enabled = true;
+                obj.GetComponent<Character>().SetIsNPC(true);
+                obj.GetComponent<Character>().InitializeNpcComponent();
             }
 
             curCount++;

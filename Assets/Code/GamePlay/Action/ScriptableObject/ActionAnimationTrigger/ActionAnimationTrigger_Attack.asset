@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   conditionSet:
     conditions: []
-  m_coolDown: 0
+  m_coolDown: 2
   m_animationTrigger: Attack

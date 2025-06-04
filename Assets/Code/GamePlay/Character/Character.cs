@@ -97,15 +97,21 @@ public class Character
         damageable = GetComponent<Damageable>();
         damageable.OnDamageTaken += TakeDamage;
 
+        Debug.Log("Awake");
         if(IsNPC)
         {
-            ETeam teamID = damageable.TeamID;
-            AIType AI = teamID == ETeam.Player ? AIType.Character : AIType.Monster;
-
-            AIBrain brain = gameObject.AddComponent<AIBrain>();
-            gameObject.AddComponent<StateMachine>();
-            brain.Initialize(this, AI);
+            InitializeNpcComponent();
         }
+    }
+
+    public void InitializeNpcComponent()
+    {
+        ETeam teamID = damageable.TeamID;
+        AIType AI = teamID == ETeam.Player ? AIType.Character : AIType.Monster;
+
+        AIBrain brain = gameObject.AddComponent<AIBrain>();
+        gameObject.AddComponent<StateMachine>();
+        brain.Initialize(this, AI);
     }
 
     protected override void OnDestroy()
@@ -121,7 +127,6 @@ public class Character
     }
     protected virtual void TakeDamage(DamageEvent info)
     {
-        Debug.Log("Player HIT");
     }
     public bool IsRight()
     {
@@ -183,6 +188,7 @@ public class Character
         }
     }
 
+    public void SetIsNPC(bool value) { m_isNPC = value; }
     public Character GetCharacter()
     {
         return this;

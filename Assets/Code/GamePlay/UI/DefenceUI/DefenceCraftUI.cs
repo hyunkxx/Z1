@@ -4,10 +4,12 @@ using UnityEngine.UI;
 public class DefenceCraftUI : MonoBehaviour
 {
     [SerializeField] private GameObject Contents;
-    [SerializeField] private DefenceGameRule GameRule;
+    [SerializeField] private Button CloseButton;
+    //[SerializeField] private DefenceGameRule GameRule;
 
     private void Start()
     {
+        CloseButton.onClick.AddListener(() => { this.gameObject.SetActive(false); });
         UpdateSlotInfo();
     }
 

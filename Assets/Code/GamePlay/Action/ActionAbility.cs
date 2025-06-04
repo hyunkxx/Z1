@@ -99,7 +99,6 @@ public class ActionAbility : BaseAction
             if (!string.IsNullOrEmpty(m_animationTrigger))
             {
                 character.Animator.SetTrigger(m_animationTrigger);
-                Debug.Log($"{character.name}   {m_animationTrigger}");
             }
             
             return true;
