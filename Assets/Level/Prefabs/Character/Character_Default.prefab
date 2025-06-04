@@ -336,14 +336,9 @@ GameObject:
   - component: {fileID: 6984386188652096524}
   - component: {fileID: 4299492805316279674}
   - component: {fileID: 2858142384857847269}
-  - component: {fileID: 3030473297292740420}
-  - component: {fileID: 2596442680677866466}
   - component: {fileID: 7235276069043101290}
-  - component: {fileID: 9098919813877421223}
-  - component: {fileID: 5756834599355081601}
-  - component: {fileID: 5511666353575863066}
   - component: {fileID: 7690316522601446988}
-  - component: {fileID: 2047761708928815268}
+  - component: {fileID: 1234846170313499435}
   m_Layer: 0
   m_Name: Character_Default
   m_TagString: Untagged
@@ -454,36 +449,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterView:
-    _weaponSocket: {fileID: 4830204434607766788}
-    _weaponEndSocket: {fileID: 5900743110533060484}
+    m_weaponSocket: {fileID: 4830204434607766788}
+    m_weaponEndSocket: {fileID: 5900743110533060484}
   movementComponent: {fileID: 7235276069043101290}
---- !u!114 &3030473297292740420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7834587441641150271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f07c8a4643d5284499d8bef6c65f3d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aIType: 0
-  targetDistanceSqr: 9999
---- !u!114 &2596442680677866466
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7834587441641150271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d14af7aabdd54844d9405b29fe326429, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 4779749065862699798}
+  m_isNPC: 0
 --- !u!114 &7235276069043101290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -498,54 +467,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   maxVelocity: 2
---- !u!114 &9098919813877421223
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7834587441641150271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56ab27d8b576930409b984a2ab7d367b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetCount: 0
-  providerData:
-    shouldDisableOnTrigger: 0
-    duration: 1
-    periodicInterval: 0
---- !u!114 &5756834599355081601
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7834587441641150271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3a442b5ffe38b54daf6906c202f337f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  teamID: 1
---- !u!114 &5511666353575863066
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7834587441641150271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75f35aae3ecd87b4eb15a8a89d6be57f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SkillTarget: 0
-  targetCount: 1
-  EffectPrefab: {fileID: 4692837568177271607, guid: f199a3da145f9a2418e1b5c1b4c954c8, type: 3}
-  transitionDelay: 1
-  attackRange: 3
-  clip: {fileID: 0}
 --- !u!114 &7690316522601446988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -558,9 +479,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceb064e34812b77498e61074fe0c98bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Attack: {fileID: 5511666353575863066}
-  SkillSet: []
---- !u!114 &2047761708928815268
+  m_actionSet: {fileID: 11400000, guid: 39733b6cbd9db2d49a4061b55a0e8ffd, type: 2}
+--- !u!114 &1234846170313499435
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -569,12 +489,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7834587441641150271}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da5b5184270dca34895759172ca7ff77, type: 3}
+  m_Script: {fileID: 11500000, guid: e3a442b5ffe38b54daf6906c202f337f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SkillTarget: 0
-  targetCount: 1
-  EffectPrefab: {fileID: 3797684433542849519, guid: 168187d4be14fe649b61410e4b9a282d, type: 3}
-  transitionDelay: 5
-  attackRange: 1
-  clip: {fileID: 0}
+  teamID: 1

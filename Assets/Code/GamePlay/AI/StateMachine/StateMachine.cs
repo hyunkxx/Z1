@@ -5,15 +5,30 @@ using UnityEngine;
 public class StateMachine : MonoBehaviour
 {
     public Animator animator;
+    public AIState currentState { get; private set; }
 
     // Brain 이 State 들을 가지고있고 어떤 상태인지 결정한다.
     // State 에서 로직 처리
 
-    public virtual void Initialize()
+    public void Awake()
     {
         animator = transform.GetComponentInChildren<Animator>();
     }
 
+    public void TransitionTo(AIState newState)
+    {
+        if (currentState == newState)
+            return;
+
+        if (currentState != null)
+        {
+            currentState.ExitState();
+        }
+
+        currentState = newState;
+        currentState.EnterState();
+    }
+    
     public void TransIdle()
     {
         foreach (var param in animator.parameters)
@@ -25,12 +40,6 @@ public class StateMachine : MonoBehaviour
         }
 
         animator.Play("Idle");
-    }
-
-    public bool TransStateAnim(string _paramName)
-    {
-        animator.SetTrigger(_paramName);
-        return true;
     }
 
     public void ChangeStateClip(AnimationClip clip)

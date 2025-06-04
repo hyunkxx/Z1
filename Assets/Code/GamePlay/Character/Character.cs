@@ -15,8 +15,8 @@ public interface ICharacterQueryable
 [System.Serializable]
 public struct CharacterView
 {
-    public Transform _weaponSocket;
-    public Transform _weaponEndSocket;
+    public Transform m_weaponSocket;
+    public Transform m_weaponEndSocket;
 }
 
 [System.Serializable]
@@ -41,25 +41,36 @@ public struct TransformData
     }
 }
 
-public class Character : Z1Behaviour
+[RequireComponent(typeof(Damageable))]
+[RequireComponent(typeof(MovementComponent))]
+public class Character 
+    : Z1Behaviour
+    , ICharacterQueryable
 {
     [SerializeField] protected CharacterView characterView;
     [SerializeField] protected MovementComponent movementComponent;
 
+    [SerializeField] protected bool m_isNPC;
+
     protected WeaponComponent weaponComponent;
     protected TargetingComponent targetingComponent;
     protected CharacterAnimationController animController;
+    protected ActionComponent actionComponent;
 
     protected Rigidbody2D rg2d;
     protected SpriteRenderer spriteRenderer;
+    protected Animator animator;
 
     protected CharacterStats characterStats;
     protected Damageable damageable;
 
+    public bool IsNPC => m_isNPC;
     public CharacterView CharacterView => characterView;
     public TargetingComponent TargetingComponent => targetingComponent;
+    public ActionComponent ActionComponent => actionComponent;
     public MovementComponent Movement => movementComponent;
     public CharacterStats Stats => characterStats;
+    public Animator Animator => animator;
 
     public event Action<bool> OnChangedFlip;
 
@@ -75,6 +86,9 @@ public class Character : Z1Behaviour
 
         rg2d = GetComponent<Rigidbody2D>();
         spriteRenderer = transform.Find("Root").GetComponent<SpriteRenderer>();
+        animator = transform.Find("Root").GetComponent<Animator>();
+
+        actionComponent = GetComponent<ActionComponent>();
         animController = GetComponent<CharacterAnimationController>();
 
         weaponComponent = GetComponent<WeaponComponent>();
@@ -82,6 +96,16 @@ public class Character : Z1Behaviour
 
         damageable = GetComponent<Damageable>();
         damageable.OnDamageTaken += TakeDamage;
+
+        if(IsNPC)
+        {
+            ETeam teamID = damageable.TeamID;
+            AIType AI = teamID == ETeam.Player ? AIType.Character : AIType.Monster;
+
+            AIBrain brain = gameObject.AddComponent<AIBrain>();
+            gameObject.AddComponent<StateMachine>();
+            brain.Initialize(this, AI);
+        }
     }
     protected override void OnDestroy()
     {
@@ -140,5 +164,10 @@ public class Character : Z1Behaviour
                 OnChangedFlip?.Invoke(true);
             }
         }
+    }
+
+    public Character GetCharacter()
+    {
+        return this;
     }
 }

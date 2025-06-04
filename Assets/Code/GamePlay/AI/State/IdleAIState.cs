@@ -2,29 +2,29 @@ using UnityEngine;
 
 public class IdleAIState : AIState
 {
-    AIBrain aiBrain;
-
-    public IdleAIState(AIBrain _brain) { aiBrain = _brain; }
-
-    public override void Awake()
-    {
-
-    }
-
-    public override void Start()
-    {
-    }
-
-    public override void Update()
-    {
-    }
+    public IdleAIState(AIBrain _brain) { brain = _brain; }
 
     public override void Initialize()
+    {
+    }
+
+    public override void EnterState()
+    {
+        ActionComponent actionComponent = brain.possessed.ActionComponent;
+        actionComponent.TryExecute(EActionType.MOVE);
+    }
+
+    public override void ExitState()
     {
     }
 
     public override bool IsEligible()
     {
         return false;
+    }
+
+    public override void UpdateState()
+    {
+        throw new System.NotImplementedException();
     }
 }

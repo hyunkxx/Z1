@@ -22,6 +22,7 @@ public class AIBrain : MonoBehaviour
     [SerializeField] AIType aIType;
     Dictionary<AIStateType, AIState> Logics;
 
+    public Character possessed { get; private set; }
     public GameObject Target { get; private set; }
 
     public MovementComponent movementComponent { get; private set; }
@@ -33,6 +34,13 @@ public class AIBrain : MonoBehaviour
 
     public AIType AIType => aIType;
 
+    public void Initialize(Character character, AIType type)
+    {
+        possessed = character;
+        aIType = type;
+
+        stateMachine = character.GetComponent<StateMachine>();
+    }
 
     private void Awake()
     {
@@ -44,7 +52,6 @@ public class AIBrain : MonoBehaviour
                 };
 
         targetingComponent = transform.GetComponentInChildren<TargetingComponent>();
-        stateMachine = transform.GetComponentInChildren<StateMachine>();
         movementComponent = transform.GetComponent<MovementComponent>();
 
         DetectRange = 5;
@@ -57,10 +64,10 @@ public class AIBrain : MonoBehaviour
         if (CurrentState != newState)
         {
             CurrentState = newState;
+            stateMachine.TransitionTo(Logics[CurrentState]);
         }
 
-        Logics[CurrentState].Update();
-        stateMachine.TransStateAnim("is" + CurrentState.ToString());
+        Logics[CurrentState].UpdateState();
     }
 
     private AIStateType FindBestEligibleAIState()

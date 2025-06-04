@@ -24,9 +24,9 @@ public class DefenceGameRule
     private DefenceCastle PlayerTeamHP;
     private DefenceCastle EnemyTeamHP;
 
-    private int HaveGreenStoneCount = 0;
-    private int HaveBlueStoneCount = 0;
-    private int HaveRedStoneCount = 0;
+    //private int HaveGreenStoneCount = 0;
+    //private int HaveBlueStoneCount = 0;
+    //private int HaveRedStoneCount = 0;
 
     private int MaxLoadingCount = 0;
     private int CurLoadingCount = 0;

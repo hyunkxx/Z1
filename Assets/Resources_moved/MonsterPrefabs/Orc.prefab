@@ -9,12 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6123920241179067176}
-  - component: {fileID: 3888352031298902229}
-  - component: {fileID: 3590823760687246128}
+  - component: {fileID: 4420333251908559049}
   - component: {fileID: 5032921733773311675}
   - component: {fileID: 1437535598788499756}
   - component: {fileID: 5743725137997800422}
-  - component: {fileID: 6821499858594191812}
   - component: {fileID: 3471724657695876419}
   - component: {fileID: 1507022867646640303}
   m_Layer: 0
@@ -23,7 +21,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6123920241179067176
 Transform:
   m_ObjectHideFlags: 0
@@ -41,7 +39,7 @@ Transform:
   - {fileID: 6915638333809491812}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3888352031298902229
+--- !u!114 &4420333251908559049
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -50,24 +48,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 4817972689310064399}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f07c8a4643d5284499d8bef6c65f3d0, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cb2143c2410b0843af7a67b52461819, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aIType: 1
-  targetDistanceSqr: 9999
---- !u!114 &3590823760687246128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4817972689310064399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d14af7aabdd54844d9405b29fe326429, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 1961569616728861630}
+  characterView:
+    m_weaponSocket: {fileID: 0}
+    m_weaponEndSocket: {fileID: 0}
+  movementComponent: {fileID: 5032921733773311675}
+  m_isNPC: 1
 --- !u!114 &5032921733773311675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3a442b5ffe38b54daf6906c202f337f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teamID: 2
+  teamID: 3
 --- !u!114 &5743725137997800422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,27 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceb064e34812b77498e61074fe0c98bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Attack: {fileID: 0}
-  SkillSet:
-  - {fileID: 6821499858594191812}
---- !u!114 &6821499858594191812
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4817972689310064399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2a265a087107784cb7bb1fad384ecc2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SkillTarget: 0
-  targetCount: 1
-  EffectPrefab: {fileID: 0}
-  transitionDelay: 5
-  attackRange: 1
-  clip: {fileID: 0}
+  m_actionSet: {fileID: 11400000, guid: 39733b6cbd9db2d49a4061b55a0e8ffd, type: 2}
 --- !u!50 &3471724657695876419
 Rigidbody2D:
   serializedVersion: 5

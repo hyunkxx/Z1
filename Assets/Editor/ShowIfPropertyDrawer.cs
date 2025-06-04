@@ -22,9 +22,11 @@ public class ShowIfPropertyDrawer : PropertyDrawer
         {
             case SerializedPropertyType.Boolean:
                 shouldShow = conditionProp.boolValue.Equals(showIf.CompareValue);
+                if (showIf.Invert) shouldShow = !shouldShow;
                 break;
             case SerializedPropertyType.Enum:
                 shouldShow = conditionProp.enumValueIndex.Equals((int)showIf.CompareValue);
+                if (showIf.Invert) shouldShow = !shouldShow;
                 break;
             default:
                 Debug.LogWarning($"[ShowIf] Unsupported property type: {conditionProp.propertyType}");
@@ -51,9 +53,11 @@ public class ShowIfPropertyDrawer : PropertyDrawer
             {
                 case SerializedPropertyType.Boolean:
                     shouldShow = conditionProp.boolValue.Equals(showIf.CompareValue);
+                    if (showIf.Invert) shouldShow = !shouldShow;
                     break;
                 case SerializedPropertyType.Enum:
                     shouldShow = conditionProp.enumValueIndex.Equals((int)showIf.CompareValue);
+                    if (showIf.Invert) shouldShow = !shouldShow;
                     break;
                 default:
                     shouldShow = true;

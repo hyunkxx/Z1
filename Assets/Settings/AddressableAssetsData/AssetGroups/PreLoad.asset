@@ -25,11 +25,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ab16cf3d12cde4f40ae12ef67211fdc5
-    m_Address: Defence_Orc
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: febb501f9ce63e5448c333eabb8965cc
     m_Address: Sprite_BaekSu
     m_ReadOnly: 0

@@ -6,80 +6,78 @@ using UnityEngine;
 
 
 //@hyun_todo : damage type {region/tick/single/multi/}
-
-[System.Serializable]
-public struct DamageProviderParam
+public enum ELifeCycle
 {
-    [NonSerialized] public GameObject owner;
-    [NonSerialized] public CharacterStats characterStats;
-
-    [SerializeField] public bool shouldDisableOnTrigger;
-
-    [SerializeField] public float duration;
-    [SerializeField] public float periodicInterval;
-
-    public DamageProviderParam(GameObject owner, CharacterStats stats, float duration, bool shouldDisableOnTrigger = false, float periodicInterval = 0f)
-    {
-        this.owner = owner;
-        this.characterStats = stats;
-
-        this.duration = duration;
-        this.periodicInterval = periodicInterval;
-        this.shouldDisableOnTrigger = shouldDisableOnTrigger;
-    }
-    public DamageProviderParam(DamageProviderParam param)
-    {
-        this.owner = param.owner;
-        this.characterStats = param.characterStats;
-
-        this.duration = param.duration;
-        this.periodicInterval = param.periodicInterval;
-        this.shouldDisableOnTrigger = param.shouldDisableOnTrigger;
-    }
+    Owner,
+    Self
 }
 
-public class DamageProvider : MonoBehaviour
+public sealed class DamageProvider : MonoBehaviour
 {
-    [SerializeField] private int targetCount;
-    [SerializeField] private DamageProviderParam providerData;
+    [SerializeField]
+    public ELifeCycle lifeCycle;
 
+    [SerializeField, ShowIf("lifeCycle", ELifeCycle.Self)]
+    public float lifeTime;
+
+    [SerializeField] public bool shouldDestroyOnTrigger;
+    [SerializeField] public float periodicInterval;
+
+    [NonSerialized] private GameObject owner;
+    [NonSerialized] private CharacterStats characterStats;
+
+    private Collider2D coll;
     private bool enableTrigger = false;
-    Collider2D[] colls;
+
+    public GameObject Owner => owner;
 
     private void Awake()
     {
-        colls = GetComponents<Collider2D>();
-        Debug.Assert(colls != null, "Effect2D has no assigned Collider.");
+        enabled = false;
+        coll = GetComponent<Collider2D>();
 
-        foreach (Collider2D coll in colls)
-        {
-            coll.enabled = false;
-            coll.isTrigger = true;
-        }
+        coll.enabled = false;
+        coll.isTrigger = true;
     }
 
-    protected void Activate()
+    public void ActivateProvider(GameObject owner, CharacterStats characterStats)
+    {
+        enabled = true;
+
+        this.owner = owner;
+        this.characterStats = characterStats;
+
+        Activate();
+    }
+
+    private void Activate()
     {
         ResetTrigger();
 
-        StartCoroutine(CoroutineLifeTime());
-        if(providerData.periodicInterval > 0f)
+        if(lifeCycle == ELifeCycle.Self)
+        {
+            StartCoroutine(CoroutineLifeTime());
+        }
+
+        if(periodicInterval > 0f)
         {
             StartCoroutine(CoroutinePerodicActivate());
         }
     }
-    public void ActivateProvider(GameObject owner, CharacterStats characterStats)
-    {
-        providerData.owner = owner;
-        providerData.characterStats = characterStats;
 
-        Activate();
+    public void ResetTrigger()
+    {
+        coll.enabled = false;
+        coll.isTrigger = true;
+        coll.enabled = true;
+
+        enableTrigger = true;
     }
 
     private IEnumerator CoroutineLifeTime()
     {
         float elapsed = 0f;
-        while(elapsed < providerData.duration)
+        while(elapsed < lifeTime)
         {
             elapsed += Time.deltaTime;
             yield return null;
@@ -88,6 +86,7 @@ public class DamageProvider : MonoBehaviour
         StopAllCoroutines();
         Destroy(gameObject);
     }
+
     private IEnumerator CoroutinePerodicActivate()
     {
         float elapsed = 0f;
@@ -95,7 +94,7 @@ public class DamageProvider : MonoBehaviour
         {
             yield return null;
 
-            if (elapsed >= providerData.periodicInterval)
+            if (elapsed >= periodicInterval)
             {
                 elapsed = 0f;
                 ResetTrigger();
@@ -104,46 +103,28 @@ public class DamageProvider : MonoBehaviour
         }
     }
 
-    /* temp */
-    private IEnumerator CoroutineResetTrigger(Collider2D[] Incolls)
-    {
-        foreach (Collider2D coll in Incolls)
-        {
-            coll.enabled = false;
-            coll.isTrigger = true;
-            yield return new WaitForFixedUpdate();
-            coll.enabled = true;
-        }
-    }
-
-    public void ResetTrigger()
-    {
-        foreach (Collider2D coll in colls)
-        {
-            coll.enabled = false;
-            coll.isTrigger = true;
-            coll.enabled = true;
-        }
-
-        enableTrigger = true;
-    }
-
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (!enableTrigger)
             return;
 
-        Damageable owner = providerData.owner.GetComponent<Damageable>();
+        if (this.owner == null)
+            return;
+
+        Damageable owner = this.owner.GetComponent<Damageable>();
         Damageable other = collision.gameObject.GetComponent<Damageable>();
         if (owner && other)
         {
             if (owner.IsEnemy(other))
             {
                 //@hyun_temp
-                DamageEvent damageEvent = new DamageEvent(50f, providerData.owner);
+                DamageEvent damageEvent = new DamageEvent(50f, this.owner);
 
                 //DamageEvent damageEvent = new DamageEvent(providerData.characterStats.Damage, providerData.owner);
                 other.TakeDamage(damageEvent);
+
+                if (shouldDestroyOnTrigger)
+                    Destroy(transform.root.gameObject);
             }
         }
     }

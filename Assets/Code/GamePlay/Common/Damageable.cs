@@ -23,6 +23,7 @@ public enum ETeam
 {
     None,
     Player,
+    Neutral,
     EnemyAI
 }
 
@@ -35,12 +36,17 @@ public sealed class Damageable : MonoBehaviour
 
     public bool IsAlly(Damageable other)
     {
+        if (teamID == ETeam.Neutral || other.TeamID == ETeam.Neutral)
+            return true;
+
         return other.TeamID == teamID;
     }
+
     public bool IsEnemy(Damageable other)
     {
-        return other.TeamID != teamID;
+        return teamID != other.TeamID && teamID != ETeam.Neutral && other.TeamID != ETeam.Neutral;
     }
+
     public void TakeDamage(DamageEvent customEvent)
     {
         ObjectPool pool = PoolManager.Instance.GetPool("DamageFont");
