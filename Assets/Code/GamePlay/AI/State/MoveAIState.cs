@@ -18,6 +18,8 @@ public class MoveAIState : AIState
     {
         ActionComponent actionComponent = brain.possessed.ActionComponent;
         actionComponent.TryExecute(EActionType.MOVE);
+
+        Debug.Log($"{brain.possessed.gameObject.name} Enter MoveState");
     }
 
     public override void UpdateState()

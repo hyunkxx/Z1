@@ -2,14 +2,17 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DefenceUI : MonoBehaviour
+public class DefenceUI : UIBase
 {
     [SerializeField] private DefenceGameRule GameRule;
     [SerializeField] private Button CraftPanelActiveButton;
     [SerializeField] private GameObject CraftPanel;
     [SerializeField] private TextMeshProUGUI Rount_txt;
-    [SerializeField] private TextMeshProUGUI Life_txt;
     [SerializeField] private TextMeshProUGUI RoundTime_txt;
+
+    [SerializeField] private Button UserSkillButton_0;
+    [SerializeField] private Button UserSkillButton_1;
+
 
     private float RoundTime = 0f;
 
@@ -21,7 +24,6 @@ public class DefenceUI : MonoBehaviour
 
     void Update()
     {
-        Life_txt.text = $"Round {GameRule.curLife} / {GameRule.fullLife}";
         RoundTime_txt.text = $"{(int)RoundTime}";
         RoundTime -= Time.deltaTime;
     }
@@ -32,5 +34,15 @@ public class DefenceUI : MonoBehaviour
         RoundTime = GameRule.roundTime;
     }
 
+    //void OnChangedStoneCountUI()
+    //{
+    //    GameRule.HaveGreenStoneCount;
+    //    GameRule.HaveBlueStoneCount;
+    //    GameRule.HaveRedStoneCount;
+    //}
 
+    void OnClickSkillButton()
+    {
+        //if(GetButtonName == )
+    }
 }

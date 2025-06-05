@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2865608423344591780}
   - component: {fileID: 3436324604003990673}
   - component: {fileID: 6389703702791057003}
+  - component: {fileID: 1074578224340737344}
   m_Layer: 0
   m_Name: DefenceCastle
   m_TagString: Untagged
@@ -106,6 +107,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae43bfc6720ecd94db68f2bc866cef27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HP: 0
+  hPBar: {fileID: 1074578224340737344}
+--- !u!114 &1074578224340737344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 679952799966159618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d4abe61c51d2dd44900aff10eab69e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HPBarSlider: {fileID: 0}
 --- !u!1 &6098171944116838775
 GameObject:
   m_ObjectHideFlags: 0

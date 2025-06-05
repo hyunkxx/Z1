@@ -38,6 +38,9 @@ public class Database : Singleton<Database>
     [SerializeField, SerializedDictionary("Key", "Defense Round DataAsset")]
     public SerializedDictionary<string, RoundAssetData> DefenseRoundAssetData;
 
+    [SerializeField, SerializedDictionary("Key", "Defence Reward DataAsset")]
+    public SerializedDictionary<string, DefenceRewardAssetData> DefenseRewardAssetDatas;
+
     /* INVENTORY */
     public Inventory Inventory { get; private set; }
 

@@ -3,18 +3,20 @@ using UnityEngine;
 public class DefenceCastle : MonoBehaviour
 {
     private Damageable damageable = null;
-    //[SerializeField] private float HP;
+    [SerializeField] private float hP;
+    [SerializeField] private HPBar hPBar;
+
+    public float HP => hP;
 
     private void Awake()
     {
         damageable = GetComponent<Damageable>();
-        //HP = 100f;
-
+        hPBar.Initialize(hP);
     }
 
     void Start()
     {
-        
+        damageable.OnDamageTaken += OnHit;
     }
 
     void Update()
@@ -25,5 +27,11 @@ public class DefenceCastle : MonoBehaviour
     public void Initialize(ETeam team)
     {
 
+    }
+
+    public void OnHit(DamageEvent damageEvent)
+    {
+        hP -= damageEvent.damage;
+        hPBar.ShowInfo(hP);
     }
 }

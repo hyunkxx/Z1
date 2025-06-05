@@ -15,7 +15,7 @@ MonoBehaviour:
   _round:
   - _monsterSpawnData:
       _serializedList:
-      - Key: Orc
+      - Key: Zombie
         Value: 10
   - _monsterSpawnData:
       _serializedList:
@@ -23,13 +23,13 @@ MonoBehaviour:
         Value: 10
   - _monsterSpawnData:
       _serializedList:
-      - Key: Orc
-        Value: 10
+      - Key: Zombie
+        Value: 1
   - _monsterSpawnData:
       _serializedList:
       - Key: Orc
         Value: 10
   - _monsterSpawnData:
       _serializedList:
-      - Key: Orc
-        Value: 10
+      - Key: Zombie
+        Value: 1

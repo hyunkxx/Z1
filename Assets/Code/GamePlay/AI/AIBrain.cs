@@ -4,6 +4,7 @@ using UnityEngine;
 
 enum AIStateType
 {
+    Dead,
     Idle,
     Attack,
     Move,
@@ -28,11 +29,15 @@ public class AIBrain : MonoBehaviour
     public MovementComponent movementComponent { get; private set; }
     TargetingComponent targetingComponent;
     StateMachine stateMachine;
+    SpawnController spawner;
 
     public float DetectRange;
     public float targetDistanceSqr = 9999;
 
     public AIType AIType => aIType;
+
+    public SpawnController GetSpanwer() { return spawner; }
+    public void SetSpawner(SpawnController _spawner) { spawner = _spawner; } 
 
     public void Initialize(Character character, AIType type)
     {
@@ -53,6 +58,7 @@ public class AIBrain : MonoBehaviour
                     [AIStateType.Idle] = new IdleAIState(this),
                     [AIStateType.Move] = new MoveAIState(this),
                     [AIStateType.Attack] = new AttackAIState(this),
+                    [AIStateType.Dead] = new AttackAIState(this),
                 };
 
         targetingComponent = transform.GetComponentInChildren<TargetingComponent>();
@@ -68,7 +74,6 @@ public class AIBrain : MonoBehaviour
             CurrentState = newState;
             stateMachine.TransitionTo(Logics[CurrentState]);
         }
-
         Logics[CurrentState].UpdateState();
     }
 

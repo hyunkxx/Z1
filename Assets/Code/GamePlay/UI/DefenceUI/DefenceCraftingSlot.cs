@@ -4,11 +4,17 @@ using UnityEngine.UI;
 public class DefenceCraftingSlot : MonoBehaviour
 {
     CharacterDataAsset DataAsset;
+    Animator animator;
     [SerializeField] DefenceSpawner Spawner;
 
     [SerializeField] private Button CraftingButton;
     [SerializeField] private Image CharacterImage;
     [SerializeField] private int CraftCount = 1;
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     void Start()
     {
@@ -24,6 +30,7 @@ public class DefenceCraftingSlot : MonoBehaviour
 
     void Craft()
     {
+        animator.SetTrigger("Click");
         StartCoroutine(Spawner.Spawn(DataAsset.PrefabKey, CraftCount, Spawner.CharacterSpawnPos));
     }
 

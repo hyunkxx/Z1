@@ -13,28 +13,24 @@ public class DefenceGameRule
     public Action NextRoundAction;
 
     RoundAssetData roundData;
+    DefenceRewardAssetData rewardData;
 
     public string CurMode = "Easy";
     private float RoundTime = 10f;
-    private int FullLife = 20;
-    private int CurLife = 0;
     private int Round = 0;
-    private int EndRound = 5;
 
-    private DefenceCastle PlayerTeamHP;
-    private DefenceCastle EnemyTeamHP;
+    [SerializeField] private DefenceCastle PlayerTeamHP;
+    [SerializeField] private DefenceCastle EnemyTeamHP;
 
-    //private int HaveGreenStoneCount = 0;
-    //private int HaveBlueStoneCount = 0;
-    //private int HaveRedStoneCount = 0;
+    public int HaveGreenStoneCount = 0;
+    public int HaveBlueStoneCount = 0;
+    public int HaveRedStoneCount = 0;
 
     private int MaxLoadingCount = 0;
     private int CurLoadingCount = 0;
 
     public float round => Round;
     public float roundTime => RoundTime;
-    public float fullLife => FullLife;
-    public float curLife => CurLife;
 
     protected override void Awake()
     {
@@ -49,9 +45,6 @@ public class DefenceGameRule
     protected override void Start()
     {
         base.Start();
-
-
-        CurLife = FullLife;
     }
 
     protected override void Update()
@@ -69,11 +62,16 @@ public class DefenceGameRule
         Debug.Log("Lose");
     }
 
+    private void GetReward()
+    {
+        // rewardData._defenceRewardData
+    }
+
     private IEnumerator RoundCheck()
     {
         while (true)
         {
-            if (CurLife <= 0)
+            if (PlayerTeamHP.HP <= 0)
             {
                 LoseGame();
                 yield break;
@@ -88,7 +86,7 @@ public class DefenceGameRule
 
             yield return new WaitForSeconds(RoundTime);
 
-            if (Round > EndRound)
+            if (EnemyTeamHP.HP <= 0)
             {
                 WinGame();
                 yield break;
@@ -116,6 +114,7 @@ public class DefenceGameRule
     void LoadSceneData()
     {
         roundData = Database.Instance.DefenseRoundAssetData.GetValueOrDefault(CurMode);
+        rewardData = Database.Instance.DefenseRewardAssetDatas.GetValueOrDefault(CurMode);
         Spawner.SetRoundData(roundData);
 
         for (int i = 0; i < Database.Instance.CharacterAssetCount; ++i)

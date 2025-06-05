@@ -714,6 +714,10 @@ MonoBehaviour:
     _serializedList:
     - Key: Easy
       Value: {fileID: 11400000, guid: ab2071f91d7cec647975e8868580eb28, type: 2}
+  DefenseRewardAssetDatas:
+    _serializedList:
+    - Key: Easy
+      Value: {fileID: 11400000, guid: 7b16e726e3356d1408901311854c9207, type: 2}
 --- !u!1 &1049300532
 GameObject:
   m_ObjectHideFlags: 0
