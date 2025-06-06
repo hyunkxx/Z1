@@ -6,6 +6,12 @@ using UnityEngine;
 using Unity.VisualScripting;
 
 
+public enum EGameType
+{
+    Defense,
+    Survival
+}
+
 public enum EGameState
 {
     None,
@@ -32,15 +38,18 @@ public sealed class GameMode
     [SerializeField]
     private GameObject _playerControllerPrefab;
 
+    private EGameType gameType;
     private EGameState gameState;
     public event Action<EGameState> OnChangeGameState;
+
+    public EGameType GameType => gameType;
+    public EGameState GameState => gameState;
 
     //[SerializeField]
     //GameModeConfig _config;
 
     //private AsyncOperationHandle<GameObject> _gameRlueHandle;
     //private AsyncOperationHandle<GameObject> _playerControllerHandle;
-    
 
     protected override void OnDestroy()
     {
@@ -57,6 +66,7 @@ public sealed class GameMode
         GameManager.Instance.RegisterGameMode(this);
         Rule = GetComponent<GameRule>();
 
+        gameType = Rule is SurvivalGameRule ? gameType = EGameType.Survival : EGameType.Defense;
         CreatePlayerController();
     }
 

@@ -5,15 +5,34 @@ using System.Linq;
 using UnityEngine;
 
 
-public sealed class ActionComponent : MonoBehaviour
+public sealed class ActionComponent 
+    : MonoBehaviour
+    , ICharacterQueryable
 {
     [SerializeField]
     private ActionSet m_actionSet;
 
-    public Character Character { get; private set; }
+    public Character OwnerCharacter { get; private set; }
     public BaseAction CurrentAction { get; private set; }
 
-    Dictionary<EActionType, float> remainingTimes = new();
+    private Dictionary<EActionType, float> remainingTimes = new();
+    public bool IsPlayerControlled { get; private set; }
+
+    public void Awake()
+    {
+        OwnerCharacter = GetComponent<Character>();
+        IsPlayerControlled = !OwnerCharacter.IsNPC && GameManager.Instance.GameMode.GameType == EGameType.Survival;
+    }
+
+    public void Update()
+    {
+        if(IsPlayerControlled && IsCooldownRunning(EActionType.ATTACK))
+        {
+            TryExecute(EActionType.ATTACK);
+        }
+
+        UpdateRemainingTimes();
+    }
 
     public bool IsCurrent(EActionType type)
     {
@@ -25,28 +44,13 @@ public sealed class ActionComponent : MonoBehaviour
         return !remainingTimes.ContainsKey(actionType);
     }
 
-    public void Awake()
-    {
-        Character = GetComponent<Character>();
-    }
-
-    public void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.U))
-        {
-            TryExecute(EActionType.ATTACK);
-        }
-
-        UpdateRemainingTimes();
-    }
-
     public bool TryExecute(EActionType actionType)
     {
         if (!IsCooldownRunning(actionType))
             return false;
 
         BaseAction action = m_actionSet.GetAction(actionType);
-        if (action.TryExecute(Character))
+        if (action.TryExecute(OwnerCharacter))
         {
             remainingTimes.Add(actionType, action.CoolDown);
             CurrentAction = GetAction(actionType);
@@ -73,5 +77,10 @@ public sealed class ActionComponent : MonoBehaviour
             if (remainingTimes[key] <= 0f)
                 remainingTimes.Remove(key);
         }
+    }
+
+    public Character GetCharacter()
+    {
+        return OwnerCharacter;
     }
 }

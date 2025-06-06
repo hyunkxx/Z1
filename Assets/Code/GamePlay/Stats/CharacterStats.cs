@@ -9,6 +9,7 @@ public enum EStatType
     Armor,
     MaxHealth,
     CurHealth,
+    CooldownReduction,
     Max
 }
 

@@ -56,17 +56,7 @@ MonoBehaviour:
       - rid: 7752762179098771476
       - rid: 3012817120289882235
     m_RuntimeSettings:
-      m_List:
-      - rid: 7752762179098771456
-      - rid: 7752762179098771457
-      - rid: 7752762179098771459
-      - rid: 7752762179098771461
-      - rid: 7752762179098771462
-      - rid: 7752762179098771464
-      - rid: 7752762179098771466
-      - rid: 7752762179098771468
-      - rid: 7752762179098771472
-      - rid: 7752762179098771476
+      m_List: []
   m_AssetVersion: 8
   m_ObsoleteDefaultVolumeProfile: {fileID: 0}
   m_RenderingLayerNames:
@@ -186,7 +176,7 @@ MonoBehaviour:
       type: {class: ProbeVolumeGlobalSettings, ns: UnityEngine.Rendering, asm: Unity.RenderPipelines.Core.Runtime}
       data:
         m_Version: 1
-        m_ProbeVolumeDisableStreamingAssets: 0
+        m_ProbeVolumeDisableStreamingAssets: 1
     - rid: 3012817120289882235
       type: {class: UniversalRenderPipelineEditorAssets, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.Runtime}
       data:

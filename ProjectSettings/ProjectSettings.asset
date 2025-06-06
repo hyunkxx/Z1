@@ -672,6 +672,8 @@ PlayerSettings:
   webWasm2023: 0
   scriptingDefineSymbols:
     Android: RH_SerializedDictionary
+    Standalone: RH_SerializedDictionary
+    Windows Store Apps: RH_SerializedDictionary
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:

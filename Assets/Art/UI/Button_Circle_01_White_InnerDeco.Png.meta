@@ -235,7 +235,11 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Button_Circle_01_White_InnerDeco_0: -7612015964509940746
+      Button_Circle_01_White_InnerDeco_1: 6388242132751684267
+      Button_Circle_01_White_InnerDeco_2: 7204080376010053274
+      Button_Circle_01_White_InnerDeco_3: -398068570342756808
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

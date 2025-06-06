@@ -50,8 +50,6 @@ public class Character
     [SerializeField] protected CharacterView characterView;
     [SerializeField] protected MovementComponent movementComponent;
 
-    [SerializeField] protected bool m_isNPC;
-
     protected WeaponComponent weaponComponent;
     protected TargetingComponent targetingComponent;
     protected CharacterAnimationController animController;
@@ -64,7 +62,7 @@ public class Character
     protected CharacterStats characterStats;
     protected Damageable damageable;
 
-    public bool IsNPC => m_isNPC;
+    public bool IsNPC { get; set; }
     public CharacterView CharacterView => characterView;
     public TargetingComponent TargetingComponent => targetingComponent;
     public ActionComponent ActionComponent => actionComponent;
@@ -73,12 +71,6 @@ public class Character
     public Animator Animator => animator;
 
     public event Action<bool> OnChangedFlip;
-
-    public void Initialize(int characterID)
-    {
-        characterStats = new CharacterStats(characterID);
-        //characterStats.JobType;
-    }
 
     protected override void Awake()
     {
@@ -102,6 +94,12 @@ public class Character
         {
             InitializeNpcComponent();
         }
+    }
+
+    public void Initialize(int characterID)
+    {
+        characterStats = new CharacterStats(characterID);
+        //characterStats.JobType;
     }
 
     public void InitializeNpcComponent()
@@ -135,18 +133,8 @@ public class Character
 
     public void OnInputAxis(Vector2 InputDirection)
     {
-        if(InputDirection != Vector2.zero)
-        {
-            if(!ActionComponent.IsCurrent(EActionType.MOVE))
-                ActionComponent.TryExecute(EActionType.MOVE);
-        }
-        else
-        {
-            if (!ActionComponent.IsCurrent(EActionType.IDLE))
-                ActionComponent.TryExecute(EActionType.IDLE);
-        }
-
         Movement.MoveToDirection(InputDirection);
+        bool Input = InputDirection != Vector2.zero ? ActionComponent.TryExecute(EActionType.MOVE) : ActionComponent.TryExecute(EActionType.IDLE);
     }
 
     public Vector2 GetCharacterDirection()
@@ -188,7 +176,6 @@ public class Character
         }
     }
 
-    public void SetIsNPC(bool value) { m_isNPC = value; }
     public Character GetCharacter()
     {
         return this;

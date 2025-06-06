@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Button_Rectangle_01_Convex_White_Gradient_Left_0: 8027579195093349464
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
