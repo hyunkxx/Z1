@@ -1,14 +1,9 @@
+using System;
 using UnityEngine;
 using UnityEngine.U2D;
 
 
-public abstract class EffectBase : Z1Behaviour
-{
-    public abstract void ActivateEffect(GameObject effectOwner);
-    public abstract void ActivateEffect(GameObject effectOwner, Transform trans);
-    public abstract void ActivateEffect(GameObject effectOwner, TransformData trans);
-    public abstract void ActivateEffect(GameObject effectOwner, Vector3 position, Quaternion rotation);
-}
+public abstract class EffectBase : Z1Behaviour {}
 
 public class Effect2D : EffectBase
 {
@@ -17,19 +12,16 @@ public class Effect2D : EffectBase
     protected GameObject owner;
     protected SpriteRenderer sprite;
 
+    public event Action OnAnimmationFinished;
+    public event Action<string> OnAnimationEvent;
+
     protected override void Awake()
     {
-        base.Awake();
-
         sprite = GetComponentInChildren<SpriteRenderer>();
         animator = GetComponent<Animator>();
         AddLastKeyframeEvent();
     }
-    protected override void OnDisable()
-    {
-        base.OnDisable();
-        EffectDeactivated();
-    }
+
     private void AddLastKeyframeEvent()
     {
         RuntimeAnimatorController controller = animator.runtimeAnimatorController;
@@ -41,7 +33,7 @@ public class Effect2D : EffectBase
             bool hasEndEvent = false;
             foreach (AnimationEvent elem in clip.events)
             {
-                if (Mathf.Approximately(elem.time, clip.length) && elem.functionName == "OnAnimationEnd")
+                if (Mathf.Approximately(elem.time, clip.length) && elem.functionName == "AnimationFinished")
                 {
                     hasEndEvent = true;
                     break;
@@ -51,7 +43,7 @@ public class Effect2D : EffectBase
             if (!hasEndEvent)
             {
                 AnimationEvent animationEvent = new AnimationEvent();
-                animationEvent.functionName = "OnAnimationFinished";
+                animationEvent.functionName = "AnimationFinished";
                 animationEvent.time = clip.length;
 
                 if (!clip.isLooping && !clip.name.Contains("__preview__"))
@@ -62,52 +54,19 @@ public class Effect2D : EffectBase
         }
     }
 
+    public bool IsValidFinishEvent()
+    {
+        return OnAnimmationFinished != null;
+    }
+
     /* call from animation event */
-    public virtual void OnAnimationFinished()
+    public virtual void AnimationFinished()
     {
-        //or Destroy(gameObject);
-        EffectDeactivated();
+        OnAnimmationFinished?.Invoke();
     }
 
-    public sealed override void ActivateEffect(GameObject effectOwner)
+    public void AnimationEvent(string param)
     {
-        owner = effectOwner;
-
-        transform.position = effectOwner.transform.position;
-        transform.rotation = effectOwner.transform.rotation;
-        transform.localPosition = effectOwner.transform.localPosition;
-
-        EffectActivated();
+        OnAnimationEvent?.Invoke(param);
     }
-    public sealed override void ActivateEffect(GameObject effectOwner, Transform trans)
-    {
-        owner = effectOwner;
-
-        transform.position = trans.position;
-        transform.rotation = trans.rotation;
-
-        EffectActivated();
-    }
-    public sealed override void ActivateEffect(GameObject effectOwner, TransformData trans)
-    {
-        owner = effectOwner;
-
-        transform.position = trans.position;
-        transform.rotation = trans.rotation;
-
-        EffectActivated();
-    }
-    public sealed override void ActivateEffect(GameObject effectOwner, Vector3 position, Quaternion rotation)
-    {
-        owner = effectOwner;
-
-        transform.position = position;
-        transform.rotation = rotation;
-
-        EffectActivated();
-    }
-
-    /* override this function to implement polymorphic behavior on activation and deactivation. */
-    protected virtual void EffectActivated() { }
-    protected virtual void EffectDeactivated() { Destroy(gameObject); }
 }

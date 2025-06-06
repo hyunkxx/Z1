@@ -15,8 +15,8 @@ MonoBehaviour:
   IDLE: {fileID: 11400000, guid: 3fd2469904189214f9a0ba43cf79681e, type: 2}
   MOVE: {fileID: 11400000, guid: 6554826fd5d70354a931bef914003163, type: 2}
   ATTACK: {fileID: 11400000, guid: 9895c9a8d5aa66b4e92c5ad56b5731b3, type: 2}
-  ABILITY1: {fileID: 0}
-  ABILITY2: {fileID: 0}
+  ABILITY1: {fileID: 11400000, guid: 7485dc3e0232c114d8f3cdcd6484dda9, type: 2}
+  ABILITY2: {fileID: 11400000, guid: a77476a1a7849fa4a9d4b63945ce5dcf, type: 2}
   ABILITY3: {fileID: 0}
   ABILITY4: {fileID: 0}
   DIE: {fileID: 0}

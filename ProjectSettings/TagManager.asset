@@ -42,11 +42,17 @@ TagManager:
   - name: Background
     uniqueID: 795995107
     locked: 0
+  - name: Foregound
+    uniqueID: 75372957
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
   - name: Character
     uniqueID: 1412787937
+    locked: 0
+  - name: Projectile
+    uniqueID: 348649025
     locked: 0
   - name: Effect
     uniqueID: 847969267

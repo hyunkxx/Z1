@@ -26,9 +26,22 @@ public sealed class ActionComponent
 
     public void Update()
     {
-        if(IsPlayerControlled && IsCooldownRunning(EActionType.ATTACK))
+        /* temp */
+        if (IsPlayerControlled && IsCooldownRunning(EActionType.ATTACK))
         {
             TryExecute(EActionType.ATTACK);
+        }
+
+        /* temp */
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            TryExecute(EActionType.ABILITY1);
+        }
+
+        /* temp */
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            TryExecute(EActionType.ABILITY2);
         }
 
         UpdateRemainingTimes();

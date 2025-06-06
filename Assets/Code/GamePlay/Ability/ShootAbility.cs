@@ -9,13 +9,13 @@ public class ShootAbility : Ability
     private Rigidbody2D m_rg2d;
     private DamageProvider m_provider;
 
-    private void Awake()
+    protected override void Awake()
     {
-        enabled = false;
-
         m_rg2d = GetComponent<Rigidbody2D>();
         m_rg2d.gravityScale = 0f;
         m_provider = GetComponentInChildren<DamageProvider>();
+
+        enabled = false;
     }
 
     public override void Activate(GameObject instigator, GameObject target = null)
@@ -25,20 +25,20 @@ public class ShootAbility : Ability
 
         Character character = instigator.GetComponent<Character>();
         transform.position = character.CharacterView.m_weaponEndSocket.position;
-        transform.rotation = character.CharacterView.m_weaponEndSocket.rotation;
+        //transform.rotation = character.CharacterView.m_weaponEndSocket.rotation;
+        
+        Vector2 direction = (m_Target.transform.position - transform.position).normalized;
 
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation= Quaternion.Euler(0f, 0f, angle);
+
+        m_rg2d.linearVelocity = direction * m_projectileProperty.speed;
         m_provider.ActivateProvider(instigator, character.Stats);
 
         enabled = true;
     }
 
-    void Start()
-    {
-        Vector2 direction = (m_Target.transform.position - transform.position).normalized;
-        m_rg2d.linearVelocity = direction * m_projectileProperty.speed;
-    }
-
-    void Update()
+    protected override void Update()
     {
         m_projectileProperty.activateTime += Time.deltaTime;
         if (m_projectileProperty.lifeTime <= m_projectileProperty.activateTime)

@@ -126,7 +126,9 @@ public sealed class DamageProvider : MonoBehaviour
                 other.TakeDamage(damageEvent);
 
                 if (shouldDestroyOnTrigger)
+                {
                     Destroy(transform.root.gameObject);
+                }
             }
         }
     }

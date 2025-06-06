@@ -309,7 +309,6 @@ GameObject:
   - component: {fileID: 7172233613179981037}
   - component: {fileID: 9098919813877421223}
   - component: {fileID: 5756834599355081601}
-  - component: {fileID: 2047761708928815268}
   m_Layer: 0
   m_Name: Character_Vampire
   m_TagString: Untagged
@@ -420,8 +419,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterView:
-    _weaponSocket: {fileID: 0}
-    _weaponEndSocket: {fileID: 0}
+    m_weaponSocket: {fileID: 0}
+    m_weaponEndSocket: {fileID: 0}
   movementComponent: {fileID: 7235276069043101290}
 --- !u!114 &4578601590110176259
 MonoBehaviour:
@@ -480,11 +479,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56ab27d8b576930409b984a2ab7d367b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetCount: 0
-  providerData:
-    shouldDisableOnTrigger: 0
-    duration: 1
-    periodicInterval: 0
+  lifeCycle: 0
+  lifeTime: 0
+  shouldDestroyOnTrigger: 0
+  periodicInterval: 0
 --- !u!114 &5756834599355081601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -498,21 +496,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teamID: 1
---- !u!114 &2047761708928815268
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7834587441641150271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da5b5184270dca34895759172ca7ff77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SkillTarget: 0
-  targetCount: 1
-  EffectPrefab: {fileID: 3797684433542849519, guid: 168187d4be14fe649b61410e4b9a282d, type: 3}
-  attackDelay: 10
-  attackRange: 1
-  clip: {fileID: 0}

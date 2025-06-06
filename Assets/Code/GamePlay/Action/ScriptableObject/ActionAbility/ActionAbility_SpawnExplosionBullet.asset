@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d58848e798f69254d9f5ee57806fd849, type: 3}
+  m_Name: ActionAbility_SpawnExplosionBullet
+  m_EditorClassIdentifier: 
+  conditionSet:
+    conditions:
+    - {fileID: 11400000, guid: 6b6a7b34cf035b64daf9430ed05e01ba, type: 2}
+  m_coolDown: 0.1
+  m_SourcePrefab: {fileID: 8004680129202126573, guid: dbc42205beb52e64195496cc6ad954b2, type: 3}
+  m_spawnCount: 5
+  m_animationTrigger: Ability1

@@ -6,7 +6,7 @@ public class BasicAttackAbility : Ability
     private Rigidbody2D m_rg2d;
     private DamageProvider m_provider;
 
-    private void Awake()
+    protected override void Awake()
     {
         enabled = false;
 

@@ -49,6 +49,7 @@ public class Character
 {
     [SerializeField] protected CharacterView characterView;
     [SerializeField] protected MovementComponent movementComponent;
+    [SerializeField] private bool m_isNPC = false;
 
     protected WeaponComponent weaponComponent;
     protected TargetingComponent targetingComponent;
@@ -62,7 +63,7 @@ public class Character
     protected CharacterStats characterStats;
     protected Damageable damageable;
 
-    public bool IsNPC { get; set; }
+    public bool IsNPC => m_isNPC;
     public CharacterView CharacterView => characterView;
     public TargetingComponent TargetingComponent => targetingComponent;
     public ActionComponent ActionComponent => actionComponent;
@@ -174,6 +175,11 @@ public class Character
                 OnChangedFlip?.Invoke(true);
             }
         }
+    }
+
+    public void SetNPC(bool value)
+    {
+        m_isNPC = value;
     }
 
     public Character GetCharacter()

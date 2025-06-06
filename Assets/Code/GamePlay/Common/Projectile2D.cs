@@ -10,6 +10,7 @@ public struct ProjectileProperty
     [NonSerialized] public float activateTime;
 }
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class Projectile2D : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rigid;
@@ -18,6 +19,12 @@ public class Projectile2D : MonoBehaviour
     public void Initialize(Vector3 direction)
     {
         rigid.linearVelocity = direction * projectileProperty.speed;
+    }
+
+    private void Awake()
+    {
+        rigid = GetComponent<Rigidbody2D>();
+        rigid.linearVelocity = transform.right * projectileProperty.speed;
     }
 
     private void Update()

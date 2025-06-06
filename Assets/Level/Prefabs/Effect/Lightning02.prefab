@@ -77,7 +77,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 847969267
-  m_SortingLayer: 1
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -133,7 +133,7 @@ LineRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 847969267
-  m_SortingLayer: 1
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Positions: []
   m_Parameters:
@@ -269,7 +269,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7624007919248151335}
   - component: {fileID: 8961564749864106436}
-  - component: {fileID: 7731013299200658941}
   - component: {fileID: -1028013577327493980}
   m_Layer: 0
   m_Name: Lightning02
@@ -316,19 +315,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7731013299200658941
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3797684433542849519}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0450f78b2b7080147ac07b6b9580e214, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageProvider: {fileID: -1028013577327493980}
 --- !u!114 &-1028013577327493980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,8 +327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56ab27d8b576930409b984a2ab7d367b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetCount: 10
-  providerData:
-    shouldDisableOnTrigger: 0
-    duration: 10
-    periodicInterval: 0
+  lifeCycle: 0
+  lifeTime: 0
+  shouldDestroyOnTrigger: 0
+  periodicInterval: 0
