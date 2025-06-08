@@ -5,6 +5,7 @@ public class DefenceCraftingSlot : MonoBehaviour
 {
     CharacterDataAsset DataAsset;
     Animator animator;
+    [SerializeField] GameObject CraftingParticle;
     [SerializeField] DefenceSpawner Spawner;
 
     [SerializeField] private Button CraftingButton;
@@ -32,6 +33,8 @@ public class DefenceCraftingSlot : MonoBehaviour
     {
         animator.SetTrigger("Click");
         StartCoroutine(Spawner.Spawn(DataAsset.PrefabKey, CraftCount, Spawner.CharacterSpawnPos));
+        foreach (UIParticleComponent pComponent in CraftingParticle.transform.GetComponentsInChildren<UIParticleComponent>())
+            pComponent.StartParticleEmission();
     }
 
     //void Craft()
