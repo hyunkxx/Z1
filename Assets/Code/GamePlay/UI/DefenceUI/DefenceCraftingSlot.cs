@@ -11,10 +11,14 @@ public class DefenceCraftingSlot : MonoBehaviour
     [SerializeField] private Button CraftingButton;
     [SerializeField] private Image CharacterImage;
     [SerializeField] private int CraftCount = 1;
+    private UIParticleComponent[] Particles;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        Particles = CraftingParticle.transform.GetComponentsInChildren<UIParticleComponent>();
+        foreach (var obj in Particles)
+            obj.gameObject.SetActive(false);
     }
 
     void Start()
@@ -33,7 +37,7 @@ public class DefenceCraftingSlot : MonoBehaviour
     {
         animator.SetTrigger("Click");
         StartCoroutine(Spawner.Spawn(DataAsset.PrefabKey, CraftCount, Spawner.CharacterSpawnPos));
-        foreach (UIParticleComponent pComponent in CraftingParticle.transform.GetComponentsInChildren<UIParticleComponent>())
+        foreach (UIParticleComponent pComponent in Particles)
             pComponent.StartParticleEmission();
     }
 

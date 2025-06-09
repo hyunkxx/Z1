@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,6 +6,7 @@ using UnityEngine.UI;
 public class UIParticleComponent : MaskableGraphic
 {
     public bool fixedTime = true;
+    private bool isInitialised = false;
 
     private ParticleSystem pSystem;
     private ParticleSystemRenderer particleRenderer;
@@ -152,17 +154,19 @@ public class UIParticleComponent : MaskableGraphic
         }
 #endif
 
+        vh.Clear();
+
         if (!gameObject.activeInHierarchy)
         {
             return;
         }
 
-        if (!pSystem.main.playOnAwake)
+        if (!isInitialised && !pSystem.main.playOnAwake)
         {
             pSystem.Stop(false, ParticleSystemStopBehavior.StopEmittingAndClear);
+            isInitialised = true;
         }
 
-        vh.Clear();
 
         Vector2 tempUV = Vector2.zero;
         Vector2 corner1 = Vector2.zero;
@@ -201,7 +205,10 @@ public class UIParticleComponent : MaskableGraphic
 
     public void StartParticleEmission()
     {
-        pSystem.Play();
+        //pSystem.Play();
+        gameObject.SetActive(true);
+        StartCoroutine(OnActiveFalse());
+
     }
 
     public void StopParticleEmission()
@@ -212,6 +219,13 @@ public class UIParticleComponent : MaskableGraphic
     public void PauseParticleEmission()
     {
         pSystem.Stop(false, ParticleSystemStopBehavior.StopEmitting);
+    }
+
+    IEnumerator OnActiveFalse()
+    {
+        yield return new WaitForSeconds(mainModule.startLifetimeMultiplier);
+        gameObject.SetActive(false);
+        Debug.Log("Particle Active False");
     }
 
     Vector4 CalculateParticleUV(ParticleSystem.Particle particle, ParticleSystem.TextureSheetAnimationModule textureSheetAnimation)

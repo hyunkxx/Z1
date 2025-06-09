@@ -6,6 +6,7 @@ public class DefenceUI : UIBase
 {
     [SerializeField] private DefenceGameRule GameRule;
     [SerializeField] private Button CraftPanelActiveButton;
+    [SerializeField] private Button BaseActiveButton;
     [SerializeField] private GameObject CraftPanel;
     [SerializeField] private TextMeshProUGUI Rount_txt;
     [SerializeField] private TextMeshProUGUI RoundTime_txt;
@@ -19,6 +20,7 @@ public class DefenceUI : UIBase
     private void Start()
     {
         CraftPanelActiveButton.onClick.AddListener(() => { CraftPanel.SetActive(true); });
+        BaseActiveButton.onClick.AddListener(OnClickBaseButton);
         GameRule.NextRoundAction += OnChangedRoundUI;
     }
 
@@ -32,6 +34,11 @@ public class DefenceUI : UIBase
     {
         Rount_txt.text = $"Round {GameRule.round}";
         RoundTime = GameRule.roundTime;
+    }
+
+    void OnClickBaseButton()
+    {
+        Camera.main.transform.position = new Vector3(100, -200);
     }
 
     //void OnChangedStoneCountUI()
