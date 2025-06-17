@@ -18,17 +18,20 @@ MonoBehaviour:
   - m_GUID: 9b414eae461647c46858c7aed068e659
     m_Address: Character_BaekSu
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Character
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: aceb1144a0a0c1b469baf633655d0f47
     m_Address: Character_Default
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Character
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f07912dc484ffcb458b49811d6161f4e
     m_Address: Character_Vampire
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Character
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d696c73dc2a11ad42a29971d096876ce, type: 2}

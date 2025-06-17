@@ -23,7 +23,7 @@ public static class AssetLoader
         Addressables.InitializeAsync().Completed += InternalInitializeCallback;
     }
 
-    public static void UnInitialize()
+    public static void ReleaseHandles()
     {
         foreach(var entry in resourceHandles)
         {

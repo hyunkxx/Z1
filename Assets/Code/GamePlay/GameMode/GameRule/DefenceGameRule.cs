@@ -16,6 +16,8 @@ public class DefenceGameRule
     DefenceRewardAssetData rewardData;
 
     public string CurMode = "Easy";
+
+    private float ReadyTime = 5f;
     private float RoundTime = 10f;
     private int Round = 0;
 
@@ -103,7 +105,7 @@ public class DefenceGameRule
                 break;
             case EGameState.ReadyGame:
                 Initialize();
-                StartCoroutine(Timer(5f, () => _gameMode.ChangeGameState(EGameState.EnterGame)));
+                StartCoroutine(Timer(ReadyTime, () => _gameMode.ChangeGameState(EGameState.EnterGame)));
                 break;
             case EGameState.EnterGame:
                 StartCoroutine(RoundCheck());

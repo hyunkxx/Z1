@@ -90,7 +90,6 @@ public class Character
         damageable = GetComponent<Damageable>();
         damageable.OnDamageTaken += TakeDamage;
 
-        Debug.Log("Awake");
         if(IsNPC)
         {
             InitializeNpcComponent();
@@ -105,6 +104,7 @@ public class Character
 
     public void InitializeNpcComponent()
     {
+        Debug.Log("Awake");
         ETeam teamID = damageable.TeamID;
         AIType AI = teamID == ETeam.Player ? AIType.Character : AIType.Monster;
 

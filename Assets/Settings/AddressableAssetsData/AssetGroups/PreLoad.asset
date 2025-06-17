@@ -18,22 +18,26 @@ MonoBehaviour:
   - m_GUID: 63200722313076e48a399b056708827b
     m_Address: EmptyGameObject
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Effect
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 69acf7b901470664584eb719adde6fc6
     m_Address: Orc
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Enemy
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 942e9cd0662a42e41993bc7762817f69
     m_Address: Zombie
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Enemy
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: febb501f9ce63e5448c333eabb8965cc
     m_Address: Sprite_BaekSu
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - default
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d696c73dc2a11ad42a29971d096876ce, type: 2}
