@@ -44,6 +44,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Effect
+  - m_GUID: fa74f64fabcb0144ebd69b2137f6411c
+    m_Address: SCV
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Enemy
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fe569e11d1890ce4cb223231c5809724
     m_Address: Zergling

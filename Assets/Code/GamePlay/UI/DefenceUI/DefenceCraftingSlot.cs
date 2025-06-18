@@ -3,6 +3,12 @@ using UnityEngine.UI;
 
 public class DefenceCraftingSlot : MonoBehaviour
 {
+    public enum ECraftingType
+    {
+        Base,
+        Field,
+    }
+
     CharacterDataAsset DataAsset;
     Animator animator;
     [SerializeField] GameObject CraftingParticle;
@@ -11,6 +17,9 @@ public class DefenceCraftingSlot : MonoBehaviour
     [SerializeField] private Button CraftingButton;
     [SerializeField] private Image CharacterImage;
     [SerializeField] private int CraftCount = 1;
+
+    private ECraftingType CraftingType = ECraftingType.Field;
+
     private UIParticleComponent[] Particles;
 
     private void Awake()
@@ -26,8 +35,9 @@ public class DefenceCraftingSlot : MonoBehaviour
         CraftingButton.onClick.AddListener(Craft);
     }
 
-    public void SetSlotInfo(int _characterID)
+    public void SetSlotInfo(int _characterID, ECraftingType _craftingType)
     {
+        CraftingType = _craftingType;
         DataAsset = Database.Instance.FindCharacterAsset(_characterID);
         CharacterImage.sprite = DataAsset.Sprite;
         SetSprite(DataAsset.Sprite);
@@ -35,27 +45,13 @@ public class DefenceCraftingSlot : MonoBehaviour
 
     void Craft()
     {
+        Transform[] spawnPos = CraftingType == ECraftingType.Base ? Spawner.ComandSpanwPos : Spawner.CharacterSpawnPos;
+
         animator.SetTrigger("Click");
-        StartCoroutine(Spawner.Spawn(DataAsset.PrefabKey, CraftCount, Spawner.CharacterSpawnPos));
+        StartCoroutine(Spawner.Spawn(DataAsset.PrefabKey, CraftCount, spawnPos));
         foreach (UIParticleComponent pComponent in Particles)
             pComponent.StartParticleEmission();
     }
-
-    //void Craft()
-    //{
-    //    Debug.Log($"Craft : {DataAsset.CharacterID}");
-    //    GridSlot waitingGrid = GridController.Instance.GetEmptyWaitingGrid();
-    //    if (waitingGrid == null)
-    //    {
-    //        Debug.Log("¥Î±‚ø≠¿Ã ≤À √°Ω¿¥œ¥Ÿ");
-    //        return;
-    //    }
-
-    //    waitingGrid.CurObject = Instantiate(AssetLoader.GetHandleInstance<GameObject>(DataAsset.PrefabKey), waitingGrid.transform.position, Quaternion.identity);
-    //    waitingGrid.CurObject.AddComponent<CharacterDragHandler>().BaseSlot = waitingGrid;
-    //    waitingGrid.CurObject.GetComponent<BoxCollider2D>().enabled = true;
-    //    waitingGrid.CurObject.layer = LayerMask.NameToLayer("Character");
-    //}
 
     public float targetVisualSize = 64f;
 

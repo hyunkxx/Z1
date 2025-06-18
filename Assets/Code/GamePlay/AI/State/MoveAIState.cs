@@ -63,7 +63,7 @@ public class MoveAIState : AIState
 
     public override bool IsEligible() 
     {
-        GameObject target = brain.Target ?? brain.FindTarget();
+        GameObject target = brain.Target? brain.Target : brain.FindTarget();
         if (target && brain.GetTargetDistance() < brain.DetectRange * brain.DetectRange)
         {
             return false;

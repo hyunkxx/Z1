@@ -24,7 +24,7 @@ public class DefenceGameRule
     [SerializeField] private DefenceCastle PlayerTeamHP;
     [SerializeField] private DefenceCastle EnemyTeamHP;
 
-    public int HaveGreenStoneCount = 0;
+    [SerializeField] static public int HaveGreenStoneCount = 0;
     public int HaveBlueStoneCount = 0;
     public int HaveRedStoneCount = 0;
 
@@ -144,6 +144,14 @@ public class DefenceGameRule
                 });
             }
         }
+
+        MaxLoadingCount++;
+        AssetLoader.LoadAssetAsync<GameObject>(Database.Instance.FindCharacterAsset(2003).PrefabKey, () =>
+        {
+            CurLoadingCount++;
+            if (MaxLoadingCount == CurLoadingCount)
+                _gameMode.ChangeGameState(EGameState.ReadyGame);
+        });
     }
 
     void Initialize()
@@ -185,6 +193,11 @@ public class DefenceGameRule
                 Spawner.objectPools.RegisterPool(pool);
             }
         }
+
+        ObjectPool SCVPool = Spawner.objectPools.GetPool(Database.Instance.FindCharacterAsset(2003).PrefabKey);
+        SCVPool = Spawner.gameObject.AddComponent<ObjectPool>();
+        SCVPool.InitializePool(AssetLoader.GetHandleInstance<GameObject>(Database.Instance.FindCharacterAsset(2003).PrefabKey), 10);
+        Spawner.objectPools.RegisterPool(SCVPool);
     }
 
     IEnumerator Timer(float _time, Action _action)

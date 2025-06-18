@@ -9,7 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6059e302c1c57b41928a82b6a47a008, type: 3}
-  m_Name: MiningAIStateSet
+  m_Script: {fileID: 11500000, guid: a9617472397cc6846a49f27f17a5a1ef, type: 3}
+  m_Name: CAD_SCV
   m_EditorClassIdentifier: 
-  aIStateSet: 00000000010000000300000005000000
+  _characterID: 2003
+  _name: SCV
+  _prefabKey: SCV
+  _greenStone: 50
+  _blueStone: 0
+  _redStone: 0
+  _sprite: {fileID: -2727242449120003181, guid: 8cee1e3d6cde0e8468e0b6a72f6a2060, type: 3}

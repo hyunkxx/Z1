@@ -5543,6 +5543,8 @@ MonoBehaviour:
       Value: {fileID: 11400000, guid: f6885ff6a723a514c9e7d8f7890ca9de, type: 2}
     - Key: 2002
       Value: {fileID: 11400000, guid: 77f96d509a387cd49a99ecbbb296c4bc, type: 2}
+    - Key: 2003
+      Value: {fileID: 11400000, guid: 689c7a5e2bb61fe44bfabef64fa83baf, type: 2}
   _itemDataAssets:
     _serializedList:
     - Key: 0
@@ -5795,6 +5797,10 @@ PrefabInstance:
     - target: {fileID: 7834587441641150271, guid: aceb1144a0a0c1b469baf633655d0f47, type: 3}
       propertyPath: m_Name
       value: Character_Default
+      objectReference: {fileID: 0}
+    - target: {fileID: 7834587441641150271, guid: aceb1144a0a0c1b469baf633655d0f47, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8286493116884513989, guid: aceb1144a0a0c1b469baf633655d0f47, type: 3}
       propertyPath: m_LocalPosition.x

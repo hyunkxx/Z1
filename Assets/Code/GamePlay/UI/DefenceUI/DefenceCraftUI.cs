@@ -28,12 +28,13 @@ public class DefenceCraftUI : MonoBehaviour
         {
             if (i > Database.Instance.CharacterAssetCount) return;
 
-            Contents.transform.GetChild(i).GetComponent<DefenceCraftingSlot>().SetSlotInfo(i + 1000);
+            Contents.transform.GetChild(i).GetComponent<DefenceCraftingSlot>().SetSlotInfo(i + 1000, DefenceCraftingSlot.ECraftingType.Field);
         }
     }
 
     void UpdateBaseSlot()
     {
+        Contents.transform.GetChild(0).GetComponent<DefenceCraftingSlot>().SetSlotInfo(2003, DefenceCraftingSlot.ECraftingType.Base);
 
     }
 }

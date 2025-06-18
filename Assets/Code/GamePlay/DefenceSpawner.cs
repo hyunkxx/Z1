@@ -8,6 +8,8 @@ public class DefenceSpawner : SpawnController
 {
     public Transform[] MonsterSpawnPos;
     public Transform[] CharacterSpawnPos;
+    public Transform[] ComandSpanwPos;
+    public Transform MineralSpawnPos;
 
     private RoundAssetData roundData;
 
@@ -76,9 +78,9 @@ public class DefenceSpawner : SpawnController
             {
                 obj.GetComponent<BoxCollider2D>().enabled = true;
                 obj.GetComponent<Character>().SetNPC(true);
-                obj.GetComponent<Character>().InitializeNpcComponent();
-                obj.GetComponent<AIBrain>().SetSpawner(this);
             }
+
+            obj.GetComponent<AIBrain>().SetSpawner(this);
 
             curCount++;
 
@@ -89,6 +91,8 @@ public class DefenceSpawner : SpawnController
 
     Vector3 RandSpawnPos(Transform[] _spanwRange)
     {
+        if (_spanwRange.Length < 2) return _spanwRange[0].transform.position;
+
         float randYPos = Random.Range(_spanwRange[0].transform.position.y, _spanwRange[1].transform.position.y);
         Vector3 SpawnPos = Vector3.zero;
 

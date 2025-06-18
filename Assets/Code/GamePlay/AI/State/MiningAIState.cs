@@ -5,29 +5,43 @@ public class MiningAIState : AIState
 {
     public MiningAIState(AIBrain _brain) { brain = _brain; }
 
-    //private float collectionAmount = 0f;
-    //private float maxCollectionAmount = 100f;
+    public int collectAmount = 0;
+    int maxCollectAmount = 15;
+
+    ParticleSystem MiningParticle;
 
     public override void EnterState()
     {
-        TakeMineral();
     }
 
     public override void ExitState()
     {
-        //brain.Target.GetComponent<Damageable>().OnDamageTaken() += TakeMineral;
     }
 
     public override void Initialize()
     {
+        MiningParticle = brain.GetComponentInChildren<ParticleSystem>();
     }
 
     public override bool IsEligible()
     {
+        if (collectAmount >= maxCollectAmount) 
+        { 
+            collectAmount = maxCollectAmount;
+            MoveMiningAIState aIState = (MoveMiningAIState)brain.GetLogic(AIStateType.MoveMining);
+            brain.SetTarget(aIState.ComandCenter.gameObject);
+            aIState.isFullAmount = true;
+            brain.possessed.TargetingComponent.gameObject.SetActive(false);
+            return false; 
+        }
+
         ActionComponent actionComponent = brain.possessed.ActionComponent;
 
         if (actionComponent.TryExecute(EActionType.ATTACK))
+        {
+            TakeMineral();
             return true;
+        }
 
         return false;
     }
@@ -38,7 +52,7 @@ public class MiningAIState : AIState
 
     private void TakeMineral()
     {
-        //Debug.Log($"¹Ì³×¶ö Ã¤Áý : {brain.possessed.Stats.}");
-       //Player.Mineral += brain.possessed.Stats.Damage;
+        MiningParticle.Play();
+        collectAmount += (int)brain.possessed.Stats.GetStat(EStatType.AttackDamage);
     }
 }

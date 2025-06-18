@@ -16,26 +16,26 @@ MonoBehaviour:
   - _monsterSpawnData:
       _serializedList:
       - Key: Zergling
-        Value: 10
+        Value: 1
   - _monsterSpawnData:
       _serializedList:
       - Key: Zergling
-        Value: 15
-  - _monsterSpawnData:
-      _serializedList:
-      - Key: Zergling
-        Value: 10
-      - Key: Saurus
-        Value: 5
-  - _monsterSpawnData:
-      _serializedList:
-      - Key: Zergling
-        Value: 10
-      - Key: Saurus
-        Value: 10
+        Value: 3
   - _monsterSpawnData:
       _serializedList:
       - Key: Zergling
         Value: 1
       - Key: Saurus
-        Value: 15
+        Value: 1
+  - _monsterSpawnData:
+      _serializedList:
+      - Key: Zergling
+        Value: 1
+      - Key: Saurus
+        Value: 2
+  - _monsterSpawnData:
+      _serializedList:
+      - Key: Zergling
+        Value: 1
+      - Key: Saurus
+        Value: 3

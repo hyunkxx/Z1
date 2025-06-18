@@ -7,6 +7,7 @@ public class DefenceUI : UIBase
     [SerializeField] private DefenceGameRule GameRule;
     [SerializeField] private DefenceCraftUI CraftUI;
 
+    [Header("Bottom Group")]
     [SerializeField] private Button FieldActiveButton;
     [SerializeField] private Button FieldCraftPanelActiveButton;
     [SerializeField] private Button BaseActiveButton;
@@ -14,9 +15,12 @@ public class DefenceUI : UIBase
     [SerializeField] private GameObject BottomBasePanel;
     [SerializeField] private GameObject BottomFieldPanel;
 
+    [Header("Text Group")]
     [SerializeField] private TextMeshProUGUI Rount_txt;
     [SerializeField] private TextMeshProUGUI RoundTime_txt;
+    [SerializeField] private TextMeshProUGUI Gold_txt;
 
+    [Header("User Interface Group")]
     [SerializeField] private Button UserSkillButton_0;
     [SerializeField] private Button UserSkillButton_1;
 
@@ -36,6 +40,8 @@ public class DefenceUI : UIBase
     {
         RoundTime_txt.text = $"{(int)RoundTime}";
         RoundTime -= Time.deltaTime;
+
+        OnChangedStoneCountUI();
     }
 
     void OnChangedRoundUI()
@@ -58,12 +64,10 @@ public class DefenceUI : UIBase
         BottomFieldPanel.SetActive(true);
     }
 
-    //void OnChangedStoneCountUI()
-    //{
-    //    GameRule.HaveGreenStoneCount;
-    //    GameRule.HaveBlueStoneCount;
-    //    GameRule.HaveRedStoneCount;
-    //}
+    void OnChangedStoneCountUI()
+    {
+        Gold_txt.text = $"{DefenceGameRule.HaveGreenStoneCount}";
+    }
 
     void OnClickSkillButton()
     {

@@ -9,6 +9,7 @@ public enum AIStateType
     Attack,
     Mining,
     Move,
+    MoveMining,
 }
 
 public enum AIType
@@ -40,6 +41,7 @@ public class AIBrain : MonoBehaviour
     public SpawnController GetSpanwer() { return spawner; }
     public void SetSpawner(SpawnController _spawner) { spawner = _spawner; } 
     public void SetTarget(GameObject _target) { Target = _target; }
+    public AIState GetLogic(AIStateType type) { return Logics[type]; }
 
     public void Initialize(Character character, AIType type, AIStateSet aIStateSet)
     {
@@ -54,6 +56,7 @@ public class AIBrain : MonoBehaviour
         for (int i = 0; i < StateSet.aIStateSet.Count; ++i)
         {
             Logics.Add(StateSet.aIStateSet[i], CreateState(StateSet.aIStateSet[i]));
+            Logics[StateSet.aIStateSet[i]].Initialize();
         }
 
         ActionComponent component = possessed.ActionComponent;
@@ -118,6 +121,8 @@ public class AIBrain : MonoBehaviour
                 return new AttackAIState(this);
             case AIStateType.Mining:
                 return new MiningAIState(this);
+            case AIStateType.MoveMining:
+                return new MoveMiningAIState(this);
             case AIStateType.Dead:
                 return new DeadAIState(this);
             default:
