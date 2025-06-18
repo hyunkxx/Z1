@@ -475,8 +475,8 @@ MonoBehaviour:
     m_weaponSocket: {fileID: 4830204434607766788}
     m_weaponEndSocket: {fileID: 5900743110533060484}
   movementComponent: {fileID: 7235276069043101290}
-  m_isNPC: 0
-  TestDetectRange: 3
+  m_isNPC: 1
+  aIStateSet: {fileID: 11400000, guid: 0e02b16196eceda42b14c4214fee708b, type: 2}
 --- !u!114 &7235276069043101290
 MonoBehaviour:
   m_ObjectHideFlags: 0

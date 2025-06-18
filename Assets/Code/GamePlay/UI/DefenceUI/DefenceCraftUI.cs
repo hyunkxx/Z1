@@ -10,7 +10,16 @@ public class DefenceCraftUI : MonoBehaviour
     private void Start()
     {
         CloseButton.onClick.AddListener(() => { this.gameObject.SetActive(false); });
-        UpdateSlotInfo();
+    }
+
+    public void OnActivePanel(bool _isField)
+    {
+        this.gameObject.SetActive(true);
+
+        if (_isField)
+            UpdateSlotInfo();
+        else
+            UpdateBaseSlot();
     }
 
     void UpdateSlotInfo()
@@ -21,5 +30,10 @@ public class DefenceCraftUI : MonoBehaviour
 
             Contents.transform.GetChild(i).GetComponent<DefenceCraftingSlot>().SetSlotInfo(i + 1000);
         }
+    }
+
+    void UpdateBaseSlot()
+    {
+
     }
 }

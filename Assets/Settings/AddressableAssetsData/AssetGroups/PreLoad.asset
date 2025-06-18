@@ -27,8 +27,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - Enemy
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6e93e5d042838bb4abe08815753f9166
+    m_Address: Saurus
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Enemy
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 942e9cd0662a42e41993bc7762817f69
     m_Address: Zombie
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Enemy
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fe569e11d1890ce4cb223231c5809724
+    m_Address: Zergling
     m_ReadOnly: 0
     m_SerializedLabels:
     - Enemy

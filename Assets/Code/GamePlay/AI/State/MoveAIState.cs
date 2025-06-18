@@ -14,6 +14,7 @@ public class MoveAIState : AIState
     public MoveAIState(AIBrain _brain) { brain = _brain; }
 
     public override void Initialize() { }
+
     public override void EnterState()
     {
         ActionComponent actionComponent = brain.possessed.ActionComponent;
@@ -37,6 +38,7 @@ public class MoveAIState : AIState
     public override void ExitState()
     {
         brain.movementComponent.ResetMovement();
+        CurMoveState = MoveState.None;
     }
 
     MoveState ChooseMoveState()

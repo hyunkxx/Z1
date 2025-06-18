@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: AC_Saurus
+  m_Controller: {fileID: 9100000, guid: 4e65b07dbb63cd84f8e1f746abf9d1bf, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 97114bb4f4ca7f24f8ff4ee90a4d96b1, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 71aeb54ec46a8de42b10fe28968d14c9, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: f6bb5e8108657ea429a261468a718d58, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 56458e7b9171f4343b278d71e86b2ee3, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: dd1b3fc5baf33be43bdff59e98677f1f, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 5f7044ffb4cf1284ab1d7d69144ce2f2, type: 2}

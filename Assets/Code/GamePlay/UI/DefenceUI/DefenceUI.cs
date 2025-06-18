@@ -5,9 +5,15 @@ using UnityEngine.UI;
 public class DefenceUI : UIBase
 {
     [SerializeField] private DefenceGameRule GameRule;
-    [SerializeField] private Button CraftPanelActiveButton;
+    [SerializeField] private DefenceCraftUI CraftUI;
+
+    [SerializeField] private Button FieldActiveButton;
+    [SerializeField] private Button FieldCraftPanelActiveButton;
     [SerializeField] private Button BaseActiveButton;
-    [SerializeField] private GameObject CraftPanel;
+    [SerializeField] private Button BaseCraftPanelActiveButton;
+    [SerializeField] private GameObject BottomBasePanel;
+    [SerializeField] private GameObject BottomFieldPanel;
+
     [SerializeField] private TextMeshProUGUI Rount_txt;
     [SerializeField] private TextMeshProUGUI RoundTime_txt;
 
@@ -19,8 +25,10 @@ public class DefenceUI : UIBase
 
     private void Start()
     {
-        CraftPanelActiveButton.onClick.AddListener(() => { CraftPanel.SetActive(true); });
+        FieldActiveButton.onClick.AddListener(OnClickFieldButton);
         BaseActiveButton.onClick.AddListener(OnClickBaseButton);
+        FieldCraftPanelActiveButton.onClick.AddListener(() => { CraftUI.OnActivePanel(true); });
+        BaseCraftPanelActiveButton.onClick.AddListener(() => { CraftUI.OnActivePanel(false); });
         GameRule.NextRoundAction += OnChangedRoundUI;
     }
 
@@ -38,7 +46,16 @@ public class DefenceUI : UIBase
 
     void OnClickBaseButton()
     {
-        Camera.main.transform.position = new Vector3(100, -200);
+        Camera.main.transform.position = new Vector3(-100, 200, -10); // ComandCenterPos
+        BottomBasePanel.SetActive(true);
+        BottomFieldPanel.SetActive(false);
+    }
+
+    void OnClickFieldButton()
+    {
+        Camera.main.transform.position = new Vector3(0, 0, -10); // FieldCenterPos
+        BottomBasePanel.SetActive(false);
+        BottomFieldPanel.SetActive(true);
     }
 
     //void OnChangedStoneCountUI()

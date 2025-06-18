@@ -5,6 +5,7 @@ using UnityEngine;
  /* weapon data, buff, debuff, region */
 public struct AttackInfo
 {
+
 }
 
 public class DamageEvent

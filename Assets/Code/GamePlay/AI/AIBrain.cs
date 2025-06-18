@@ -2,11 +2,12 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-enum AIStateType
+public enum AIStateType
 {
     Dead,
     Idle,
     Attack,
+    Mining,
     Move,
 }
 
@@ -18,10 +19,10 @@ public enum AIType
 
 public class AIBrain : MonoBehaviour
 {
-    AIStateType[] AIStates = (AIStateType[])Enum.GetValues(typeof(AIStateType));
     AIStateType CurrentState;
     [SerializeField] AIType aIType;
     Dictionary<AIStateType, AIState> Logics;
+    AIStateSet StateSet;
 
     public Character possessed { get; private set; }
     public GameObject Target { get; private set; }
@@ -39,30 +40,26 @@ public class AIBrain : MonoBehaviour
     public SpawnController GetSpanwer() { return spawner; }
     public void SetSpawner(SpawnController _spawner) { spawner = _spawner; } 
 
-    public void Initialize(Character character, AIType type)
+    public void Initialize(Character character, AIType type, AIStateSet aIStateSet)
     {
+        Logics = new Dictionary<AIStateType, AIState>();
+        targetingComponent = transform.GetComponentInChildren<TargetingComponent>();
+        movementComponent = transform.GetComponent<MovementComponent>();
+
         possessed = character;
         aIType = type;
+        StateSet = aIStateSet;
+
+        for (int i = 0; i < StateSet.aIStateSet.Count; ++i)
+        {
+            Logics.Add(StateSet.aIStateSet[i], CreateState(StateSet.aIStateSet[i]));
+        }
 
         ActionComponent component = possessed.ActionComponent;
         ActionAbility ability = component.GetAction(EActionType.ATTACK) as ActionAbility;
         DetectRange = ability ? ability.TriggerDistance : 1f;
 
         stateMachine = character.GetComponent<StateMachine>();
-    }
-
-    private void Awake()
-    {
-        Logics = new Dictionary<AIStateType, AIState>()
-                {
-                    [AIStateType.Idle] = new IdleAIState(this),
-                    [AIStateType.Move] = new MoveAIState(this),
-                    [AIStateType.Attack] = new AttackAIState(this),
-                    [AIStateType.Dead] = new AttackAIState(this),
-                };
-
-        targetingComponent = transform.GetComponentInChildren<TargetingComponent>();
-        movementComponent = transform.GetComponent<MovementComponent>();
     }
 
     private void Update()
@@ -79,7 +76,7 @@ public class AIBrain : MonoBehaviour
 
     private AIStateType FindBestEligibleAIState()
     {
-        foreach (AIStateType aiStateType in AIStates)
+        foreach (AIStateType aiStateType in StateSet.aIStateSet)
         {
             if (Logics[aiStateType].IsEligible())
             {
@@ -106,5 +103,24 @@ public class AIBrain : MonoBehaviour
         }
 
         return null;
+    }
+
+    AIState CreateState(AIStateType type)
+    {
+        switch (type)
+        {
+            case AIStateType.Idle:
+                return new IdleAIState(this);
+            case AIStateType.Move:
+                return new MoveAIState(this);
+            case AIStateType.Attack:
+                return new AttackAIState(this);
+            case AIStateType.Mining:
+                return new MiningAIState(this);
+            case AIStateType.Dead:
+                return new DeadAIState(this);
+            default:
+                return null;
+        }
     }
 }

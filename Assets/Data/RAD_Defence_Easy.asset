@@ -15,21 +15,27 @@ MonoBehaviour:
   _round:
   - _monsterSpawnData:
       _serializedList:
-      - Key: Zombie
+      - Key: Zergling
         Value: 10
   - _monsterSpawnData:
       _serializedList:
-      - Key: Orc
+      - Key: Zergling
+        Value: 15
+  - _monsterSpawnData:
+      _serializedList:
+      - Key: Zergling
+        Value: 10
+      - Key: Saurus
+        Value: 5
+  - _monsterSpawnData:
+      _serializedList:
+      - Key: Zergling
+        Value: 10
+      - Key: Saurus
         Value: 10
   - _monsterSpawnData:
       _serializedList:
-      - Key: Zombie
+      - Key: Zergling
         Value: 1
-  - _monsterSpawnData:
-      _serializedList:
-      - Key: Orc
-        Value: 10
-  - _monsterSpawnData:
-      _serializedList:
-      - Key: Zombie
-        Value: 1
+      - Key: Saurus
+        Value: 15

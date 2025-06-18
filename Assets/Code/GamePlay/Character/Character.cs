@@ -71,6 +71,8 @@ public class Character
     public CharacterStats Stats => characterStats;
     public Animator Animator => animator;
 
+    [SerializeField] private AIStateSet aIStateSet;
+
     public event Action<bool> OnChangedFlip;
 
     protected override void Awake()
@@ -110,7 +112,7 @@ public class Character
 
         AIBrain brain = gameObject.AddComponent<AIBrain>();
         gameObject.AddComponent<StateMachine>();
-        brain.Initialize(this, AI);
+        brain.Initialize(this, AI, aIStateSet);
     }
 
     protected override void OnDestroy()
