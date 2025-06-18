@@ -38,7 +38,7 @@ public class MiningAIState : AIState
 
     private void TakeMineral()
     {
-        Debug.Log($"¹Ì³×¶ö Ã¤Áý : {brain.possessed.Stats.Damage}");
+        //Debug.Log($"¹Ì³×¶ö Ã¤Áý : {brain.possessed.Stats.}");
        //Player.Mineral += brain.possessed.Stats.Damage;
     }
 }
