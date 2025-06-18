@@ -16,4 +16,3 @@ MonoBehaviour:
   m_WaveInfos:
   - m_SpawnEnemies:
     - {fileID: 11400000, guid: f6885ff6a723a514c9e7d8f7890ca9de, type: 2}
-    - {fileID: 11400000, guid: 77f96d509a387cd49a99ecbbb296c4bc, type: 2}

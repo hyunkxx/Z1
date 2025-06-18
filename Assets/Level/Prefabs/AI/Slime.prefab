@@ -260,6 +260,7 @@ MonoBehaviour:
     m_weaponEndSocket: {fileID: 0}
   movementComponent: {fileID: 3093477760184211630}
   m_isNPC: 1
+  aIStateSet: {fileID: 11400000, guid: 0e02b16196eceda42b14c4214fee708b, type: 2}
 --- !u!114 &3093477760184211630
 MonoBehaviour:
   m_ObjectHideFlags: 0
