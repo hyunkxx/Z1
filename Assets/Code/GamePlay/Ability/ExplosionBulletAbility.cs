@@ -60,10 +60,10 @@ public class ExplosionBulletAbility : Ability
 
     private void AnimationEventCallback(string param)
     {
-        if(param == "Hit")
+        if(param == "Hit" && m_instigator)
         {
-            /* stat temp */
-            damageProvider.ActivateProvider(m_instigator, null);
+            var character = m_instigator.GetComponent<Character>();
+            damageProvider.ActivateProvider(m_instigator, character.Stats);
         }
     }
 
@@ -77,6 +77,9 @@ public class ExplosionBulletAbility : Ability
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (m_instigator == null)
+            return;
+
         if (m_instigator == collision.transform.root.gameObject)
             return;
 

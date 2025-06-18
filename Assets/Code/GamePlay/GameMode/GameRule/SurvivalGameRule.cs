@@ -94,6 +94,17 @@ public class SurvivalGameRule
             return;
         }
 
+        /* Default Hit Effect */
+        AssetLoader.LoadAssetAsync<GameObject>("Effect_Hit00", () =>
+        {
+            ObjectPool pool = PoolManager.Instance.gameObject.AddComponent<ObjectPool>();
+            pool.InitializePool(AssetLoader.GetHandleInstance<GameObject>("Effect_Hit00"), 100);
+
+            var poolContainer = PoolManager.Instance.GetComponent<PoolContainer>();
+            poolContainer.RegisterPool(pool);
+        });
+
+        /* Stage Enemy Pool */
         int loadedCount = 0;
         HashSet<int> uniqueEnemyIDs = m_StageData.GetSpawnableEnemyIDs();
         foreach(int ID in uniqueEnemyIDs)
@@ -109,28 +120,4 @@ public class SurvivalGameRule
             });
         }
     }
-
-    //void Initialize()
-    //{
-    //    for (int i = 1; i <= roundData.Round.Count; ++i)
-    //    {
-    //        foreach (var data in roundData.Round[i - 1]._monsterSpawnData)
-    //        {
-    //            ObjectPool pool = Spawner.objectPools.GetPool(data.Key);
-
-    //            if (pool)
-    //            {
-    //                pool.ExpandPool(data.Value);
-    //            }
-    //            else
-    //            {
-    //                pool = Spawner.gameObject.AddComponent<ObjectPool>();
-    //                pool.InitializePool(AssetLoader.GetHandleInstance<GameObject>(data.Key), data.Value);
-    //            }
-
-    //            Spawner.objectPools.RegisterPool(pool);
-    //        }
-    //    }
-    //}
-
 }

@@ -39,6 +39,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Enemy
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ba63bac2960eb13478856a02db63aa3a
+    m_Address: Effect_Hit00
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Effect
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fe569e11d1890ce4cb223231c5809724
     m_Address: Zergling
     m_ReadOnly: 0

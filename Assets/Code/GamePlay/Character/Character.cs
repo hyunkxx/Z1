@@ -7,6 +7,12 @@ using UnityEngine.EventSystems;
 using UnityEngine.TextCore.Text;
 
 
+public enum EFlipType
+{
+    Sprite,
+    Transform
+}
+
 public interface ICharacterQueryable
 {
     public Character GetCharacter();
@@ -50,6 +56,10 @@ public class Character
     [SerializeField] protected CharacterView characterView;
     [SerializeField] protected MovementComponent movementComponent;
     [SerializeField] private bool m_isNPC = false;
+    [SerializeField] private EFlipType m_FlipType;
+
+    [SerializeField, ShowIf("m_FlipType", EFlipType.Transform)]
+    private Transform m_FlipRoot;
 
     protected WeaponComponent weaponComponent;
     protected TargetingComponent targetingComponent;
@@ -171,35 +181,43 @@ public class Character
         else
             return IsRight() ? Vector2.right : Vector2.left;
     }
+
     public void UpdateFlip()
     {
-        if(targetingComponent.HasNearTarget())
+        Vector3 faceDirection = targetingComponent.HasNearTarget() ? targetingComponent.GetTargetDirection() : movementComponent.MoveDirection;
+
+        switch (m_FlipType)
         {
-            Vector3 targetDir = targetingComponent.GetTargetDirection();
-            if (spriteRenderer.flipX && targetDir.x > 0f)
-            {
-                spriteRenderer.flipX = false;
-                OnChangedFlip?.Invoke(false);
-            }
-            else if (!spriteRenderer.flipX && targetDir.x < 0f)
-            {
-                spriteRenderer.flipX = true;
-                OnChangedFlip?.Invoke(true);
-            }
-        }
-        else
-        {
-            Vector3 moveDirection = movementComponent.MoveDirection;
-            if (spriteRenderer.flipX && moveDirection.x > 0f)
-            {
-                spriteRenderer.flipX = false;
-                OnChangedFlip?.Invoke(false);
-            }
-            else if (!spriteRenderer.flipX && moveDirection.x < 0f)
-            {
-                spriteRenderer.flipX = true;
-                OnChangedFlip?.Invoke(true);
-            }
+            case EFlipType.Sprite:
+                if (spriteRenderer.flipX && faceDirection.x > 0f)
+                {
+                    spriteRenderer.flipX = false;
+                    OnChangedFlip?.Invoke(false);
+                }
+                else if (!spriteRenderer.flipX && faceDirection.x < 0f)
+                {
+                    spriteRenderer.flipX = true;
+                    OnChangedFlip?.Invoke(true);
+                }
+                break;
+            case EFlipType.Transform:
+                if (m_FlipRoot == null)
+                    return;
+
+                Vector3 localScale = m_FlipRoot.localScale;
+                if (localScale.x < 0f && faceDirection.x > 0f)
+                {
+                    localScale.x *= -1f;
+                    m_FlipRoot.localScale = localScale;
+                    OnChangedFlip?.Invoke(false);
+                }
+                else if (localScale.x > 0f && faceDirection.x < 0f)
+                {
+                    localScale.x *= -1f;
+                    m_FlipRoot.localScale = localScale;
+                    OnChangedFlip?.Invoke(true);
+                }
+                break;
         }
     }
 

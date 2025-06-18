@@ -50,6 +50,13 @@ public sealed class Damageable : MonoBehaviour
 
     public void TakeDamage(DamageEvent customEvent)
     {
+        /* temp defence object pool 아직 수정안됨 */
+        ObjectPool hitEffectPool = PoolManager.Instance.GetPool("Effect_Hit00");
+        if(hitEffectPool)
+        {
+            GameObject hitEffect = hitEffectPool.GetObject(transform.position, Quaternion.identity);
+        }
+
         ObjectPool pool = PoolManager.Instance.GetPool("DamageFont");
         GameObject instance = pool.GetObject(transform.position, Quaternion.identity);
         DamageFont font = instance.GetComponent<DamageFont>();
