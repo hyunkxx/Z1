@@ -7,9 +7,13 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 public class SurvivalGameRule
     : GameRule
 {
+    public string StageKey { get; private set; }
     public int CharacterID { get; private set; }
-
     private AsyncOperationHandle<GameObject> _characterHandle;
+
+    [SerializeField]
+    private SpawnerPool m_Spawner;
+    private StageData m_StageData;
 
     protected override void OnDestroy()
     {
@@ -38,31 +42,21 @@ public class SurvivalGameRule
             return;
         }
 
-        CharacterID = int.Parse(Game.Payload);
+        _gameMode.ChangeGameState(EGameState.LoadGame);
+
+        string[] parameters = Game.Payload.Split('#');
+
+        StageKey = parameters[0];
+        CharacterID = int.Parse(parameters[1]);
 
         Transform playerStart = _gameMode.PlayerStart;
         SpawnCharacter(playerStart.position);
+        LoadSceneData();
     }
 
     protected override void Start()
     {
         base.Start();
-        Debug.Log("Rule Start");
-    }
-
-    private void OnChangeGameState(EGameState state)
-    {
-        switch (state)
-        {
-            case EGameState.LoadGame:
-                //LoadSceneData();
-                break;
-            case EGameState.ReadyGame:
-                //Initialize();
-                break;
-            case EGameState.EnterGame:
-                break;
-        }
     }
 
     private bool SpawnCharacter(Vector3 location)
@@ -84,43 +78,37 @@ public class SurvivalGameRule
                 cameraMovement.SetViewTarget(character.gameObject);
 
                 _gameMode.PlayerController.ConnectCharacter(character);
-                _gameMode.ChangeGameState(EGameState.ReadyGame);
             }
         };
 
         return true;
     }
 
-    //void LoadSceneData()
-    //{
-    //    roundData = Database.Instance.DefenseRoundAssetData.GetValueOrDefault(CurMode);
-    //    Spawner.SetRoundData(roundData);
+    public void LoadSceneData()
+    {
+        m_StageData = Database.Instance.FindStageData(StageKey);
+        if (m_StageData == null)
+        {
+            Debug.LogWarning("LoadStageData failed: invalid stage ID");
+            Destroy(gameObject);
+            return;
+        }
 
-    //    for (int i = 0; i < Database.Instance.CharacterAssetCount; ++i)
-    //    {
-    //        MaxLoadingCount++;
-    //        AssetLoader.LoadAssetAsync<GameObject>(Database.Instance.FindCharacterAsset(i + 1000).PrefabKey, () =>
-    //        {
-    //            CurLoadingCount++;
-    //            if (MaxLoadingCount == CurLoadingCount)
-    //                _gameMode.ChangeGameState(EGameState.ReadyGame);
-    //        });
-    //    }
-
-    //    for (int i = 1; i <= roundData.Round.Count; ++i)
-    //    {
-    //        foreach (var data in roundData.Round[i - 1]._monsterSpawnData)
-    //        {
-    //            MaxLoadingCount++;
-    //            AssetLoader.LoadAssetAsync<GameObject>(data.Key, () =>
-    //            {
-    //                CurLoadingCount++;
-    //                if (MaxLoadingCount == CurLoadingCount)
-    //                    _gameMode.ChangeGameState(EGameState.ReadyGame);
-    //            });
-    //        }
-    //    }
-    //}
+        int loadedCount = 0;
+        HashSet<int> uniqueEnemyIDs = m_StageData.GetSpawnableEnemyIDs();
+        foreach(int ID in uniqueEnemyIDs)
+        {
+            AssetLoader.LoadAssetAsync<GameObject>(Database.Instance.FindCharacterAsset(ID).PrefabKey, () =>
+            {
+                loadedCount++;
+                if (uniqueEnemyIDs.Count == loadedCount)
+                {
+                    m_Spawner.Initialize(m_StageData);
+                    _gameMode.ChangeGameState(EGameState.ReadyGame);
+                }
+            });
+        }
+    }
 
     //void Initialize()
     //{

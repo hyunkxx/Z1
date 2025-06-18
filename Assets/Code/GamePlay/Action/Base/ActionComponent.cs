@@ -27,21 +27,19 @@ public sealed class ActionComponent
     public void Update()
     {
         /* temp */
-        if (IsPlayerControlled && IsCooldownRunning(EActionType.ATTACK))
+        if (IsPlayerControlled)
         {
             TryExecute(EActionType.ATTACK);
-        }
 
-        /* temp */
-        if(Input.GetKeyDown(KeyCode.E))
-        {
-            TryExecute(EActionType.ABILITY1);
-        }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                TryExecute(EActionType.ABILITY1);
+            }
 
-        /* temp */
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            TryExecute(EActionType.ABILITY2);
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                TryExecute(EActionType.ABILITY2);
+            }
         }
 
         UpdateRemainingTimes();
@@ -54,12 +52,21 @@ public sealed class ActionComponent
 
     public bool IsCooldownRunning(EActionType actionType)
     {
-        return !remainingTimes.ContainsKey(actionType);
+        return remainingTimes.ContainsKey(actionType);
+    }
+
+    public bool CanExecute(EActionType actionType)
+    {
+        if (IsCooldownRunning(actionType))
+            return false;
+
+        BaseAction action = m_actionSet.GetAction(actionType);
+        return action.CheckConditions(OwnerCharacter);
     }
 
     public bool TryExecute(EActionType actionType)
     {
-        if (!IsCooldownRunning(actionType))
+        if (IsCooldownRunning(actionType))
             return false;
 
         BaseAction action = m_actionSet.GetAction(actionType);

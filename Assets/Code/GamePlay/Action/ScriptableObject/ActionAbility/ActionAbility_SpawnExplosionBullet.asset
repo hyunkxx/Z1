@@ -15,7 +15,7 @@ MonoBehaviour:
   conditionSet:
     conditions:
     - {fileID: 11400000, guid: 6b6a7b34cf035b64daf9430ed05e01ba, type: 2}
-  m_coolDown: 0.1
+  m_coolDown: 1
   m_SourcePrefab: {fileID: 8004680129202126573, guid: dbc42205beb52e64195496cc6ad954b2, type: 3}
-  m_spawnCount: 5
-  m_animationTrigger: Ability1
+  m_spawnCount: 3
+  m_animationTrigger: 

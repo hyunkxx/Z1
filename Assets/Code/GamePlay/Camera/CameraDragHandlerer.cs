@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class CameraDragHandlerer : MonoBehaviour
-{
+{    
     bool isDragging = false;
     Vector2 lastTouchPos;
     Camera mainCamera;

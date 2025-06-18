@@ -82,7 +82,7 @@ public class ExplosionBulletAbility : Ability
 
         Damageable owner = m_instigator.GetComponent<Damageable>();
         Damageable other = collision.gameObject.GetComponent<Damageable>();
-        if (owner != null && other != null && owner.IsAlly(other))
+        if (owner == null || other == null || owner.IsAlly(other))
             return;
 
         ExplosionSetup();

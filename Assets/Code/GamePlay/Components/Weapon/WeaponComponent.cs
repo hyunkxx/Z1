@@ -46,14 +46,18 @@ public sealed class WeaponComponent : MonoBehaviour
         if (character.TargetingComponent.HasNearTarget())
         {
             WeaponDirection = character.TargetingComponent.GetTargetDirection();
+
+            targetAngle = Mathf.Repeat(Mathf.Atan2(WeaponDirection.y, WeaponDirection.x) * Mathf.Rad2Deg, 360f);
+            //angle = Mathf.LerpAngle(transform.eulerAngles.z, targetAngle, Time.deltaTime * 15.0f);
+            transform.rotation = Quaternion.Euler(0, 0, targetAngle);
         }
         else
         {
             WeaponDirection = character.GetCharacterDirection();
-        }
 
-        targetAngle = Mathf.Repeat(Mathf.Atan2(WeaponDirection.y, WeaponDirection.x) * Mathf.Rad2Deg, 360f);
-        angle = Mathf.LerpAngle(transform.eulerAngles.z, targetAngle, Time.deltaTime * 15.0f);
-        transform.rotation = Quaternion.Euler(0, 0, angle);
+            targetAngle = Mathf.Repeat(Mathf.Atan2(WeaponDirection.y, WeaponDirection.x) * Mathf.Rad2Deg, 360f);
+            angle = Mathf.LerpAngle(transform.eulerAngles.z, targetAngle, Time.deltaTime * 15.0f);
+            transform.rotation = Quaternion.Euler(0, 0, angle);
+        }
     }
 }

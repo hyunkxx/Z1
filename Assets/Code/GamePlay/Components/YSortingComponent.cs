@@ -28,7 +28,7 @@ public class YSortingComponent : MonoBehaviour
     {
         while (gameObject.activeSelf)
         {
-            gameObject.transform.GetComponent<SpriteRenderer>().sortingOrder = (int)(transform.parent.position.y * 100);
+            gameObject.transform.GetComponent<SpriteRenderer>().sortingOrder = (int)(transform.parent.position.y * -100);
 
             float t = Mathf.InverseLerp(maxY, minY, transform.parent.position.y);
             float scale = Mathf.Lerp(maxScale, minScale, t);

@@ -119,7 +119,8 @@ public class DefenceGameRule
         rewardData = Database.Instance.DefenseRewardAssetDatas.GetValueOrDefault(CurMode);
         Spawner.SetRoundData(roundData);
 
-        for (int i = 0; i < Database.Instance.CharacterAssetCount; ++i)
+        /* temp count */
+        for (int i = 0; i < 2; ++i)
         {
             MaxLoadingCount++;
             AssetLoader.LoadAssetAsync<GameObject>(Database.Instance.FindCharacterAsset(i + 1000).PrefabKey, () =>
@@ -147,7 +148,8 @@ public class DefenceGameRule
 
     void Initialize()
     {
-        for (int i = 0; i < Database.Instance.CharacterAssetCount; ++i)
+        /* temp count */
+        for (int i = 0; i < 2; ++i)
         {
             ObjectPool characterPool = Spawner.objectPools.GetPool(Database.Instance.FindCharacterAsset(i + 1000).PrefabKey);
 

@@ -15,4 +15,5 @@ MonoBehaviour:
   conditionSet:
     conditions: []
   m_coolDown: 2
+  m_bUseAnimationTrigger: 0
   m_animationTrigger: Attack

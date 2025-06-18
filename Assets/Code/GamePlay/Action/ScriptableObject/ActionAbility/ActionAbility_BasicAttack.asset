@@ -15,7 +15,7 @@ MonoBehaviour:
   conditionSet:
     conditions:
     - {fileID: 11400000, guid: 6b6a7b34cf035b64daf9430ed05e01ba, type: 2}
-  m_coolDown: 2
+  m_coolDown: 4
   m_abilityPrefab: {fileID: 7054123221439287616, guid: 2af55651b79015a44b890850e103e689, type: 3}
   m_abilityTarget: 1
   m_targetCount: 2

@@ -24,7 +24,7 @@ public class CameraMovement : MonoBehaviour
 
     public void Awake()
     {
-        pixelPerfectCamera = GetComponent<UnityEngine.Rendering.Universal.PixelPerfectCamera>();
+        //pixelPerfectCamera = GetComponent<UnityEngine.Rendering.Universal.PixelPerfectCamera>();
         //pixelPerfectCamera.assetsPPU = 32;
     }
 

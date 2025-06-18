@@ -74,6 +74,7 @@ public class Character
     [SerializeField] private AIStateSet aIStateSet;
 
     public event Action<bool> OnChangedFlip;
+    //public event Action OnDieEvent;
 
     protected override void Awake()
     {
@@ -106,7 +107,8 @@ public class Character
 
     public void InitializeNpcComponent()
     {
-        Debug.Log("Awake");
+        characterStats = new CharacterStats(2001);
+
         ETeam teamID = damageable.TeamID;
         AIType AI = teamID == ETeam.Player ? AIType.Character : AIType.Monster;
 
@@ -128,7 +130,29 @@ public class Character
     }
     protected virtual void TakeDamage(DamageEvent info)
     {
+        Debug.Log(info.damage);
+        if (characterStats == null)
+            return;
+
+        characterStats.ApplyDamage(info);
+        Debug.Log($"{characterStats.GetStat(EStatType.CurHealth)} / {characterStats.GetStat(EStatType.MaxHealth)}");
+
+        if(!IsAlive())
+        {
+            Kiil();
+        }
     }
+
+    public void Kiil()
+    {
+        Destroy(gameObject);
+    }
+
+    public bool IsAlive()
+    {
+        return characterStats.GetStat(EStatType.CurHealth) > 0f;
+    }
+
     public bool IsRight()
     {
         return !spriteRenderer.flipX;

@@ -35,6 +35,15 @@ public class Database : Singleton<Database>
     private SerializedDictionary<int, ItemDataAsset> _itemDataAssets;
     public int ItemAssetCount => _itemDataAssets.Count;
 
+    /**
+     * @ Vampire Stage Data
+     * @ StageKey : 1-1
+     * @ Round    : 스테이지 내부 라운드 정보
+     */
+    [SerializeField, SerializedDictionary("Key", "Stage DataAsset")]
+    private SerializedDictionary<string, StageData> _stageDataAssets;
+    public int StageCount => _stageDataAssets.Count;
+
     [SerializeField, SerializedDictionary("Key", "Defense Round DataAsset")]
     public SerializedDictionary<string, RoundAssetData> DefenseRoundAssetData;
 
@@ -44,6 +53,7 @@ public class Database : Singleton<Database>
     /* INVENTORY */
     public Inventory Inventory { get; private set; }
 
+    public StageData FindStageData(string stageKey) { return _stageDataAssets.GetValueOrDefault(stageKey); }
     public CharacterDataAsset FindCharacterAsset(int ID) { return _characterDataAssets.GetValueOrDefault(ID); }
     public ItemDataAsset FindItemAsset(int ID) { return _itemDataAssets.GetValueOrDefault(ID); }
 

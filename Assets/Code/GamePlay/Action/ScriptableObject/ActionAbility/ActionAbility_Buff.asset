@@ -19,4 +19,4 @@ MonoBehaviour:
   m_abilityTarget: 0
   m_targetCount: 1
   m_triggerDistance: 5
-  m_animationTrigger: Ability2
+  m_animationTrigger: 

@@ -39,6 +39,7 @@ public class AIBrain : MonoBehaviour
 
     public SpawnController GetSpanwer() { return spawner; }
     public void SetSpawner(SpawnController _spawner) { spawner = _spawner; } 
+    public void SetTarget(GameObject _target) { Target = _target; }
 
     public void Initialize(Character character, AIType type, AIStateSet aIStateSet)
     {

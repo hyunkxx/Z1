@@ -115,20 +115,18 @@ public sealed class DamageProvider : MonoBehaviour
 
         Damageable owner = this.owner.GetComponent<Damageable>();
         Damageable other = collision.gameObject.GetComponent<Damageable>();
-        if (owner && other)
+        if (!owner || !other)
+            return;
+
+        if (owner.IsEnemy(other))
         {
-            if (owner.IsEnemy(other))
+            DamageEvent damageEvent = new DamageEvent(characterStats.GetStat(EStatType.AttackDamage), this.owner);
+            other.TakeDamage(damageEvent);
+
+            if (shouldDestroyOnTrigger)
             {
-                //@hyun_temp
-                DamageEvent damageEvent = new DamageEvent(50f, this.owner);
-
-                //DamageEvent damageEvent = new DamageEvent(providerData.characterStats.Damage, providerData.owner);
-                other.TakeDamage(damageEvent);
-
-                if (shouldDestroyOnTrigger)
-                {
-                    Destroy(transform.root.gameObject);
-                }
+                Destroy(transform.root.gameObject);
+                enableTrigger = false;
             }
         }
     }

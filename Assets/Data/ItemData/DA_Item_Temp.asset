@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DA_Item_Temp
   m_EditorClassIdentifier: 
   _itemID: 0
-  _name: SEX
+  _name: --
   _stackLimit: 3
   _image: {fileID: -1539440673025631000, guid: 39799d122d4bd654d8c2c79af3d690b1, type: 3}
   _equipmentType: 1

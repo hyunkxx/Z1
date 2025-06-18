@@ -4,7 +4,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ActionAnimationTrigger", menuName = "Scriptable Objects/Actions/ActionAnimationTrigger")]
 public class ActionAnimationTrigger : BaseAction
 {
-    [SerializeField] protected string m_animationTrigger;
+    [SerializeField]
+    protected string m_animationTrigger;
 
     protected override bool InternalExecuteAction(ICharacterQueryable InQueryable)
     {

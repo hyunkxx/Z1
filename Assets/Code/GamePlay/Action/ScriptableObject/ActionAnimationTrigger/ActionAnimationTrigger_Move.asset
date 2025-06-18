@@ -15,4 +15,5 @@ MonoBehaviour:
   conditionSet:
     conditions: []
   m_coolDown: 0
+  m_UseAnimationTrigger: 1
   m_animationTrigger: Move

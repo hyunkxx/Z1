@@ -18,6 +18,10 @@ public abstract class BaseAction: ScriptableObject
     //{
     //    Debug.Log("Enable");
     //}
+    public bool CheckConditions(ICharacterQueryable InQueryable)
+    {
+        return conditionSet.Check(InQueryable);
+    }
 
     public bool TryExecute(ICharacterQueryable InQueryable)
     {
