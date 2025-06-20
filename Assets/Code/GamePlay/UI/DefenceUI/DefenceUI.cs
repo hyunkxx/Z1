@@ -95,7 +95,7 @@ public class DefenceUI : UIBase
         {
             case "SkillButton_0":
                 Debug.Log("Skill_0 Active");
-
+                Controller.Skill_0.
                 break;
 
             case "SkillButton_1":
