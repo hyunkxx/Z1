@@ -12,6 +12,7 @@ public class DefenceGameRule
 
     public Action NextRoundAction;
 
+    DefenceUI defenceUI;
     RoundAssetData roundData;
     DefenceRewardAssetData rewardData;
 
@@ -34,6 +35,13 @@ public class DefenceGameRule
     public float round => Round;
     public float roundTime => RoundTime;
 
+    public enum ERewardType
+    {
+        Lose,
+        Win,
+        Ads,
+    }
+
     protected override void Awake()
     {
         base.Awake();
@@ -43,6 +51,7 @@ public class DefenceGameRule
         _gameMode.ChangeGameState(EGameState.LoadGame);
     }
 
+    // 골드, Exp, 특성 포인트(유저 특성), 스킬 포인트 (유저 스킬 강화)    
 
     protected override void Start()
     {
@@ -56,17 +65,35 @@ public class DefenceGameRule
 
     private void WinGame()
     {
-        Debug.Log("Win");
+        defenceUI.WinPanel.SetActive(true);
     }
 
     private void LoseGame()
     {
-        Debug.Log("Lose");
+        defenceUI.LosePanel.SetActive(true);
     }
 
-    private void GetReward()
+    public void GetReward(ERewardType rewardType)
     {
-        // rewardData._defenceRewardData
+        switch(rewardType)
+        {
+            case ERewardType.Lose:
+                HaveBlueStoneCount = rewardData._defenceRewardData["Gold"] / 2;
+                HaveBlueStoneCount = rewardData._defenceRewardData["Exp"] / 2;
+                break;
+
+            case ERewardType.Win:
+                HaveBlueStoneCount = rewardData._defenceRewardData["Gold"];
+                HaveBlueStoneCount = rewardData._defenceRewardData["Exp"];
+                break;
+
+            case ERewardType.Ads:
+                HaveBlueStoneCount = rewardData._defenceRewardData["Gold"] * 2;
+                HaveBlueStoneCount = rewardData._defenceRewardData["Exp"] * 2;
+                break;
+        }
+
+        GameManager.Instance.OpenScene("Lobby");
     }
 
     private IEnumerator RoundCheck()

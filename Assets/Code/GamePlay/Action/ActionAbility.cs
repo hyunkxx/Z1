@@ -33,6 +33,7 @@ public class ActionAbility : BaseAction
     public int TargetMaxCount { get { return AbilityTarget == EAbilityTarget.Multi ? m_targetCount : 1; } }
     public float TriggerDistance => m_triggerDistance;
     public string AnimationTrigger => m_animationTrigger;
+    public GameObject AbilityPrefab => m_abilityPrefab;
 
     protected override bool InternalExecuteAction(ICharacterQueryable InQueryable)
     {

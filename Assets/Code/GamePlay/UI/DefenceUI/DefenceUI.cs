@@ -4,8 +4,15 @@ using UnityEngine.UI;
 
 public class DefenceUI : UIBase
 {
+    [SerializeField] private DefencePlayerController Controller;
     [SerializeField] private DefenceGameRule GameRule;
     [SerializeField] private DefenceCraftUI CraftUI;
+
+    [Header("ResultPanel")]
+    public GameObject WinPanel;
+    [SerializeField] private Button WinRewardButton;
+    public GameObject LosePanel;
+    [SerializeField] private Button LoseRewardButton;
 
     [Header("Bottom Group")]
     [SerializeField] private Button FieldActiveButton;
@@ -27,12 +34,25 @@ public class DefenceUI : UIBase
 
     private float RoundTime = 0f;
 
+    private void Awake()
+    {
+        Controller = (DefencePlayerController)GameManager.Instance.GameMode.PlayerController;
+    }
+
     private void Start()
     {
         FieldActiveButton.onClick.AddListener(OnClickFieldButton);
-        BaseActiveButton.onClick.AddListener(OnClickBaseButton);
         FieldCraftPanelActiveButton.onClick.AddListener(() => { CraftUI.OnActivePanel(true); });
+
+        BaseActiveButton.onClick.AddListener(OnClickBaseButton);
         BaseCraftPanelActiveButton.onClick.AddListener(() => { CraftUI.OnActivePanel(false); });
+
+        WinRewardButton.onClick.AddListener(() => { GameRule.GetReward(DefenceGameRule.ERewardType.Win); });
+        LoseRewardButton.onClick.AddListener(() => { GameRule.GetReward(DefenceGameRule.ERewardType.Lose); });
+
+        UserSkillButton_0.onClick.AddListener(OnClickSkillButton);
+        UserSkillButton_1.onClick.AddListener(OnClickSkillButton);
+
         GameRule.NextRoundAction += OnChangedRoundUI;
     }
 
@@ -71,6 +91,16 @@ public class DefenceUI : UIBase
 
     void OnClickSkillButton()
     {
-        //if(GetButtonName == )
+        switch(GetButtonName())
+        {
+            case "SkillButton_0":
+                Debug.Log("Skill_0 Active");
+
+                break;
+
+            case "SkillButton_1":
+                Debug.Log("Skill_1 Active");
+                break;
+        }
     }
 }
