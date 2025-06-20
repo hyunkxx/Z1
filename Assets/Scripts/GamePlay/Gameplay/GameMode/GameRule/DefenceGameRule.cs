@@ -12,7 +12,7 @@ public class DefenceGameRule
 
     public Action NextRoundAction;
 
-    DefenceUI defenceUI;
+    [SerializeField] DefenceUI defenceUI;
     RoundAssetData roundData;
     DefenceRewardAssetData rewardData;
 
@@ -25,7 +25,7 @@ public class DefenceGameRule
     [SerializeField] private DefenceCastle PlayerTeamHP;
     [SerializeField] private DefenceCastle EnemyTeamHP;
 
-    [SerializeField] static public int HaveGreenStoneCount = 0;
+    public int HaveGreenStoneCount = 0;
     public int HaveBlueStoneCount = 0;
     public int HaveRedStoneCount = 0;
 
@@ -63,12 +63,12 @@ public class DefenceGameRule
         base.Update();
     }
 
-    private void WinGame()
+    public void WinGame()
     {
         defenceUI.WinPanel.SetActive(true);
     }
 
-    private void LoseGame()
+    public void LoseGame()
     {
         defenceUI.LosePanel.SetActive(true);
     }
@@ -100,12 +100,6 @@ public class DefenceGameRule
     {
         while (true)
         {
-            if (PlayerTeamHP.HP <= 0)
-            {
-                LoseGame();
-                yield break;
-            }
-
             if (roundData.Round.Count > round)
             {
                 NextRoundAction.Invoke();
@@ -114,12 +108,6 @@ public class DefenceGameRule
             }
 
             yield return new WaitForSeconds(RoundTime);
-
-            if (EnemyTeamHP.HP <= 0)
-            {
-                WinGame();
-                yield break;
-            }
         }
     }
 

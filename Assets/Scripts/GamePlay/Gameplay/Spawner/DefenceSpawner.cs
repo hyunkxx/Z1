@@ -9,7 +9,7 @@ public class DefenceSpawner : SpawnController
     public Transform[] MonsterSpawnPos;
     public Transform[] CharacterSpawnPos;
     public Transform[] ComandSpanwPos;
-    public Transform MineralSpawnPos;
+    public Transform[] MineralSpawnPos;
 
     private RoundAssetData roundData;
 

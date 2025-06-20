@@ -7,22 +7,36 @@ public class CameraDragHandlerer : MonoBehaviour
     Vector2 lastTouchPos;
     Camera mainCamera;
     public float moveSpeed = 1f;
+    public GameObject Target;
+
+    ECameraMoveState CurState = ECameraMoveState.None;
+    public enum ECameraMoveState
+    {
+        None,
+        Targeting,
+    }
 
     void Awake()
     {
         mainCamera = Camera.main;
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
-        HandleMouseDrag();
+        switch (CurState)
+        {
+            case ECameraMoveState.None:
+                HandleMouseDrag();
+                break;
+            case ECameraMoveState.Targeting:
+                TargetingObject();
+                break;
+        }
     }
 
     void HandleMouseDrag()
@@ -44,7 +58,7 @@ public class CameraDragHandlerer : MonoBehaviour
             Vector3 worldDelta = mainCamera.ScreenToWorldPoint(currentPosition) - mainCamera.ScreenToWorldPoint(lastTouchPos);
 
             Vector3 cameraPos = mainCamera.transform.position;
-            Vector3 newPos = new Vector3((worldDelta.x * moveSpeed) + cameraPos.x, cameraPos.y, cameraPos.z);
+            Vector3 newPos = new Vector3((-worldDelta.x * moveSpeed) + cameraPos.x, cameraPos.y, cameraPos.z);
 
             mainCamera.transform.position = newPos;
 
@@ -52,4 +66,24 @@ public class CameraDragHandlerer : MonoBehaviour
         }
     }
 
+    void TargetingObject()
+    {
+        transform.position = new Vector3(Target.transform.position.x, Target.transform.position.y, transform.position.z);
+        // 범위 내에서는 가만히 범위 밖으로 가면 카메라 이동
+    }
+
+    public void ChangeState(ECameraMoveState state)
+    {
+        CurState = state;
+        Target = null;
+        isDragging = false;
+        transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+    }
+
+    public void ChangeState(ECameraMoveState state, GameObject target)
+    {
+        CurState = state;
+        Target = target;
+        isDragging = false;
+    }
 }

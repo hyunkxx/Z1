@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class DefenceUI : UIBase
 {
+
     [SerializeField] private DefencePlayerController Controller;
     [SerializeField] private DefenceGameRule GameRule;
     [SerializeField] private DefenceCraftUI CraftUI;
@@ -31,6 +32,8 @@ public class DefenceUI : UIBase
     [SerializeField] private Button UserSkillButton_0;
     [SerializeField] private Button UserSkillButton_1;
 
+    DefenceGameRule defenceGame;
+
 
     private float RoundTime = 0f;
 
@@ -54,6 +57,7 @@ public class DefenceUI : UIBase
         UserSkillButton_1.onClick.AddListener(OnClickSkillButton);
 
         GameRule.NextRoundAction += OnChangedRoundUI;
+        defenceGame = (DefenceGameRule)GameManager.Instance.GameMode.Rule;
     }
 
     void Update()
@@ -86,7 +90,7 @@ public class DefenceUI : UIBase
 
     void OnChangedStoneCountUI()
     {
-        Gold_txt.text = $"{DefenceGameRule.HaveGreenStoneCount}";
+        Gold_txt.text = $"{defenceGame.HaveGreenStoneCount}";
     }
 
     void OnClickSkillButton()
@@ -95,7 +99,7 @@ public class DefenceUI : UIBase
         {
             case "SkillButton_0":
                 Debug.Log("Skill_0 Active");
-                //Controller.Skill_0.
+                Controller.ActioveSkill_0();
                 break;
 
             case "SkillButton_1":

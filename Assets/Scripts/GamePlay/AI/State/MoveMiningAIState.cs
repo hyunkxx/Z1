@@ -6,7 +6,8 @@ public class MoveMiningAIState : AIState
 
     public bool isFullAmount = false;
     public Transform ComandCenter;
-    Transform Mineral;
+    Transform[] Mineral;
+    DefenceGameRule gameRule;
 
     bool isInitialize = false;
     public override void EnterState()
@@ -16,7 +17,8 @@ public class MoveMiningAIState : AIState
             DefenceSpawner spawner = (DefenceSpawner)brain.GetSpanwer();
             ComandCenter = spawner.ComandSpanwPos[0];
             Mineral = spawner.MineralSpawnPos;
-            brain.SetTarget(Mineral.gameObject);
+            brain.SetTarget(Mineral[0].gameObject);
+            gameRule = (DefenceGameRule)GameManager.Instance.GameMode.Rule;
             isInitialize = true;
         }
 
@@ -47,10 +49,10 @@ public class MoveMiningAIState : AIState
             if (isFullAmount)
             {
                 MiningAIState aIState = (MiningAIState)brain.GetLogic(AIStateType.Mining);
-                DefenceGameRule.HaveGreenStoneCount += aIState.collectAmount;
+                gameRule.HaveGreenStoneCount += aIState.collectAmount;
                 aIState.collectAmount = 0;
                 isFullAmount = false;
-                brain.SetTarget(Mineral.gameObject);
+                brain.SetTarget(Mineral[0].gameObject);
                 brain.possessed.TargetingComponent.gameObject.SetActive(true);
             }
             return false;

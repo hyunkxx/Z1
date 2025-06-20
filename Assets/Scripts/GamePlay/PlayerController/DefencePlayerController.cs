@@ -3,14 +3,13 @@ using UnityEngine;
 
 public class DefencePlayerController : PlayerController
 {
+    private CameraDragHandlerer CameraHandlerer;
     public GameObject Skill_Prefab;
-
-    [SerializeField, ShowIf("m_abilityTarget", EAbilityTarget.Multi)]
-    private int m_targetCount = 1;
 
     protected override void Start()
     {
         base.Awake();
+        CameraHandlerer = Camera.main.GetComponent<CameraDragHandlerer>();
     }
     protected override void Update()
     {
@@ -19,17 +18,7 @@ public class DefencePlayerController : PlayerController
 
     public void ActioveSkill_0()
     {
-        IReadOnlyList<TargetElement> targets = character.TargetingComponent.GetTargetList();
-
-        for (int i = 0; i < m_targetCount; ++i)
-        {
-            if (targets.Count <= i)
-                break;
-
-            GameObject obj = Instantiate(Skill_Prefab);
-            Ability ability = obj.GetComponent<Ability>();
-            ability.Activate(character.gameObject, targets[i].target);
-        }
+        GameObject obj = Instantiate(Skill_Prefab);
+        CameraHandlerer.ChangeState(CameraDragHandlerer.ECameraMoveState.Targeting, obj);
     }
-
 }
