@@ -9,6 +9,12 @@ public class YSortingComponent : MonoBehaviour
     private float maxScale = 0.7f;
 
     Coroutine YSortingCoroutine;
+    SpriteRenderer[] spriteRenderers;
+
+    private void Awake()
+    {
+        spriteRenderers = gameObject.transform.GetComponentsInChildren<SpriteRenderer>();
+    }
 
     private void OnBecameVisible()
     {
@@ -28,7 +34,8 @@ public class YSortingComponent : MonoBehaviour
     {
         while (gameObject.activeSelf)
         {
-            gameObject.transform.GetComponent<SpriteRenderer>().sortingOrder = (int)(transform.parent.position.y * -100);
+            foreach (SpriteRenderer spriteRenderer in spriteRenderers)
+                spriteRenderer.sortingOrder = (int)(transform.parent.position.y * -100);
 
             float t = Mathf.InverseLerp(maxY, minY, transform.parent.position.y);
             float scale = Mathf.Lerp(maxScale, minScale, t);

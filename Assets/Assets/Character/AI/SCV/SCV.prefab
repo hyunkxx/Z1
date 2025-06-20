@@ -111,7 +111,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8470681228656686278}
+  m_Father: {fileID: 5440166827701952967}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4748773233465195409
 SpriteRenderer:
@@ -197,9 +197,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7297221751383901226}
-  - {fileID: 1419015789663114727}
+  m_Children: []
   m_Father: {fileID: 5440166827701952967}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4153801174176972465
@@ -5114,7 +5112,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 847969267
-  m_SortingLayer: 3
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
@@ -5478,6 +5476,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7297221751383901226}
+  - {fileID: 1419015789663114727}
   - {fileID: 8470681228656686278}
   - {fileID: 1792955426534745096}
   - {fileID: 9159694628566062234}
@@ -5591,7 +5591,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2624161673318038676}
-  m_Father: {fileID: 8470681228656686278}
+  m_Father: {fileID: 5440166827701952967}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2981971133054567899
 SpriteRenderer:
