@@ -822,7 +822,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20732847585faa1438bbbe93796f91f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameRule: {fileID: 2004177058}
+  Controller: {fileID: 0}
+  GameRule: {fileID: 0}
   CraftUI: {fileID: 593889413}
   WinPanel: {fileID: 155152229}
   WinRewardButton: {fileID: 1211470862}
@@ -9738,7 +9739,7 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6642420206358302170, guid: d0d7c201b5d66f748a8104d717801801, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 3574492255017738530, guid: d0d7c201b5d66f748a8104d717801801, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2004177058}
     - targetCorrespondingSourceObject: {fileID: 803357732367060045, guid: d0d7c201b5d66f748a8104d717801801, type: 3}
@@ -9747,7 +9748,7 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: d0d7c201b5d66f748a8104d717801801, type: 3}
 --- !u!1 &2004177057 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 6642420206358302170, guid: d0d7c201b5d66f748a8104d717801801, type: 3}
+  m_CorrespondingSourceObject: {fileID: 3574492255017738530, guid: d0d7c201b5d66f748a8104d717801801, type: 3}
   m_PrefabInstance: {fileID: 2004177056}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &2004177058

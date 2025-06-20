@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Slider_LevelProfile_Badge_SingleDemo_0: -5784998893897818166
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
