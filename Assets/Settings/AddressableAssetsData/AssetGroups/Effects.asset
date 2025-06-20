@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Effects
+  m_EditorClassIdentifier: 
+  m_GroupName: Effects
+  m_GUID: 7faeffa7b5c9e3f448590aad28ffc597
+  m_SerializeEntries:
+  - m_GUID: 8c1229d895fbe8f4b9587a879fa461cd
+    m_Address: Effect_SpawnVisualizer
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8e06b6d0e5986704b84655059d6971ba
+    m_Address: DropObject_XP
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Effect
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ba63bac2960eb13478856a02db63aa3a
+    m_Address: Effect_Hit00
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Effect
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d67c372b639511349aa795081f079f27
+    m_Address: Particle_Blood
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dd2794fa28b98d643a76f2caa682ceab
+    m_Address: Mat_Tint
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Material
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: d696c73dc2a11ad42a29971d096876ce, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: ec6e7a2ceaaf0d14ea83d41e6a433da2, type: 2}
+    - {fileID: 11400000, guid: 8e27abd52c99b7a45b87e8cb73c0b672, type: 2}

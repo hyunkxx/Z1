@@ -15,12 +15,6 @@ MonoBehaviour:
   m_GroupName: PreLoad
   m_GUID: 27d940c126288bc418a010a4e7df7746
   m_SerializeEntries:
-  - m_GUID: 63200722313076e48a399b056708827b
-    m_Address: EmptyGameObject
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Effect
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 69acf7b901470664584eb719adde6fc6
     m_Address: Orc
     m_ReadOnly: 0
@@ -39,11 +33,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - Enemy
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ba63bac2960eb13478856a02db63aa3a
-    m_Address: Effect_Hit00
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Effect
   - m_GUID: fa74f64fabcb0144ebd69b2137f6411c
     m_Address: SCV
     m_ReadOnly: 0
@@ -55,12 +44,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Enemy
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: febb501f9ce63e5448c333eabb8965cc
-    m_Address: Sprite_BaekSu
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - default
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d696c73dc2a11ad42a29971d096876ce, type: 2}

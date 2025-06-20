@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Damageable
+  - DropObject
   layers:
   - Default
   - TransparentFX
@@ -45,6 +46,9 @@ TagManager:
   - name: Foregound
     uniqueID: 75372957
     locked: 0
+  - name: FieldObject
+    uniqueID: 4135749589
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
@@ -55,7 +59,7 @@ TagManager:
     uniqueID: 348649025
     locked: 0
   - name: Effect
-    uniqueID: 847969267
+    uniqueID: 3611468867
     locked: 0
   - name: WorldSpaceUI
     uniqueID: 1965022313
