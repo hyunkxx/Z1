@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 211dfef2a2c3299418a3a2c9ff41b89a
+guid: bbc70a521e5308745a9e3dbbfcc34a55
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -72,10 +72,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -129,10 +129,10 @@ TextureImporter:
       name: TEMP_CARD_0
       rect:
         serializedVersion: 2
-        x: 25
-        y: 25
-        width: 462
-        height: 462
+        x: 33
+        y: 31
+        width: 446
+        height: 448
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,7 +160,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      TEMP_CARD_0: 413416784742526728
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

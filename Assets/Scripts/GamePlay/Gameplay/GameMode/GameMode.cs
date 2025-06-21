@@ -20,6 +20,7 @@ public enum EGameState
     EnterGame,
     ExitGame,
     Paused,
+    Resume,
     Success,
     Failure,
     Restarting
@@ -45,6 +46,7 @@ public sealed class GameMode
     public EGameType GameType => gameType;
     public EGameState GameState => gameState;
 
+    public bool IsPaused { get { return gameState == EGameState.Paused && Time.timeScale == 0f; } }
     //[SerializeField]
     //GameModeConfig _config;
 
@@ -93,5 +95,19 @@ public sealed class GameMode
 
         gameState = state;
         OnChangeGameState?.Invoke(state);
+    }
+
+    public void GamePause(bool bPause)
+    {
+        if(bPause)
+        {
+            Time.timeScale = 0f;
+            ChangeGameState(EGameState.Paused);
+        }
+        else if(IsPaused)
+        {
+            Time.timeScale = 1f;
+            ChangeGameState(EGameState.Resume);
+        }
     }
 }

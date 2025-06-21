@@ -64,5 +64,8 @@ TagManager:
   - name: WorldSpaceUI
     uniqueID: 1965022313
     locked: 0
+  - name: UI
+    uniqueID: 4086817369
+    locked: 0
   m_RenderingLayers:
   - Default

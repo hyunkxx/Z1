@@ -149,6 +149,21 @@ public class SurvivalGameRule
         OnChangedJamCount?.Invoke(jamCount);
     }
 
+    protected override void Update()
+    {
+        base.Update();
+
+        if(Input.GetKeyDown(KeyCode.N))
+        {
+            _gameMode.GamePause(true);
+        }
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            _gameMode.GamePause(false);
+        }
+    }
+
     IEnumerator WaveLifeCycle()
     {
         currentWaveTime = waveCycle;
