@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -18,10 +20,17 @@ public class SurvivalGameRule
 
     private int jamCount = 0;
     public event Action<int> OnChangedJamCount;
+    public event Action<int> OnChangedWave;
+
+    /* Spawner Wave Property */
+    const float waveCycle = 60f;
+    const float spawnCycle = 5f;
+    public float currentWaveTime { get; private set; }
+    bool bWaveRestart = false;
 
     protected override void OnDestroy()
     {
-        if (_characterHandle.IsValid())
+        if (_characterHandle.IsValid() && _characterHandle.Result != null)
         {
             Addressables.ReleaseInstance(_characterHandle);
         }
@@ -56,11 +65,6 @@ public class SurvivalGameRule
         Transform playerStart = _gameMode.PlayerStart;
         SpawnCharacter(playerStart.position);
         LoadSceneData();
-    }
-
-    protected override void Start()
-    {
-        base.Start();
     }
 
     private bool SpawnCharacter(Vector3 location)
@@ -129,6 +133,11 @@ public class SurvivalGameRule
                 {
                     m_Spawner.Initialize(m_StageData);
                     _gameMode.ChangeGameState(EGameState.ReadyGame);
+
+                    UIManager.Instance.MessagePopup.Message($"Stage\n{StageKey}", () => 
+                    {
+                        StartCoroutine(WaveLifeCycle());
+                    });
                 }
             });
         }
@@ -138,5 +147,48 @@ public class SurvivalGameRule
     {
         jamCount += amount;
         OnChangedJamCount?.Invoke(jamCount);
+    }
+
+    IEnumerator WaveLifeCycle()
+    {
+        currentWaveTime = waveCycle;
+        int currentWave = 0;
+       
+        OnChangedWave?.Invoke(currentWave);
+
+        while (currentWave < m_StageData.TotalWaveCount())
+        {
+            bWaveRestart = false;
+
+            float spawnTimer = 0f;
+            while (currentWaveTime >= 0f)
+            {
+                currentWaveTime -= Time.deltaTime;
+                spawnTimer -= Time.deltaTime;
+
+                if (spawnTimer <= 0f)
+                {
+                    spawnTimer = spawnCycle;
+                    StartCoroutine(m_Spawner.SpawnEnemy(currentWave));
+                }
+
+                yield return null;
+            }
+
+            currentWaveTime = waveCycle;
+            currentWave++;
+
+            OnChangedWave?.Invoke(currentWave);
+
+            m_Spawner.AllKill();
+
+            
+            UIManager.Instance.MessagePopup.Message($"{currentWave + 1} Wave", () =>
+            {
+                bWaveRestart = true;
+            });
+
+            yield return new WaitUntil(() => bWaveRestart);
+        }
     }
 }

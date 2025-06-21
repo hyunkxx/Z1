@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 
 public abstract class HUDBase : MonoBehaviour
@@ -15,6 +16,12 @@ public class SurvivalHUD : HUDBase
     [SerializeField]
     private JamWidget jamWidget;
 
+    [SerializeField]
+    private TextMeshProUGUI timerText;
+
+    [SerializeField]
+    private TextMeshProUGUI waveText;
+
     PlayerController playerController;
     SurvivalGameRule rule;
 
@@ -24,11 +31,14 @@ public class SurvivalHUD : HUDBase
         rule = GameManager.Instance.GameMode.Rule as SurvivalGameRule;
 
         rule.OnChangedJamCount += OnChangedJam;
+        rule.OnChangedWave += OnChangedWave;
 
         if (playerController.Character != null)
         {
             var damageable = playerController.Character.gameObject.GetComponent<Damageable>();
             damageable.OnDamageTaken += TakeDamage;
+
+            healthBar.Initialize(playerController.Character);
         }
     }
 
@@ -37,6 +47,7 @@ public class SurvivalHUD : HUDBase
         if(rule != null)
         {
             rule.OnChangedJamCount -= OnChangedJam;
+            rule.OnChangedWave -= OnChangedWave;
         }
 
         if(playerController?.Character != null)
@@ -49,16 +60,29 @@ public class SurvivalHUD : HUDBase
         }
     }
 
+    public void Update()
+    {
+        int waveTime = Mathf.FloorToInt(rule.currentWaveTime);
+        int minutes = waveTime / 60;
+        int seconds = waveTime % 60;
+
+        timerText.text = $"{minutes:D2}:{seconds:D2}";
+    }
+
     private void TakeDamage(DamageEvent info)
     {
-        var stat = playerController.Character.Stats;
-        float ratio = stat.GetStat(EStatType.CurHealth) / stat.GetStat(EStatType.MaxHealth);
-        healthBar.SetHealth(ratio);
+        CharacterStats stat = playerController.Character.Stats;
+        healthBar.SetHealth(stat);
     }
 
     private void OnChangedJam(int amount)
     {
         jamWidget.JamText.text = $"x{amount}";
         jamWidget.animator.SetTrigger("JamWidget_React");
+    }
+
+    private void OnChangedWave(int wave)
+    {
+        waveText.text = $"{wave + 1} Wave";
     }
 }

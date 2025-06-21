@@ -101,6 +101,7 @@ public class SurvivalSpawner : MonoBehaviour
     private GameMode m_GameMode;
 
     private StageData m_StageData;
+    private List<Character> m_activateEnemies = new();
 
     private void Awake()
     {
@@ -123,42 +124,23 @@ public class SurvivalSpawner : MonoBehaviour
         }
 
         gameObject.SetActive(true);
-        StartCoroutine(WaveLifeCycle());
     }
 
-    IEnumerator WaveLifeCycle()
+    public void AllKill()
     {
-        const float waveCycle = 60f;
-        const float spawnCycle = 5f;
-
-        float waveTimer = 0f;
-        int currentWave = 0;
-
-        while (currentWave < m_StageData.TotalWaveCount())
+        foreach(Character enemy in m_activateEnemies)
         {
-            float spawnTimer = 0f;
-            while (waveTimer < waveCycle)
+            if(enemy != null)
             {
-                waveTimer += Time.deltaTime;
-                spawnTimer += Time.deltaTime;
-
-                if (spawnTimer >= spawnCycle)
-                {
-                    spawnTimer = 0f;
-                    StartCoroutine(SpawnEnemy(currentWave));
-                }
-
-                yield return null;
+                enemy.ForceKill();
             }
-
-            waveTimer = 0f;
-            currentWave++;
-
-            Debug.Log(currentWave);
         }
+
+        m_activateEnemies.Clear();
+        StopAllCoroutines();
     }
 
-    IEnumerator SpawnEnemy(int waveIndex)
+    public IEnumerator SpawnEnemy(int waveIndex)
     {
         GameMode mode = GameManager.Instance.GameMode;
         GameRule rule = mode.Rule;
@@ -194,6 +176,7 @@ public class SurvivalSpawner : MonoBehaviour
                 spawnVisualizer.Initialize(position, () => {
                     var enemyPool = m_PoolContainer.GetPool($"{targetName}");
                     GameObject tempGO = enemyPool.GetObject(position, Quaternion.identity);
+                    m_activateEnemies.Add(tempGO.GetComponent<Character>());
 
                     Character character = GameManager.Instance.GameMode.PlayerController.Character;
                     if (character)

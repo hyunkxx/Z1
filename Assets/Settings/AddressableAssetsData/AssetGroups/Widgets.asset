@@ -10,26 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: GameStartup
+  m_Name: Widgets
   m_EditorClassIdentifier: 
-  m_GroupName: GameStartup
-  m_GUID: d1353b08f25248c41bfc5835ad092dae
+  m_GroupName: Widgets
+  m_GUID: 352be7b88ae94b249b7902aca9696b1b
   m_SerializeEntries:
-  - m_GUID: 32ca2fd040c7cb247bad8910b8a70d0b
-    m_Address: Character_Slime
+  - m_GUID: b55f0e1b2337fe1428c70eb0f5b58fe3
+    m_Address: Survival_HUD
     m_ReadOnly: 0
-    m_SerializedLabels:
-    - Character
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: aceb1144a0a0c1b469baf633655d0f47
-    m_Address: Character_Default
+  - m_GUID: b77767f5742afdd43994ffea3e8fefd6
+    m_Address: MessagePopup
     m_ReadOnly: 0
-    m_SerializedLabels:
-    - Character
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d696c73dc2a11ad42a29971d096876ce, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: f3bf119d49f38f34c8112c50ca39161f, type: 2}
-    - {fileID: 11400000, guid: 04664bcb0660a414c8b83ee3ac47176e, type: 2}
+    - {fileID: 11400000, guid: 07cb9b2dd9abe0d42a05facf47e37a2d, type: 2}
+    - {fileID: 11400000, guid: 0990d7015264ae440b37e50650ba682b, type: 2}

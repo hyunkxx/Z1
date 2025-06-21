@@ -1,12 +1,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
+using System.Data;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.TextCore.Text;
 using UnityEngine.AddressableAssets;
+using UnityEngine.EventSystems;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.TextCore.Text;
 
 
 public enum EFlipType
@@ -203,8 +203,25 @@ public class Character
         CoChangeMaterial = null;
     }
 
-    public void Kiil()
+    public void ForceKill()
     {
+        var gameRule = GameManager.Instance.GameMode.Rule;
+
+        ObjectPool hitEffectPool = gameRule.PoolContainer.GetPool("Effect_Hit00");
+        if (hitEffectPool)
+        {
+            GameObject hitEffect = hitEffectPool.GetObject(transform.position, Quaternion.identity);
+        }
+
+        ObjectPool bloodPool = gameRule.PoolContainer.GetPool("Particle_Blood");
+        GameObject bloodGO = bloodPool.GetObject(transform.position, Quaternion.identity);
+
+        Kiil();
+    }
+
+    private void Kiil()
+    {
+        /* temp return pool */
         Destroy(gameObject);
     }
 
