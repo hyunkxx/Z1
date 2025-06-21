@@ -5812,8 +5812,7 @@ MonoBehaviour:
   - {fileID: 837079899}
   ComandSpanwPos:
   - {fileID: 1172965390}
-  MineralSpawnPos:
-  - {fileID: 207229491}
+  MineralSpawnPos: {fileID: 0}
 --- !u!114 &972174294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11519,6 +11518,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 891217739452076397, guid: d0d7c201b5d66f748a8104d717801801, type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1058217698873835701, guid: d0d7c201b5d66f748a8104d717801801, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -11632,11 +11635,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Spawner: {fileID: 972174293}
-  defenceUI: {fileID: 194017893}
   CurMode: Easy
   PlayerTeamHP: {fileID: 229742117}
   EnemyTeamHP: {fileID: 8636509954352533626}
-  HaveGreenStoneCount: 0
   HaveBlueStoneCount: 0
   HaveRedStoneCount: 0
 --- !u!1 &2004177059 stripped
