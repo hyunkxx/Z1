@@ -8,6 +8,7 @@ public class DefenceUI : UIBase
     [SerializeField] private DefencePlayerController Controller;
     [SerializeField] private DefenceGameRule GameRule;
     [SerializeField] private DefenceCraftUI CraftUI;
+    [SerializeField] private ItemGroupAnimation itemGroupAnimation;
 
     [Header("ResultPanel")]
     public GameObject WinPanel;
@@ -33,6 +34,8 @@ public class DefenceUI : UIBase
     [SerializeField] private Button UserSkillButton_1;
 
     DefenceGameRule defenceGame;
+
+    public ItemGroupAnimation ItemGroupAnimation => itemGroupAnimation;
 
 
     private float RoundTime = 0f;

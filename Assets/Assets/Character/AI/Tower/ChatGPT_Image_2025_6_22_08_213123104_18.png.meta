@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 81b936f72fd7feb4485815b74a7f24f9
+guid: ec3e95eb3c27ba34cb1ef9fa348cea6f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2673105429424390988
-    second: PinLock_PinBackground_0
+      213: 658081446863699099
+    second: ChatGPT_Image_2025_6_22_08_213123104_18_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,30 +109,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WindowsStoreApps
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PinLock_PinBackground_0
+      name: ChatGPT_Image_2025_6_22_08_213123104_18_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 100
-        height: 100
+        x: 71
+        y: 57
+        width: 951
+        height: 962
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4bcbdff46c837ead0800000000000000
-      internalID: -2673105429424390988
+      spriteID: b9cf599d699f12900800000000000000
+      internalID: 658081446863699099
       vertices: []
       indices: 
       edges: []
@@ -160,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      PinLock_PinBackground_0: -2673105429424390988
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

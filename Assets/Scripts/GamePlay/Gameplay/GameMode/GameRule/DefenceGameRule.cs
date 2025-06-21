@@ -34,6 +34,8 @@ public class DefenceGameRule
 
     public float round => Round;
     public float roundTime => RoundTime;
+    public DefenceRewardAssetData RewardData => rewardData;
+
 
     public enum ERewardType
     {
@@ -66,11 +68,13 @@ public class DefenceGameRule
     public void WinGame()
     {
         defenceUI.WinPanel.SetActive(true);
+        defenceUI.ItemGroupAnimation.OnActive();
     }
 
     public void LoseGame()
     {
         defenceUI.LosePanel.SetActive(true);
+        defenceUI.ItemGroupAnimation.OnActive();
     }
 
     public void GetReward(ERewardType rewardType)

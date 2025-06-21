@@ -8,6 +8,7 @@ public class DefenceCastle : MonoBehaviour
     DefenceGameRule gameRule;
 
     ETeam team;
+    bool isGameOver = false;
 
     public float HP => hP;
 
@@ -39,12 +40,19 @@ public class DefenceCastle : MonoBehaviour
     {
         hP -= damageEvent.damage;
         hPBar.ShowInfo(hP);
+        GameOver();
+    }
 
+    public void GameOver()
+    {
         if (HP > 0) return;
+        if (isGameOver) return;
 
         if (team == ETeam.Player)
             gameRule.LoseGame();
         else
             gameRule.WinGame();
+        
+            isGameOver = true;
     }
 }

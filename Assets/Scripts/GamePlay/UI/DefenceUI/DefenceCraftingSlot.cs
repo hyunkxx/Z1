@@ -47,7 +47,7 @@ public class DefenceCraftingSlot : MonoBehaviour
     {
         Transform[] spawnPos = CraftingType == ECraftingType.Base ? Spawner.ComandSpanwPos : Spawner.CharacterSpawnPos;
 
-        animator.SetTrigger("Click");
+        animator.SetTrigger("Active");
         StartCoroutine(Spawner.Spawn(DataAsset.PrefabKey, CraftCount, spawnPos));
         foreach (UIParticleComponent pComponent in Particles)
             pComponent.StartParticleEmission();
