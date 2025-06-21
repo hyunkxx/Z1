@@ -161,7 +161,7 @@ public class SurvivalSpawner : MonoBehaviour
             int randomLocationIndex = UnityEngine.Random.Range(0, m_SpawnPositions.Count);
             int spawnEnemyIndex = UnityEngine.Random.Range(0, m_StageData.WaveInfo[waveIndex].m_SpawnEnemies.Count);
 
-            Vector2 randomCircle = UnityEngine.Random.insideUnitCircle;
+            Vector2 randomCircle = UnityEngine.Random.insideUnitCircle * 3f;
             Vector3 circleOffset = new Vector3(randomCircle.x, 0f, randomCircle.y);
 
             Vector3 position = m_SpawnPositions[randomLocationIndex].position + circleOffset;

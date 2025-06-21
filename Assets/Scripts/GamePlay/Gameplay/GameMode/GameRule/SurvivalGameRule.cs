@@ -23,7 +23,7 @@ public class SurvivalGameRule
     public event Action<int> OnChangedWave;
 
     /* Spawner Wave Property */
-    const float waveCycle = 60f;
+    const float waveCycle = 5f;
     const float spawnCycle = 5f;
     public float currentWaveTime { get; private set; }
     bool bWaveRestart = false;
@@ -156,7 +156,7 @@ public class SurvivalGameRule
        
         OnChangedWave?.Invoke(currentWave);
 
-        while (currentWave < m_StageData.TotalWaveCount())
+        while (true)
         {
             bWaveRestart = false;
 
@@ -175,13 +175,17 @@ public class SurvivalGameRule
                 yield return null;
             }
 
+            if (currentWave == m_StageData.TotalWaveCount() - 1)
+            {
+                currentWaveTime = 0f;
+                break;
+            }
+
             currentWaveTime = waveCycle;
             currentWave++;
 
             OnChangedWave?.Invoke(currentWave);
-
             m_Spawner.AllKill();
-
             
             UIManager.Instance.MessagePopup.Message($"{currentWave + 1} Wave", () =>
             {

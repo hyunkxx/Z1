@@ -57,7 +57,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 65aede3f31767ee499704da8b57fc9fe, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -260,6 +260,8 @@ MonoBehaviour:
     m_weaponEndSocket: {fileID: 0}
   movementComponent: {fileID: 3093477760184211630}
   m_isNPC: 1
+  m_FlipType: 0
+  m_FlipRoot: {fileID: 0}
   aIStateSet: {fileID: 11400000, guid: 0e02b16196eceda42b14c4214fee708b, type: 2}
 --- !u!114 &3093477760184211630
 MonoBehaviour:

@@ -14,26 +14,40 @@ struct DropProperty
 
 public class DropObject : MonoBehaviour
 {
-    [SerializeField]
     private GameObject _target;
+    private Collider2D _collision;
 
     [SerializeField]
     private DropProperty _dropConfig;
     private Vector3 _invertedDirection;
+    private Vector3 _cachedPosition;
     private float   _elapsedTime;
+
+    public void Awake()
+    {
+        _collision = GetComponent<Collider2D>();
+        _collision.isTrigger = true;
+    }
 
     public void OnEnable()
     {
+        _target = null;
         _elapsedTime = 0f;
+        _collision.enabled = false;
+        _dropConfig._turn = false;
+        _cachedPosition = Vector3.zero;
     }
 
     public void OnDisable()
     {
         _target = null;
         _elapsedTime = 0f;
+        _collision.enabled = false;
+        _dropConfig._turn = false;
+        _cachedPosition = Vector3.zero;
     }
 
-    public void LateUpdate()
+    public void Update()
     {
         if (_target == null)
             return;
@@ -41,11 +55,12 @@ public class DropObject : MonoBehaviour
         _elapsedTime += Time.deltaTime;
         if (_elapsedTime < _dropConfig._turnDelay)
         {
-            transform.position = Vector3.Lerp(transform.position, (transform.position + _invertedDirection), _dropConfig._moveSpeed * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, (_cachedPosition + _invertedDirection), _dropConfig._moveSpeed * Time.deltaTime);
         }
         else
         {
             _dropConfig._turn = true;
+            _collision.enabled = true;
             transform.position = Vector3.Lerp(transform.position, _target.transform.position, _dropConfig._moveSpeed * 2f * Time.deltaTime);
         }
     }
@@ -68,9 +83,15 @@ public class DropObject : MonoBehaviour
         }
         else
         {
+            _collision.enabled = false;
             _target = collision.gameObject;
+            _cachedPosition = transform.position;
             _invertedDirection = (transform.position - _target.transform.position).normalized;
         }
     }
 
+    public void AnimationFinished()
+    {
+        _collision.enabled = true;
+    }
 }

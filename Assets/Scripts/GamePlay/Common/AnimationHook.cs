@@ -1,8 +1,13 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 
 public class AnimationHook : MonoBehaviour
 {
+    [SerializeField]
+    private List<GameObject> eventReceiver = new();
     private Animator animator;
 
     private void Awake()
@@ -39,6 +44,17 @@ public class AnimationHook : MonoBehaviour
                 {
                     clip.AddEvent(animationEvent);
                 }
+            }
+        }
+    }
+
+    public void AnimationFinished()
+    {
+        if(eventReceiver.Count > 0)
+        {
+            foreach(GameObject GO in eventReceiver)
+            {
+                GO.SendMessage("AnimationFinished");
             }
         }
     }
